@@ -1,0 +1,15 @@
+name: 中
+
+menu: 
+  home: 首页
+  about: 关于
+  contact: 联系
+  archive: 归档
+
+page:
+  next: 更新的
+  prev: 更旧的
+
+post:
+  related: "你可能还会喜欢："
+  date_prefix: 写于

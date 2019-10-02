@@ -1,0 +1,12 @@
+.language-selector {
+    float: right;
+}
+  
+.language-selector a {
+    color: #777;
+    font-size: 0.8rem;
+}
+
+.en:lang(en), .zh:lang(zh){
+    color: #FFFEEE;
+}

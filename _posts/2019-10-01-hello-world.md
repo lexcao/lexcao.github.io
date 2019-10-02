@@ -1,8 +1,8 @@
 ---
-layout: post
-title: "Hello World"
-categories: computer
+title: Hello World
 image: mountains.jpg
+uid: hello-world
 ---
 
 # Hello World
+This is English edition of hello world

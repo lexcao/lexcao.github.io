@@ -11,8 +11,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
 
-  <link rel="stylesheet" href="{{ site.github.url }}/assets/css/main.css">
-  <link rel="stylesheet" href="{{ site.github.url }}/assets/css/syntax.css">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | absolute_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | absolute_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/extend.css' | absolute_url }}">
   <!-- Use Atom -->
   {% feed_meta %}
   <!-- Use RSS-2.0 -->
@@ -22,16 +23,19 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quattrocento+Sans">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-  <script type="text/javascript" async
+  <!-- <script type="text/javascript" async
     src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-  </script>
+  </script> -->
 
   <!-- Google Analytics -->
   {% include google-analytics.html %}
 
   <!-- Use Jekyll SEO plugin -->
   {% seo %}
+
+  <!-- Language SEO -->
+  {% include language-seo.html %}
 
 </head>

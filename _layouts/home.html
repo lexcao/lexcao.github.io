@@ -14,8 +14,10 @@ title: Home
   </div>
   {% endif %}
   <p>
-    {{ post.content | strip_html | truncate: 350 }} <a href="{{ site.github.url }}{{ post.url }}">Read more</a>
-    <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.date | date_to_string }} - <i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</span>
+    {{ post.content | markdownify | truncate: 350 }} <a href="{{ site.github.url }}{{ post.url }}">Read more</a>
+    <span class="post-date">
+      <i class="fa fa-calendar" aria-hidden="true"></i>
+      {{ post.date | date_to_string: "ordinal" }}
   </p>
 </div>
 {% endfor %}
@@ -23,14 +25,16 @@ title: Home
 <!-- Pagination links -->
 <div class="pagination">
   {% if paginator.next_page %}
-    <a class="pagination-button pagination-active next" href="{{ site.github.url }}{{ paginator.next_page_path }}">{{ site.data.settings.pagination.previous_page }}</a>
+  <a class="pagination-button pagination-active next"
+    href="{{ paginator.next_page_path | absolute_url }}">{{ site.data.locales[page.locale].page.prev }}</a>
   {% else %}
-    <span class="pagination-button">{{ site.data.settings.pagination.previous_page }}</span>
+  <span class="pagination-button">{{ site.data.locales[page.locale].page.prev }}</span>
   {% endif %}
 
   {% if paginator.previous_page %}
-    <a class="pagination-button pagination-active" href="{{ site.baseurl }}{{ paginator.previous_page_path }}">{{ site.data.settings.pagination.next_page }}</a>
+  <a class="pagination-button pagination-active"
+    href="{{ paginator.previous_page_path | absolute_url }}">{{ site.data.locales[page.locale].page.next }}</a>
   {% else %}
-    <span class="pagination-button">{{ site.data.settings.pagination.next_page }}</span>
+  <span class="pagination-button">{{ site.data.locales[page.locale].page.next }}</span>
   {% endif %}
 </div>

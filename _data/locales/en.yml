@@ -1,0 +1,15 @@
+name: EN
+
+menu: 
+  home: Home
+  about: About
+  contact: Contact
+  archive: Archive
+
+page:
+  next: Newer
+  prev: Older
+
+post:
+  related: "You may also enjoy:"
+  date_prefix: Written on
