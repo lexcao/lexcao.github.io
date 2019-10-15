@@ -2,6 +2,7 @@
 
 {% unless uid %}
 {% assign uid = page.uid %}
+{% assign show = true %}
 {% endunless %}
 
 {% assign image = site.data.images[uid]%}
@@ -14,4 +15,10 @@
     <img src="{{ image.image.url }}">
     {% endif %}
 </div>
+{% if show %}
+<div class="image-info">
+    <i>Photo by <a target="blank" href="{{ image.author.url }}">{{ image.author.name }}</a> on
+        <a target="blank" href="{{ image.image.source }}">Unsplash</a></i>
+</div>
+{% endif %}
 {% endif %}

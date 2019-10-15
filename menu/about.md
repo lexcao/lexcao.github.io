@@ -29,8 +29,7 @@ If you want to [contact me](mailto:clixin@foxmail.com).
 
 Static website generator
 * `Jekyll 4.0` [https://jekyllrb.com/](https://jekyllrb.com/)
-*  Theme is `Lagrange` http://jekyllthemes.org/themes/lagrange/
-
+*  Theme is `Lagrange` [http://jekyllthemes.org/themes/lagrange/](http://jekyllthemes.org/themes/lagrange/)
 Code hosting
 * Github
 * The source code of the blog is [there]().
