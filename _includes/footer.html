@@ -7,9 +7,15 @@
   {% endif %}
 
   <div class="post-date no-padding">
-    Powered by 
-    <a target="blank" href="http://jekyllthemes.org/themes/lagrange/">Lagrange</a> theme of 
+    Powered by
+    <a target="blank" href="http://jekyllthemes.org/themes/lagrange/">Lagrange</a> theme of
     <a target="blank" href="https://jekyllrb.com/">Jekyll</a> On
     <a target="blank" href="https://pages.github.com">Github Pages</a>
+    <br>
+    {{ site.data.locales[page.locale].blog.title }} | {{ site.data.locales[page.locale].blog.description }}
+    by <a href="{{ home | append: '/menu/about.html' | absolute_url }}">
+      {{ site.data.locales[page.locale].blog.author }}
+    </a>
+  </div>
   </div>
 </footer>
