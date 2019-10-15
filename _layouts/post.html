@@ -6,9 +6,7 @@ layout: default
   {{ page.title }}
 </h1>
 
-{% if page.image %}
-  <img src="{{ site.github.url }}/assets/img/{{ page.image }}">
-{% endif %}
+{% include head-image.html %}
 
 {{ content }}
 
@@ -17,14 +15,14 @@ layout: default
   {{ page.date | date_to_long_string: "ordinal" }}
   by
   {% if page.author %}
-    {{ page.author }}
+  {{ page.author }}
   {% else %}
-    {{ site.author }}
+  {{ site.author }}
   {% endif %}
 </span>
 
 {% include related-posts.html %}
 
 {% if site.data.settings.disqus.comments %}
-  {% include disqus.html %}
+{% include disqus.html %}
 {% endif %}

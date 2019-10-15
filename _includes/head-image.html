@@ -1,0 +1,15 @@
+<div>
+    {% assign item = site.data.images[page.uid] %}
+    {% if item %}
+    {% assign first_char = item.image.url | slice: 0 %}
+    {% if first_char == '/' %}
+    <img src="{{ site.github.url }}/assets/img/{{ item.image.url }}">
+    {% else %}
+    <img src="{{ item.image.url }}">
+    {% endif %}
+    <div class="image-info">
+        <i>Photo by <a target="blank" href="{{ item.author.url }}">{{ item.author.name }}</a> on
+            <a target="blank" href="{{ item.image.source }}">Unsplash</a></i>
+    </div>
+    {% endif %}
+</div>

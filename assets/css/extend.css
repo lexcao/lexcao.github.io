@@ -21,3 +21,8 @@
 .no-padding a:hover {
     text-decoration: none;
 }
+
+.image-info {
+    text-align: right;
+    font-size: 0.7rem;
+}

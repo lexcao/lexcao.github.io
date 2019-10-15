@@ -1,6 +1,5 @@
 ---
 title: 你好世界
-image: mountains.jpg
 uid: hello-world
 ---
 

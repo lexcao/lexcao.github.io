@@ -1,0 +1,10 @@
+hello-world:
+  image:
+    url: https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2293&q=80
+    source: https://unsplash.com/s/photos/computer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+  author:
+    name: Federica Galli
+    url: https://unsplash.com/@fedechanw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+  crop: # top + bottom = -30% default is -15%, -15%
+    top: -30%;
+    bottom: 0; 

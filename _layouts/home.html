@@ -8,13 +8,20 @@ title: Home
   <h1>
     <a href="{{ site.github.url }}{{ post.url }}">{{ post.title }}</a>
   </h1>
-  {% if post.image %}
+  {% assign image = site.data.images[post.uid]%}
+  {% if image %}
   <div class="thumbnail-container">
-    <a href="{{ site.github.url }}{{ post.url }}"><img src="{{ site.github.url }}/assets/img/{{ post.image }}"></a>
+    <a href="{{ site.github.url }}{{ post.url }}">
+      {% if image.crop.top and image.crop.bottom %}
+      <img style="margin-top: {{ image.crop.top }}; margin-bottom: {{ image.crop.bottom }}" src="{{ image.image.url }}">
+      {% else %}
+      <img src="{{ image.image.url }}">
+      {% endif %}
+    </a>
   </div>
   {% endif %}
   <p>
-    {{ post.content | markdownify | truncate: 350 }} <a href="{{ site.github.url }}{{ post.url }}">Read more</a>
+    {{ post.content | markdownify | truncate: 200 }} <a href="{{ site.github.url }}{{ post.url }}">Read more</a>
     <span class="post-date">
       <i class="fa fa-calendar" aria-hidden="true"></i>
       {{ post.date | date_to_string: "ordinal" }}

@@ -1,6 +1,5 @@
 ---
 title: Hello World
-image: mountains.jpg
 uid: hello-world
 ---
 
