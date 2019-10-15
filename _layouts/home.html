@@ -8,17 +8,10 @@ title: Home
   <h1>
     <a href="{{ site.github.url }}{{ post.url }}">{{ post.title }}</a>
   </h1>
-  {% assign image = site.data.images[post.uid]%}
-  {% if image %}
-  <div class="thumbnail-container">
-    <a href="{{ site.github.url }}{{ post.url }}">
-      {% if image.crop.top and image.crop.bottom %}
-      <img style="margin-top: {{ image.crop.top }}; margin-bottom: {{ image.crop.bottom }}" src="{{ image.image.url }}">
-      {% else %}
-      <img src="{{ image.image.url }}">
-      {% endif %}
-    </a>
-  </div>
+  {% if site.data.images[post.uid] %}
+  <a href="{{ site.github.url }}{{ post.url }}">
+      {% include thumbnail-head-image.html uid = post.uid %}
+  </a>
   {% endif %}
   <p>
     {{ post.content | markdownify | truncate: 200 }} <a href="{{ site.github.url }}{{ post.url }}">Read more</a>
