@@ -1,11 +1,11 @@
 <footer class="footer">
   {% include social-icons.html %}
 
-  {% assign home = site.github.url | append: '/' %}
+  {% assign home = site.github.url %}
   {% if page.locale != 'en' %}
      {% assign home = home | append: page.locale %}
   {% endif %}
 
   <div class="post-date">
     <a href="{{ home | append: '/menu/about.html' | absolute_url }}">{{ site.title }} | {{ site.description }} by {{ site.author }}</a></div>
-</footer>
+</footer>~
