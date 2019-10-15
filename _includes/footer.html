@@ -3,9 +3,13 @@
 
   {% assign home = site.github.url %}
   {% if page.locale != 'en' %}
-     {% assign home = home | append: page.locale %}
+  {% assign home = home | append: page.locale %}
   {% endif %}
 
-  <div class="post-date">
-    <a href="{{ home | append: '/menu/about.html' | absolute_url }}">{{ site.title }} | {{ site.description }} by {{ site.author }}</a></div>
-</footer>~
+  <div class="post-date no-padding">
+    Powered by 
+    <a target="blank" href="http://jekyllthemes.org/themes/lagrange/">Lagrange</a> theme of 
+    <a target="blank" href="https://jekyllrb.com/">Jekyll</a> On
+    <a target="blank" href="https://pages.github.com">Github Pages</a>
+  </div>
+</footer>

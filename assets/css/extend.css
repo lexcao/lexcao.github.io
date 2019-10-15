@@ -10,3 +10,14 @@
 .en:lang(en), .zh:lang(zh){
     color: #FFFEEE;
 }
+
+.no-padding a {
+    padding: 0;
+    color: #555;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.no-padding a:hover {
+    text-decoration: none;
+}

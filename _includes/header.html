@@ -6,8 +6,8 @@
        {% assign home = home | append: page.locale %}
     {% endif %}
     
-    <a href="{{home}}">{{ site.title }}</a>
-    <small class="masthead-subtitle">{{ site.description }}</small>
+    <a href="{{home}}">{{ site.data.locales[page.locale].blog.title }}</a>
+    <small class="masthead-subtitle">{{ site.data.locales[page.locale].blog.description }}</small>
     
     {% include language-selector.html %}
     

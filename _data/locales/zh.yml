@@ -1,5 +1,10 @@
 name: 中
 
+blog:
+  title: 代码笔记
+  description: 分享 / 总结 / 记录
+  author: 曹历鑫
+
 menu: 
   home: 首页
   about: 关于

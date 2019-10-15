@@ -1,5 +1,10 @@
 name: EN
 
+blog:
+  title: CodingNotes
+  description: Share / Summary / Record
+  author: Levi Cao
+
 menu: 
   home: Home
   about: About
