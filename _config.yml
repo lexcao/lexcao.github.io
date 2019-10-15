@@ -14,7 +14,7 @@ highlighter:         rouge
 plugins:
   - jekyll-paginate-v2
   - jekyll-sitemap
-  - jekyll-feed
+  # - jekyll-feed
   - jekyll-seo-tag
 
 # Customise atom feed settings (this is where Jekyll-Feed gets configuration information)

@@ -2,9 +2,9 @@
 
   <title>
     {% if page.title == "Home" %}
-      {{ site.data.locales[page.locale].blog.title }} | {{ site.data.locales[page.locale].blog.description }}
+    {{ site.data.locales[page.locale].blog.title }} | {{ site.data.locales[page.locale].blog.description }}
     {% else %}
-      {{ page.title }} | {{ site.data.locales[page.locale].blog.title }}
+    {{ page.title }} | {{ site.data.locales[page.locale].blog.title }}
     {% endif %}
   </title>
 
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | absolute_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/extend.css' | absolute_url }}">
   <!-- Use Atom -->
-  {% feed_meta %}
+  {% comment %} {% feed_meta %} {% endcomment %}
   <!-- Use RSS-2.0 -->
   <!--<link href="{{ site.github.url }}/rss-feed.xml" type="application/rss+xml" rel="alternate" title="{{ site.title }} | {{ site.description }}"/>
   //-->
@@ -23,7 +23,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quattrocento+Sans">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
   <!-- <script type="text/javascript" async
     src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
