@@ -8,7 +8,7 @@ uid: about
 
 ## Hello There
 
-Welcome to my blog, I am **Levi Cao**, `曹历鑫` in Chinese.
+Welcome to my blog, I am **Lex Cao**, `曹历鑫` in Chinese.
 
 The name of the blog is **CodingNotes** `代码笔记`.
 

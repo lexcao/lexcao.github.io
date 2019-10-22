@@ -16,8 +16,8 @@ menu:
 
 # Available social icons are powered by Font Awesome, so you can use any icon that they offer
 social:
-- {show: true, icon: 'github', link: 'https://github.com/levi-cao'}
-- {show: true, icon: 'twitter', link: 'https://twitter.com/levi_cao'}
+- {show: true, icon: 'github', link: 'https://github.com/lexcao'}
+- {show: true, icon: 'twitter', link: 'https://twitter.com/lexcao'}
 - {show: false, icon: 'weibo', link: 'https://weibo.com'}
 - {show: true, icon: 'envelope', link: 'mailto:clixin@foxmail.com'}
 - {show: false, icon: 'rss-square', link: '/feed.xml'}
