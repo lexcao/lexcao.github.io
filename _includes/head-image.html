@@ -3,7 +3,7 @@
     {% if item %}
     {% assign first_char = item.image.url | slice: 0 %}
     {% if first_char == '/' %}
-    <img src="{{ '/assets/img/' + item.image.url | relative_url }}">
+    <img src="{{ '/assets/img/' append: item.image.url | relative_url }}">
     {% else %}
     <img src="{{ item.image.url }}">
     {% endif %}
