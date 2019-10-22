@@ -4,17 +4,18 @@ title: Home
 ---
 
 {% for post in paginator.posts %}
+{% assign post_url = post.url | relative_url %}
 <div class="posts">
   <h1>
-    <a href="{{ site.github.url }}{{ post.url }}">{{ post.title }}</a>
+    <a href="{{ post_url }}">{{ post.title }}</a>
   </h1>
   {% if site.data.images[post.uid] %}
-  <a href="{{ site.github.url }}{{ post.url }}">
+  <a href="{{ post_url }}">
       {% include thumbnail-head-image.html uid = post.uid %}
   </a>
   {% endif %}
   <p>
-    {{ post.content | markdownify | truncate: 200 }} <a href="{{ site.github.url }}{{ post.url }}">Read more</a>
+    {{ post.content | markdownify | truncate: 200 }} <a href="{{ post_url }}">Read more</a>
     <span class="post-date">
       <i class="fa fa-calendar" aria-hidden="true"></i>
       {{ post.date | date_to_string: "ordinal" }}

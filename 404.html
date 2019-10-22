@@ -4,18 +4,18 @@ image: 404-cat.jpg
 permalink: 404.html
 ---
 
-<img src="{{ site.github.url }}/assets/img/{{ page.image }}">
+<img src="{{ '/assets/img/' | append: page.image | relative_url }}">
 
 <h2 style="text-align:center">404 Not Found 😢</h2>
 
 <div class="page">
   <h3>Sorry!</h3>
   <p class="lead">I've misplaced that URL or it's pointing to something that doesn't exist.</p>
-  <p><a href="{{ site.github.url }}/">Back home.</a></p>
+  <p><a href="/">Back home.</a></p>
 </div>
 
 <div class="page">
   <h3>抱歉!</h3>
   <p class="lead">我弄错这个链接或者它指向一个不存在的地址。</p>
-  <p><a href="{{ site.github.url }}/">回到首页。</a></p>
+  <p><a href="/">回到首页。</a></p>
 </div>

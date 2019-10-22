@@ -1,7 +1,7 @@
 <div class="menu">
   <nav class="menu-content">
     {% for item in site.data.settings.menu[page.locale] %}
-      <a href="{{ site.github.url }}/{{ item.path }}/{{ item.url }}">{{ site.data.locales[page.locale].menu[item.uid] }}</a>
+      <a href="{{ '/' | append: item.path | append: '/' | append: item.url | relative_url}}">{{ site.data.locales[page.locale].menu[item.uid] }}</a>
     {% endfor %}
   </nav>
   <nav class="social-icons">
