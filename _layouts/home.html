@@ -3,7 +3,8 @@ layout: default
 title: Home
 ---
 
-{% for post in paginator.posts %}
+{% assign posts = site.posts | where: "locale", page.locale %}
+{% for post in posts limit: 5 %}
 {% assign post_url = post.url | relative_url %}
 <div class="posts">
   <h1>
@@ -11,7 +12,7 @@ title: Home
   </h1>
   {% if site.data.images[post.uid] %}
   <a href="{{ post_url }}">
-      {% include thumbnail-head-image.html uid = post.uid %}
+    {% include thumbnail-head-image.html uid = post.uid %}
   </a>
   {% endif %}
   <p>
@@ -23,6 +24,7 @@ title: Home
 </div>
 {% endfor %}
 
+{% comment %}
 <!-- Pagination links -->
 <div class="pagination">
   {% if paginator.next_page %}
@@ -38,4 +40,5 @@ title: Home
   {% else %}
   <span class="pagination-button">{{ site.data.locales[page.locale].page.next }}</span>
   {% endif %}
+{% endcomment %}
 </div>
