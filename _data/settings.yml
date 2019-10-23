@@ -3,9 +3,6 @@ disqus:
   comments: false
   disqus_shortname: 'diabled-disqus'
 
-# If you are not using Google Analytics, please change 'google-ID' to an empty string
-google-ID: 'UA-150740331-1'
-
 menu:
   en: 
   - {uid: 'archive', path: 'menu', url: 'archive.html'}
