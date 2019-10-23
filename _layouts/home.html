@@ -16,10 +16,11 @@ title: Home
   </a>
   {% endif %}
   <p>
-    {{ post.content | markdownify | truncate: 200 }} <a href="{{ post_url }}">Read more</a>
+    {{ post.content | strip_html | truncate: 100 }} <a href="{{ post_url }}">Read more</a>
     <span class="post-date">
       <i class="fa fa-calendar" aria-hidden="true"></i>
       {{ post.date | date_to_string: "ordinal" }}
+    </span>
   </p>
 </div>
 {% endfor %}
