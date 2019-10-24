@@ -117,9 +117,9 @@ uid: hello-world
 
 相关参考链接
 
-* [install on macOS](https://jekyllrb.com/docs/installation/macos/)
-* [jekyll with bundle](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/)
-* [creating a github pages with jekyll](https://help.github.com/en/articles/creating-a-github-pages-site-with-jekyll)
+* [*Install on MacOS*](https://jekyllrb.com/docs/installation/macos/)
+* [*Jekyll with Bundle*](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/)
+* [*Creating a Github Pages with Jekyll*](https://help.github.com/en/articles/creating-a-github-pages-site-with-jekyll)
 
 使用到的命令
 
@@ -151,15 +151,15 @@ $ bundle exec jekyll serve
 
 在相关主题浏览网站：
 
-* [jekyllthemes.org/](http://jekyllthemes.org/)
-* [jekyllthemes.io/](https://jekyllthemes.io/)
+* [*jekyllthemes.org/*](http://jekyllthemes.org/)
+* [*jekyllthemes.io/*](https://jekyllthemes.io/)
 
 找到的心仪的主题：
 
-* [lagrange](http://jekyllthemes.org/themes/lagrange/)
-* [chalk](http://jekyllthemes.org/themes/chalk/)
-* [type](http://jekyllthemes.org/themes/type/)
-* [Kikofri](http://jekyllthemes.org/themes/Kikofri/)
+* [*Lagrange*](http://jekyllthemes.org/themes/lagrange/)
+* [*Chalk*](http://jekyllthemes.org/themes/chalk/)
+* [*Type*](http://jekyllthemes.org/themes/type/)
+* [*Kikofri*](http://jekyllthemes.org/themes/Kikofri/)
 
 选出以上 4 个主题，最后使用 `lagrange` 作为博客主题。
 
@@ -200,9 +200,9 @@ $ git push -u origin master
 
 `Your site is published at https://lexcao.github.io/` 博客已经发布成功。
 
-访问 [https://lexcao.github.io/](https://lexcao.github.io/) 即可看到。
+访问 [*https://lexcao.github.io/*](https://lexcao.github.io/) 即可看到。
 
-可以在 [environment](https://github.com/lexcao/lexcao.github.io/deployments) 看到博客部署情况，默认配置是 `master` 分支有代码更新会进行自动部署。
+可以在 [*environment*](https://github.com/lexcao/lexcao.github.io/deployments) 看到博客部署情况，默认配置是 `master` 分支有代码更新会进行自动部署。
 
 
 
@@ -212,9 +212,9 @@ $ git push -u origin master
 
 ### Google Analytics
 
-1. 在 [Google Analytics](https://analytics.google.com) 创建媒体资源，拿到一个 `UA-xxx-x` ID，并且引入统计代码；
-2. 在 [Google Tag Manager](https://tagmanager.google.com) 创建跟踪代码，根据上面拿到的 `UA-xxx-x` ID 新增一个 `Google Analytics` 代码跟踪，引入全局统计代码，并发布。
-3. 可选择，在 `Google Analytics` 关联 [Google Search Console](https://search.google.com/search-console)。
+1. 在 [*Google Analytics*](https://analytics.google.com) 创建媒体资源，拿到一个 `UA-xxx-x` ID，并且引入统计代码；
+2. 在 [*Google Tag Manager*](https://tagmanager.google.com) 创建跟踪代码，根据上面拿到的 `UA-xxx-x` ID 新增一个 `Google Analytics` 代码跟踪，引入全局统计代码，并发布。
+3. 可选择，在 `Google Analytics` 关联 [*Google Search Console*](https://search.google.com/search-console)。
 
 注意事项：
 
