@@ -107,7 +107,7 @@ Chinese name is `代码笔记`.
 
 `thecodingnotes.com` Just ok, and a little bit long.
 
-So, I would keep it for `lexcao.github.io` until finding a better domain.
+So, I would keep it for `lexcao.github.io` until a better domain found.
 
 
 
