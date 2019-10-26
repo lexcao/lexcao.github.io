@@ -9,8 +9,7 @@ hello-world:
     name: Federica Galli
   crop:
     top: -30%;
-    bottom: 0; 
-
+    bottom: 0;
 
 about:
   image:
@@ -22,4 +21,11 @@ about:
   crop:
     top: -13%;
     bottom: -17%;
-  
+
+jekyll-supports-multi-language-without-plugin:
+  image:
+    url: https://images.unsplash.com/photo-1455540904194-fc101941273a?auto=format&fit=crop&w=720&q=80
+    source: https://unsplash.com/photos/jUSu0686zDM
+  author:
+    url: https://unsplash.com/@freestocks
+    name: freestocks.org
