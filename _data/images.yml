@@ -2,10 +2,10 @@
 
 hello-world:
   image:
-    url: https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2293&q=80
-    source: https://unsplash.com/s/photos/computer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+    url: https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80
+    source: https://unsplash.com/photos/aiqKc07b5PA
   author:
-    url: https://unsplash.com/@fedechanw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+    url: https://unsplash.com/@fedechanw
     name: Federica Galli
   crop:
     top: -30%;
@@ -13,10 +13,10 @@ hello-world:
 
 about:
   image:
-    url: https://images.unsplash.com/photo-1530319067432-f2a729c03db5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2480&q=80
-    source: https://unsplash.com/s/photos/hello?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+    url: https://images.unsplash.com/photo-1530319067432-f2a729c03db5?auto=format&fit=crop&w=720&q=80
+    source: https://unsplash.com/photos/e31ANd1PXUw
   author: 
-    url: https://unsplash.com/@lastly?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+    url: https://unsplash.com/@lastly
     name: Tyler Lastovich
   crop:
     top: -13%;
