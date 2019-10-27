@@ -22,7 +22,7 @@ about:
     top: -13%;
     bottom: -17%;
 
-jekyll-supports-multi-language-without-plugin:
+jekyll-multi-language-without-plugin:
   image:
     url: https://images.unsplash.com/photo-1455540904194-fc101941273a?auto=format&fit=crop&w=720&q=80
     source: https://unsplash.com/photos/jUSu0686zDM

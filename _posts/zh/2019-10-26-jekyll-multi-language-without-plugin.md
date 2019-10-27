@@ -1,6 +1,6 @@
 ---
 title: Jekyll 不使用插件支持多语言
-uid: jekyll-supports-multi-language-without-plugin
+uid: jekyll-multi-language-without-plugin
 ---
 
 # 实现目标 
