@@ -67,7 +67,7 @@ defaults:
       locale: zh
 ```
 
-* #1 no set for `scope` means global default: all posts and pages are default to `en`;
+* #1 not set for `scope` means global default: all posts and pages are default to `en`;
 * #2 set for `scope` means in the path of `_posts/zh/**`: all posts are default to `zh`.
 
 
