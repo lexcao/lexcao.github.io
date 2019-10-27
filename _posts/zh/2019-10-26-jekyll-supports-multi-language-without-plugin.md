@@ -14,7 +14,7 @@ uid: jekyll-supports-multi-language-without-plugin
 # 相关缺陷
 
 * 404 页面无法配置，只能在 `404.html` 页面写上两种语言；
-* 支持多语言文章的分页插件 `jekyll-paginate-v2` 没在 Github Pages 支持的插件白名单内，目前本博客首页不支持分页；
+* 支持多语言文章的分页插件 `jekyll-paginate-v2` 没在 Github Pages 支持的插件白名单内，目前本博客首页不支持分页。多语言分页详见[下文](#paginate)；
 * 多语言时间表示有点麻烦，需要做一些字符串处理工作，能实现但是不太优雅，具体可以参考 [*Jekyll-Date-Formatting*](http://alanwsmith.com/jekyll-liquid-date-formatting-examples)。
 
 # 开始配置
@@ -216,9 +216,10 @@ collections:
 * [*Deploy A Multi-Language Jekyll Site*](http://meumobi.github.io/jekyll/2019/06/05/multi-languages-with-jekyll.html)
 * [*jekyll-paginate-v2*](https://github.com/sverrirs/jekyll-paginate-v2/blob/master/README-GENERATOR.md)
 
+<a id="paginate"></a>
 # 另一件事
 
-## 语言支持分页
+## 多语言支持分页
 
 旧的分页插件 `jekyll-pagination-v1` 无法根据筛选条件过滤已经不再适合，不能在对应的语言页面显示对应的语言文章列表。
 
