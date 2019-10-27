@@ -140,7 +140,7 @@ collections:
 
 * #1 仅在有 `uid` 的页面显示语言选择器
 * #2 拼接 `posts` `pages` `zh` 数组，找到 `uid` 对应的页面，根据 `local` 排序
-* #3 过滤掉 `/pages/` 目录下页面（分页插件生成的页面）
+* #3 过滤掉 `/pages/` 目录下页面
 * #4 拿到 `locale` 对应的语言文字，如 `EN` `中`
 
 ## 6. 归档页面
@@ -226,8 +226,8 @@ collections:
 
 ### Gemfile 安装
 
-```yaml
-gem 'jekyll-paginate-v2'
+```bash
+$ gem 'jekyll-paginate-v2'
 ```
 
 ### _config.yml 配置
