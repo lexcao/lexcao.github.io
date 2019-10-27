@@ -68,7 +68,7 @@ defaults:
 
 导航栏中 `归档` `关于` 或者 `下一页` 等这样的通用字符串。
 
-使用 `site.data` 功能来实现，在 `/_data` 目录下创建 `locales` 文件夹，并分别创建 `en.yml` 和 `zh.yml` 用于存放英文和中文字符串，配置如下
+使用 `site.data` 功能来实现，在 `/_data` 目录下创建 `locales` 文件夹，并分别创建 `en.yml` 和 `zh.yml` 用于存放英文和中文字符串。
 
 ```yaml
 # /_data/locales/en.yml 文件中
@@ -86,7 +86,6 @@ menu:
 
 {% raw %}
 ```html
-<!-- 导航栏的详细使用见下 -->
 <nav class="menu-content">
   <a href="/about">{{ site.data.locales[page.locale].menu.about }}</a>
 </nav>
