@@ -29,3 +29,14 @@ jekyll-multi-language-without-plugin:
   author:
     url: https://unsplash.com/@freestocks
     name: freestocks.org
+
+jekyll-hugo-hexo:
+  image:
+    url: https://images.unsplash.com/photo-1534398079543-7ae6d016b86a?auto=format&fit=crop&w=720&q=80
+    source: https://unsplash.com/photos/VdOO4_HFTWM
+  author:
+    url: https://unsplash.com/@jeshoots
+    name: jeshoots.com
+  crop:
+    top: -23%;
+    bottom: -7%;
