@@ -11,7 +11,7 @@ I have selected three generators from Github, which are
 
 * [*Jekyll*](https://jekyllrb.com/)
 * [*Hugo*](https://gohugo.io/)
-* [*Hexo*]([https://hexo.io](https://hexo.io/))
+* [*Hexo*](https://hexo.io/)
 
 # WHAT is Static Website Generator
 
