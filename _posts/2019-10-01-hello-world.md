@@ -55,7 +55,7 @@ Considering this is my first blog building, I choose simple static blog. And I c
 
 To choose appropriate static website generator, please see 
 
-[*Jekyll / Hugo / Hexo Static Website Generator Comparation*]().
+[*Jekyll / Hugo / Hexo Static Comparision*]({{ "/posts/jekyll-hugo-hexo" | relative_url }}).
 
 
 
@@ -75,8 +75,8 @@ Preparation needs 4 parts below:
 Several articles should be written and ready to post in advance.
 
 1. *Github Pages Deployment Notes* (this article 😆);
-2. *Jekyll Supports Multiple Language without Plugin* (this blog supports English and Chinese 😆);
-3. *Jekyll / Hugo / Hexo Static Website Generator Comparation* (this blog  use Jekyll 😆);
+2. [*Jekyll Supports Multiple Language without Plugin*]({{ "/posts/jekyll-multi-language-without-plugin" | relative_url }}) (this blog supports English and Chinese 😆);
+3. [*Jekyll / Hugo / Hexo Comparision*]({{ "/posts/jekyll-hugo-hexo" | relative_url }}) (this blog  use Jekyll 😆);
 4. *How to choose an English name* (mine is Lex Cao 😆).
 
 ## Blog Introduction

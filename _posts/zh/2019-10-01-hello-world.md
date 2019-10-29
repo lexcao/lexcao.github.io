@@ -53,7 +53,7 @@ uid: hello-world
 
 考虑到刚接触到博客搭建，先从简单的静态博客入手。目前 Github 上有很多开源的静态网站生成器，这里我选择使用 `Jekyll`。
 
-选择合适的静态博客生成器请看 [Jekyll / Hugo / Hexo 静态网站生成器比较]()。
+选择合适的静态博客生成器请看 [*Jekyll / Hugo / Hexo 比较*]({{ "/zh/posts/jekyll-hugo-hexo" | relative_url }})。
 
 # 第二步 准备好所需内容
 
@@ -69,8 +69,8 @@ uid: hello-world
 提前写好文章准备发布
 
 1. Github Pages 部署记录（本文 😆）
-2. Jekyll 不使用插件支持多语言（本博客是中文和英文 😆）
-3. Jekyll / Hugo / Hexo 静态博客生成工具比较（本博客用 Jekyll 😆）
+2. [*Jekyll 不使用插件支持多语言*]({{ "/zh/posts/jekyll-multi-language-without-plugin" | relative_url }})（本博客是中文和英文 😆）
+3. [*Jekyll / Hugo / Hexo 比较*]({{ "/zh/posts/jekyll-hugo-hexo" | relative_url }})（本博客用 Jekyll 😆）
 4. 如何选择一个英文名（Lex Cao 😆）
 
 
