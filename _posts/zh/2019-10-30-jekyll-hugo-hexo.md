@@ -48,7 +48,7 @@ uid: jekyll-hugo-hexo
 * 基于 `Gem` 主题；
 * `Markdown` 和 `YAML` 类型支持；
 * `Sass` 预处理 CSS 支持；
-* 官网插件支持 `CoffeeScript`。
+* 官方插件支持 `CoffeeScript`。
 
 
 
