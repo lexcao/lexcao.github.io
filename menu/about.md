@@ -31,11 +31,11 @@ Static website generator
 * `Jekyll 4.0` [https://jekyllrb.com/](https://jekyllrb.com/)
 *  Theme is `Lagrange` [http://jekyllthemes.org/themes/lagrange/](http://jekyllthemes.org/themes/lagrange/)
 Code hosting
-* Github
+* GitHub
 * The source code of the blog is [there]().
 
 Blog deploying
-* Github Pages
+* GitHub Pages
 
 ## Chinese and English Support
 
@@ -51,6 +51,6 @@ Stay tuned.
 
 * <a target="_blank" href="https://icons8.com/icons/set/code">Code</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 * Powered by [Jekyll](https://jekyllrb.com/) with [Lagrange](http://jekyllthemes.org/themes/lagrange/) theme
-* Deployed by [Github Pages](https://pages.github.com)
+* Deployed by [GitHub Pages](https://pages.github.com)
 * Free to use photos by [Pexels](https://www.pexels.com/)
 * Free to use photos by [Unsplash](https://unsplash.com)

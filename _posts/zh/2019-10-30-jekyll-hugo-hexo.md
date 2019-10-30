@@ -9,7 +9,7 @@ uid: jekyll-hugo-hexo
 
 这是我从 Google 找到的一些简要的描述，希望它能对你选择什么生成器开始搭建网站有帮助。
 
-我从 Github 选择了以下三个静态博客生成器进行比较
+我从 GitHub 选择了以下三个静态博客生成器进行比较
 
 * [*Jekyll*](https://jekyllrb.com/)
 * [*Hugo*](https://gohugo.io/)
@@ -27,7 +27,7 @@ uid: jekyll-hugo-hexo
 # [*Jekyll*](https://jekyllrb.com/)
 
 * 使用语言 **Ruby**；
-* **Github** 支持；
+* **GitHub** 支持；
 * 使用 GitHub Pages 免费部署。
 
 ## 优势

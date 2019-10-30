@@ -13,7 +13,7 @@ uid: hello-world
   * Google Aynalysis 
   * Baidu Aynalysis
 * 部署
-  * Github Pages
+  * GitHub Pages
 
 这是我的第一篇文章，作为最简单的 “你好 世界”，我想记录一下该博客的诞生过程，以及如果你也想搭建一个自己的博客应该怎么做。
 
@@ -51,7 +51,7 @@ uid: hello-world
 * 文章从后台服务器获取
 * 前端页面动态获取
 
-考虑到刚接触到博客搭建，先从简单的静态博客入手。目前 Github 上有很多开源的静态网站生成器，这里我选择使用 `Jekyll`。
+考虑到刚接触到博客搭建，先从简单的静态博客入手。目前 GitHub 上有很多开源的静态网站生成器，这里我选择使用 `Jekyll`。
 
 选择合适的静态博客生成器请看 [*Jekyll / Hugo / Hexo 比较*]({{ "/zh/posts/jekyll-hugo-hexo" | relative_url }})。
 
@@ -68,7 +68,7 @@ uid: hello-world
 
 提前写好文章准备发布
 
-1. Github Pages 部署记录（本文 😆）
+1. GitHub Pages 部署记录（本文 😆）
 2. [*Jekyll 不使用插件支持多语言*]({{ "/zh/posts/jekyll-multi-language-without-plugin" | relative_url }})（本博客是中文和英文 😆）
 3. [*Jekyll / Hugo / Hexo 比较*]({{ "/zh/posts/jekyll-hugo-hexo" | relative_url }})（本博客用 Jekyll 😆）
 4. 如何选择一个英文名（Lex Cao 😆）
@@ -119,7 +119,7 @@ uid: hello-world
 
 * [*Install on MacOS*](https://jekyllrb.com/docs/installation/macos/)
 * [*Jekyll with Bundle*](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/)
-* [*Creating a Github Pages with Jekyll*](https://help.github.com/en/articles/creating-a-github-pages-site-with-jekyll)
+* [*Creating a GitHub Pages with Jekyll*](https://help.github.com/en/articles/creating-a-github-pages-site-with-jekyll)
 
 使用到的命令
 
@@ -165,9 +165,9 @@ $ bundle exec jekyll serve
 
 ### 插件说明
 
-* Github Pages 集成 Jekyll 实现**自动部署**需要插件 `github-pages`。该插件仅允许使用白名单内插件，具体请看[允许插件及版本](https://pages.github.com/versions/)；
-* 要想使用自定义插件（白名单以外的插件），不能 Github Pages 的自动部署功能，需要将 `_site` 目录放到仓库上，手动实现[自动部署](https://jekyllrb.com/docs/deployment/automated/)；
-* 本次是第一次搭建博客，所以选用了 Github Pages 的自动部署。
+* GitHub Pages 集成 Jekyll 实现**自动部署**需要插件 `github-pages`。该插件仅允许使用白名单内插件，具体请看[允许插件及版本](https://pages.github.com/versions/)；
+* 要想使用自定义插件（白名单以外的插件），不能 GitHub Pages 的自动部署功能，需要将 `_site` 目录放到仓库上，手动实现[自动部署](https://jekyllrb.com/docs/deployment/automated/)；
+* 本次是第一次搭建博客，所以选用了 GitHub Pages 的自动部署。
 
 ### 多语言配置
 
@@ -176,7 +176,7 @@ $ bundle exec jekyll serve
 [Jekyll 不使用插件支持多语言]()。
 
 
-## 部署到 Github Pages
+## 部署到 GitHub Pages
 
 [官方教程](https://help.github.com/en/articles/getting-started-with-github-pages)
 
@@ -186,7 +186,7 @@ $ bundle exec jekyll serve
 
 如：`lexcao.github.io`
 
-### 将文章推到 Github
+### 将文章推到 GitHub
 
 ```bash
 # 添加远程仓库
@@ -219,7 +219,7 @@ $ git push -u origin master
 注意事项：
 
 1. `Google Tag Manager` 不允许变量为中文名;
-2. 重新发布 Github Pages 生效后，如果请求 `js` 文件 `net::ERR_BLOCKED_BY_CLIENT` 错误，关掉广告拦截插件重试。
+2. 重新发布 GitHub Pages 生效后，如果请求 `js` 文件 `net::ERR_BLOCKED_BY_CLIENT` 错误，关掉广告拦截插件重试。
 
 ### Baidu Analytics
 

@@ -7,7 +7,7 @@ It is hard to choose a suitable static website generator, especially when you wa
 
 Here is some brief information I found from Google and hope it should be useful for you to decide starting up on what generator.
 
-I have selected three generators from Github, which are
+I have selected three generators from GitHub, which are
 
 * [*Jekyll*](https://jekyllrb.com/)
 * [*Hugo*](https://gohugo.io/)
@@ -27,15 +27,15 @@ I have selected three generators from Github, which are
 # [*Jekyll*](https://jekyllrb.com/)
 
 * built in **Ruby**;
-* supported by **Github**;
-* use **Github Pages** for free to host.
+* supported by **GitHub**;
+* use **GitHub Pages** for free to host.
 
 ## Pros
 
 1. free and open source;
 2. RubyGems supports to build themes as gems;
 3. easy and simple to use;
-4. great Github Pages support;
+4. great GitHub Pages support;
 5. comes with default and decent minimal theme out of box.
 
 ## Cons
@@ -92,7 +92,7 @@ As your website content grows, the build process becomes significantly slower.
 ## Pros
 
 * also fast;
-* easy to deploy on Github Pages;
+* easy to deploy on GitHub Pages;
 * Chinese (maybe cons for non-Chinese);
 * Chinese community.
 
@@ -114,11 +114,11 @@ As your website content grows, the build process becomes significantly slower.
 
 1. Huge number of free themes and plugins;
 2. There are many tutorial for the beginners;
-3. Deploy on Github Pages without any skills.
+3. Deploy on GitHub Pages without any skills.
 
 ## What I dislike
 
-1. It is not supported by Github Pages to many plugins;
+1. It is not supported by GitHub Pages to many plugins;
 2. I18n is not supported.
 
 

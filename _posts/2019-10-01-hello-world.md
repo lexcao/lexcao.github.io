@@ -15,7 +15,7 @@ Blog configuration:
   * Google Analysis
   * Baidu Analysis
 * Deployment
-  * Github Pages
+  * GitHub Pages
 
 This is my first post, which I would like to note the beginning of the blog as the simplest "hello world" and how to build such blog by yourself.
 
@@ -74,7 +74,7 @@ Preparation needs 4 parts below:
 
 Several articles should be written and ready to post in advance.
 
-1. *Github Pages Deployment Notes* (this article 😆);
+1. *GitHub Pages Deployment Notes* (this article 😆);
 2. [*Jekyll Supports Multiple Language without Plugin*]({{ "/posts/jekyll-multi-language-without-plugin" | relative_url }}) (this blog supports English and Chinese 😆);
 3. [*Jekyll / Hugo / Hexo Comparision*]({{ "/posts/jekyll-hugo-hexo" | relative_url }}) (this blog  use Jekyll 😆);
 4. *How to choose an English name* (mine is Lex Cao 😆).
@@ -121,7 +121,7 @@ Relative links:
 
 * [*Install on MacOS*](https://jekyllrb.com/docs/installation/macos/)
 * [*Jekyll with Bundle*](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/)
-* [*Creating a Github Pages with Jekyll*](https://help.github.com/en/articles/creating-a-github-pages-site-with-jekyll)
+* [*Creating a GitHub Pages with Jekyll*](https://help.github.com/en/articles/creating-a-github-pages-site-with-jekyll)
 
 Used commands:
 
@@ -164,7 +164,7 @@ Find liked theme:
 
 ### Plugin Notice
 
-* `github-pages` plugin is needed to automated deployment when Github Pages integration Jekyll, which some white-list plugins are limited while deploying. See [*Permit plugins with versions*](https://pages.github.com/versions/);
+* `github-pages` plugin is needed to automated deployment when GitHub Pages integration Jekyll, which some white-list plugins are limited while deploying. See [*Permit plugins with versions*](https://pages.github.com/versions/);
 * The method to use more plugins (not in the white-list) is to push `_site` folder to the repository other than automated deplyment by Github Pages and to [*auto deploy*](https://jekyllrb.com/docs/deployment/automated/) manually.
 * I would like to use automated deployment by Github Pages because of the first blog.
 
@@ -178,7 +178,7 @@ There are many tricks need to be set, please see
 
 
 
-## Deploy on Github
+## Deploy on GitHub
 
 [*Ofiicial tutorial*](https://help.github.com/en/articles/getting-started-with-github-pages)
 
@@ -188,7 +188,7 @@ The name of repository should be a fixed pattern `<user>.github.io`.
 
 For example, `lexcao.github.io`
 
-### Push articles to Github
+### Push articles to GitHub
 
 ```bash
 # add remote repository
@@ -219,7 +219,7 @@ On repository page, there is a easy way to see every time deployments from [*env
 Notice:
 
 1. Variable name of Chiese is not allowed in `Google Tag Manager`;
-2. If there is `net::ERR_BLOCKED_BY_CLIENT` error on requesting `js` file after Github Pages re-deployment, refresh page without ad block extensions would solve the problem.
+2. If there is `net::ERR_BLOCKED_BY_CLIENT` error on requesting `js` file after GitHub Pages re-deployment, refresh page without ad block extensions would solve the problem.
 
 ### Baidu Analytics
 

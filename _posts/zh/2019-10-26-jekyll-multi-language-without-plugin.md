@@ -14,7 +14,7 @@ uid: jekyll-multi-language-without-plugin
 # 相关缺陷
 
 * 404 页面无法配置，只能在 `404.html` 页面写上两种语言；
-* 支持多语言文章的分页插件 `jekyll-paginate-v2` 没在 Github Pages 支持的插件白名单内，目前本博客首页不支持分页。多语言分页详见[下文](#paginate)；
+* 支持多语言文章的分页插件 `jekyll-paginate-v2` 没在 GitHub Pages 支持的插件白名单内，目前本博客首页不支持分页。多语言分页详见[下文](#paginate)；
 * 多语言时间表示有点麻烦，需要做一些字符串处理工作，能实现但是不太优雅，具体可以参考 [*Jekyll-Date-Formatting*](http://alanwsmith.com/jekyll-liquid-date-formatting-examples)。
 
 # 开始配置
@@ -205,7 +205,7 @@ collections:
 
 ## 最后
 
-我省略了一些不重要的常规配置，源码请看 [*Github: lexcao.github.io*](https://github.com/lexcao/lexcao.github.io)
+我省略了一些不重要的常规配置，源码请看 [*GitHub: lexcao.github.io*](https://github.com/lexcao/lexcao.github.io)
 
 # 相关参考链接
 

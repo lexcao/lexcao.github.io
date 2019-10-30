@@ -34,11 +34,11 @@ uid: about
 *  使用主题  `Lagrange` [http://jekyllthemes.org/themes/lagrange/](http://jekyllthemes.org/themes/lagrange/)
 
 代码托管
-* Github
+* GitHub
 * 博客源码在这里
 
 博客部署
-* Github Pages
+* GitHub Pages
 
 ## 中英支持
 
@@ -57,6 +57,6 @@ uid: about
 ## 相关链接
 * <a target="_blank" href="https://icons8.com/icons/set/code">Code</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 * Powered by [Jekyll](https://jekyllrb.com/) with [Lagrange](http://jekyllthemes.org/themes/lagrange/) theme
-* Deployed by [Github Pages](https://pages.github.com)
+* Deployed by [GitHub Pages](https://pages.github.com)
 * Free to use photos by [Pexels](https://www.pexels.com/)
 * Free to use photos by [Unsplash](https://unsplash.com)

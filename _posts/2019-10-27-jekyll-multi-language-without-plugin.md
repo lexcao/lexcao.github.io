@@ -16,7 +16,7 @@ uid: jekyll-multi-language-without-plugin
 # Defect
 
 * As `404.html` page was not supported for separate language file, two langugage content would be shown on it at the same time.
-* The `jekyll-paginate-v2`, a plugin supports pagination for multi-language, is not supported by Github Pages. So the blog has not been supported pagination so far. See details [*below*](#pagination).
+* The `jekyll-paginate-v2`, a plugin supports pagination for multi-language, is not supported by GitHub Pages. So the blog has not been supported pagination so far. See details [*below*](#pagination).
 * It is a little bit tricky to show date in multi-language way. Some string formatting work should be taken as it is able to have done that but is not a better way. Please see [*Jekyll Date Formatting*](http://alanwsmith.com/jekyll-liquid-date-formatting-examples).
 
 
@@ -240,7 +240,7 @@ Some unimportant and regular configuration are omitted, please to see the [*Sour
 
 The old pagination plugin `jekyll-pagination-v1` is no longer suitable for the short of filtering by the criteria. It is not able to show the one language list of posts on specified language.
 
-Fortunately, `jekyll-pagination-v2` announced to support pagination on multi-language way. As I mentioned above, the [*permitted plugins*](https://pages.github.com/versions/) provided by Github Pages does not contain this plugin. Which you need to [*deploy automated manually*](https://jekyllrb.com/docs/deployment/automated/) if you want to use. Here are setup `jekyll-pagination-v2`.
+Fortunately, `jekyll-pagination-v2` announced to support pagination on multi-language way. As I mentioned above, the [*permitted plugins*](https://pages.github.com/versions/) provided by GitHub Pages does not contain this plugin. Which you need to [*deploy automated manually*](https://jekyllrb.com/docs/deployment/automated/) if you want to use. Here are setup `jekyll-pagination-v2`.
 
 ### Gemfile install
 
