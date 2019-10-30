@@ -79,9 +79,9 @@ As your website content grows, the build process becomes significantly slower.
 
 ## Features
 
-* supporting `i18n`;
-* building `fast`;
-* no installation need for `Go`.
+* `Go` template;
+* `i18n`;
+* supporting dynamic `API`;
 
 
 
@@ -93,7 +93,6 @@ As your website content grows, the build process becomes significantly slower.
 
 * also fast;
 * easy to deploy on Github Pages;
-* free themes and plugins;
 * Chinese (maybe cons for non-Chinese);
 * Chinese community.
 
@@ -124,7 +123,7 @@ As your website content grows, the build process becomes significantly slower.
 
 
 
-By the way, the build speed is not considered for me because of the small count of articles at the moment, which I might change to other generator when it is slightly  slow on building with jekyll in the future.
+By the way, the build speed is not considered for me because of the small count of articles at the moment, which I might change to other generator when it becomes slightly slow on building with Jekyll in the future.
 
 The rank of speed among three generators are `Hugo > Hexo > Jekyll`.
 
