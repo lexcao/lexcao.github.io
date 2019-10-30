@@ -7,8 +7,9 @@ layout: default
 </h1>
 
 {% include head-image.html %}
-
-{{ content }}
+<div class="post-content">
+  {{ content }}
+</div>
 
 <span class="post-date">
   {{ site.data.locales[page.locale].post.date_prefix }}

@@ -26,3 +26,8 @@
     text-align: right;
     font-size: 0.7rem;
 }
+
+.post-content h1 {
+    text-align: center;
+    padding: 8px 0;
+}
