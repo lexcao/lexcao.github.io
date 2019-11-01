@@ -23,7 +23,7 @@ Use:
 * SpringBoot,
 * SpringCloud.
 
-If you want to [contact me](mailto:clixin@foxmail.com).
+If you want to [contact me](mailto:lexcao@foxmail.com).
 
 ## About Blog
 
@@ -32,7 +32,7 @@ Static website generator
 *  Theme is `Lagrange` [http://jekyllthemes.org/themes/lagrange/](http://jekyllthemes.org/themes/lagrange/)
 Code hosting
 * GitHub
-* The source code of the blog is [there]().
+* [*Here*](https://github.com/lexcao/lexcao.github.io) is the source code of the blog
 
 Blog deploying
 * GitHub Pages

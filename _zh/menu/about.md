@@ -23,7 +23,7 @@ uid: about
 * SpringBoot；
 * SpringCloud。
 
-如果你想 [联系我](mailto:clixin@foxmail.com)。
+如果你想 [联系我](mailto:lexcao@foxmail.com)。
 
 
 
@@ -35,7 +35,7 @@ uid: about
 
 代码托管
 * GitHub
-* 博客源码在这里
+* 博客源码在[*这里*](https://github.com/lexcao/lexcao.github.io)
 
 博客部署
 * GitHub Pages
