@@ -77,7 +77,7 @@ Several articles should be written and ready to post in advance.
 1. *GitHub Pages Deployment Notes* (this article 😆);
 2. [*Jekyll Supports Multiple Language without Plugin*]({{ "/posts/jekyll-multi-language-without-plugin" | relative_url }}) (this blog supports English and Chinese 😆);
 3. [*Jekyll / Hugo / Hexo Comparision*]({{ "/posts/jekyll-hugo-hexo" | relative_url }}) (this blog  use Jekyll 😆);
-4. *How to choose an English name* (mine is Lex Cao 😆).
+4. [*Choose An English Name*]({{ "/posts/choose-english-name" | relative_url }}) (mine is Lex Cao 😆).
 
 ## Blog Introduction
 
