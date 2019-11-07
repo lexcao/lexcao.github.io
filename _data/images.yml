@@ -40,3 +40,11 @@ jekyll-hugo-hexo:
   crop:
     top: -23%;
     bottom: -7%;
+
+choose-english-name:
+  image:
+    url: https://images.unsplash.com/photo-1555431189-0fabf2667795?auto=format&fit=crop&w=720&q=80
+    source: https://unsplash.com/photos/POMpXtcVYHo
+  author:
+    url: https://unsplash.com/@brett_jordan
+    name: Brett Jordan
