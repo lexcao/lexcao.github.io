@@ -5,7 +5,7 @@ uid: choose-english-name
 
 # Introduction
 
-I am 曹历鑫, Lixin Cao in Chinese Pinyin. I was finding a way to give myself an English name, then I found a post, [*How to choose an English name*](http://www.pgbovine.net/choosing-english-name.htm), which gives an useful method for choosing an English name, by which I made a program to help choose an English name.
+I am Lixin Cao in Chinese Pinyin. I was finding a way to give myself an English name, then I found a post, [*How to choose an English name*](http://www.pgbovine.net/choosing-english-name.htm), which gives an useful method for choosing an English name, by which I made a program to help choose an English name.
 
 You can try it [*here*](https://lexcao.github.io/English-name-picker).
 

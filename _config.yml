@@ -29,6 +29,7 @@ defaults:
       locale: en
   # config posts
   - scope:
+      path: ""
       type: posts
     values:
       layout: post
