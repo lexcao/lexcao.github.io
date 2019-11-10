@@ -12,8 +12,15 @@
     {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
     {% capture prevYear %}{{ prev.date | date: '%Y' }}{% endcapture %}
 
+    {% capture month %}{{ post.date | date: '%m' }}{% endcapture %}
+    {% capture prevMonth %}{{ prev.date | date: '%m' }}{% endcapture %}
+
     {% if year != prevYear or index == 0 %}
     <h3>{{ year }}</h3>
+    {% endif %}
+
+    {% if month != prevMonth or index == 0 %}
+    <h4 style="text-align: center">{{ month }}</h4>
     {% endif %}
 
     <li itemscope>
