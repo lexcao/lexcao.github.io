@@ -4,7 +4,7 @@ uid: choose-english-name
 ---
 # 简介
 
-最近我在寻找一个一个方法给自己取一个英文名字，然后我发现这篇文章，[*如何选择一个英文名字*](http://www.pgbovine.net/choosing-english-name.htm)。该文章在选择一个英文名字提出了一个行之有效的方法，我用该方法制作了一个应用来帮助选择一个英文名字。
+最近我在寻找一个方法给自己取一个英文名字，然后我发现这篇文章，[*如何选择一个英文名字*](http://www.pgbovine.net/choosing-english-name.htm)。该文章在选择一个英文名字提出了一个行之有效的方法，我用该方法制作了一个应用来帮助选择一个英文名字。
 
 你可以在 [*这里*](https://lexcao.github.io/English-name-picker) 尝试一下。
 
