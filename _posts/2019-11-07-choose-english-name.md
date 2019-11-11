@@ -58,7 +58,7 @@ You can use it for free or make another English name application. Enjoy!
    2. Alex (already taken)
    3. Lucas (too popular)
    4. Liam (too popular)
-4. Search each name meaning from [*nameberry*](https://nameberry.com/) and [*behindthename*](*https://behindthename.com*) to find variants of the name.
+4. Search each name meaning from [*NameBerry*](https://nameberry.com/) and [*BehindTheName*](*https://behindthename.com*) to find variants of the name.
 6. I like ***Alex*** most, then I finally picked ***Lex*** for my English name.
 
 
