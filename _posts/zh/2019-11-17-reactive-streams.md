@@ -7,7 +7,7 @@ uid: reactive-streams
 
 # Reactive Streams
 
-> 译者注：Reactive Streams 直译为响应式流，这里保留英文原词。
+> 注：Reactive Streams 直译为响应式流，这里保留英文原词。
 
 *Reactive Streams* 是一项提议，旨在为具有**无阻塞背压的异步处理流**提供标准。这包括针对运行环境（JVM 和 JavaScript）以及网络协议的努力。
 
