@@ -47,5 +47,59 @@ uid: reactive-streams
 
 基本含义定义了如何通过背压来调节流中元素的传输。元素的传输方式，传输过程中的表现形式或者背压的信号发送方式均不属于本规范的一部分。
 
-### JVM 接口（已完成）
+#### JVM 接口（已完成）
+
+工作组将基本语义应用于一组编程接口，这些编程接口的主要目的是允许使用共享内存堆在 JVM 内的对象和线程之间传递流，从而实现不同一致性的实现和语言绑定的互操作。
+
+在 2019 年 8 月 23 日，我们发布了针对 JVM 的 Reactive Streams 1.0.3 版本，包含了 Java [*API*](https://www.reactive-streams.org/reactive-streams-1.0.3-javadoc)， 一个文本 [说明](https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.3/README.md#specification), 一个 [*TCK*](https://www.reactive-streams.org/reactive-streams-tck-1.0.3-javadoc) 和 [实现示例](https://www.reactive-streams.org/reactive-streams-examples-1.0.3-javadoc).
+
+1.0.3 的新功能是主 jar 中包含 JDK 9（适配器库）。Maven Central 上提供了相应的代码库：
+
+```
+<dependency>
+  <groupId>org.reactivestreams</groupId>
+  <artifactId>reactive-streams</artifactId>
+  <version>1.0.3</version>
+</dependency>
+<dependency>
+  <groupId>org.reactivestreams</groupId>
+  <artifactId>reactive-streams-tck</artifactId>
+  <version>1.0.3</version>
+</dependency>
+<dependency>
+  <groupId>org.reactivestreams</groupId>
+  <artifactId>reactive-streams-tck-flow</artifactId>
+  <version>1.0.3</version>
+</dependency>
+<dependency>
+  <groupId>org.reactivestreams</groupId>
+  <artifactId>reactive-streams-examples</artifactId>
+  <version>1.0.3</version>
+</dependency>
+```
+
+这些代码的源码在 [*GitHub*](https://github.com/reactive-streams/reactive-streams-jvm/tree/v1.0.3)。请使用 GitHub Issues 来提供反馈。
+
+所有的库和说明都在 [知识共享零](http://creativecommons.org/publicdomain/zero/1.0) 下发布到了公共领域。
+
+在 [这里](https://www.reactive-streams.org/announce-1.0.3) 阅读更多有关 Reactive Streams 1.0.3 相关内容。
+
+#### 实现须知
+
+为了着手实现最终规范，建议先阅读 [*README*](https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.3/README.md) 和这个 [Java API 文档](https://www.reactive-streams.org/reactive-streams-1.0.3-javadoc)，然后看一下这个 [规范](https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.3/README.md#specification)，再看一下这个 [*TCK*](https://github.com/reactive-streams/reactive-streams-jvm/tree/v1.0.3/tck) 以及 [示例实现](https://github.com/reactive-streams/reactive-streams-jvm/tree/v1.0.3/examples/src/main/java/org/reactivestreams/example/unicast)。如果你对以上有任何问题，请先看一下 [关闭的问题](https://github.com/reactive-streams/reactive-streams-jvm/issues?page=1&state=closed)，如果尚未解决，请打开一个 [新的问题](https://github.com/reactive-streams/reactive-streams-jvm/issues/new)。
+
+这项工作是在 [*reactive-streams-jvm*](https://github.com/reactive-streams/reactive-streams-jvm/) 仓库执行的。
+
+#### JavaScript 接口
+
+这个工作组定义了一组最小的对象属性，用于观察 JavaScript 运行环境中的流元素。目的是提供一个可测试的规范，该规范允许不同实现在同一个运行环境进行互操作。
+
+这项工作是在 [*reactive-streams-js*](https://github.com/reactive-streams/reactive-streams-js/) 仓库执行的。
+
+#### 网路协议
+
+该工作组定义了用于在各种传输介质上传递 Reactive Streams，其中涉及到元素的序列化和反序列化。此类传输媒介例如 TCP，UDP，HTTP 和 WebSockets。
+
+这项工作是在 [*reactive-streams-io*](https://github.com/reactive-streams/reactive-streams-io/) 仓库执行的。
+
 
