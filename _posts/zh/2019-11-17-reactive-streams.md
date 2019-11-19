@@ -11,7 +11,7 @@ uid: reactive-streams
 
 *Reactive Streams* 是一项提议，旨在为具有**无阻塞背压的异步处理流**提供标准。这包括针对运行环境（JVM 和 JavaScript）以及网络协议的努力。
 
-响应式流是为了提供一个**无阻塞背压异步流式处理的标准的一个提议**。
+Reactive Streams 是为了提供一个**无阻塞背压异步流式处理的标准的一个提议**。
 
 
 
