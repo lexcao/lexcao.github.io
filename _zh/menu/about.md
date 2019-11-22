@@ -56,7 +56,7 @@ uid: about
 
 ## 相关链接
 * <a target="_blank" href="https://icons8.com/icons/set/code">Code</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-* Powered by [Jekyll](https://jekyllrb.com/) with [Lagrange](http://jekyllthemes.org/themes/lagrange/) theme
-* Deployed by [GitHub Pages](https://pages.github.com)
-* Free to use photos by [Pexels](https://www.pexels.com/)
-* Free to use photos by [Unsplash](https://unsplash.com)
+* Powered by [*Jekyll*](https://jekyllrb.com/) with [*Lagrange*](http://jekyllthemes.org/themes/lagrange/) theme
+* Deployed by [*GitHub Pages*](https://pages.github.com)
+* Free to use photos by [*Pexels*](https://www.pexels.com/)
+* Free to use photos by [*Unsplash*](https://unsplash.com)
