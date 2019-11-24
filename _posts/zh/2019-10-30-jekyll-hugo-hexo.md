@@ -13,7 +13,7 @@ uid: jekyll-hugo-hexo
 
 * [*Jekyll*](https://jekyllrb.com/)
 * [*Hugo*](https://gohugo.io/)
-* [*Hexo*]([https://hexo.io](https://hexo.io/))
+* [*Hexo*](https://hexo.io/)
 
 # 什么是静态网站生成器
 
