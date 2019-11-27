@@ -96,9 +96,7 @@ And here [*How to Choose Operators*](https://projectreactor.io/docs/core/release
 
 
 
-# Spring Reactor
-
-WebFlux
+# Spring Reactor WebFlux
 
 #### debug
 
@@ -126,16 +124,6 @@ iteraction models
 3. request stream (1 to many pub / sub)
 4. reqeust channel (many to many)
 
-vocabulary
-
-* broker: 
-* routing:
-* route
-* forwarding
-* tag
-* metadata
-* origin
-
 protocol
 
 * webstock
@@ -145,8 +133,6 @@ protocol
 ## Back Pressure
 
 #### RequestN
-
-lease
 
 https://www.youtube.com/watch?v=PfbycN_eqhg
 
