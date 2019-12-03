@@ -1,5 +1,20 @@
 [*VIM Cheat Sheet*](https://vim.rtorr.com/)
 
+# Re: A Vim Training Journey
+
+1. vim tutor
+2. make your idea to text-editor
+3. select your best vim editor, like macvim, evil mode in emacs, and whatever you are using 
+
+if you are first or want to practice more 
+
+requirement:
+1. all default vim settings
+2. a comfortable Idea, which I highly recommend Intellij Idea Community Edition
+(What? It is an IDE not and editor, see my post how to set to an elegant editor)
+3. A keyboard without <ESC> and <Backspace> key
+4. you can use the course on the idea
+
 ## move
 
 ### Basic
@@ -15,9 +30,20 @@ j   k      ←   →
 `gg` - go to top
 `{number} G / gg` - jump to the given {number} of line
 `%` - move to the matching `() [] {}` in that block 
+`n` / `N` in search - jump to the search result
+`<C-]>` - jump to the declaration / tag
+`<C-t>` - jump back from tag
+`<C-o>` - jump back from jump
+`<C-i>` - jump forward from `<C-o>`
 
-
-
+`<C-o>` can jump back from following command
+* <C-]>
+* gg
+* G
+* number gg / G
+* n / N in search
+`<C-i>` jump forward from <C-o>
+> `<C-T>` jump forward from last
 
 ## edit (CRUD)
 
@@ -38,14 +64,95 @@ To create character, you need enter the `INSERT` mode
 ### Read
 
 `<C-g>` - show the line location in the current file, but not works in IdeaVIM
-kk
+`/{word}` <ENTER> - search {word} forward
+`n` - jump to next word
+`N` - jump to previous word
+`?{word}` <ENTER> - search {word} backward
+
+`:set ic` - ignore case when searching 
+`:set hls` - hlsearch
+`:set is` - incsearch
+`:set ic hls is` - combine all this set
+`:set noxx` -- switch off the set, `noic`
+/{word}\c - ignore case when searching {word} this time
+
 
 ### Update
+
+`u` - undo
+`U` - undo all the changes on a line
+`<C-r>` - redo, to undo the undoes
+
+`p` - put the previously deleted after the cursor
+`r{x}` - replace the character at the cursor with x
+`ce` - dw + i
+`c$` - C 
+`R` - enter replacing mode
+
+substitute
+```
+substitute {new} for {old}, differnt params with different scope
+:s/{old}/{new}    -- first in current line
+:s/{old}/{new}/g  -- all in current line
+:{from},{to}s/{old}/{new}/g -- all in range of from and to 
+:%s/{old}/{new}/g -- all in the whole file
+:%s/{old}/{new}/gc -- all in the whole file with a confirm prompt
+```
 
 
 ### Delete
 `d` -  
-`x` 
+`x` - delete the character under the cursor
 `c`
+`<C-w>` - delete a word in insert mode
+`<C-u>` - delete all the characters in current line on once insert mode
+`dw` - delete a word
+`d$` - delete to the end of the line
+`D` - d$
+`dd` - delete a whole line
 
+
+## advance
+
+### motion
+> e.g: this is word.
+
+w - until the start of the next word
+    `is ` including the space
+e - to the end of the current word
+    `is`
+$ - to the end of the line
+    `is word.` including .
+    
+### counter  
+0 - move to the start of the line
+number - repeat command {number} times
+
+
+```
+counter command
+command [number] motion
+```
+
+
+<C-d> - show the hint in command mode
+:help - visit help doc
+
+### command
+
+`:!{command}` - execute external command
+:w{filename} - save to another file
+
+v - visual mode
+v + :w{filename} -> `:'<,'>w{filename}` - save selection to another file
+:r{filename} - read the content of the file
+:r + !{command} - read the command output  
+
+y - yank(copy)
+p - past
+yw - yank a word
+
+
+## not working
+`<C-g>`
 
