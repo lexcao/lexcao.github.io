@@ -1,12 +1,9 @@
-[*VIM Cheat Sheet*](https://vim.rtorr.com/)
 
-# Re: A Vim Training Journey
+# Introduce
 
 1. vim tutor
 2. make your idea to text-editor
 3. select your best vim editor, like macvim, evil mode in emacs, and whatever you are using 
-
-if you are first or want to practice more 
 
 requirement:
 1. all default vim settings
@@ -33,17 +30,15 @@ j   k      ←   →
 `n` / `N` in search - jump to the search result
 `<C-]>` - jump to the declaration / tag
 `<C-t>` - jump back from tag
-`<C-o>` - jump back from jump
-`<C-i>` - jump forward from `<C-o>`
+`<C-o>` - jump back from a jump (see details below)
+`<C-i>` - jump forward to `<C-o>`
 
 `<C-o>` can jump back from following command
-* <C-]>
-* gg
-* G
-* number gg / G
-* n / N in search
-`<C-i>` jump forward from <C-o>
-> `<C-T>` jump forward from last
+* `<C-]>`
+* `gg`
+* `G`
+* `number G / gg`
+* `n` / `N` in search
 
 ## edit (CRUD)
 
@@ -156,3 +151,5 @@ yw - yank a word
 ## not working
 `<C-g>`
 
+# References
+* [*VIM Cheat Sheet*](https://vim.rtorr.com/)
