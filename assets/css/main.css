@@ -17,6 +17,10 @@
   Base
 */
 
+@font-face {
+    font-display: swap;
+}
+
 body {
     background-color: #FFFEEE;
     font-family: "-apple-system", "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
