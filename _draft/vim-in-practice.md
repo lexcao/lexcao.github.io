@@ -1,6 +1,17 @@
 
 # Introduce
 
+```
+Vim 是一个方便快捷的编辑器。
+曾经也学习过一次 VIM，但是命令行版本的 VIM 用来开发 Java 不太顺手，还需要使用 IDEA 这样的集成开发环境才行。
+体验到 VIM 的便捷和快速之后，就很难再回到日常的编码习惯中，所以这次准备重新学习练习 VIM 在 IDEA 这个平台上。
+所以写此文章记录重新学习 VIM， 以及一些平时开发中遇到的 VIM 最佳解决方案。
+用于 VIM 进行快速编码
+作为一个 Java 开发者来说，有一个优秀的
+```
+Vim is a convenient and quick text editor.
+
+This is a vim 
 1. vim tutor
 2. make your idea to text-editor
 3. select your best vim editor, like macvim, evil mode in emacs, and whatever you are using 
@@ -11,6 +22,8 @@ requirement:
 (What? It is an IDE not and editor, see my post how to set to an elegant editor)
 3. A keyboard without <ESC> and <Backspace> key
 4. you can use the course on the idea
+
+# change some word
 
 ## move
 
@@ -53,8 +66,8 @@ To create character, you need enter the `INSERT` mode
 `O` - `Open`, open a new line above current line then enter `INSERT` mode
 
 
-`c` - `change`, can enter `INSERT` mode as well, but with motion, see Update.
-`s` - `substitute`, can enter `INSERT` mode as well, with delete current character.
+`c` - `change`, enter `INSERT` mode as well, need motion, see Update.
+`s` - `substitute`, enter `INSERT` mode as well, will delete current character.
 
 ### Read
 
@@ -69,7 +82,7 @@ To create character, you need enter the `INSERT` mode
 `:set is` - incsearch
 `:set ic hls is` - combine all this set
 `:set noxx` -- switch off the set, `noic`
-/{word}\c - ignore case when searching {word} this time
+`/{word}\c` - ignore case when searching {word} this time
 
 
 ### Update
@@ -153,3 +166,67 @@ yw - yank a word
 
 # References
 * [*VIM Cheat Sheet*](https://vim.rtorr.com/)
+
+
+# Practice 
+
+## delete a word in insert mode
+
+`<C-w>` - delete back a word
+`<C-u>` - delete back a line in current insert
+
+```
+1. This is a whole sentence.
+C-w -> This is a whole  
+C-u -> 
+
+2. This is 
+-> This is a whole sentence.
+C-w -> This is a whole
+C-w -> This is 
+```
+
+## multi cursor 
+`<C-v>` - start multi cursor visual mode
+then 
+* `I` - enter insert mode, then `<ESC>`, all lines will be inserted
+* `A` - enter insert mode, same as `I`
+```
+this is
+this is
+this is
+
+this is showing how mulit cursor works.
+this is showing how mulit cursor works.
+this is showing how mulit cursor works.
+```
+
+## batch process
+```
+given:
+1, 2, 3 
+expect:
+1,
+2,
+3
+
+solve:
+<S-v> -> : -> s/, /,\r/g
+```
+
+```
+given:
+User(id=1),
+User(id=23),
+User(id=456)
+exepct:
+1,
+23,
+456
+
+solve:
+<S-v> -> 2j -> : -> s/
+User(id=1),
+User(id=23),
+User(id=456)
+```
