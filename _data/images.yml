@@ -64,3 +64,14 @@ reactive-overview:
   author:
     url: https://unsplash.com/@justindkauffman
     name: Justin Kauffman
+
+konverter:
+  image:
+    url: https://images.unsplash.com/photo-1576920803192-b00c94175cae?auto=format&fit=crop&w=720&q=80
+    source: https://unsplash.com/photos/aF5rhTEmqnk
+  author:
+    url: https://unsplash.com/@markusspiske
+    name: Markus Spiske
+  crop:
+    top: -8%;
+    bottom: -22%;
