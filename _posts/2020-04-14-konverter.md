@@ -1,43 +1,46 @@
 ---
-title: 使用 KAPT 生成 Kotlin Data Class 转换器
+title: Generate Converter for Kotlin Class by KAPT
 uid: konverter
 ---
 
-# 背景
-Web 后台开发中，对于一个实体的操作会衍生出多个类似的对象进行操作（避免直接使用实体），由此出现相关名词
-* 持久化对象，即实体 PO(*Persistent Object*)
-* 传输对象 DTO(*Data Transfer Object*)
-* 业务对象 BO(*Business Object*)
-* 展示对象 VO(*View Object*)
-* 等等……
-这些对象大多数直接从实体里面裁剪几个字段，比如，在一次创建订单请求中以订单实体（OrderEntity）为例，经历如下流程：
+# Background
+
+In web backend development, the operation of an entity need to code a number of similar classes to handle request (avoiding the direct use of entities), which resulting in related terminology:
+* PO (*Persistent Object*)
+* DTO (*Data Transfer Object*)
+* BO (*Business Object*)
+* VO (*View Object*)
+
+Most of these classes trim a few fields directly from the entity. For example, by using `OrderEntity` in a request to create an order, it would process like following:
 
 ```
-1. 接收请求体 CreateOrderRequest
-2. 根据 OrderQuery 构造查询对象查询订单
-3. 构造 OrderEntity 进行持久化操作
-4. 构造 OrderBO 进行下游消费
-5. 返回响应体 CreateOrderResponse
-```
+1. Receive request body `CreateOrderRequest` as DTO
+2. Construct `OrderQuery` as BO to query orders
+3. Construct `QueryEntity` as PO for the order persistent
+4. Construct `OrderBO` as BO for further service consumption
+5. Respond body `CreateOrderResponse` as VO
+```  
 
-可见，从 OrderEntity 衍生出 4 个对象，仅仅是对订单的实体的部分裁剪，但是要编写很多重复的代码（复制也行）。当然，如果是新增字段的话可以使用继承解决。
+You will see, there are 4 classes derived from OrderEntity which are just partial cropping of the entity, but a lot of repetitive code has to be written (yes, you can copy and paste). Of course, you should use inheritance if there is going to be a new field differed from OrderEntity.
 
-在 Kotlin Web 后台开发中，data class 的语法特性带来很多优势，但还是避免不了创建类似的重复对象。
-所以 `Konverter` 诞生于此，解决实体对象裁剪问题。还有另一个功能那就是自动生成两个实体间的转换方法。
-> 注意：目前只支持 Kotlin，并且生成的转换方法是通过扩展函数实现
+In web backend development with Kotlin, the syntax features of the `data class` offer many advantages (getter, setter, equals, hashCode...), however, you can't avoid creating similar duplicate classes. 
 
-# 是什么
-通过 [*KAPT(Kotlin Annotation Processing Tool*](https://kotlinlang.org/docs/reference/kapt.html]) 注解处理以及 [*Kotlin Poet*](https://github.com/square/kotlinpoet) 代码生成，实现自动生成对实体的相关裁剪的对象。
-主要有两个注解：
-* `@Konvertable` 生成裁剪的实体以及对应的转换方法
-* `@Konvert` 单独针对某个类生成转换方法
+So, `Konverter` is here to solve classes which trimmed fields from entity. Additionally, it supports to generate the conversion functions between two classes. 
 
-废话不多说来看怎么使用。
+> Note, till now it only supports on Kotlin, because the generated code of conversion function implemented by extension function and only generating Kotlin code.
 
-# 怎么用
+# What is Konverter
+Konverter is automate generating the classes which trimmed from entity, and those conversion functions by [*KAPT (Kotlin Annotation Processing Tool*](https://kotlinlang.org/docs/reference/kapt.html]) annotation processing and [*Kotlin Poet*](https://github.com/square/kotlinpoet) code generating.
 
-## 1. 引入依赖
+There are two main annotations: 
+* `@Konvertable` generates trimmed classes and respondent converter;
+* `@Konvert` generates the converter for specified class.
 
+Let's see how it works.
+
+# How to use
+
+## 1. Add dependency
 ```
 // for build.gradle.kts
 repositories {
@@ -60,8 +63,7 @@ dependencies {
 }
 ```
 
-## 2. 在需要转换的类上加上注解
-
+## 2. Add annotations
 ```
 @Konvertable(
     To(name = "LoginDTO", pick = ["username", "password"]),
@@ -78,10 +80,9 @@ data class UserEntity(
 )
 ```
 
-## 3. 生成的代码如下：
-
+## 3. Then `compileKotlin` to process generation
+### For `@Konvertable`
 ```
-// @Konvertable
 /**
  *  Auto generated code by @Konvertable
  */
@@ -153,10 +154,9 @@ fun RegisterDTO.toUserEntity(
   gender: Int = this@toUserEntity.gender
 ): UserEntity = UserEntity(id=id,username=username,password=password,gender=gender)
 ```
-
+### For `@Konvert`
 ```
-// @Konvert
-// 转换为如下对象
+// the class to convert to
 data class UserVO(
     val id: String,
     val name: String,
@@ -177,7 +177,7 @@ object GenderEnumConverter : Konvert.KonvertBy<Int, GenderEnum> {
     }
 }
 
-// 生成的代码
+// generated code
 **
  *  Auto generated code by @Konvert
  */
@@ -198,27 +198,22 @@ fun UserVO.toUserEntity(
 ): UserEntity = UserEntity(id=id,username=username,password=password,gender=gender)
 ```
 
-## 相关 API 说明
-转换规则
-* 如果转换至 String 类型，原类型不匹配时会调用 `toString()`
-* 如果转换至基础数据类型，转换字段缺失时会使用默认类型
-* 如果转换至允许为 null 类型，原类型不匹配时会使用默认值 null
-* 如果转换至引用类型（String 除外）或者找不到映射需要在转换方法显式赋值
+## API notes
+the rules of conversion and generation
+* If converting to String type, it will use toString() while the type is not match;
+* If converting to primitive type, it will use default value of primitive type when missing;
+* If converting to nullable type, it will use null for default value when missing;
+* It will need be assigned explicitly when converting to reference type (excepting String) or unknown type.
 
-# 下一步
-* 代码重构，新增测试用例
-* 支持引用类型默认值
-* 支持嵌套对象
-* 支持 Java
-* 已知 BUG 修复
-* 支持映射失败字段获取原类型的构造函数参数默认值，或者成员变量默认值（目前 Kotlin KAPT 已支持获取[成员变量默认值](https://youtrack.jetbrains.com/issue/KT-30164)，暂不支持获取[函数参数默认值](https://youtrack.jetbrains.com/issue/KT-29355)）
+# What next
 
-# 已知 BUG
-* 相同 name 在 @Konvertable 冲突
-* @Konvertable 参数合法性校验以及友好报错
-* KonvertBy 目前使用 Class 报错或者使用 Companion 报错
+* code optimization and test case
+* support the default value of object and collection
+* support nested class
+* support for Java
+* fix bugs
+* support for using the default value of parameters on constructors or fields on class from original when missing (from now, Kotlin KAPT is only support for [*default value of fields*](https://youtrack.jetbrains.com/issue/KT-30164), but not for [*parameters*](https://youtrack.jetbrains.com/issue/KT-29355))
 
-# 最后
-Konverter 源码在 [GitHub](https://github.com/lexcao/konverter)
-
-相关的样例代码 [GitHub](https://github.com/lexcao/konverter-demo)
+# Source code
+* [Konverter in Github](https://github.com/lexcao/konverter)
+* [Konverter-demo in Github](https://github.com/lexcao/konverter-demo)
