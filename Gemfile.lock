@@ -246,7 +246,6 @@ DEPENDENCIES
   github-pages
   jekyll-seo-tag
   jekyll-sitemap
-  tzinfo-data
 
 BUNDLED WITH
    2.0.2
