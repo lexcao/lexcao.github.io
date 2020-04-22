@@ -75,3 +75,14 @@ konverter:
   crop:
     top: -8%;
     bottom: -22%;
+
+kotlin-equality-diving:
+  image:
+    url: https://images.unsplash.com/photo-1547517023-7ca0c162f816?auto=format&fit=crop&w=720&q=80
+    source: https://unsplash.com/photos/gVUV7PbSu_0
+  author:
+    url: https://unsplash.com/@karaeads
+    name: Kara Eads
+  crop:
+    top: -20%;
+    bottom: -10%;
