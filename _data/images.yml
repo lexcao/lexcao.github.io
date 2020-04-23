@@ -86,3 +86,14 @@ kotlin-equality-diving:
   crop:
     top: -20%;
     bottom: -10%;
+
+async-within-async:
+  image:
+    url: https://images.unsplash.com/photo-1580292808168-7a568c57f3ac?auto=format&fit=crop&w=720&q=80
+    source: https://unsplash.com/photos/80f7BuU9o8s
+  author:
+    url: https://unsplash.com/@lennonzf
+    name: Lennon Cheng
+  crop:
+    top: -15%;
+    bottom: 0;
