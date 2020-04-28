@@ -9,11 +9,9 @@ uid: kotlin-equality-diving
 
 # 事由
 
-产生 BUG Kotlin 版本 `1.2.61` Java 版本 `1.8.0_172`。
+以下代码片段 Kotlin 版本 `1.3.72`。
 
-以下代码片段 Kotlin 版本 `1.3.72` 问题依然存在。
-
-先还原一下 BUG 场景，已去除业务逻辑部分，仅保留关键代码，片段如下：
+还原问题代码，已去除业务逻辑部分，仅保留关键代码，片段如下：
 
 ```kotlin
 // 有一个状态枚举
@@ -38,7 +36,7 @@ fun handleState() {
 }
 ```
 
-当处理 CANCELED 代码没有执行，原因在于「import」。
+当处理 CANCELED 代码没有执行，原因在于***「import」***。
 
 ```java
 import javax.print.attribute.standard.JobState.CANCELED
@@ -78,13 +76,13 @@ if (state == MyState.CANCELED) { ... }
 
 为了探个究竟，通过以下实验研究 Kotlin 编译器类型不匹配行为。
 
-[「点击跳转到结果部分」](#summary)
+[「点击跳转到结果部分」](#conclusion)
 
 
 
 # 🔬实验
 
-### 第一步 实验预期
+## 第一步 实验预期
 
 先看下各自的相等（***equality***）语法说明：
 
@@ -143,7 +141,7 @@ Kotlin 中的相等，
 
 
 
-### 第二步 收集变量
+## 第二步 收集变量
 
 通过上面复现出的问题梳理出以下变量：
 
@@ -155,7 +153,7 @@ Kotlin 中的相等，
 
 
 
-### 第三步 初步筛选
+## 第三步 初步筛选
 
 对于条件判断语句，
 
@@ -173,7 +171,7 @@ if (condition) {}
 
 对于表达式对象，每个实验对象定义 a / b ，b 用于同类型时备用。
 
-| 表达式<br/>对象      | java                          | kotlin                                 |
+| 表达式<br/>对象      | Java                          | Kotlin                                 |
 | --------------- | ----------------------------- | -------------------------------------- |
 | class           | MyJavaClassA / MyJavaClassB   | MyKotlinClassA / MyKotlinClassB        |
 | enum            | RetentionPolicy / ElementType | AnnotationRetention / AnnotationTarget |
@@ -215,7 +213,7 @@ K - K?
 
 
 
-### 第四步 验证框架
+## 第四步 验证框架
 
 ```
 // java 验证代码
@@ -238,13 +236,13 @@ class KotlinGenerated {
 
 
 
-### 第五步 编码验证
+## 第五步 编码验证
 
 有了上面的模版之后，就可以根据变量开始编码验证。
 
 面对多种的变量组合的情况，手动编写大量的模版代码非常的劳累。
 
-所以利用工具，使用 [*JavaPoet*](https://github.com/square/javapoet) 和 [*KotlinPoet*](https://github.com/square/kotlinpoet) 来生成代码，多种组合更容易。
+所以利用工具，使用 [*JavaPoet*](https://github.com/square/javapoet) 和 [*KotlinPoet*](https://github.com/square/kotlinpoet) 来生成代码。
 
 (花了一天来写自动生成代码逻辑，完成后感到一阵空虚，为什么要花那么多的时间折腾，手动复制粘贴早写完了。)
 
@@ -271,7 +269,7 @@ class KotlinGenerated {
 
 
 
-### 第六步 观察结果
+## 第六步 观察结果
 
 > 环境如下
 >
@@ -280,20 +278,20 @@ class KotlinGenerated {
 > * IDEA Version 2020.1
 
 这里结果大致分为两类：
-* [error] ，不能编译。编译器告警，在 IDEA 中红色波浪线标出；
-* [warning] ，能够编译。IDEA 告警，以黄色背景高亮。
+* **[error]** ，不能编译。编译器告警，在 IDEA 中红色波浪线标出；
+* **[warning]** ，能够编译。IDEA 告警，以黄色背景高亮。
 
-#### JavaGenerated.java
+### JavaGenerated.java
 
 完全符合预期，
 * `==` 不能编译；
-* `equals` 能够编译，另外 IDEA 给出友好提醒。
+* `equals()` 能够编译，另外 IDEA 给出友好提醒。
 
 |  type       | ==                                      | equals                              |
 | ---------- | --------------------------------------- | ----------------------------------- |
-| Class      | [error] Operator '==' <br/>cannot be applied | [warning] inconvertible types       |
-| Static     | [error] Operator '==' <br/>cannot be applied | [warning] inconvertible types       |
-| Enum       | [error] Operator '==' <br/>cannot be applied | [warning] condition is always false |
+| Class      | **[error]** Operator '==' <br/>cannot be applied | **[warning]** inconvertible types       |
+| Static     | **[error]** Operator '==' <br/>cannot be applied | **[warning]** inconvertible types       |
+| Enum       | **[error]** Operator '==' <br/>cannot be applied | **[warning]** condition is always false |
 
 #### KotlinGenerated.kt
 
@@ -303,9 +301,9 @@ class KotlinGenerated {
 
 |   type       | ==                                                           |
 | ---------- | ------------------------------------------------------------ |
-| Class      | [error] EQUALITY_NOT_APPLICABLE,<br/>Operator '==' cannot be applied |
-| Static     | [error] EQUALITY_NOT_APPLICABLE,<br/>Operator '==' cannot be applied |
-| Enum       | [warning] INCOMPATIBLE_ENUM_COMPARISON,<br/>Comparison of incompatible enums is always unsuccessful |
+| Class      | **[error]** EQUALITY_NOT_APPLICABLE,<br/>Operator '==' cannot be applied |
+| Static     | **[error]** EQUALITY_NOT_APPLICABLE,<br/>Operator '==' cannot be applied |
+| Enum       | **[warning]** INCOMPATIBLE_ENUM_COMPARISON,<br/>Comparison of incompatible enums is always unsuccessful |
 
 不符合预期，
 * Java Class / Static 可以编译；
@@ -344,7 +342,7 @@ fun if_NullableKotlinEnum_To_JavaStatic(a: AnnotationRetention?) {
 5. nullable 的枚举类为什么可以与 Java 的静态类型对比？
 
 
-### 第七步 探究原因 <a name="summary" />
+## 第七步 探究原因 <a name="conclusion" />
 
 
 再回顾一下 Kotlin 官方文档中对相等（***equality***）的定义：
@@ -354,13 +352,13 @@ a == b => a?.equals(b) ?: (b === null)
 a === b => a and b point to the same object
 ```
 
-#### 1. Class / Static 的对比为什么比 Java 的 equals 更严格？
+### 1. Class / Static 的对比为什么比 Java 的 equals 更严格？
 
 （目前没有想清楚原因）TODO ：这里应该去看 Kotlin 编译器在处理 `EQUALITY_NOT_APPLICABLE` 这个报错。
 
 
 
-#### 2. 为什么 Enum 的对比可以通过编译，没有像上面那么严格？
+### 2. 为什么 Enum 的对比可以通过编译，没有像上面那么严格？
 
 在 Java 中 `enum` 其实是语法糖，最终会被编译为范型类。
 ```java
@@ -369,7 +367,7 @@ abstract class Enum<E extends Enum<E>> { ... }
 
 Kotlin 不例外，`enum class` 也是语法糖，最终会被编译为范型类。
 ```kotlin
-abstract class Enum<E : Enum<E>>
+abstract class Enum<E : Enum<E>> { ... }
 ```
 
 当两个枚举对比的时候，相当与是同一个类的不同范型，所以能够通过编译，不会出现类型不匹配问题。
@@ -378,7 +376,7 @@ abstract class Enum<E : Enum<E>>
 
 
 
-#### 3. 使用两个不同的 Java 的对象对比，为什么可以通过编译？
+### 3. 使用两个不同的 Java 的对象对比，为什么可以通过编译？
 
 Kotlin 中有严格的 `Nullable / Notnull` 语法。
 
@@ -391,7 +389,7 @@ Kotlin 中有严格的 `Nullable / Notnull` 语法。
 
 
 
-#### 4. Kotlin nullable 的枚举类为什么可以与 Java 的静态类型对比？
+### 4. Kotlin nullable 的枚举类为什么可以与 Java 的静态类型对比？
 
 进行上述前置探索，终于到这次问题的终点。结合上面的结论，总结如下：
 
