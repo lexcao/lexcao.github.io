@@ -1,7 +1,7 @@
 # Change 'comments' to true for Disqus comments
 disqus:
   comments: false
-  disqus_shortname: 'diabled-disqus'
+  disqus_shortname: 'disabled-disqus'
 
 menu:
   en: 

@@ -1,0 +1,56 @@
+<script>
+
+  const register = (div) => {
+    const children = div.children
+    if (!children || children.length === 0) {
+      return
+    }
+
+    const languages = {}
+    const buttons = {}
+    let current = ''
+
+    const tab = document.createElement('div')
+
+    for (const child of children) {
+      child.style.display = 'none'
+      languages[child.classList[0]] = child
+    }
+
+    const switchTo = (target) => {
+      if (current === target) {
+        return
+      }
+      languages[current].style.display = 'none'
+      languages[target].style.display = 'block'
+
+      buttons[current].classList.remove('active')
+      buttons[target].classList.add('active')
+
+      current = target
+    }
+
+    for (const name in languages) {
+      const button = document.createElement('button')
+      button.textContent = name.replace('language-', '')
+      button.onclick = () => switchTo(name)
+      buttons[name] = button
+
+      tab.append(button)
+    }
+
+    const init = (name) => {
+      current = name
+      languages[name].style.display = 'block'
+      buttons[name].classList.add('active')
+
+      div.insertBefore(tab, languages[name])
+    }
+
+    init(children[0].classList[0])
+  }
+
+  window.onload = () => {
+    document.querySelectorAll('.switch-tab').forEach(it => register(it))
+  }
+</script>
