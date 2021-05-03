@@ -14,6 +14,7 @@ menu:
 page:
   next: Newer
   prev: Older
+  see_more: See more
 
 post:
   related: "You may also enjoy:"
