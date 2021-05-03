@@ -1,0 +1,9 @@
+<script>
+  const referrer = document.referrer
+  const directVisit = !referrer
+  const inSite = referrer.indexOf('lexcao.github.io') !== -1 || referrer.indexOf('localhost') !== -1
+
+  if (directVisit || !inSite) {
+    document.location = 'zh'
+  }
+</script>
