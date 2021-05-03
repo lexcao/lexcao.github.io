@@ -1,6 +1,5 @@
 ---
-title: Kotlin/Java TDD 开发流程记录
-
+title: Kotlin/Java TDD 开发流程记录 
 uid: kotlin-java-tdd-example
 ---
 
@@ -14,7 +13,7 @@ uid: kotlin-java-tdd-example
 是一种开发流程，中文是「测试驱动开发」。用一句白话形容，就是「先写测试再开发」。先写测试除了能确保测试程式的撰写，还有一个好处：有助于在开发初期厘清程式介面如何设计。详细理论知识可以前往 Wiki 了解，这里不再过多介绍。
 
 - [测试驱动开发](https://zh.wikipedia.org/wiki/%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91)
-- [Test-driven_development](https://en.wikipedia.org/wiki/Test-driven_development)
+- [Test Driven Development](https://en.wikipedia.org/wiki/Test-driven_development)
 
 ## TDD 开发流程（5步）
 

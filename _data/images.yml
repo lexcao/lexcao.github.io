@@ -109,3 +109,13 @@ spring-data-jpa-join-table:
     top: -15%;
     bottom: 0;
 
+kotlin-java-tdd-example:
+  image:
+    url: https://images.unsplash.com/photo-1613190695372-8006b3b40095?auto=format&fit=crop&w=720&q=80&h=480
+    source: https://unsplash.com/photos/12dJPHX4aPw
+  author:
+    url: https://unsplash.com/@takeshi2
+    name: wu yi
+  crop:
+    top: -15%;
+    bottom: 0;
