@@ -1,5 +1,5 @@
 ---
-title: Kotlin/Java TDD 开发流程记录 
+title: Kotlin/Java TDD 开发流程记录
 uid: kotlin-java-tdd-example
 ---
 
@@ -469,8 +469,9 @@ override fun makeReservation(reservation: Reservation): Reservation {
 
 # 🔗 参考链接
 
-- [https://zh.wikipedia.org/wiki/测试驱动开发](https://zh.wikipedia.org/wiki/%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91)
-- [https://tw.alphacamp.co/blog/tdd-test-driven-development-example](https://tw.alphacamp.co/blog/tdd-test-driven-development-example)
-- [https://yurenju.medium.com/自動軟體測試-tdd-與-bdd-464519672ac5](https://yurenju.medium.com/%E8%87%AA%E5%8B%95%E8%BB%9F%E9%AB%94%E6%B8%AC%E8%A9%A6-tdd-%E8%88%87-bdd-464519672ac5)
-- [https://www.baeldung.com/spring-boot-testing](https://www.baeldung.com/spring-boot-testing)
-- [https://spring.io/guides/gs/testing-web/](https://spring.io/guides/gs/testing-web/)
+- [测试驱动开发](https://zh.wikipedia.org/wiki/%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91)
+- [Test Driven Development](https://en.wikipedia.org/wiki/Test-driven_development)
+- [TDD 開發五步驟，帶你實戰 Test Driven Development 範例](https://tw.alphacamp.co/blog/tdd-test-driven-development-example)
+- [自動軟體測試-tdd-與-bdd](https://yurenju.medium.com/%E8%87%AA%E5%8B%95%E8%BB%9F%E9%AB%94%E6%B8%AC%E8%A9%A6-tdd-%E8%88%87-bdd-464519672ac5)
+- [spring-boot-testing](https://www.baeldung.com/spring-boot-testing)
+- [testing-web-layer](https://spring.io/guides/gs/testing-web/)
