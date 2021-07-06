@@ -3,8 +3,6 @@ title: Kotlin/Java TDD 开发流程记录
 uid: kotlin-java-tdd-example
 ---
 
-{%include switch-tab.html %}
-
 通过使用 Kotlin / Java 中 Junit5 和 Mockito 测试框架，在预约功能中演示 TDD 开发流程。
 
 # TDD 介绍
@@ -54,9 +52,11 @@ uid: kotlin-java-tdd-example
 - 同一个时间点，只有一个用户可以下单成功
 
 ## 使用到的库
+{% include switch-tab.html %}
 
 {::options parse_block_html="true" /}
 <details><summary markdown="span">build.gradle.kts</summary>
+
 
 ```kotlin
 plugins {

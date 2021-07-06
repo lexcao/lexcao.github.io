@@ -1,7 +1,7 @@
 <script>
   const referrer = document.referrer
   const directVisit = !referrer
-  const inSite = referrer.indexOf('lexcao.io') !== -1 || referrer.indexOf('lexcao.github.io') !== -1 || referrer.indexOf('localhost') !== -1
+  const inSite = referrer.indexOf('lexcao.io') !== -1 || referrer.indexOf('lexcao.github.io') !== -1 || referrer.indexOf('localhost') !== -1 || referrer.indexOf('127.0.0.1') !== -1
 
   if (directVisit || !inSite) {
     document.location = 'zh'
