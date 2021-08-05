@@ -1,3 +1,8 @@
+- id: low-calorie
+  en: Low Calorie Meal.
+  zh: 低卡减脂餐。
+  link: https://cal.lexcao.io
+
 - id: algo-visualization
   en: Algorithm visualization.
   zh: 算法可视化。
