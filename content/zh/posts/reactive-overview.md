@@ -1,6 +1,6 @@
 ---
 title: Reactive 概览
-data: 2019-11-29
+date: 2019-11-29
 uid: reactive-overview
 ---
 
