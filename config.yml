@@ -11,6 +11,7 @@ buildDrafts: false
 buildFuture: false
 buildExpired: false
 enableEmoji: false
+publishDir: docs
 
 minify:
   disableXML: true
