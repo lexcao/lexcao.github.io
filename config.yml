@@ -11,6 +11,7 @@ buildDrafts: false
 buildFuture: false
 buildExpired: false
 enableEmoji: false
+googleAnalytics: "G-DDVMDVDZMH"
 
 minify:
   disableXML: true
@@ -105,6 +106,7 @@ languages:
           weight: 5
 
 params:
+  gtm_id: "GTM-KJ277ZJ"
   env: production
   title: The Coding Notes
   description: Share / Summary / Record
@@ -138,11 +140,6 @@ params:
       url: "https://twitter.com/lexcao"
     - name: email
       url: "mailto:lexcao@foxmail.com"
-
-    #  analytics:
-    #    google:
-    #      SiteVerificationTag: "XYZabc"
-    # Baidu?
 
   cover:
     hidden: true # hide everywhere but not in structured data

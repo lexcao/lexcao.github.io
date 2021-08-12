@@ -123,4 +123,10 @@
 {{- template "partials/templates/opengraph.html" . }}
 {{- template "partials/templates/twitter_cards.html" . }}
 {{- template "partials/templates/schema_json.html" . }}
+{{- if .Site.Params.gtm_id }}
+<noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id={{ .Site.Params.gtm_id }}" height="0" width="0" style="display:none;visibility:hidden">
+    </iframe>
+</noscript>
+{{- end }}
 {{- end -}}
