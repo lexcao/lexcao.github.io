@@ -59,7 +59,7 @@
 {{- end }}
 
 {{- with .Site.Params.profileMode }}
-{{- if and .enabled .imageUrl }}
+{{- if and .enabled .imageUrl .isHome }}
 <link rel="preload" href="{{ .imageUrl }}" as="image">
 {{- end }}
 {{- end }}
