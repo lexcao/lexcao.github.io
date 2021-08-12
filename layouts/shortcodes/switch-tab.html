@@ -1,0 +1,22 @@
+{{ $codeBlocks := (findRE "\x60\x60\x60([A-Za-z0-9]+)\n([^\x60]*)\n\x60\x60\x60" .Inner 1) }}
+
+{{ $languages := slice }}
+{{ $lang2code := dict }}
+
+{{ range $block := $codeBlocks }}
+{{ $lang := replaceRE "\x60\x60\x60([A-Za-z0-9]+)\n[^\x60]*\n\x60\x60\x60" "$1" $block }}
+{{ $code := replaceRE "\x60\x60\x60[A-Za-z0-9]+\n([^\x60]*)\n\x60\x60\x60" "$1" $block }}
+{{ $lang2code = $lang2code | merge (dict $lang $code) }}
+{{ $languages = $languages | append $lang }}
+{{ end }}
+
+<!-- TODO support switch code tab -->
+<div class="">
+    {{ range $languages }}
+    <a class="button" href="#">
+        {{ . }}
+    </a>
+    {{ end }}
+
+    {{ highlight (index $lang2code "kotlin") "kotlin" "" }}
+</div>

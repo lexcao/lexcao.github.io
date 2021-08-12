@@ -1,0 +1,29 @@
+{{- define "main" }}
+
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description }}
+  </div>
+  {{- end }}
+</header>
+
+<div style="margin-top: 40px"></div>
+{{- range $.Site.Data.Projects }}
+<article class="post-entry">
+  {{- $isHidden := (.Site.Params.cover.hidden | default .Site.Params.cover.hiddenInList) }}
+  {{- partial "cover.html" (dict "cxt" . "IsHome" true "isHidden" $isHidden) }}
+  <header class="entry-header">
+    <h2>
+      {{- .id }}
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>{{- i18n .id }}</p>
+  </section>
+  <a class="entry-link" aria-label="project link to {{ .id | plainify }}" href="{{ .link }}"></a>
+</article>
+{{- end }}
+
+{{- end }}{{/* end main */}}

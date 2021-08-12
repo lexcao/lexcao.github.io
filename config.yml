@@ -1,0 +1,169 @@
+baseURL: https://lexcao.io
+title: The Coding Notes
+theme: PaperMod
+paginate: 5
+
+defaultContentLanguage: en
+
+enableInlineShortcodes: true
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+enableEmoji: false
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+languages:
+  en:
+    contentDir: content/en
+    languageName: English
+    weight: 1
+    DateFormat: "January 2, 2006"
+    profileMode:
+      enabled: true
+      imageUrl: "profile_avatar.jpeg"
+      imageWidth: 150
+      imageHeight: 150
+      title: Lex Cao
+      subtitle: Stay hungry, stay foolish.
+      buttons:
+        - name: Posts
+          url: posts
+        - name: Projects
+          url: projects
+    menu:
+      main:
+        - identifier: search
+          name: Search
+          url: /search/
+          weight: 1
+        - identifier: archives
+          name: Archives
+          url: /archives/
+          weight: 2
+        - identifier: tags
+          name: Tags
+          url: /tags/
+          weight: 3
+        - identifier: projects
+          name: Projects
+          url: /projects/
+          weight: 4
+        - identifier: about
+          name: About
+          url: /about/
+          weight: 5
+  zh:
+    contentDir: content/zh
+    languageName: 中文
+    weight: 2
+    DateFormat: "2006 January 2"
+    profileMode:
+      enabled: true
+      imageUrl: "/profile_avatar.jpeg"
+      imageWidth: 150
+      imageHeight: 150
+      title: 曹 历鑫
+      subtitle: 在城市的肋骨间，感受一成不变的节拍
+      buttons:
+        - name: 博文
+          url: posts
+        - name: 项目
+          url: projects
+    label:
+      text: 代码笔记
+    menu:
+      main:
+        - identifier: search
+          name: 搜索
+          url: /search/
+          weight: 1
+        - identifier: archives
+          name: 归档
+          url: /archives/
+          weight: 2
+        - identifier: tags
+          name: 标签
+          url: /tags/
+          weight: 3
+        - identifier: projects
+          name: 项目
+          url: /projects/
+          weight: 4
+        - identifier: about
+          name: 关于
+          url: /about/
+          weight: 5
+
+params:
+  env: production
+  title: The Coding Notes
+  description: Share / Summary / Record
+  keywords: [ Blog ]
+  author: Lex Cao
+  images: [ "https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80" ]
+
+  defaultTheme: auto # dark, light
+  disableThemeToggle: false
+  displayFullLangName: true
+
+  ShowReadingTime: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: true
+  tocopen: false
+
+  assets:
+    favicon: "/favicon.ico"
+
+  socialIcons:
+    - name: github
+      url: "https://github.com/lexcao"
+    - name: twitter
+      url: "https://twitter.com/lexcao"
+    - name: email
+      url: "mailto:lexcao@foxmail.com"
+
+    #  analytics:
+    #    google:
+    #      SiteVerificationTag: "XYZabc"
+    # Baidu?
+
+  cover:
+    hidden: true # hide everywhere but not in structured data
+    hiddenInList: true # hide on list pages and home
+    hiddenInSingle: true # hide on single page
+
+  #  editPost:
+  #    URL: "https://github.com/lexcao/lexcao.github.io/content"
+  #    Text: "Suggest Changes" # edit text
+  #    appendFilePath: true # to append file path to Edit link
+
+  # for search
+  # https://fusejs.io/api/options.html
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    keys: [ "title", "permalink", "summary", "content" ]
+
+taxonomies:
+  tag: tags

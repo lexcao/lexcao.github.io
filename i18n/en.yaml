@@ -1,0 +1,11 @@
+low-calorie:
+  other: Low calorie meal.
+
+algo-visualization:
+  other: Algorithm visualization.
+
+kox:
+  other: Kotlin implementation of Lox language.
+
+konverter:
+  other: Code generation for converter between data class by KAPT.

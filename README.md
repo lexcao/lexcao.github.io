@@ -1,6 +1,13 @@
 # [lexcao.github.io](https://lexcao.github.io)
 for GitHub pages
 
+## Hugo
+local run with
+```
+$ hugo serve
+```
+
+## Jekyll
 local run with
 ```
 $ bundle exec jekyll serve
