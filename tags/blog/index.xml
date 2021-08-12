@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Blog on The Coding Notes</title>
+    <link>https://lexcao.io/tags/blog/</link>
+    <description>Recent content in Blog on The Coding Notes</description>
+    <image>
+      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</url>
+      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 29 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jekyll / Hugo / Hexo Comparison</title>
+      <link>https://lexcao.io/posts/jekyll-hugo-hexo/</link>
+      <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/posts/jekyll-hugo-hexo/</guid>
+      <description>It is hard to choose a suitable static website generator, especially when you want to build website like blog for the first time. This is my first time to build a blog and have not enough time to go through some popular generators, which I have chosen Jekyll at the beginning but it is not a best one. In the future I am going to try another generators.
+Here is some brief information I found from Google and hope it should be useful for you to decide starting up on what generator.</description>
+    </item>
+    
+    <item>
+      <title>Jekyll Multi-Language without Plugin</title>
+      <link>https://lexcao.io/posts/jekyll-multi-language-without-plugin/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/posts/jekyll-multi-language-without-plugin/</guid>
+      <description>Goal  Support multi-language, mainly in English and supplemented by Chinese; When visiting pages begin with /, e.g. /about.html, /posts/hello-world, English pages would be shown; When visiting pages began with /zh/, e.g. /zh/about.html, /zh/posts/hello-world, Chinese pages would be shown; When visiting ../hello-world posts, corresponding langugage posts would be jumped via the link; Posts which are specified language would only be shown in archive and index pages.  Defect  As 404.</description>
+    </item>
+    
+    <item>
+      <title>Hello World</title>
+      <link>https://lexcao.io/posts/hello-world/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/posts/hello-world/</guid>
+      <description>Hello World Blog configuration:
+ Static Website Generation  Jekyll 3.8.5 Ruby 2.6.0 Lagrange theme   Website Aynalysis  Google Analysis Baidu Analysis   Deployment  GitHub Pages    This is my first post, which I would like to note the beginning of the blog as the simplest &amp;ldquo;hello world&amp;rdquo; and how to build such blog by yourself.
+The article will contain three steps:
+ Choose type of blog Prepare something needed Compose them  Step 01 Choose Type of Blog There are static websites and dynamic websites depending on whether the frontend web page interacts with the backend server or database.</description>
+    </item>
+    
+  </channel>
+</rss>

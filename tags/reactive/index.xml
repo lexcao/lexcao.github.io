@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Reactive on The Coding Notes</title>
+    <link>https://lexcao.io/tags/reactive/</link>
+    <description>Recent content in Reactive on The Coding Notes</description>
+    <image>
+      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</url>
+      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 28 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/tags/reactive/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reactive Overview</title>
+      <link>https://lexcao.io/posts/reactive-overview/</link>
+      <pubDate>Thu, 28 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/posts/reactive-overview/</guid>
+      <description>Reactive Streams Reactive Streams started as an initiative in late 2013 between engineers at Netflix, Pivotal and Lightbend.
+ Reactive Streams is an initiative to provide a standard for asynchronous stream processing with non-blocking back pressure. This encompasses efforts aimed at runtime environments (JVM and JavaScript) as well as network protocols.
+ You can read the origin specification on official website of Reactive Streams.
+Also, you can read the Chinese translation from here.</description>
+    </item>
+    
+  </channel>
+</rss>

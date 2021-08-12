@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Spring on The Coding Notes</title>
+    <link>https://lexcao.io/zh/tags/spring/</link>
+    <description>Recent content in Spring on The Coding Notes</description>
+    <image>
+      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</url>
+      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 04 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/zh/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring Data JPA 多条件动态连表查询</title>
+      <link>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</link>
+      <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</guid>
+      <description>痛点 项目中使用 Spring Data JPA 作为 ORM 框架的时候，实体映射非常方便。Spring Data Repository 的顶层抽象完全解决单实体的查询，面对单实体的复杂查询，也能使用 JpaSpecificationExecutor&amp;lt;T&amp;gt; 构造 Specification&amp;lt;T&amp;gt; 轻松应对。
+而对于后台管理报表查询需求来说，需要进行连表多条件动态查询的时候，就显得无从下手。因为它并不像 MyBatis 一样能够在 XML 文件中写出动态 SQL 语句。
+尽管可以使用 EntityManager 动态拼接原生 SQL 语句，但是该方法返回值为 ResultSet ，也就是说查出来的实体映射关系需要手动映射（😢这样不太优雅，已经定义出实体，还需要自己去映射）。
+所以，本文的目的是，在现有实体关系的基础上，结合 Specification&amp;lt;T&amp;gt; 记录下 Spring Data JPA 多条件动态连表查询操作，以及其中的踩坑和优化。
+基础操作 那么，让我们开始进入代码操作。【本文所有代码在此】
+前置说明 相关依赖  Java 11 SpringBoot 2.4.2  build.gradle
+plugins { id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&amp;#39; id &amp;#39;io.spring.dependency-management&amp;#39; version &amp;#39;1.0.11.RELEASE&amp;#39; id &amp;#39;java&amp;#39; } dependencies { implementation &amp;#39;org.springframework.boot:spring-boot-starter-data-jpa&amp;#39; compileOnly &amp;#39;org.projectlombok:lombok&amp;#39; runtimeOnly &amp;#39;mysql:mysql-connector-java&amp;#39; annotationProcessor &amp;#39;org.projectlombok:lombok&amp;#39; testImplementation &amp;#39;org.</description>
+    </item>
+    
+  </channel>
+</rss>

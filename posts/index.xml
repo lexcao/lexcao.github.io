@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on The Coding Notes</title>
+    <link>https://lexcao.io/posts/</link>
+    <description>Recent content in Posts on The Coding Notes</description>
+    <image>
+      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</url>
+      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 21 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kotlin Weird Equality</title>
+      <link>https://lexcao.io/posts/kotlin-equality-diving/</link>
+      <pubDate>Tue, 21 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/posts/kotlin-equality-diving/</guid>
+      <description>Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.
+Background The following code snippet is using Kotlin 1.3.72.
+The business logic of it has been removed and only remained the code structure for reproducing the question.
+// a enum for state enum class MyState { OK, CANCELED } // it might return nullable MyState fun processing(): MyState?</description>
+    </item>
+    
+    <item>
+      <title>Generate Converter for Kotlin Class by KAPT</title>
+      <link>https://lexcao.io/posts/konverter/</link>
+      <pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/posts/konverter/</guid>
+      <description>Background In web backend development, the operation of an entity need to code a number of similar classes to handle request (avoiding the direct use of entities), which resulting in related terminology:
+ PO (Persistent Object) DTO (Data Transfer Object) BO (Business Object) VO (View Object)  Most of these classes trim a few fields directly from the entity. For example, by using OrderEntity in a request to create an order, it would process like following:</description>
+    </item>
+    
+    <item>
+      <title>Reactive Overview</title>
+      <link>https://lexcao.io/posts/reactive-overview/</link>
+      <pubDate>Thu, 28 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/posts/reactive-overview/</guid>
+      <description>Reactive Streams Reactive Streams started as an initiative in late 2013 between engineers at Netflix, Pivotal and Lightbend.
+ Reactive Streams is an initiative to provide a standard for asynchronous stream processing with non-blocking back pressure. This encompasses efforts aimed at runtime environments (JVM and JavaScript) as well as network protocols.
+ You can read the origin specification on official website of Reactive Streams.
+Also, you can read the Chinese translation from here.</description>
+    </item>
+    
+    <item>
+      <title>Choose An English Name</title>
+      <link>https://lexcao.io/posts/choose-english-name/</link>
+      <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/posts/choose-english-name/</guid>
+      <description>Introduction I am Lixin Cao in Chinese Pinyin. I was finding a way to give myself an English name, then I found a post, How to choose an English name, which gives an useful method for choosing an English name, by which I made a program to help choose an English name.
+You can try it here.
+I will cover some detail of the post and the program in the below.</description>
+    </item>
+    
+    <item>
+      <title>Jekyll / Hugo / Hexo Comparison</title>
+      <link>https://lexcao.io/posts/jekyll-hugo-hexo/</link>
+      <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/posts/jekyll-hugo-hexo/</guid>
+      <description>It is hard to choose a suitable static website generator, especially when you want to build website like blog for the first time. This is my first time to build a blog and have not enough time to go through some popular generators, which I have chosen Jekyll at the beginning but it is not a best one. In the future I am going to try another generators.
+Here is some brief information I found from Google and hope it should be useful for you to decide starting up on what generator.</description>
+    </item>
+    
+    <item>
+      <title>Jekyll Multi-Language without Plugin</title>
+      <link>https://lexcao.io/posts/jekyll-multi-language-without-plugin/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/posts/jekyll-multi-language-without-plugin/</guid>
+      <description>Goal  Support multi-language, mainly in English and supplemented by Chinese; When visiting pages begin with /, e.g. /about.html, /posts/hello-world, English pages would be shown; When visiting pages began with /zh/, e.g. /zh/about.html, /zh/posts/hello-world, Chinese pages would be shown; When visiting ../hello-world posts, corresponding langugage posts would be jumped via the link; Posts which are specified language would only be shown in archive and index pages.  Defect  As 404.</description>
+    </item>
+    
+    <item>
+      <title>Hello World</title>
+      <link>https://lexcao.io/posts/hello-world/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/posts/hello-world/</guid>
+      <description>Hello World Blog configuration:
+ Static Website Generation  Jekyll 3.8.5 Ruby 2.6.0 Lagrange theme   Website Aynalysis  Google Analysis Baidu Analysis   Deployment  GitHub Pages    This is my first post, which I would like to note the beginning of the blog as the simplest &amp;ldquo;hello world&amp;rdquo; and how to build such blog by yourself.
+The article will contain three steps:
+ Choose type of blog Prepare something needed Compose them  Step 01 Choose Type of Blog There are static websites and dynamic websites depending on whether the frontend web page interacts with the backend server or database.</description>
+    </item>
+    
+  </channel>
+</rss>
