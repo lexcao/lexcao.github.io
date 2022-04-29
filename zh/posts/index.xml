@@ -37,7 +37,7 @@ TDD 介绍 TDD（Test-Driven Development） 是一种开发流程，中文是「
 所以，本文的目的是，在现有实体关系的基础上，结合 Specification&amp;lt;T&amp;gt; 记录下 Spring Data JPA 多条件动态连表查询操作，以及其中的踩坑和优化。
 基础操作 那么，让我们开始进入代码操作。【本文所有代码在此】
 前置说明 相关依赖  Java 11 SpringBoot 2.4.2  build.gradle
-plugins { id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&amp;#39; id &amp;#39;io.spring.dependency-management&amp;#39; version &amp;#39;1.0.11.RELEASE&amp;#39; id &amp;#39;java&amp;#39; } dependencies { implementation &amp;#39;org.springframework.boot:spring-boot-starter-data-jpa&amp;#39; compileOnly &amp;#39;org.projectlombok:lombok&amp;#39; runtimeOnly &amp;#39;mysql:mysql-connector-java&amp;#39; annotationProcessor &amp;#39;org.projectlombok:lombok&amp;#39; testImplementation &amp;#39;org.</description>
+plugins {  id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&amp;#39;  id &amp;#39;io.spring.dependency-management&amp;#39; version &amp;#39;1.0.11.RELEASE&amp;#39;  id &amp;#39;java&amp;#39; }  dependencies {  implementation &amp;#39;org.springframework.boot:spring-boot-starter-data-jpa&amp;#39;  compileOnly &amp;#39;org.</description>
     </item>
     
     <item>
@@ -49,8 +49,7 @@ plugins { id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&a
       <description>最近遇到一个平时没怎么关注的 Kotlin 相等问题，决定记录一下探究过程。
 事由 以下代码片段 Kotlin 版本 1.3.72。
 还原问题代码，已去除业务逻辑部分，仅保留关键代码，片段如下：
-// 有一个状态枚举 enum class MyState { OK, CANCELED } // 某个处理函数会返回 nullable MyState fun processing(): MyState? { // 假设当前某种情况下返回 取消 这个状态  return MyState.CANCELED } // 在处理状态时 fun handleState() { // 此时编译器推断出类型为 State?  val state = processing() if (state == CANCELED) { // 当处理 CANCELED 以下代码没有执行  println(&amp;#34;Handle &amp;lt;CANCELED&amp;gt; state&amp;#34;) } } 当处理 CANCELED 代码没有执行，原因在于***「import」***。
-import javax.print.attribute.standard.JobState.CANCELED // 此处使用静态导入引入了一个其他包中同名的一个静态变量，该变量声明如下 // public static final JobState CANCELED = new JobState (7); 解决方法：</description>
+// 有一个状态枚举 enum class MyState {  OK, CANCELED }  // 某个处理函数会返回 nullable MyState fun processing(): MyState? { 	// 假设当前某种情况下返回 取消 这个状态  return MyState.CANCELED }  // 在处理状态时 fun handleState() { 	// 此时编译器推断出类型为 State?  val state = processing()  if (state == CANCELED) {  // 当处理 CANCELED 以下代码没有执行  println(&amp;#34;Handle &amp;lt;CANCELED&amp;gt; state&amp;#34;)  } } 当处理 CANCELED 代码没有执行，原因在于***「import」***。</description>
     </item>
     
     <item>
@@ -80,6 +79,21 @@ import javax.print.attribute.standard.JobState.CANCELED // 此处使用静态导
 安装 # 安装 eclipse $ brew cask install eclipse-java # 安装 eclipse MAT $ brew cask install mat # 是的，这个就是 eclipse-mat 相关连接   Eclipse
   Eclipse MAT
   使用   把 heap dump 文件 dump.</description>
+    </item>
+    
+    <item>
+      <title>Reactive 概览</title>
+      <link>https://lexcao.io/zh/posts/reactive-overview/</link>
+      <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/zh/posts/reactive-overview/</guid>
+      <description>Reactive Streams Reactive Streams 在 Netflix 、Pivotal 和 Lightbend 工程师于 2013 年底发起这项计划。
+ Reactive Streams 是一项提议，为无阻塞背压的异步流提供一个标准。这包括针对运行时环境（JVM 和 JavaScript）以及网络协议上的工作。
+ 你可以在 Reactive Streams 官网网站阅读这个原始规范。
+你也可以在 这里 阅读它的中文翻译。
+无阻塞背压的异步流处理 Reactive Streams 由以下组成：
+ 异步； 流式； 无阻塞； 背压（回压）。  以下是 Java 接口，你可以在 GitHub 阅读更详细内容。
+public interface Publisher&amp;lt;T&amp;gt; {  public void subscribe(Subscriber&amp;lt;? super T&amp;gt; s); }  public interface Subscriber&amp;lt;T&amp;gt; {  public void onSubscribe(Subscription s);  public void onNext(T t);  public void onError(Throwable t);  public void onComplete(); }  public interface Subscription {  public void request(long n);  public void cancel(); }  public interface Processor&amp;lt;T, R&amp;gt; extends Subscriber&amp;lt;T&amp;gt;, Publisher&amp;lt;R&amp;gt; { } Reactive Extensions  用于可观察流的异步编程 API。</description>
     </item>
     
     <item>
@@ -159,21 +173,6 @@ Avoid:
  依赖前端 HTML / CSS / JS 数据从后台服务器获取 能够动态响应用户请求  所以，静态博客：
  文章预先生成 不依赖后台服务器  动态博客：
  文章从后台服务器获取 前端页面动态获取  考虑到刚接触到博客搭建，先从简单的静态博客入手。目前 GitHub 上有很多开源的静态网站生成器，这里我选择使用 Jekyll。</description>
-    </item>
-    
-    <item>
-      <title>Reactive 概览</title>
-      <link>https://lexcao.io/zh/posts/reactive-overview/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://lexcao.io/zh/posts/reactive-overview/</guid>
-      <description>Reactive Streams Reactive Streams 在 Netflix 、Pivotal 和 Lightbend 工程师于 2013 年底发起这项计划。
- Reactive Streams 是一项提议，为无阻塞背压的异步流提供一个标准。这包括针对运行时环境（JVM 和 JavaScript）以及网络协议上的工作。
- 你可以在 Reactive Streams 官网网站阅读这个原始规范。
-你也可以在 这里 阅读它的中文翻译。
-无阻塞背压的异步流处理 Reactive Streams 由以下组成：
- 异步； 流式； 无阻塞； 背压（回压）。  以下是 Java 接口，你可以在 GitHub 阅读更详细内容。
-public interface Publisher&amp;lt;T&amp;gt; { public void subscribe(Subscriber&amp;lt;? super T&amp;gt; s); } public interface Subscriber&amp;lt;T&amp;gt; { public void onSubscribe(Subscription s); public void onNext(T t); public void onError(Throwable t); public void onComplete(); } public interface Subscription { public void request(long n); public void cancel(); } public interface Processor&amp;lt;T, R&amp;gt; extends Subscriber&amp;lt;T&amp;gt;, Publisher&amp;lt;R&amp;gt; { } Reactive Extensions  用于可观察流的异步编程 API。</description>
     </item>
     
   </channel>

@@ -37,7 +37,7 @@ TDD 介绍 TDD（Test-Driven Development） 是一种开发流程，中文是「
 所以，本文的目的是，在现有实体关系的基础上，结合 Specification&amp;lt;T&amp;gt; 记录下 Spring Data JPA 多条件动态连表查询操作，以及其中的踩坑和优化。
 基础操作 那么，让我们开始进入代码操作。【本文所有代码在此】
 前置说明 相关依赖  Java 11 SpringBoot 2.4.2  build.gradle
-plugins { id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&amp;#39; id &amp;#39;io.spring.dependency-management&amp;#39; version &amp;#39;1.0.11.RELEASE&amp;#39; id &amp;#39;java&amp;#39; } dependencies { implementation &amp;#39;org.springframework.boot:spring-boot-starter-data-jpa&amp;#39; compileOnly &amp;#39;org.projectlombok:lombok&amp;#39; runtimeOnly &amp;#39;mysql:mysql-connector-java&amp;#39; annotationProcessor &amp;#39;org.projectlombok:lombok&amp;#39; testImplementation &amp;#39;org.</description>
+plugins {  id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&amp;#39;  id &amp;#39;io.spring.dependency-management&amp;#39; version &amp;#39;1.0.11.RELEASE&amp;#39;  id &amp;#39;java&amp;#39; }  dependencies {  implementation &amp;#39;org.springframework.boot:spring-boot-starter-data-jpa&amp;#39;  compileOnly &amp;#39;org.</description>
     </item>
     
     <item>

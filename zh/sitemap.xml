@@ -37,19 +37,6 @@
                 href="https://lexcao.io/zh/"
                 />
   </url><url>
-    <loc>https://lexcao.io/zh/posts/</loc>
-    <lastmod>2021-05-03T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/posts/"
-                />
-  </url><url>
     <loc>https://lexcao.io/zh/tags/</loc>
     <lastmod>2021-05-03T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -61,6 +48,19 @@
                 rel="alternate"
                 hreflang="zh"
                 href="https://lexcao.io/zh/tags/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/zh/posts/</loc>
+    <lastmod>2021-05-03T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/"
                 />
   </url><url>
     <loc>https://lexcao.io/zh/tags/mysql/</loc>
@@ -106,6 +106,19 @@
   </url><url>
     <loc>https://lexcao.io/zh/posts/async-within-async/</loc>
     <lastmod>2020-03-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lexcao.io/zh/posts/reactive-overview/</loc>
+    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/posts/reactive-overview/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/reactive-overview/"
+                />
   </url><url>
     <loc>https://lexcao.io/zh/tags/reactive/</loc>
     <lastmod>2019-11-17T00:00:00+00:00</lastmod>
@@ -165,19 +178,6 @@
                 href="https://lexcao.io/zh/posts/jekyll-multi-language-without-plugin/"
                 />
   </url><url>
-    <loc>https://lexcao.io/zh/posts/hello-world/</loc>
-    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/posts/hello-world/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/posts/hello-world/"
-                />
-  </url><url>
     <loc>https://lexcao.io/zh/about/</loc>
     <lastmod>2019-10-01T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -191,16 +191,17 @@
                 href="https://lexcao.io/zh/about/"
                 />
   </url><url>
-    <loc>https://lexcao.io/zh/posts/reactive-overview/</loc>
+    <loc>https://lexcao.io/zh/posts/hello-world/</loc>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://lexcao.io/posts/reactive-overview/"
+                href="https://lexcao.io/posts/hello-world/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://lexcao.io/zh/posts/reactive-overview/"
+                href="https://lexcao.io/zh/posts/hello-world/"
                 />
   </url><url>
     <loc>https://lexcao.io/zh/archives/</loc>

@@ -1,326 +1,40 @@
-<!doctype html><html lang=en dir=auto>
-<head><meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name=robots content="index, follow">
-<title>Kotlin Weird Equality | The Coding Notes</title>
-<meta name=keywords content>
-<meta name=description content="Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Kotlin Weird Equality | The Coding Notes</title><meta name=keywords content><meta name=description content="Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.
 Background The following code snippet is using Kotlin 1.3.72.
 The business logic of it has been removed and only remained the code structure for reproducing the question.
-// a enum for state enum class MyState { OK, CANCELED } // it might return nullable MyState fun processing(): MyState?">
-<meta name=author content="Lex Cao">
-<link rel=canonical href=https://lexcao.io/posts/kotlin-equality-diving/>
-<link crossorigin=anonymous href=/assets/css/stylesheet.min.954da09bd8e837a4043689612475b7cc6722c94243f0373fc0f972f02186a597.css integrity="sha256-lU2gm9joN6QENolhJHW3zGciyUJD8Dc/wPly8CGGpZc=" rel="preload stylesheet" as=style>
-<script defer crossorigin=anonymous src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
-<link rel=icon href=https://lexcao.io/favicon.ico>
-<link rel=icon type=image/png sizes=16x16 href=https://lexcao.io/favicon-16x16.png>
-<link rel=icon type=image/png sizes=32x32 href=https://lexcao.io/favicon-32x32.png>
-<link rel=apple-touch-icon href=https://lexcao.io/apple-touch-icon.png>
-<link rel=mask-icon href=https://lexcao.io/safari-pinned-tab.svg>
-<meta name=theme-color content="#2e2e33">
-<meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.87.0">
-<link rel=alternate hreflang=en href=https://lexcao.io/posts/kotlin-equality-diving/>
-<link rel=alternate hreflang=zh href=https://lexcao.io/zh/posts/kotlin-equality-diving/>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DDVMDVDZMH"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-DDVMDVDZMH',{anonymize_ip:!1})}</script>
-<meta property="og:title" content="Kotlin Weird Equality">
-<meta property="og:description" content="Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.
+// a enum for state enum class MyState {  OK, CANCELED }  // it might return nullable MyState fun processing(): MyState?"><meta name=author content="Lex Cao"><link rel=canonical href=https://lexcao.io/posts/kotlin-equality-diving/><link crossorigin=anonymous href=/assets/css/stylesheet.min.c105fdc36edbfb42d308a2d6ec2b38187ba259d129d7574bcf561ecc44e72262.css integrity="sha256-wQX9w27b+0LTCKLW7Cs4GHuiWdEp11dLz1YezETnImI=" rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://lexcao.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://lexcao.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://lexcao.io/favicon-32x32.png><link rel=apple-touch-icon href=https://lexcao.io/apple-touch-icon.png><link rel=mask-icon href=https://lexcao.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.98.0"><link rel=alternate hreflang=en href=https://lexcao.io/posts/kotlin-equality-diving/><link rel=alternate hreflang=zh href=https://lexcao.io/zh/posts/kotlin-equality-diving/><script async src="https://www.googletagmanager.com/gtag/js?id=G-DDVMDVDZMH"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-DDVMDVDZMH",{anonymize_ip:!1})}</script><meta property="og:title" content="Kotlin Weird Equality"><meta property="og:description" content="Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.
 Background The following code snippet is using Kotlin 1.3.72.
 The business logic of it has been removed and only remained the code structure for reproducing the question.
-// a enum for state enum class MyState { OK, CANCELED } // it might return nullable MyState fun processing(): MyState?">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://lexcao.io/posts/kotlin-equality-diving/"><meta property="og:image" content="https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2020-04-21T00:00:00+00:00">
-<meta property="article:modified_time" content="2020-04-21T00:00:00+00:00"><meta property="og:site_name" content="The Coding Notes">
-<meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80">
-<meta name=twitter:title content="Kotlin Weird Equality">
-<meta name=twitter:description content="Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.
+// a enum for state enum class MyState {  OK, CANCELED }  // it might return nullable MyState fun processing(): MyState?"><meta property="og:type" content="article"><meta property="og:url" content="https://lexcao.io/posts/kotlin-equality-diving/"><meta property="og:image" content="https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-04-21T00:00:00+00:00"><meta property="article:modified_time" content="2020-04-21T00:00:00+00:00"><meta property="og:site_name" content="The Coding Notes"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80"><meta name=twitter:title content="Kotlin Weird Equality"><meta name=twitter:description content="Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.
 Background The following code snippet is using Kotlin 1.3.72.
 The business logic of it has been removed and only remained the code structure for reproducing the question.
-// a enum for state enum class MyState { OK, CANCELED } // it might return nullable MyState fun processing(): MyState?">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://lexcao.io/posts/"},{"@type":"ListItem","position":3,"name":"Kotlin Weird Equality","item":"https://lexcao.io/posts/kotlin-equality-diving/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Kotlin Weird Equality","name":"Kotlin Weird Equality","description":"Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.\nBackground The following code snippet is using Kotlin 1.3.72.\nThe business logic of it has been removed and only remained the code structure for reproducing the question.\n// a enum for state enum class MyState { OK, CANCELED } // it might return nullable MyState fun processing(): MyState?","keywords":[],"articleBody":"Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.\nBackground The following code snippet is using Kotlin 1.3.72.\nThe business logic of it has been removed and only remained the code structure for reproducing the question.\n// a enum for state enum class MyState { OK, CANCELED } // it might return nullable MyState fun processing(): MyState? { // asuming that it returns the CANCELED state  return MyState.CANCELED } // when processing the state fun handleState() { // the type of state is MyState?  val state = processing() if (state == CANCELED) { // if condition counld not reach here  println(\"Handle  state\") } } The reason why it could not reach the CANCELED condition is the import.\nimport javax.print.attribute.standard.JobState.CANCELED // the same name CANCELED is static imported, and the definition is as below: // public static final JobState CANCELED = new JobState (7); 👏 Great, it is so easy to fix it.\n😠 But, wait! Why does two mismatched types compile successfully in Kotlin?\n🤔 Think ❓Question:\n 🤐 Why does it compile successfully when comparing with Kotlin enum and Java static type?  ❓❓❓Other questions:\n Is there any mismatch by another class excepting enum? How does the enum compile by Kotlin compiler? Is this happens in Java? (supposed not)  I have not found anything after searching from Stack Overflow and YouTrack. Maybe it is not a question.😢\nSo I started to make an experiment to dive into the equality with mismatched types on Kotlin compiler.\n👉 Jump to conclusion directly.\n🔬Experiment Step01 Setting Expectations Let’s have a look at the definition of equality in Java and Kotlin.\nIn Java,\n == compares the references between two objects. It is requires the two objects are in the same type before comparing. equals() compares the content between two objects.  In Kotlin,\n In Kotlin there are two types of equality:\nStructural equality (a check for equals()).\n a == b = a?.equals(b) ?: (b === null)  Referential equality (two references point to the same object);\n a === b = a and b point to the same object  — kotlin equality\n In a short,\n The == in Java is equivalent to === in Kotlin; The == in Kotlin combines equals() and == in Java.  The expectations are:\nIn Java,\n equals() compiles successfully and runs as usual.  The parameter of equal() is Object, no type mismatch errors.   == does not compile.  Equality between reference types require they are same types.    In Kotlin,\n === does not compile.  The behavior is same to == in Java as above.   == does not compile.  There is reference comparison between two objects, so does not compile when type mismatch as Java does.    Step02 Collecting Variables The variables collected from the above code are:\n   variable values     control flow Kotlin: if / when | Java: if / switch   subjects Kotlin: class / enum class / object Java: class / enum / static field   condition K - K / J - J / J - K    step03 Basic Filtering For control flow,\n to use if for the same behaviors on if and when in Kotlin. to use if in Java for the functionality of switch which only supports for enum / string / primitive type in Java.  if (condition) {} For equality,\n to use ==  and equals() in Java. to use == in Kotlin, while === is omitted for == in Java.  For subjects, there are two subjects of a and b on each type.\n   subjects Java Kotlin     class MyJavaClassA / MyJavaClassB MyKotlinClassA / MyKotlinClassB   enum RetentionPolicy / ElementType AnnotationRetention / AnnotationTarget   object / static JobState / JobStateReason MyKotlinObjectA / MyKotlinObjectB    public class MyJavaClassA {} // MyJavaClassA.java public class MyJavaClassB {} // MyJavaClassB.java class MyKotlinClassA // MyKotlinClassA.kt class MyKotlinClassB // MyKotlinClassB.kt object MyKotlinObject // MyKotlinObjectA object MyKotlinObject // MyKotlinObjectB // RetentionPolicy : java.lang.annotation.RetentionPolicy // ElementType : java.lang.annotation.ElementType // AnnotationRetention : kotlin.annotation.AnnotationRetention // AnnotationTarget : kotlin.annotation.AnnotationTarget // JobState : javax.print.attribute.standard.JobState // JobStateReason : javax.print.attribute.standard.JobStateReason For condition, Kotlin nullable type need to consider.\n// So, here we have J - J K - K K? - K? J - K J - K? K - K? step04 Verifying Template // Java code JavaGenerated.java public class JavaGenerated { void if_JavaClass_To_JavaClass(MyJavaClassB a) { if (a.equals(new MyJavaClassA())) { } else if (a == new MyJavaClassA()) { } } } // Kotlin code KotlinGenerated.kt class KotlinGenerated { fun if_JavaClass_To_JavaClass(a: MyJavaClassB) { if (a == MyJavaClassA()) { } } } step05 Coding By using the template above, it is time to start coding with those variables.\nIt is really repeated and tedious to write such templates for the occasion which there are so many combinations of the variables.\nSo here I decide to use JavaPoet and KotlinPoet to generate code.\n1. Enumerate three types for test for JavaCase and KotlinCase respectively 2. Combine JavaCase and KotlinCase two by two to get java-kotlin 3. Combine condition according to java-kotlin * J 2 J * J 2 K * K 2 K * K? 2 K * K? 2 J 4. Generate functions or methods of KotlinIf and JavaIf according to the conditions 5. Generate Java and Kotlin files according to JavaPoet and KotinPoet The generated code is quite a lot, if you are interested, check following files:\n JavaGenerated.java KotlinGenerated.kt  step06 Watching Result  Environment:\n Java Version 1.8.0_172 Kotlin Version 1.3.72 IDEA Version 2020.1   There are two types of results:\n [error] does not compile. The compiler will error, which is under read wavy line in IDEA. [warning] compiles fine.The IDEA will warn, which is highlighted by yellow in IDEA.  JavaGenerated.java Exactly as expected,\n == does not compile. equals() compiles fine, additionally, there is a friendly warning in IDEA.     type == equals     Class [error] Operator ‘==’ cannot be applied [warning] inconvertible types   Static [error] Operator ‘==’ cannot be applied [warning] inconvertible types   Enum [error] Operator ‘==’ cannot be applied [warning] condition is always false    KotlinGenerated.kt Partially as expected,\n === does not compile. == does not compile on Class / Static from Kotlin.     type ==     Class [error] EQUALITY_NOT_APPLICABLE,Operator ‘==’ cannot be applied   Static [error] EQUALITY_NOT_APPLICABLE,Operator ‘==’ cannot be applied   Enum [warning] INCOMPATIBLE_ENUM_COMPARISON,Comparison of incompatible enums is always unsuccessful    Not as expected,\n Class / Static from Java compiles fine. Enum compiles fine.  Here are the relevant codes:\nfun if_JavaClass_To_JavaClass(a: MyJavaClassB) { if (a == MyJavaClassA()) { } } fun if_JavaStatic_To_JavaStatic(a: JobStateReason) { if (a == JobState.CANCELED) { } } fun if_NullableKotlinEnum_To_JavaStatic(a: AnnotationRetention?) { if (a == JobState.CANCELED) { } } It is described as follows:\n Java class types (Class / Static) compile fine.  JavaClass_To_JavaClass JavaStatic_To_JavaStatic   It compiles fine when Nullable Kotlin enum to Java static type.  NullableKotlinEnum_To_JavaStatic    Then, the questions are:\n Why is the equality between Class in Kotlin stricter than that in Java? Why does the equality between enums compile fine? Why is it possible to compile fine when comparing between two different Java classes? Why is it possible to compile fine when comparing between Kotlin nullable enum to Java static type?  step07 Finding Why  Let’s recap the definition of equality from Kotlin official docs.\na == b = a?.equals(b) ?: (b === null) a === b = a and b point to the same object 1. Why is the equality between Class / Static in Kotlin stricter than that in Java? (Not found yet) TODO: Maybe it could overview the source code to find how the compiler warns EQUALITY_NOT_APPLICABLE in Kotlin.\n2. Why does the comparison between enums compile fine? In Java, enum is actually a syntactic sugar and will eventually be compiled into a generic class.\nabstract class EnumE extends EnumE { ... } In Kotlin with no exception, enum class is also syntactic sugar and will be compiled into a generic class.\nabstract class Enum { ... } When comparing with two enums, it goes to compare between same Enum class but with different generic type. So it could compile fine and there would be no errors about type mismatch.\nAdditionally, IDEA gives a friendly warning about INCOMPATIBLE_ENUM_COMPARISON.\n3. Why is it possible to compile fine when comparing between two different Java classes? There is strict Nullable / Notnull syntax in Kotlin.\nWhen calling Java from Kotlin, the compiler could not inference the Null info of it, Nullable as default, for the undetermined Null info of Java class.\nThere would be a ! from IDEA type inference when calling from Java. It indicates that the Null info is unknown.\n(Additionally, It is possible to inference the correct Null info from Kotlin compiler by using the annotations that are @Nullable / @Notnull provided by JetBrains in Java code)\n[TODO add some screenshots]\nSo, when comparing with two Nullable types, it goes to b === null condition and compiles fine.\n4. Why is it possible to compile fine when comparing between Kotlin nullable enum to Java static type? From exploration above, it finally gets to the point. Here are the conclusions:\n There would be a same Enum type after compiling enums. The Null info of the Java static type is unknown. When comparing with two Nullable types, it compiles fine.  // It goes a friendly warning which is [INCOMPATIBLE_ENUM_COMPARISON] // after telling the Null info of Java static type to the compiler fun if_NullableKotlinEnum_To_JavaStatic(a: AnnotationRetention?) { // By using !! to tell it is NotNull  if (a == JobState.CANCELED!!) { // [INCOMPATIBLE_ENUM_COMPARISON] Comparison of incompatible enums  // 'AnnotationRetention?' and 'JobState' is always unsuccessful  } } 👀 Summary  It is fun and interesting for the process of experiment. The knowledge of foundation in Kotlin equality is not solid. Deep dived into the equality and enum of Kotlin and Java. What’s next: to learn about the equality of Kotlin compiler’s source code.  🔗 Links  Github Source Code Kotlin Equality Docs JavaPoet KotlinPoet JavaGenerated.java KotlinGenerated.kt  ","wordCount":"1623","inLanguage":"en","datePublished":"2020-04-21T00:00:00Z","dateModified":"2020-04-21T00:00:00Z","author":{"@type":"Person","name":"Lex Cao"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://lexcao.io/posts/kotlin-equality-diving/"},"publisher":{"@type":"Organization","name":"The Coding Notes","logo":{"@type":"ImageObject","url":"https://lexcao.io/favicon.ico"}}}</script>
-<noscript>
-<iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJ277ZJ" height=0 width=0 style=display:none;visibility:hidden></iframe>
-</noscript>
-</head>
-<body id=top>
-<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
-<noscript>
-<style type=text/css>#theme-toggle,.top-link{display:none}</style>
-<style>@media(prefers-color-scheme:dark){:root{--theme:#1d1e20;--entry:#2e2e33;--primary:rgba(255, 255, 255, 0.84);--secondary:rgba(255, 255, 255, 0.56);--tertiary:rgba(255, 255, 255, 0.16);--content:rgba(255, 255, 255, 0.74);--hljs-bg:#2e2e33;--code-bg:#37383e;--border:#333}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
-</noscript>
-<header class=header>
-<nav class=nav>
-<div class=logo>
-<a href=https://lexcao.io accesskey=h title="The Coding Notes (Alt + H)">The Coding Notes</a>
-<span class=logo-switches>
-<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-</button>
-<ul class=lang-switch><li>|</li>
-<li>
-<a href=https://lexcao.io/zh/ title=中文 aria-label=中文>中文</a>
-</li>
-</ul>
-</span>
-</div>
-<ul id=menu>
-<li>
-<a href=https://lexcao.io/search/ title="Search (Alt + /)" accesskey=/>
-<span>Search</span>
-</a>
-</li>
-<li>
-<a href=https://lexcao.io/archives/ title=Archives>
-<span>Archives</span>
-</a>
-</li>
-<li>
-<a href=https://lexcao.io/tags/ title=Tags>
-<span>Tags</span>
-</a>
-</li>
-<li>
-<a href=https://lexcao.io/projects/ title=Projects>
-<span>Projects</span>
-</a>
-</li>
-<li>
-<a href=https://lexcao.io/about/ title=About>
-<span>About</span>
-</a>
-</li>
-</ul>
-</nav>
-</header>
-<main class=main>
-<article class=post-single>
-<header class=post-header>
-<div class=breadcrumbs><a href=https://lexcao.io>Home</a>&nbsp;»&nbsp;<a href=https://lexcao.io/posts/>Posts</a></div>
-<h1 class=post-title>
-Kotlin Weird Equality
-</h1>
-<div class=post-meta>April 21, 2020&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Lex Cao&nbsp;|&nbsp;
-<ul class=i18n_list>Translations:
-<li>
-<a href=https://lexcao.io/zh/posts/kotlin-equality-diving/>中文</a>
-</li>
-</ul>
-</div>
-</header> <div class=toc>
-<details>
-<summary accesskey=c title="(Alt + C)">
-<div class=details>Table of Contents</div>
-</summary>
-<div class=inner><ul>
-<li>
-<a href=#background aria-label=Background>Background</a></li>
-<li>
-<a href=#-think aria-label="🤔 Think">🤔 Think</a></li>
-<li>
-<a href=#experiment aria-label=🔬Experiment>🔬Experiment</a><ul>
-<li>
-<a href=#step01-setting-expectations aria-label="Step01 Setting Expectations">Step01 Setting Expectations</a></li>
-<li>
-<a href=#step02-collecting-variables aria-label="Step02 Collecting Variables">Step02 Collecting Variables</a></li>
-<li>
-<a href=#step03-basic-filtering aria-label="step03 Basic Filtering">step03 Basic Filtering</a></li>
-<li>
-<a href=#step04-verifying-template aria-label="step04 Verifying Template">step04 Verifying Template</a></li>
-<li>
-<a href=#step05-coding aria-label="step05 Coding">step05 Coding</a></li>
-<li>
-<a href=#step06-watching-result aria-label="step06 Watching Result">step06 Watching Result</a><ul>
-<li>
-<a href=#javageneratedjava aria-label=JavaGenerated.java>JavaGenerated.java</a></li>
-<li>
-<a href=#kotlingeneratedkt aria-label=KotlinGenerated.kt>KotlinGenerated.kt</a></li></ul>
-</li>
-<li>
-<a href=#step07-finding-why-a-nameconclusion aria-label="step07 Finding Why ">step07 Finding Why </a><ul>
-<li>
-<a href=#1-why-is-the-equality-between-class--static-in-kotlin-stricter-than-that-in-java aria-label="1. Why is the equality between Class / Static in Kotlin stricter than that in Java?">1. Why is the equality between Class / Static in Kotlin stricter than that in Java?</a></li>
-<li>
-<a href=#2-why-does-the-comparison-between-enums-compile-fine aria-label="2. Why does the comparison between enums compile fine?">2. Why does the comparison between enums compile fine?</a></li>
-<li>
-<a href=#3-why-is-it-possible-to-compile-fine-when-comparing-between-two-different-java-classes aria-label="3. Why is it possible to compile fine when comparing between two different Java classes?">3. Why is it possible to compile fine when comparing between two different Java classes?</a></li>
-<li>
-<a href=#4-why-is-it-possible-to-compile-fine-when-comparing-between-kotlin-nullable-enum--to-java-static-type aria-label="4. Why is it possible to compile fine when comparing between Kotlin nullable enum  to Java static type?">4. Why is it possible to compile fine when comparing between Kotlin nullable enum to Java static type?</a></li></ul>
-</li></ul>
-</li>
-<li>
-<a href=#-summary aria-label="👀 Summary">👀 Summary</a></li>
-<li>
-<a href=#-links aria-label="🔗 Links">🔗 Links</a>
-</li>
-</ul>
-</div>
-</details>
-</div>
-<div class=post-content><p>Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.</p>
-<h1 id=background>Background<a hidden class=anchor aria-hidden=true href=#background>#</a></h1>
-<p>The following code snippet is using Kotlin <code>1.3.72</code>.</p>
-<p>The business logic of it has been removed and only remained the code structure for reproducing the question.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// a enum for state
-</span><span style=color:#75715e></span><span style=color:#66d9ef>enum</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyState</span> {
-    OK, CANCELED
-}
-
-<span style=color:#75715e>// it might return nullable MyState
-</span><span style=color:#75715e></span><span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>processing</span>(): MyState? {
-    <span style=color:#75715e>// asuming that it returns the CANCELED state
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> MyState.CANCELED
-}
-
-<span style=color:#75715e>// when processing the state
-</span><span style=color:#75715e></span><span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>handleState</span>() {
-    <span style=color:#75715e>// the type of state is MyState?
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>val</span> state = processing()
-    <span style=color:#66d9ef>if</span> (state <span style=color:#f92672>==</span> CANCELED) {
-        <span style=color:#75715e>// if condition counld not reach here
-</span><span style=color:#75715e></span>        println(<span style=color:#e6db74>&#34;Handle &lt;CANCELED&gt; state&#34;</span>)
-    }
-}
-</code></pre></div><p>The reason why it could not reach the CANCELED condition is the <em><strong>import</strong></em>.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>import</span> javax.print.attribute.standard.JobState.CANCELED
-<span style=color:#75715e>// the same name CANCELED is static imported, and the definition is as below:
-</span><span style=color:#75715e>// public static final JobState CANCELED = new JobState (7);
-</span></code></pre></div><p>👏 Great, it is so easy to fix it.</p>
-<p>😠 But, wait! Why does two mismatched types compile successfully in Kotlin?</p>
-<h1 id=-think>🤔 Think<a hidden class=anchor aria-hidden=true href=#-think>#</a></h1>
-<p>❓Question:</p>
-<ul>
-<li>🤐 Why does it compile successfully when comparing with Kotlin enum and Java static type?</li>
-</ul>
-<p>❓❓❓Other questions:</p>
-<ul>
-<li>Is there any mismatch by another class excepting enum?</li>
-<li>How does the enum compile by Kotlin compiler?</li>
-<li>Is this happens in Java? (supposed not)</li>
-</ul>
-<p>I have not found anything after searching from <em>Stack Overflow</em> and <em>YouTrack.</em> Maybe it is not a question.😢</p>
-<p>So I started to make an experiment to dive into the equality with mismatched types on Kotlin compiler.</p>
-<p>👉 <em><strong><a href=#conclusion>Jump to conclusion directly</a></strong></em>.</p>
-<h1 id=experiment>🔬Experiment<a hidden class=anchor aria-hidden=true href=#experiment>#</a></h1>
-<h2 id=step01-setting-expectations>Step01 Setting Expectations<a hidden class=anchor aria-hidden=true href=#step01-setting-expectations>#</a></h2>
-<p>Let&rsquo;s have a look at the definition of equality in Java and Kotlin.</p>
-<p>In Java,</p>
-<ul>
-<li><code>==</code> compares the references between two objects. It is requires the two objects are in the same type before comparing.</li>
-<li><code>equals()</code> compares the content between two objects.</li>
-</ul>
-<p>In Kotlin,</p>
-<blockquote>
-<p>In Kotlin there are two types of equality:</p>
-<p>Structural equality (a check for equals()).</p>
-<ul>
-<li><code>a == b</code> => a?.equals(b) ?: (b === null)</li>
-</ul>
-<p>Referential equality (two references point to the same object);</p>
-<ul>
-<li><code>a === b</code> => a and b point to the same object</li>
-</ul>
-<p>&mdash; <em><a href=https://kotlinlang.org/docs/reference/equality.html>kotlin equality</a></em></p>
-</blockquote>
-<p>In a short,</p>
-<ul>
-<li>The <code>==</code> in Java is equivalent to <code>===</code> in Kotlin;</li>
-<li>The <code>==</code> in Kotlin combines <code>equals()</code> and <code>==</code> in Java.</li>
-</ul>
-<p>The expectations are:</p>
-<p>In Java,</p>
-<ul>
-<li><code>equals()</code> compiles successfully and runs as usual.
-<ul>
-<li>The parameter of <code>equal()</code> is <code>Object</code>, no type mismatch errors.</li>
-</ul>
-</li>
-<li><code>==</code> does not compile.
-<ul>
-<li>Equality between reference types require they are same types.</li>
-</ul>
-</li>
-</ul>
-<p>In Kotlin,</p>
-<ul>
-<li><code>===</code> does not compile.
-<ul>
-<li>The behavior is same to <code>==</code> in Java as above.</li>
-</ul>
-</li>
-<li><code>==</code> does not compile.
-<ul>
-<li>There is reference comparison between two objects, so does not compile when type mismatch as Java does.</li>
-</ul>
-</li>
-</ul>
-<h2 id=step02-collecting-variables>Step02 Collecting Variables<a hidden class=anchor aria-hidden=true href=#step02-collecting-variables>#</a></h2>
-<p>The variables collected from the above code are:</p>
-<table>
-<thead>
-<tr>
-<th>variable</th>
-<th>values</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>control flow</td>
-<td>Kotlin: if / when | Java: if / switch</td>
-</tr>
-<tr>
-<td>subjects</td>
-<td>Kotlin: class / enum class / object Java: class / enum / static field</td>
-</tr>
-<tr>
-<td>condition</td>
-<td>K - K / J - J / J - K</td>
-</tr>
-</tbody>
-</table>
-<h2 id=step03-basic-filtering>step03 Basic Filtering<a hidden class=anchor aria-hidden=true href=#step03-basic-filtering>#</a></h2>
-<p>For control flow,</p>
-<ul>
-<li>to use <code>if</code> for the same behaviors on <code>if</code> and <code>when</code> in Kotlin.</li>
-<li>to use <code>if</code> in Java for the functionality of <code>switch</code> which only supports for enum / string / primitive type in Java.</li>
-</ul>
-<pre><code>if (condition) {}
-</code></pre><p>For equality,</p>
-<ul>
-<li>to use <code>== </code> and <code>equals()</code> in Java.</li>
-<li>to use <code>==</code> in Kotlin, while <code>===</code> is omitted for <code>==</code> in Java.</li>
-</ul>
-<p>For subjects, there are two subjects of a and b on each type.</p>
-<table>
-<thead>
-<tr>
-<th>subjects</th>
-<th>Java</th>
-<th>Kotlin</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>MyJavaClassA / MyJavaClassB</td>
-<td>MyKotlinClassA / MyKotlinClassB</td>
-</tr>
-<tr>
-<td>enum</td>
-<td>RetentionPolicy / ElementType</td>
-<td>AnnotationRetention / AnnotationTarget</td>
-</tr>
-<tr>
-<td>object / static</td>
-<td>JobState / JobStateReason</td>
-<td>MyKotlinObjectA / MyKotlinObjectB</td>
-</tr>
-</tbody>
-</table>
-<pre><code>public class MyJavaClassA {} // MyJavaClassA.java
+// a enum for state enum class MyState {  OK, CANCELED }  // it might return nullable MyState fun processing(): MyState?"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://lexcao.io/posts/"},{"@type":"ListItem","position":3,"name":"Kotlin Weird Equality","item":"https://lexcao.io/posts/kotlin-equality-diving/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Kotlin Weird Equality","name":"Kotlin Weird Equality","description":"Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.\nBackground The following code snippet is using Kotlin 1.3.72.\nThe business logic of it has been removed and only remained the code structure for reproducing the question.\n// a enum for state enum class MyState {  OK, CANCELED }  // it might return nullable MyState fun processing(): MyState?","keywords":[],"articleBody":"Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.\nBackground The following code snippet is using Kotlin 1.3.72.\nThe business logic of it has been removed and only remained the code structure for reproducing the question.\n// a enum for state enum class MyState {  OK, CANCELED }  // it might return nullable MyState fun processing(): MyState? {  // asuming that it returns the CANCELED state  return MyState.CANCELED }  // when processing the state fun handleState() {  // the type of state is MyState?  val state = processing()  if (state == CANCELED) {  // if condition counld not reach here  println(\"Handle  state\")  } } The reason why it could not reach the CANCELED condition is the import.\nimport javax.print.attribute.standard.JobState.CANCELED // the same name CANCELED is static imported, and the definition is as below: // public static final JobState CANCELED = new JobState (7); 👏 Great, it is so easy to fix it.\n😠 But, wait! Why does two mismatched types compile successfully in Kotlin?\n🤔 Think ❓Question:\n 🤐 Why does it compile successfully when comparing with Kotlin enum and Java static type?  ❓❓❓Other questions:\n Is there any mismatch by another class excepting enum? How does the enum compile by Kotlin compiler? Is this happens in Java? (supposed not)  I have not found anything after searching from Stack Overflow and YouTrack. Maybe it is not a question.😢\nSo I started to make an experiment to dive into the equality with mismatched types on Kotlin compiler.\n👉 Jump to conclusion directly.\n🔬Experiment Step01 Setting Expectations Let’s have a look at the definition of equality in Java and Kotlin.\nIn Java,\n == compares the references between two objects. It is requires the two objects are in the same type before comparing. equals() compares the content between two objects.  In Kotlin,\n In Kotlin there are two types of equality:\nStructural equality (a check for equals()).\n a == b = a?.equals(b) ?: (b === null)  Referential equality (two references point to the same object);\n a === b = a and b point to the same object  — kotlin equality\n In a short,\n The == in Java is equivalent to === in Kotlin; The == in Kotlin combines equals() and == in Java.  The expectations are:\nIn Java,\n equals() compiles successfully and runs as usual.  The parameter of equal() is Object, no type mismatch errors.   == does not compile.  Equality between reference types require they are same types.    In Kotlin,\n === does not compile.  The behavior is same to == in Java as above.   == does not compile.  There is reference comparison between two objects, so does not compile when type mismatch as Java does.    Step02 Collecting Variables The variables collected from the above code are:\n   variable values     control flow Kotlin: if / when | Java: if / switch   subjects Kotlin: class / enum class / object Java: class / enum / static field   condition K - K / J - J / J - K    step03 Basic Filtering For control flow,\n to use if for the same behaviors on if and when in Kotlin. to use if in Java for the functionality of switch which only supports for enum / string / primitive type in Java.  if (condition) {} For equality,\n to use ==  and equals() in Java. to use == in Kotlin, while === is omitted for == in Java.  For subjects, there are two subjects of a and b on each type.\n   subjects Java Kotlin     class MyJavaClassA / MyJavaClassB MyKotlinClassA / MyKotlinClassB   enum RetentionPolicy / ElementType AnnotationRetention / AnnotationTarget   object / static JobState / JobStateReason MyKotlinObjectA / MyKotlinObjectB    public class MyJavaClassA {} // MyJavaClassA.java public class MyJavaClassB {} // MyJavaClassB.java class MyKotlinClassA // MyKotlinClassA.kt class MyKotlinClassB // MyKotlinClassB.kt object MyKotlinObject // MyKotlinObjectA object MyKotlinObject // MyKotlinObjectB // RetentionPolicy : java.lang.annotation.RetentionPolicy // ElementType : java.lang.annotation.ElementType // AnnotationRetention : kotlin.annotation.AnnotationRetention // AnnotationTarget : kotlin.annotation.AnnotationTarget // JobState : javax.print.attribute.standard.JobState // JobStateReason : javax.print.attribute.standard.JobStateReason For condition, Kotlin nullable type need to consider.\n// So, here we have J - J K - K K? - K? J - K J - K? K - K? step04 Verifying Template // Java code JavaGenerated.java public class JavaGenerated { void if_JavaClass_To_JavaClass(MyJavaClassB a) { if (a.equals(new MyJavaClassA())) { } else if (a == new MyJavaClassA()) { } } } // Kotlin code KotlinGenerated.kt class KotlinGenerated { fun if_JavaClass_To_JavaClass(a: MyJavaClassB) { if (a == MyJavaClassA()) { } } } step05 Coding By using the template above, it is time to start coding with those variables.\nIt is really repeated and tedious to write such templates for the occasion which there are so many combinations of the variables.\nSo here I decide to use JavaPoet and KotlinPoet to generate code.\n1. Enumerate three types for test for JavaCase and KotlinCase respectively 2. Combine JavaCase and KotlinCase two by two to get java-kotlin 3. Combine condition according to java-kotlin * J 2 J * J 2 K * K 2 K * K? 2 K * K? 2 J 4. Generate functions or methods of KotlinIf and JavaIf according to the conditions 5. Generate Java and Kotlin files according to JavaPoet and KotinPoet The generated code is quite a lot, if you are interested, check following files:\n JavaGenerated.java KotlinGenerated.kt  step06 Watching Result  Environment:\n Java Version 1.8.0_172 Kotlin Version 1.3.72 IDEA Version 2020.1   There are two types of results:\n [error] does not compile. The compiler will error, which is under read wavy line in IDEA. [warning] compiles fine.The IDEA will warn, which is highlighted by yellow in IDEA.  JavaGenerated.java Exactly as expected,\n == does not compile. equals() compiles fine, additionally, there is a friendly warning in IDEA.     type == equals     Class [error] Operator ‘==’ cannot be applied [warning] inconvertible types   Static [error] Operator ‘==’ cannot be applied [warning] inconvertible types   Enum [error] Operator ‘==’ cannot be applied [warning] condition is always false    KotlinGenerated.kt Partially as expected,\n === does not compile. == does not compile on Class / Static from Kotlin.     type ==     Class [error] EQUALITY_NOT_APPLICABLE,Operator ‘==’ cannot be applied   Static [error] EQUALITY_NOT_APPLICABLE,Operator ‘==’ cannot be applied   Enum [warning] INCOMPATIBLE_ENUM_COMPARISON,Comparison of incompatible enums is always unsuccessful    Not as expected,\n Class / Static from Java compiles fine. Enum compiles fine.  Here are the relevant codes:\nfun if_JavaClass_To_JavaClass(a: MyJavaClassB) {  if (a == MyJavaClassA()) {  } }  fun if_JavaStatic_To_JavaStatic(a: JobStateReason) {  if (a == JobState.CANCELED) {  } }  fun if_NullableKotlinEnum_To_JavaStatic(a: AnnotationRetention?) {  if (a == JobState.CANCELED) {  } } It is described as follows:\n Java class types (Class / Static) compile fine.  JavaClass_To_JavaClass JavaStatic_To_JavaStatic   It compiles fine when Nullable Kotlin enum to Java static type.  NullableKotlinEnum_To_JavaStatic    Then, the questions are:\n Why is the equality between Class in Kotlin stricter than that in Java? Why does the equality between enums compile fine? Why is it possible to compile fine when comparing between two different Java classes? Why is it possible to compile fine when comparing between Kotlin nullable enum to Java static type?  step07 Finding Why  Let’s recap the definition of equality from Kotlin official docs.\na == b = a?.equals(b) ?: (b === null) a === b = a and b point to the same object 1. Why is the equality between Class / Static in Kotlin stricter than that in Java? (Not found yet) TODO: Maybe it could overview the source code to find how the compiler warns EQUALITY_NOT_APPLICABLE in Kotlin.\n2. Why does the comparison between enums compile fine? In Java, enum is actually a syntactic sugar and will eventually be compiled into a generic class.\nabstract class EnumE extends EnumE { ... } In Kotlin with no exception, enum class is also syntactic sugar and will be compiled into a generic class.\nabstract class Enum { ... } When comparing with two enums, it goes to compare between same Enum class but with different generic type. So it could compile fine and there would be no errors about type mismatch.\nAdditionally, IDEA gives a friendly warning about INCOMPATIBLE_ENUM_COMPARISON.\n3. Why is it possible to compile fine when comparing between two different Java classes? There is strict Nullable / Notnull syntax in Kotlin.\nWhen calling Java from Kotlin, the compiler could not inference the Null info of it, Nullable as default, for the undetermined Null info of Java class.\nThere would be a ! from IDEA type inference when calling from Java. It indicates that the Null info is unknown.\n(Additionally, It is possible to inference the correct Null info from Kotlin compiler by using the annotations that are @Nullable / @Notnull provided by JetBrains in Java code)\n[TODO add some screenshots]\nSo, when comparing with two Nullable types, it goes to b === null condition and compiles fine.\n4. Why is it possible to compile fine when comparing between Kotlin nullable enum to Java static type? From exploration above, it finally gets to the point. Here are the conclusions:\n There would be a same Enum type after compiling enums. The Null info of the Java static type is unknown. When comparing with two Nullable types, it compiles fine.  // It goes a friendly warning which is [INCOMPATIBLE_ENUM_COMPARISON] // after telling the Null info of Java static type to the compiler fun if_NullableKotlinEnum_To_JavaStatic(a: AnnotationRetention?) {  // By using !! to tell it is NotNull  if (a == JobState.CANCELED!!) {  // [INCOMPATIBLE_ENUM_COMPARISON] Comparison of incompatible enums  // 'AnnotationRetention?' and 'JobState' is always unsuccessful  } } 👀 Summary  It is fun and interesting for the process of experiment. The knowledge of foundation in Kotlin equality is not solid. Deep dived into the equality and enum of Kotlin and Java. What’s next: to learn about the equality of Kotlin compiler’s source code.  🔗 Links  Github Source Code Kotlin Equality Docs JavaPoet KotlinPoet JavaGenerated.java KotlinGenerated.kt  ","wordCount":"1623","inLanguage":"en","datePublished":"2020-04-21T00:00:00Z","dateModified":"2020-04-21T00:00:00Z","author":{"@type":"Person","name":"Lex Cao"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://lexcao.io/posts/kotlin-equality-diving/"},"publisher":{"@type":"Organization","name":"The Coding Notes","logo":{"@type":"ImageObject","url":"https://lexcao.io/favicon.ico"}}}</script><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJ277ZJ" height=0 width=0 style=display:none;visibility:hidden></iframe></noscript></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:#1d1e20;--entry:#2e2e33;--primary:rgba(255, 255, 255, 0.84);--secondary:rgba(255, 255, 255, 0.56);--tertiary:rgba(255, 255, 255, 0.16);--content:rgba(255, 255, 255, 0.74);--hljs-bg:#2e2e33;--code-bg:#37383e;--border:#333}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><header class=header><nav class=nav><div class=logo><a href=https://lexcao.io accesskey=h title="The Coding Notes (Alt + H)">The Coding Notes</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button><ul class=lang-switch><li>|</li><li><a href=https://lexcao.io/zh/ title=中文 aria-label=中文>中文</a></li></ul></span></div><ul id=menu><li><a href=https://lexcao.io/search/ title="Search (Alt + /)" accesskey=/><span>Search</span></a></li><li><a href=https://lexcao.io/archives/ title=Archives><span>Archives</span></a></li><li><a href=https://lexcao.io/tags/ title=Tags><span>Tags</span></a></li><li><a href=https://lexcao.io/projects/ title=Projects><span>Projects</span></a></li><li><a href=https://lexcao.io/about/ title=About><span>About</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://lexcao.io>Home</a>&nbsp;»&nbsp;<a href=https://lexcao.io/posts/>Posts</a></div><h1 class=post-title>Kotlin Weird Equality</h1><div class=post-meta>April 21, 2020&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Lex Cao&nbsp;|&nbsp;<ul class=i18n_list>Translations:<li><a href=https://lexcao.io/zh/posts/kotlin-equality-diving/>中文</a></li></ul></div></header><div class=toc><details><summary accesskey=c title="(Alt + C)"><div class=details>Table of Contents</div></summary><div class=inner><ul><li><a href=#background aria-label=Background>Background</a></li><li><a href=#-think aria-label="🤔 Think">🤔 Think</a></li><li><a href=#experiment aria-label=🔬Experiment>🔬Experiment</a><ul><li><a href=#step01-setting-expectations aria-label="Step01 Setting Expectations">Step01 Setting Expectations</a></li><li><a href=#step02-collecting-variables aria-label="Step02 Collecting Variables">Step02 Collecting Variables</a></li><li><a href=#step03-basic-filtering aria-label="step03 Basic Filtering">step03 Basic Filtering</a></li><li><a href=#step04-verifying-template aria-label="step04 Verifying Template">step04 Verifying Template</a></li><li><a href=#step05-coding aria-label="step05 Coding">step05 Coding</a></li><li><a href=#step06-watching-result aria-label="step06 Watching Result">step06 Watching Result</a><ul><li><a href=#javageneratedjava aria-label=JavaGenerated.java>JavaGenerated.java</a></li><li><a href=#kotlingeneratedkt aria-label=KotlinGenerated.kt>KotlinGenerated.kt</a></li></ul></li><li><a href=#step07-finding-why-a-nameconclusion aria-label="step07 Finding Why ">step07 Finding Why</a><ul><li><a href=#1-why-is-the-equality-between-class--static-in-kotlin-stricter-than-that-in-java aria-label="1. Why is the equality between Class / Static in Kotlin stricter than that in Java?">1. Why is the equality between Class / Static in Kotlin stricter than that in Java?</a></li><li><a href=#2-why-does-the-comparison-between-enums-compile-fine aria-label="2. Why does the comparison between enums compile fine?">2. Why does the comparison between enums compile fine?</a></li><li><a href=#3-why-is-it-possible-to-compile-fine-when-comparing-between-two-different-java-classes aria-label="3. Why is it possible to compile fine when comparing between two different Java classes?">3. Why is it possible to compile fine when comparing between two different Java classes?</a></li><li><a href=#4-why-is-it-possible-to-compile-fine-when-comparing-between-kotlin-nullable-enum--to-java-static-type aria-label="4. Why is it possible to compile fine when comparing between Kotlin nullable enum  to Java static type?">4. Why is it possible to compile fine when comparing between Kotlin nullable enum to Java static type?</a></li></ul></li></ul></li><li><a href=#-summary aria-label="👀 Summary">👀 Summary</a></li><li><a href=#-links aria-label="🔗 Links">🔗 Links</a></li></ul></div></details></div><div class=post-content><p>Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.</p><h1 id=background>Background<a hidden class=anchor aria-hidden=true href=#background>#</a></h1><p>The following code snippet is using Kotlin <code>1.3.72</code>.</p><p>The business logic of it has been removed and only remained the code structure for reproducing the question.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// a enum for state
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>enum</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyState</span> {
+</span></span><span style=display:flex><span>    OK, CANCELED
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// it might return nullable MyState
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>processing</span>(): MyState? {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// asuming that it returns the CANCELED state
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> MyState.CANCELED
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// when processing the state
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>handleState</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// the type of state is MyState?
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>val</span> state = processing()
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (state <span style=color:#f92672>==</span> CANCELED) {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// if condition counld not reach here
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        println(<span style=color:#e6db74>&#34;Handle &lt;CANCELED&gt; state&#34;</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>The reason why it could not reach the CANCELED condition is the <em><strong>import</strong></em>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> javax.print.attribute.standard.JobState.CANCELED
+</span></span><span style=display:flex><span><span style=color:#75715e>// the same name CANCELED is static imported, and the definition is as below:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>// public static final JobState CANCELED = new JobState (7);
+</span></span></span></code></pre></div><p>👏 Great, it is so easy to fix it.</p><p>😠 But, wait! Why does two mismatched types compile successfully in Kotlin?</p><h1 id=-think>🤔 Think<a hidden class=anchor aria-hidden=true href=#-think>#</a></h1><p>❓Question:</p><ul><li>🤐 Why does it compile successfully when comparing with Kotlin enum and Java static type?</li></ul><p>❓❓❓Other questions:</p><ul><li>Is there any mismatch by another class excepting enum?</li><li>How does the enum compile by Kotlin compiler?</li><li>Is this happens in Java? (supposed not)</li></ul><p>I have not found anything after searching from <em>Stack Overflow</em> and <em>YouTrack.</em> Maybe it is not a question.😢</p><p>So I started to make an experiment to dive into the equality with mismatched types on Kotlin compiler.</p><p>👉 <em><strong><a href=#conclusion>Jump to conclusion directly</a></strong></em>.</p><h1 id=experiment>🔬Experiment<a hidden class=anchor aria-hidden=true href=#experiment>#</a></h1><h2 id=step01-setting-expectations>Step01 Setting Expectations<a hidden class=anchor aria-hidden=true href=#step01-setting-expectations>#</a></h2><p>Let&rsquo;s have a look at the definition of equality in Java and Kotlin.</p><p>In Java,</p><ul><li><code>==</code> compares the references between two objects. It is requires the two objects are in the same type before comparing.</li><li><code>equals()</code> compares the content between two objects.</li></ul><p>In Kotlin,</p><blockquote><p>In Kotlin there are two types of equality:</p><p>Structural equality (a check for equals()).</p><ul><li><code>a == b</code> => a?.equals(b) ?: (b === null)</li></ul><p>Referential equality (two references point to the same object);</p><ul><li><code>a === b</code> => a and b point to the same object</li></ul><p>&mdash; <em><a href=https://kotlinlang.org/docs/reference/equality.html>kotlin equality</a></em></p></blockquote><p>In a short,</p><ul><li>The <code>==</code> in Java is equivalent to <code>===</code> in Kotlin;</li><li>The <code>==</code> in Kotlin combines <code>equals()</code> and <code>==</code> in Java.</li></ul><p>The expectations are:</p><p>In Java,</p><ul><li><code>equals()</code> compiles successfully and runs as usual.<ul><li>The parameter of <code>equal()</code> is <code>Object</code>, no type mismatch errors.</li></ul></li><li><code>==</code> does not compile.<ul><li>Equality between reference types require they are same types.</li></ul></li></ul><p>In Kotlin,</p><ul><li><code>===</code> does not compile.<ul><li>The behavior is same to <code>==</code> in Java as above.</li></ul></li><li><code>==</code> does not compile.<ul><li>There is reference comparison between two objects, so does not compile when type mismatch as Java does.</li></ul></li></ul><h2 id=step02-collecting-variables>Step02 Collecting Variables<a hidden class=anchor aria-hidden=true href=#step02-collecting-variables>#</a></h2><p>The variables collected from the above code are:</p><table><thead><tr><th>variable</th><th>values</th></tr></thead><tbody><tr><td>control flow</td><td>Kotlin: if / when | Java: if / switch</td></tr><tr><td>subjects</td><td>Kotlin: class / enum class / object Java: class / enum / static field</td></tr><tr><td>condition</td><td>K - K / J - J / J - K</td></tr></tbody></table><h2 id=step03-basic-filtering>step03 Basic Filtering<a hidden class=anchor aria-hidden=true href=#step03-basic-filtering>#</a></h2><p>For control flow,</p><ul><li>to use <code>if</code> for the same behaviors on <code>if</code> and <code>when</code> in Kotlin.</li><li>to use <code>if</code> in Java for the functionality of <code>switch</code> which only supports for enum / string / primitive type in Java.</li></ul><pre tabindex=0><code>if (condition) {}
+</code></pre><p>For equality,</p><ul><li>to use <code>==</code> and <code>equals()</code> in Java.</li><li>to use <code>==</code> in Kotlin, while <code>===</code> is omitted for <code>==</code> in Java.</li></ul><p>For subjects, there are two subjects of a and b on each type.</p><table><thead><tr><th>subjects</th><th>Java</th><th>Kotlin</th></tr></thead><tbody><tr><td>class</td><td>MyJavaClassA / MyJavaClassB</td><td>MyKotlinClassA / MyKotlinClassB</td></tr><tr><td>enum</td><td>RetentionPolicy / ElementType</td><td>AnnotationRetention / AnnotationTarget</td></tr><tr><td>object / static</td><td>JobState / JobStateReason</td><td>MyKotlinObjectA / MyKotlinObjectB</td></tr></tbody></table><pre tabindex=0><code>public class MyJavaClassA {} // MyJavaClassA.java
 
 public class MyJavaClassB {} // MyJavaClassB.java
 
@@ -338,8 +52,7 @@ object MyKotlinObject // MyKotlinObjectB
 // AnnotationTarget     : kotlin.annotation.AnnotationTarget
 // JobState             : javax.print.attribute.standard.JobState
 // JobStateReason       : javax.print.attribute.standard.JobStateReason
-</code></pre><p>For condition, Kotlin nullable type need to consider.</p>
-<pre><code>// So, here we have
+</code></pre><p>For condition, Kotlin nullable type need to consider.</p><pre tabindex=0><code>// So, here we have
 J - J
 K - K
 K? - K?
@@ -347,8 +60,7 @@ K? - K?
 J - K
 J - K?
 K - K?
-</code></pre><h2 id=step04-verifying-template>step04 Verifying Template<a hidden class=anchor aria-hidden=true href=#step04-verifying-template>#</a></h2>
-<pre><code>// Java code JavaGenerated.java
+</code></pre><h2 id=step04-verifying-template>step04 Verifying Template<a hidden class=anchor aria-hidden=true href=#step04-verifying-template>#</a></h2><pre tabindex=0><code>// Java code JavaGenerated.java
 public class JavaGenerated {
     void if_JavaClass_To_JavaClass(MyJavaClassB a) {
         if (a.equals(new MyJavaClassA())) {
@@ -364,11 +76,7 @@ class KotlinGenerated {
         }
   	}
 }
-</code></pre><h2 id=step05-coding>step05 Coding<a hidden class=anchor aria-hidden=true href=#step05-coding>#</a></h2>
-<p>By using the template above, it is time to start coding with those variables.</p>
-<p>It is really repeated and tedious to write such templates for the occasion which there are so many combinations of the variables.</p>
-<p>So here I decide to use <a href=https://github.com/square/javapoet><em>JavaPoet</em></a> and <a href=https://github.com/square/kotlinpoet><em>KotlinPoet</em></a> to generate code.</p>
-<pre><code>1. Enumerate three types for test for JavaCase and KotlinCase respectively
+</code></pre><h2 id=step05-coding>step05 Coding<a hidden class=anchor aria-hidden=true href=#step05-coding>#</a></h2><p>By using the template above, it is time to start coding with those variables.</p><p>It is really repeated and tedious to write such templates for the occasion which there are so many combinations of the variables.</p><p>So here I decide to use <a href=https://github.com/square/javapoet><em>JavaPoet</em></a> and <a href=https://github.com/square/kotlinpoet><em>KotlinPoet</em></a> to generate code.</p><pre tabindex=0><code>1. Enumerate three types for test for JavaCase and KotlinCase respectively
 2. Combine JavaCase and KotlinCase two by two to get java-kotlin
 3. Combine condition according to java-kotlin
     * J 2 J
@@ -378,205 +86,35 @@ class KotlinGenerated {
     * K? 2 J
 4. Generate functions or methods of KotlinIf and JavaIf according to the conditions
 5. Generate Java and Kotlin files according to JavaPoet and KotinPoet
-</code></pre><p>The generated code is quite a lot, if you are interested, check following files:</p>
-<ul>
-<li><a href=https://github.com/lexcao/kotlin-equality/blob/generated/src/main/java/io/github/lexcao/equality/generated/JavaGenerated.java><em>JavaGenerated.java</em></a></li>
-<li><a href=https://github.com/lexcao/kotlin-equality/blob/generated/src/main/kotlin/io/github/lexcao/equality/generated/KotlinGenerated.kt><em>KotlinGenerated.kt</em></a></li>
-</ul>
-<h2 id=step06-watching-result>step06 Watching Result<a hidden class=anchor aria-hidden=true href=#step06-watching-result>#</a></h2>
-<blockquote>
-<p>Environment:</p>
-<ul>
-<li>Java Version 1.8.0_172</li>
-<li>Kotlin Version 1.3.72</li>
-<li>IDEA Version 2020.1</li>
-</ul>
-</blockquote>
-<p>There are two types of results:</p>
-<ul>
-<li><strong>[error]</strong> does not compile. The compiler will error, which is under read wavy line in IDEA.</li>
-<li><strong>[warning]</strong> compiles fine.The IDEA will warn, which is highlighted by yellow in IDEA.</li>
-</ul>
-<h3 id=javageneratedjava>JavaGenerated.java<a hidden class=anchor aria-hidden=true href=#javageneratedjava>#</a></h3>
-<p>Exactly as expected,</p>
-<ul>
-<li><code>==</code> does not compile.</li>
-<li><code>equals()</code> compiles fine, additionally, there is a friendly warning in IDEA.</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>type</th>
-<th>==</th>
-<th>equals</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Class</td>
-<td><strong>[error]</strong> Operator &lsquo;==&rsquo; cannot be applied</td>
-<td><strong>[warning]</strong> inconvertible types</td>
-</tr>
-<tr>
-<td>Static</td>
-<td><strong>[error]</strong> Operator &lsquo;==&rsquo; cannot be applied</td>
-<td><strong>[warning]</strong> inconvertible types</td>
-</tr>
-<tr>
-<td>Enum</td>
-<td><strong>[error]</strong> Operator &lsquo;==&rsquo; cannot be applied</td>
-<td><strong>[warning]</strong> condition is always false</td>
-</tr>
-</tbody>
-</table>
-<h3 id=kotlingeneratedkt>KotlinGenerated.kt<a hidden class=anchor aria-hidden=true href=#kotlingeneratedkt>#</a></h3>
-<p>Partially as expected,</p>
-<ul>
-<li><code>===</code> does not compile.</li>
-<li><code>==</code> does not compile on Class / Static from Kotlin.</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>type</th>
-<th>==</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Class</td>
-<td><strong>[error]</strong> EQUALITY_NOT_APPLICABLE,Operator &lsquo;==&rsquo; cannot be applied</td>
-</tr>
-<tr>
-<td>Static</td>
-<td><strong>[error]</strong> EQUALITY_NOT_APPLICABLE,Operator &lsquo;==&rsquo; cannot be applied</td>
-</tr>
-<tr>
-<td>Enum</td>
-<td><strong>[warning]</strong> INCOMPATIBLE_ENUM_COMPARISON,Comparison of incompatible enums is always unsuccessful</td>
-</tr>
-</tbody>
-</table>
-<p>Not as expected,</p>
-<ul>
-<li>Class / Static from Java compiles fine.</li>
-<li>Enum compiles fine.</li>
-</ul>
-<p>Here are the relevant codes:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>if_JavaClass_To_JavaClass</span>(a: MyJavaClassB) {
-    <span style=color:#66d9ef>if</span> (a <span style=color:#f92672>==</span> MyJavaClassA()) {
-    }
-}
-
-<span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>if_JavaStatic_To_JavaStatic</span>(a: JobStateReason) {
-    <span style=color:#66d9ef>if</span> (a <span style=color:#f92672>==</span> JobState.CANCELED) {
-    }
-}
-
-<span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>if_NullableKotlinEnum_To_JavaStatic</span>(a: AnnotationRetention?) {
-    <span style=color:#66d9ef>if</span> (a <span style=color:#f92672>==</span> JobState.CANCELED) {
-    }
-}
-</code></pre></div><p>It is described as follows:</p>
-<ul>
-<li>Java class types (Class / Static) compile fine.
-<ul>
-<li>JavaClass_To_JavaClass</li>
-<li>JavaStatic_To_JavaStatic</li>
-</ul>
-</li>
-<li>It compiles fine when <strong>Nullable</strong> Kotlin enum to Java static type.
-<ul>
-<li>NullableKotlinEnum_To_JavaStatic</li>
-</ul>
-</li>
-</ul>
-<p>Then, the questions are:</p>
-<ul>
-<li>Why is the equality between Class in Kotlin stricter than that in Java?</li>
-<li>Why does the equality between enums compile fine?</li>
-<li>Why is it possible to compile fine when comparing between two different Java classes?</li>
-<li>Why is it possible to compile fine when comparing between Kotlin nullable enum to Java static type?</li>
-</ul>
-<h2 id=step07-finding-why-a-nameconclusion>step07 Finding Why <a hidden class=anchor aria-hidden=true href=#step07-finding-why-a-nameconclusion>#</a></h2>
-<p>Let&rsquo;s recap the definition of <em><strong>equality</strong></em> from Kotlin official docs.</p>
-<pre><code>a == b =&gt; a?.equals(b) ?: (b === null)
+</code></pre><p>The generated code is quite a lot, if you are interested, check following files:</p><ul><li><a href=https://github.com/lexcao/kotlin-equality/blob/generated/src/main/java/io/github/lexcao/equality/generated/JavaGenerated.java><em>JavaGenerated.java</em></a></li><li><a href=https://github.com/lexcao/kotlin-equality/blob/generated/src/main/kotlin/io/github/lexcao/equality/generated/KotlinGenerated.kt><em>KotlinGenerated.kt</em></a></li></ul><h2 id=step06-watching-result>step06 Watching Result<a hidden class=anchor aria-hidden=true href=#step06-watching-result>#</a></h2><blockquote><p>Environment:</p><ul><li>Java Version 1.8.0_172</li><li>Kotlin Version 1.3.72</li><li>IDEA Version 2020.1</li></ul></blockquote><p>There are two types of results:</p><ul><li><strong>[error]</strong> does not compile. The compiler will error, which is under read wavy line in IDEA.</li><li><strong>[warning]</strong> compiles fine.The IDEA will warn, which is highlighted by yellow in IDEA.</li></ul><h3 id=javageneratedjava>JavaGenerated.java<a hidden class=anchor aria-hidden=true href=#javageneratedjava>#</a></h3><p>Exactly as expected,</p><ul><li><code>==</code> does not compile.</li><li><code>equals()</code> compiles fine, additionally, there is a friendly warning in IDEA.</li></ul><table><thead><tr><th>type</th><th>==</th><th>equals</th></tr></thead><tbody><tr><td>Class</td><td><strong>[error]</strong> Operator &lsquo;==&rsquo; cannot be applied</td><td><strong>[warning]</strong> inconvertible types</td></tr><tr><td>Static</td><td><strong>[error]</strong> Operator &lsquo;==&rsquo; cannot be applied</td><td><strong>[warning]</strong> inconvertible types</td></tr><tr><td>Enum</td><td><strong>[error]</strong> Operator &lsquo;==&rsquo; cannot be applied</td><td><strong>[warning]</strong> condition is always false</td></tr></tbody></table><h3 id=kotlingeneratedkt>KotlinGenerated.kt<a hidden class=anchor aria-hidden=true href=#kotlingeneratedkt>#</a></h3><p>Partially as expected,</p><ul><li><code>===</code> does not compile.</li><li><code>==</code> does not compile on Class / Static from Kotlin.</li></ul><table><thead><tr><th>type</th><th>==</th></tr></thead><tbody><tr><td>Class</td><td><strong>[error]</strong> EQUALITY_NOT_APPLICABLE,Operator &lsquo;==&rsquo; cannot be applied</td></tr><tr><td>Static</td><td><strong>[error]</strong> EQUALITY_NOT_APPLICABLE,Operator &lsquo;==&rsquo; cannot be applied</td></tr><tr><td>Enum</td><td><strong>[warning]</strong> INCOMPATIBLE_ENUM_COMPARISON,Comparison of incompatible enums is always unsuccessful</td></tr></tbody></table><p>Not as expected,</p><ul><li>Class / Static from Java compiles fine.</li><li>Enum compiles fine.</li></ul><p>Here are the relevant codes:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>if</span>_JavaClass_To_JavaClass(a: MyJavaClassB) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (a <span style=color:#f92672>==</span> MyJavaClassA()) {
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>if</span>_JavaStatic_To_JavaStatic(a: JobStateReason) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (a <span style=color:#f92672>==</span> JobState.CANCELED) {
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>if</span>_NullableKotlinEnum_To_JavaStatic(a: AnnotationRetention?) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (a <span style=color:#f92672>==</span> JobState.CANCELED) {
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>It is described as follows:</p><ul><li>Java class types (Class / Static) compile fine.<ul><li>JavaClass_To_JavaClass</li><li>JavaStatic_To_JavaStatic</li></ul></li><li>It compiles fine when <strong>Nullable</strong> Kotlin enum to Java static type.<ul><li>NullableKotlinEnum_To_JavaStatic</li></ul></li></ul><p>Then, the questions are:</p><ul><li>Why is the equality between Class in Kotlin stricter than that in Java?</li><li>Why does the equality between enums compile fine?</li><li>Why is it possible to compile fine when comparing between two different Java classes?</li><li>Why is it possible to compile fine when comparing between Kotlin nullable enum to Java static type?</li></ul><h2 id=step07-finding-why-a-nameconclusion>step07 Finding Why <a hidden class=anchor aria-hidden=true href=#step07-finding-why-a-nameconclusion>#</a></h2><p>Let&rsquo;s recap the definition of <em><strong>equality</strong></em> from Kotlin official docs.</p><pre tabindex=0><code>a == b =&gt; a?.equals(b) ?: (b === null)
 a === b =&gt; a and b point to the same object
-</code></pre><h3 id=1-why-is-the-equality-between-class--static-in-kotlin-stricter-than-that-in-java>1. Why is the equality between Class / Static in Kotlin stricter than that in Java?<a hidden class=anchor aria-hidden=true href=#1-why-is-the-equality-between-class--static-in-kotlin-stricter-than-that-in-java>#</a></h3>
-<p>(Not found yet) TODO: Maybe it could overview the source code to find how the compiler warns <code>EQUALITY_NOT_APPLICABLE</code> in Kotlin.</p>
-<h3 id=2-why-does-the-comparison-between-enums-compile-fine>2. Why does the comparison between enums compile fine?<a hidden class=anchor aria-hidden=true href=#2-why-does-the-comparison-between-enums-compile-fine>#</a></h3>
-<p>In Java, <code>enum</code> is actually a syntactic sugar and will eventually be compiled into a generic class.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Enum</span><span style=color:#f92672>&lt;</span>E <span style=color:#66d9ef>extends</span> Enum<span style=color:#f92672>&lt;</span>E<span style=color:#f92672>&gt;&gt;</span> <span style=color:#f92672>{</span> <span style=color:#f92672>...</span> <span style=color:#f92672>}</span>
-</code></pre></div><p>In Kotlin with no exception, <code>enum class</code> is also syntactic sugar and will be compiled into a generic class.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Enum</span>&lt;E : Enum&lt;E&gt;&gt; { <span style=color:#f92672>..</span>. }
-</code></pre></div><p>When comparing with two enums, it goes to compare between same <code>Enum</code> class but with different generic type. So it could compile fine and there would be no errors about type mismatch.</p>
-<p>Additionally, IDEA gives a friendly warning about <code>INCOMPATIBLE_ENUM_COMPARISON</code>.</p>
-<h3 id=3-why-is-it-possible-to-compile-fine-when-comparing-between-two-different-java-classes>3. Why is it possible to compile fine when comparing between two different Java classes?<a hidden class=anchor aria-hidden=true href=#3-why-is-it-possible-to-compile-fine-when-comparing-between-two-different-java-classes>#</a></h3>
-<p>There is strict <code>Nullable / Notnull</code> syntax in Kotlin.</p>
-<p>When calling Java from Kotlin, the compiler could not inference the <code>Null</code> info of it, <code>Nullable</code> as default, for the undetermined <code>Null</code> info of Java class.</p>
-<p>There would be a <code>!</code> from IDEA type inference when calling from Java. It indicates that the <code>Null</code> info is unknown.</p>
-<p>(Additionally, It is possible to inference the correct <code>Null</code> info from Kotlin compiler by using the annotations that are <code>@Nullable / @Notnull</code> provided by JetBrains in Java code)</p>
-<p>[TODO add some screenshots]</p>
-<p>So, when comparing with two <code>Nullable</code> types, it goes to <code>b === null</code> condition and compiles fine.</p>
-<h3 id=4-why-is-it-possible-to-compile-fine-when-comparing-between-kotlin-nullable-enum--to-java-static-type>4. Why is it possible to compile fine when comparing between Kotlin nullable enum to Java static type?<a hidden class=anchor aria-hidden=true href=#4-why-is-it-possible-to-compile-fine-when-comparing-between-kotlin-nullable-enum--to-java-static-type>#</a></h3>
-<p>From exploration above, it finally gets to the point. Here are the conclusions:</p>
-<ol>
-<li>There would be a same <code>Enum</code> type after compiling enums.</li>
-<li>The <code>Null</code> info of the Java static type is unknown.</li>
-<li>When comparing with two <code>Nullable</code> types, it compiles fine.</li>
-</ol>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// It goes a friendly warning which is [INCOMPATIBLE_ENUM_COMPARISON]
-</span><span style=color:#75715e>// after telling the Null info of Java static type to the compiler
-</span><span style=color:#75715e></span><span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>if_NullableKotlinEnum_To_JavaStatic</span>(a: AnnotationRetention?) {
-    <span style=color:#75715e>// By using !! to tell it is NotNull
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>if</span> (a <span style=color:#f92672>==</span> JobState.CANCELED<span style=color:#f92672>!!</span>) {
-        <span style=color:#75715e>// [INCOMPATIBLE_ENUM_COMPARISON] Comparison of incompatible enums 
-</span><span style=color:#75715e></span>        <span style=color:#75715e>// &#39;AnnotationRetention?&#39; and &#39;JobState&#39; is always unsuccessful
-</span><span style=color:#75715e></span>    }
-}
-</code></pre></div><h1 id=-summary>👀 Summary<a hidden class=anchor aria-hidden=true href=#-summary>#</a></h1>
-<ul>
-<li>It is fun and interesting for the process of experiment.</li>
-<li>The knowledge of foundation in Kotlin equality is not solid.</li>
-<li>Deep dived into the equality and enum of Kotlin and Java.</li>
-<li>What&rsquo;s next: to learn about the equality of Kotlin compiler&rsquo;s source code.</li>
-</ul>
-<h1 id=-links>🔗 Links<a hidden class=anchor aria-hidden=true href=#-links>#</a></h1>
-<ul>
-<li><a href=https://github.com/lexcao/kotlin-java-equality-palyground><em><strong>Github Source Code</strong></em></a></li>
-<li><a href=https://kotlinlang.org/docs/reference/equality.html><em><strong>Kotlin Equality Docs</strong></em></a></li>
-<li><a href=https://github.com/square/javapoet><em>JavaPoet</em></a></li>
-<li><a href=https://github.com/square/kotlinpoet><em>KotlinPoet</em></a></li>
-<li><a href=https://github.com/lexcao/kotlin-equality/blob/generated/src/main/java/io/github/lexcao/equality/generated/JavaGenerated.java><em>JavaGenerated.java</em></a></li>
-<li><a href=https://github.com/lexcao/kotlin-equality/blob/generated/src/main/kotlin/io/github/lexcao/equality/generated/KotlinGenerated.kt><em>KotlinGenerated.kt</em></a></li>
-</ul>
-</div>
-<footer class=post-footer>
-<nav class=paginav>
-<a class=next href=https://lexcao.io/posts/konverter/>
-<span class=title>Next Page »</span>
-<br>
-<span>Generate Converter for Kotlin Class by KAPT</span>
-</a>
-</nav>
-</footer>
-</article>
-</main>
-<footer class=footer>
-<span>&copy; 2021 <a href=https://lexcao.io>The Coding Notes</a></span>
-<span>
-Powered by
+</code></pre><h3 id=1-why-is-the-equality-between-class--static-in-kotlin-stricter-than-that-in-java>1. Why is the equality between Class / Static in Kotlin stricter than that in Java?<a hidden class=anchor aria-hidden=true href=#1-why-is-the-equality-between-class--static-in-kotlin-stricter-than-that-in-java>#</a></h3><p>(Not found yet) TODO: Maybe it could overview the source code to find how the compiler warns <code>EQUALITY_NOT_APPLICABLE</code> in Kotlin.</p><h3 id=2-why-does-the-comparison-between-enums-compile-fine>2. Why does the comparison between enums compile fine?<a hidden class=anchor aria-hidden=true href=#2-why-does-the-comparison-between-enums-compile-fine>#</a></h3><p>In Java, <code>enum</code> is actually a syntactic sugar and will eventually be compiled into a generic class.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Enum</span><span style=color:#f92672>&lt;</span>E <span style=color:#66d9ef>extends</span> Enum<span style=color:#f92672>&lt;</span>E<span style=color:#f92672>&gt;&gt;</span> <span style=color:#f92672>{</span> <span style=color:#f92672>...</span> <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>In Kotlin with no exception, <code>enum class</code> is also syntactic sugar and will be compiled into a generic class.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Enum</span>&lt;E : Enum&lt;E&gt;&gt; { <span style=color:#f92672>..</span>. }
+</span></span></code></pre></div><p>When comparing with two enums, it goes to compare between same <code>Enum</code> class but with different generic type. So it could compile fine and there would be no errors about type mismatch.</p><p>Additionally, IDEA gives a friendly warning about <code>INCOMPATIBLE_ENUM_COMPARISON</code>.</p><h3 id=3-why-is-it-possible-to-compile-fine-when-comparing-between-two-different-java-classes>3. Why is it possible to compile fine when comparing between two different Java classes?<a hidden class=anchor aria-hidden=true href=#3-why-is-it-possible-to-compile-fine-when-comparing-between-two-different-java-classes>#</a></h3><p>There is strict <code>Nullable / Notnull</code> syntax in Kotlin.</p><p>When calling Java from Kotlin, the compiler could not inference the <code>Null</code> info of it, <code>Nullable</code> as default, for the undetermined <code>Null</code> info of Java class.</p><p>There would be a <code>!</code> from IDEA type inference when calling from Java. It indicates that the <code>Null</code> info is unknown.</p><p>(Additionally, It is possible to inference the correct <code>Null</code> info from Kotlin compiler by using the annotations that are <code>@Nullable / @Notnull</code> provided by JetBrains in Java code)</p><p>[TODO add some screenshots]</p><p>So, when comparing with two <code>Nullable</code> types, it goes to <code>b === null</code> condition and compiles fine.</p><h3 id=4-why-is-it-possible-to-compile-fine-when-comparing-between-kotlin-nullable-enum--to-java-static-type>4. Why is it possible to compile fine when comparing between Kotlin nullable enum to Java static type?<a hidden class=anchor aria-hidden=true href=#4-why-is-it-possible-to-compile-fine-when-comparing-between-kotlin-nullable-enum--to-java-static-type>#</a></h3><p>From exploration above, it finally gets to the point. Here are the conclusions:</p><ol><li>There would be a same <code>Enum</code> type after compiling enums.</li><li>The <code>Null</code> info of the Java static type is unknown.</li><li>When comparing with two <code>Nullable</code> types, it compiles fine.</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// It goes a friendly warning which is [INCOMPATIBLE_ENUM_COMPARISON]
+</span></span></span><span style=display:flex><span><span style=color:#75715e>// after telling the Null info of Java static type to the compiler
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>if</span>_NullableKotlinEnum_To_JavaStatic(a: AnnotationRetention?) {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// By using !! to tell it is NotNull
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>if</span> (a <span style=color:#f92672>==</span> JobState.CANCELED<span style=color:#f92672>!!</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// [INCOMPATIBLE_ENUM_COMPARISON] Comparison of incompatible enums 
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// &#39;AnnotationRetention?&#39; and &#39;JobState&#39; is always unsuccessful
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h1 id=-summary>👀 Summary<a hidden class=anchor aria-hidden=true href=#-summary>#</a></h1><ul><li>It is fun and interesting for the process of experiment.</li><li>The knowledge of foundation in Kotlin equality is not solid.</li><li>Deep dived into the equality and enum of Kotlin and Java.</li><li>What&rsquo;s next: to learn about the equality of Kotlin compiler&rsquo;s source code.</li></ul><h1 id=-links>🔗 Links<a hidden class=anchor aria-hidden=true href=#-links>#</a></h1><ul><li><a href=https://github.com/lexcao/kotlin-java-equality-palyground><em><strong>Github Source Code</strong></em></a></li><li><a href=https://kotlinlang.org/docs/reference/equality.html><em><strong>Kotlin Equality Docs</strong></em></a></li><li><a href=https://github.com/square/javapoet><em>JavaPoet</em></a></li><li><a href=https://github.com/square/kotlinpoet><em>KotlinPoet</em></a></li><li><a href=https://github.com/lexcao/kotlin-equality/blob/generated/src/main/java/io/github/lexcao/equality/generated/JavaGenerated.java><em>JavaGenerated.java</em></a></li><li><a href=https://github.com/lexcao/kotlin-equality/blob/generated/src/main/kotlin/io/github/lexcao/equality/generated/KotlinGenerated.kt><em>KotlinGenerated.kt</em></a></li></ul></div><footer class=post-footer><nav class=paginav><a class=next href=https://lexcao.io/posts/konverter/><span class=title>Next Page »</span><br><span>Generate Converter for Kotlin Class by KAPT</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2022 <a href=https://lexcao.io>The Coding Notes</a></span>
+<span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
-</span>
-</footer>
-<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
-<button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
-</button>
-</a>
-<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
-<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
-<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
-<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerText='copy';function d(){a.innerText='copied!',setTimeout(()=>{a.innerText='copy'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
-</body>
-</html>
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)"><button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></button></a>
+<script>let menu=document.getElementById("menu");menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(t){t.preventDefault();var e=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView({behavior:"smooth"}),e==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${e}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(t=>{const n=t.parentNode.parentNode,e=document.createElement("button");e.classList.add("copy-code"),e.innerText="copy";function s(){e.innerText="copied!",setTimeout(()=>{e.innerText="copy"},2e3)}e.addEventListener("click",o=>{if("clipboard"in navigator){navigator.clipboard.writeText(t.textContent),s();return}const e=document.createRange();e.selectNodeContents(t);const n=window.getSelection();n.removeAllRanges(),n.addRange(e);try{document.execCommand("copy"),s()}catch(e){}n.removeRange(e)}),n.classList.contains("highlight")?n.appendChild(e):n.parentNode.firstChild==n||(t.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?t.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(e):t.parentNode.appendChild(e))})</script></body></html>

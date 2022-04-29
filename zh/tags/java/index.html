@@ -1,154 +1,25 @@
-<!doctype html><html lang=zh dir=auto>
-<head><meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name=robots content="index, follow">
-<title>Java | The Coding Notes</title>
-<meta name=keywords content>
-<meta name=description content="Share / Summary / Record">
-<meta name=author content="Lex Cao">
-<link rel=canonical href=https://lexcao.io/zh/tags/java/>
-<link crossorigin=anonymous href=/assets/css/stylesheet.min.954da09bd8e837a4043689612475b7cc6722c94243f0373fc0f972f02186a597.css integrity="sha256-lU2gm9joN6QENolhJHW3zGciyUJD8Dc/wPly8CGGpZc=" rel="preload stylesheet" as=style>
-<link rel=icon href=https://lexcao.io/favicon.ico>
-<link rel=icon type=image/png sizes=16x16 href=https://lexcao.io/favicon-16x16.png>
-<link rel=icon type=image/png sizes=32x32 href=https://lexcao.io/favicon-32x32.png>
-<link rel=apple-touch-icon href=https://lexcao.io/apple-touch-icon.png>
-<link rel=mask-icon href=https://lexcao.io/safari-pinned-tab.svg>
-<meta name=theme-color content="#2e2e33">
-<meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.87.0">
-<link rel=alternate type=application/rss+xml href=https://lexcao.io/zh/tags/java/index.xml>
-<link rel=alternate hreflang=zh href=https://lexcao.io/zh/tags/java/>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DDVMDVDZMH"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-DDVMDVDZMH',{anonymize_ip:!1})}</script>
-<meta property="og:title" content="Java">
-<meta property="og:description" content="Share / Summary / Record">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://lexcao.io/zh/tags/java/"><meta property="og:image" content="https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80"><meta property="og:site_name" content="The Coding Notes">
-<meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80">
-<meta name=twitter:title content="Java">
-<meta name=twitter:description content="Share / Summary / Record">
-<noscript>
-<iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJ277ZJ" height=0 width=0 style=display:none;visibility:hidden></iframe>
-</noscript>
-</head>
-<body class=list id=top>
-<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
-<noscript>
-<style type=text/css>#theme-toggle,.top-link{display:none}</style>
-<style>@media(prefers-color-scheme:dark){:root{--theme:#1d1e20;--entry:#2e2e33;--primary:rgba(255, 255, 255, 0.84);--secondary:rgba(255, 255, 255, 0.56);--tertiary:rgba(255, 255, 255, 0.16);--content:rgba(255, 255, 255, 0.74);--hljs-bg:#2e2e33;--code-bg:#37383e;--border:#333}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
-</noscript>
-<header class=header>
-<nav class=nav>
-<div class=logo>
-<a href=https://lexcao.io/zh/ accesskey=h title="代码笔记 (Alt + H)">代码笔记</a>
-<span class=logo-switches>
-<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-</button>
-<ul class=lang-switch><li>|</li>
-<li>
-<a href=https://lexcao.io/ title=English aria-label=English>English</a>
-</li>
-</ul>
-</span>
-</div>
-<ul id=menu>
-<li>
-<a href=https://lexcao.io/zh/search/ title="搜索 (Alt + /)" accesskey=/>
-<span>搜索</span>
-</a>
-</li>
-<li>
-<a href=https://lexcao.io/zh/archives/ title=归档>
-<span>归档</span>
-</a>
-</li>
-<li>
-<a href=https://lexcao.io/zh/tags/ title=标签>
-<span>标签</span>
-</a>
-</li>
-<li>
-<a href=https://lexcao.io/zh/projects/ title=项目>
-<span>项目</span>
-</a>
-</li>
-<li>
-<a href=https://lexcao.io/zh/about/ title=关于>
-<span>关于</span>
-</a>
-</li>
-</ul>
-</nav>
-</header>
-<main class=main>
-<header class=page-header><div class=breadcrumbs><a href=https://lexcao.io/zh/>主页</a></div>
-<h1>Java</h1>
-</header>
-<article class="post-entry tag-entry">
-<header class=entry-header>
-<h2>Kotlin/Java TDD 开发流程记录</h2>
-</header>
-<section class=entry-content>
-<p>通过使用 Kotlin / Java 中 Junit5 和 Mockito 测试框架，在预约功能中演示 TDD 开发流程。
+<!doctype html><html lang=zh dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Java | The Coding Notes</title><meta name=keywords content><meta name=description content="Share / Summary / Record"><meta name=author content="Lex Cao"><link rel=canonical href=https://lexcao.io/zh/tags/java/><link crossorigin=anonymous href=/assets/css/stylesheet.min.c105fdc36edbfb42d308a2d6ec2b38187ba259d129d7574bcf561ecc44e72262.css integrity="sha256-wQX9w27b+0LTCKLW7Cs4GHuiWdEp11dLz1YezETnImI=" rel="preload stylesheet" as=style><link rel=icon href=https://lexcao.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://lexcao.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://lexcao.io/favicon-32x32.png><link rel=apple-touch-icon href=https://lexcao.io/apple-touch-icon.png><link rel=mask-icon href=https://lexcao.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.98.0"><link rel=alternate type=application/rss+xml href=https://lexcao.io/zh/tags/java/index.xml><link rel=alternate hreflang=zh href=https://lexcao.io/zh/tags/java/><script async src="https://www.googletagmanager.com/gtag/js?id=G-DDVMDVDZMH"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-DDVMDVDZMH",{anonymize_ip:!1})}</script><meta property="og:title" content="Java"><meta property="og:description" content="Share / Summary / Record"><meta property="og:type" content="website"><meta property="og:url" content="https://lexcao.io/zh/tags/java/"><meta property="og:image" content="https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80"><meta property="og:site_name" content="The Coding Notes"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80"><meta name=twitter:title content="Java"><meta name=twitter:description content="Share / Summary / Record"><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KJ277ZJ" height=0 width=0 style=display:none;visibility:hidden></iframe></noscript></head><body class=list id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:#1d1e20;--entry:#2e2e33;--primary:rgba(255, 255, 255, 0.84);--secondary:rgba(255, 255, 255, 0.56);--tertiary:rgba(255, 255, 255, 0.16);--content:rgba(255, 255, 255, 0.74);--hljs-bg:#2e2e33;--code-bg:#37383e;--border:#333}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><header class=header><nav class=nav><div class=logo><a href=https://lexcao.io/zh/ accesskey=h title="代码笔记 (Alt + H)">代码笔记</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button><ul class=lang-switch><li>|</li><li><a href=https://lexcao.io/ title=English aria-label=English>English</a></li></ul></span></div><ul id=menu><li><a href=https://lexcao.io/zh/search/ title="搜索 (Alt + /)" accesskey=/><span>搜索</span></a></li><li><a href=https://lexcao.io/zh/archives/ title=归档><span>归档</span></a></li><li><a href=https://lexcao.io/zh/tags/ title=标签><span>标签</span></a></li><li><a href=https://lexcao.io/zh/projects/ title=项目><span>项目</span></a></li><li><a href=https://lexcao.io/zh/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><header class=page-header><div class=breadcrumbs><a href=https://lexcao.io/zh/>主页</a></div><h1>Java</h1></header><article class="post-entry tag-entry"><header class=entry-header><h2>Kotlin/Java TDD 开发流程记录</h2></header><section class=entry-content><p>通过使用 Kotlin / Java 中 Junit5 和 Mockito 测试框架，在预约功能中演示 TDD 开发流程。
 TDD 介绍 TDD（Test-Driven Development） 是一种开发流程，中文是「测试驱动开发」。用一句白话形容，就是「先写测试再开发」。先写测试除了能确保测试程式的撰写，还有一个好处：有助于在开发初期厘清程式介面如何设计。详细理论知识可以前往 Wiki 了解，这里不再过多介绍。
 测试驱动开发 Test Driven Development TDD 开发流程（5步） 术语说明：
 红灯 - Failure - 测试用例失败 绿灯 - Success - 测试用例成功 重构 - Refactor - 重构功能代码 具体步骤：
 选定一个功能，编写测试用例 执行测试，得到【红灯】 编写满足测试用例的功能代码 再次执行，得到【绿灯】 【重构】代码 小结：
 对于每一个功能，在【红灯】-【绿灯】-【重构】间来回循环往复，不断得到完善。
-前置工作 代码说明 使用 Kotlin 语言（会有相对应的 Java 代码） 使用到的测试框架 Running: JUnit5 Mock: MockK / Mockito Assertion: Kotest / AssertJ 只涉及 TDD 的具体流程，不涉及单元测试如何编写（可以看 SpringBoot 单元测试各层） 功能介绍 假设一个用户预约的场景。...</p>
-</section>
-<footer class=entry-footer>2021 May 3&nbsp;·&nbsp;2 分钟&nbsp;·&nbsp;Lex Cao</footer>
-<a class=entry-link aria-label="post link to Kotlin/Java TDD 开发流程记录" href=https://lexcao.io/zh/posts/kotlin-java-tdd-example/></a>
-</article>
-<article class="post-entry tag-entry">
-<header class=entry-header>
-<h2>Spring Data JPA 多条件动态连表查询</h2>
-</header>
-<section class=entry-content>
-<p>痛点 项目中使用 Spring Data JPA 作为 ORM 框架的时候，实体映射非常方便。Spring Data Repository 的顶层抽象完全解决单实体的查询，面对单实体的复杂查询，也能使用 JpaSpecificationExecutor&lt;T> 构造 Specification&lt;T> 轻松应对。
+前置工作 代码说明 使用 Kotlin 语言（会有相对应的 Java 代码） 使用到的测试框架 Running: JUnit5 Mock: MockK / Mockito Assertion: Kotest / AssertJ 只涉及 TDD 的具体流程，不涉及单元测试如何编写（可以看 SpringBoot 单元测试各层） 功能介绍 假设一个用户预约的场景。...</p></section><footer class=entry-footer>2021 May 3&nbsp;·&nbsp;2 分钟&nbsp;·&nbsp;Lex Cao</footer><a class=entry-link aria-label="post link to Kotlin/Java TDD 开发流程记录" href=https://lexcao.io/zh/posts/kotlin-java-tdd-example/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2>Spring Data JPA 多条件动态连表查询</h2></header><section class=entry-content><p>痛点 项目中使用 Spring Data JPA 作为 ORM 框架的时候，实体映射非常方便。Spring Data Repository 的顶层抽象完全解决单实体的查询，面对单实体的复杂查询，也能使用 JpaSpecificationExecutor&lt;T> 构造 Specification&lt;T> 轻松应对。
 而对于后台管理报表查询需求来说，需要进行连表多条件动态查询的时候，就显得无从下手。因为它并不像 MyBatis 一样能够在 XML 文件中写出动态 SQL 语句。
 尽管可以使用 EntityManager 动态拼接原生 SQL 语句，但是该方法返回值为 ResultSet ，也就是说查出来的实体映射关系需要手动映射（😢这样不太优雅，已经定义出实体，还需要自己去映射）。
 所以，本文的目的是，在现有实体关系的基础上，结合 Specification&lt;T> 记录下 Spring Data JPA 多条件动态连表查询操作，以及其中的踩坑和优化。
 基础操作 那么，让我们开始进入代码操作。【本文所有代码在此】
 前置说明 相关依赖 Java 11 SpringBoot 2.4.2 build.gradle
-plugins { id 'org.springframework.boot' version '2.4.2' id 'io.spring.dependency-management' version '1.0.11.RELEASE' id 'java' } dependencies { implementation 'org.springframework.boot:spring-boot-starter-data-jpa' compileOnly 'org.projectlombok:lombok' runtimeOnly 'mysql:mysql-connector-java' annotationProcessor 'org.projectlombok:lombok' testImplementation 'org....</p>
-</section>
-<footer class=entry-footer>2021 April 4&nbsp;·&nbsp;6 分钟&nbsp;·&nbsp;Lex Cao</footer>
-<a class=entry-link aria-label="post link to Spring Data JPA 多条件动态连表查询" href=https://lexcao.io/zh/posts/spring-data-jpa-join-table/></a>
-</article>
-<article class="post-entry tag-entry">
-<header class=entry-header>
-<h2>一次线程死锁排查记录</h2>
-</header>
-<section class=entry-content>
-<p>背景 某次发版之后，线上服务低概率出现某台实例接口响应超时，具体表现为：
+plugins { id 'org.springframework.boot' version '2.4.2' id 'io.spring.dependency-management' version '1.0.11.RELEASE' id 'java' } dependencies { implementation 'org.springframework.boot:spring-boot-starter-data-jpa' compileOnly 'org....</p></section><footer class=entry-footer>2021 April 4&nbsp;·&nbsp;6 分钟&nbsp;·&nbsp;Lex Cao</footer><a class=entry-link aria-label="post link to Spring Data JPA 多条件动态连表查询" href=https://lexcao.io/zh/posts/spring-data-jpa-join-table/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2>一次线程死锁排查记录</h2></header><section class=entry-content><p>背景 某次发版之后，线上服务低概率出现某台实例接口响应超时，具体表现为：
 /health 接口超时报警； 线程死锁，Tomcat 线程池吃满； 服务完全无响应。 保留下当前 heap dump 和 thread stack 后，临时重启服务器恢复正常。
 # heap dump $ jmap -dump:format=b,file=dump.hprof [pid] # thread stack jstack [pid] > stack.txt 接下来简单记录一下排查结果。 （此文为回忆所写，当时排查的思考细节和过程已省略）
 排查 heap dump 使用工具 Eclipse + MAT
 安装 # 安装 eclipse $ brew cask install eclipse-java # 安装 eclipse MAT $ brew cask install mat # 是的，这个就是 eclipse-mat 相关连接 Eclipse
 Eclipse MAT
-使用 把 heap dump 文件 dump....</p>
-</section>
-<footer class=entry-footer>2020 March 21&nbsp;·&nbsp;2 分钟&nbsp;·&nbsp;Lex Cao</footer>
-<a class=entry-link aria-label="post link to 一次线程死锁排查记录" href=https://lexcao.io/zh/posts/async-within-async/></a>
-</article>
-</main>
-<footer class=footer>
-<span>&copy; 2021 <a href=https://lexcao.io/zh/>The Coding Notes</a></span>
-<span>
-Powered by
+使用 把 heap dump 文件 dump....</p></section><footer class=entry-footer>2020 March 21&nbsp;·&nbsp;2 分钟&nbsp;·&nbsp;Lex Cao</footer><a class=entry-link aria-label="post link to 一次线程死锁排查记录" href=https://lexcao.io/zh/posts/async-within-async/></a></article></main><footer class=footer><span>&copy; 2022 <a href=https://lexcao.io/zh/>The Coding Notes</a></span>
+<span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
-</span>
-</footer>
-<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
-<button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
-</button>
-</a>
-<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
-<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
-<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
-</body>
-</html>
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)"><button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></button></a>
+<script>let menu=document.getElementById("menu");menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(t){t.preventDefault();var e=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView({behavior:"smooth"}),e==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${e}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script></body></html>

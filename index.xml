@@ -19,7 +19,7 @@
       <description>Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.
 Background The following code snippet is using Kotlin 1.3.72.
 The business logic of it has been removed and only remained the code structure for reproducing the question.
-// a enum for state enum class MyState { OK, CANCELED } // it might return nullable MyState fun processing(): MyState?</description>
+// a enum for state enum class MyState {  OK, CANCELED }  // it might return nullable MyState fun processing(): MyState?</description>
     </item>
     
     <item>
