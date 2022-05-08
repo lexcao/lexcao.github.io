@@ -3,30 +3,9 @@ This is just a placeholder blank stylesheet so as to support adding custom style
 
 Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-css-with-themes-assets for more info
 */
-.bg-blur {
+.bg-position {
     position: absolute;
-    width: 18rem;
-    height: 18rem;
-    border-radius: 9999px;
-    opacity: 0.5;
-    mix-blend-mode: multiply;
-    filter: blur(24px);
-}
-
-.bg-color-red {
-    top: 40%;
-    left: 40%;
-    background-color: rgb(249 168 212);
-}
-
-.bg-color-yellow {
-    top: 30%;
-    right: 40%;
-    background-color: rgb(253 224 71);
-}
-
-.bg-color-purple {
-    bottom: 60%;
-    left: 50%;
-    background-color: rgb(216 180 254);
+    width: 48rem;
+    height: 48rem;
+    z-index: -1;
 }
