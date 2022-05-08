@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Rust on The Coding Notes</title>
+    <link>https://lexcao.io/zh/tags/rust/</link>
+    <description>Recent content in Rust on The Coding Notes</description>
+    <image>
+      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</url>
+      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 02 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/zh/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>通过构建全栈待办应用学习 Rust</title>
+      <link>https://lexcao.io/zh/posts/learn-rust-fullstack/</link>
+      <pubDate>Mon, 02 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/zh/posts/learn-rust-fullstack/</guid>
+      <description>什么 我想写一篇关于我如何学习Rust的博客。
+请原谅我在 2022 年才开始学习这个伟大的编程语言。
+为了在实践中学习Rust，我构建了一个全栈待办应用。
+你可以在 这里 尝试。相关源码可以在 GitHub 上找到。
+现在，我准备写一下它是如何构建的。
+如何 首先，和大家一样，我也是从 The Book 中学习 Rust。这是一本不应该跳过入门学习 Rust 的好书。
+在学习了一些基本的语法之后，我尝试从零开始使用 Rust 构建一个全栈应用，这是一个使用 Rust tokio 的后端服务和一个使用 Rust WASM（Web Assembly）的前端页面。
+我将分别对这两部分做一个简单的介绍。
+后端 后台服务是一个的简单的 REST API。使用 actix-web 作为网络框架。
+ 我将写另一篇博客，介绍我如何使用 TDD 开发 Rust 后台服务。 被 Rust 编译器和 Borrow Checker 教育是一次特别的体验。  对于部署，我使用 Supabase 作为 Postgres 服务，使用 Railway 来运行后台服务 docker 镜像。
+前端 前端页面有在线和离线数据源，在线是从后台服务器获取数据，而离线是在本地存储。并且有一个按钮来切换它们。
+前台由 Rust WASM 和 yew 框架驱动，这是一个类似 React 基于组件构建 Web 应用框架。</description>
+    </item>
+    
+  </channel>
+</rss>

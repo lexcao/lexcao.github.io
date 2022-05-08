@@ -2,6 +2,84 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://lexcao.io/zh/tags/practice/</loc>
+    <lastmod>2022-05-02T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/tags/practice/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/practice/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/zh/tags/rust/</loc>
+    <lastmod>2022-05-02T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/tags/rust/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/rust/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/zh/</loc>
+    <lastmod>2022-05-02T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/zh/tags/</loc>
+    <lastmod>2022-05-02T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/zh/posts/</loc>
+    <lastmod>2022-05-02T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/zh/posts/learn-rust-fullstack/</loc>
+    <lastmod>2022-05-02T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/posts/learn-rust-fullstack/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/learn-rust-fullstack/"
+                />
+  </url><url>
     <loc>https://lexcao.io/zh/tags/java/</loc>
     <lastmod>2021-05-03T00:00:00+00:00</lastmod>
   </url><url>
@@ -23,45 +101,6 @@
   </url><url>
     <loc>https://lexcao.io/zh/tags/tdd/</loc>
     <lastmod>2021-05-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://lexcao.io/zh/</loc>
-    <lastmod>2021-05-03T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/"
-                />
-  </url><url>
-    <loc>https://lexcao.io/zh/tags/</loc>
-    <lastmod>2021-05-03T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/tags/"
-                />
-  </url><url>
-    <loc>https://lexcao.io/zh/posts/</loc>
-    <lastmod>2021-05-03T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/posts/"
-                />
   </url><url>
     <loc>https://lexcao.io/zh/tags/mysql/</loc>
     <lastmod>2021-04-04T00:00:00+00:00</lastmod>

@@ -9,7 +9,21 @@
       <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 21 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Learn Rust by Building a Full-stack Todo Application</title>
+      <link>https://lexcao.io/posts/learn-rust-fullstack/</link>
+      <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/posts/learn-rust-fullstack/</guid>
+      <description>What I want to write a blog about how I learned Rust.
+Please forgive me that I just started learning such a great programming language in 2022.
+To learn Rust by doing, I have built a full-stack todo application.
+You can try it here. The source code is available at GitHub.
+Here I am going to write about how to build it.
+How Firstly, as everyone beginning, I learn Rust from the book as well.</description>
+    </item>
+    
     <item>
       <title>Kotlin Weird Equality</title>
       <link>https://lexcao.io/posts/kotlin-equality-diving/</link>
