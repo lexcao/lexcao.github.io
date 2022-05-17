@@ -31,7 +31,7 @@ languages:
     DateFormat: "January 2, 2006"
     profileMode:
       enabled: true
-      imageUrl: "profile_avatar.jpeg"
+      imageUrl: "profile_avatar.webp"
       imageWidth: 150
       imageHeight: 150
       title: Lex Cao
@@ -70,7 +70,7 @@ languages:
     DateFormat: "2006 January 2"
     profileMode:
       enabled: true
-      imageUrl: "/profile_avatar.jpeg"
+      imageUrl: "/profile_avatar.webp"
       imageWidth: 150
       imageHeight: 150
       title: 曹 历鑫
