@@ -17,8 +17,8 @@
       
       <guid>https://lexcao.io/zh/posts/reactive-streams/</guid>
       <description>翻译自 Reactive Streams
-Reactive Streams  注：Reactive Streams 直译为响应式流，这里保留英文原词。
- Reactive Streams 是一项提议，旨在为具有无阻塞背压的异步处理流提供标准。这包括针对运行环境（JVM 和 JavaScript）以及网络协议的努力。
+Reactive Streams 注：Reactive Streams 直译为响应式流，这里保留英文原词。
+Reactive Streams 是一项提议，旨在为具有无阻塞背压的异步处理流提供标准。这包括针对运行环境（JVM 和 JavaScript）以及网络协议的努力。
 Reactive Streams 是为了提供一个无阻塞背压异步流式处理的标准的一个提议。
 JDK9 java.util.concurrent.Flow 在 JDK 9 的 java.util.concurrent.Flow 中可用的接口，分别为 1 ：1 语义上各自对应于 Reactive Streams。这意味着将会有一个迁移期，库（Libraries）将采用 JDK 中的新类型，但是由于库的完全语义等效以及 Reactive Streams &amp;lt;-&amp;gt; Flow 适配器库和直接与 JDK Flow 类型兼容的 TCK，因此这个迁移期预计会很短。
 如果你有兴趣了解有关 JVM Reactive Streams，请阅读此 文章

@@ -27,7 +27,7 @@ I will cover some detail of the post and the program in the below.</description>
       <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://lexcao.io/posts/jekyll-multi-language-without-plugin/</guid>
-      <description>Goal  Support multi-language, mainly in English and supplemented by Chinese; When visiting pages begin with /, e.g. /about.html, /posts/hello-world, English pages would be shown; When visiting pages began with /zh/, e.g. /zh/about.html, /zh/posts/hello-world, Chinese pages would be shown; When visiting ../hello-world posts, corresponding langugage posts would be jumped via the link; Posts which are specified language would only be shown in archive and index pages.  Defect  As 404.</description>
+      <description>Goal Support multi-language, mainly in English and supplemented by Chinese; When visiting pages begin with /, e.g. /about.html, /posts/hello-world, English pages would be shown; When visiting pages began with /zh/, e.g. /zh/about.html, /zh/posts/hello-world, Chinese pages would be shown; When visiting ../hello-world posts, corresponding langugage posts would be jumped via the link; Posts which are specified language would only be shown in archive and index pages. Defect As 404.html page was not supported for separate language file, two langugage content would be shown on it at the same time.</description>
     </item>
     
   </channel>

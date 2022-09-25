@@ -18,11 +18,11 @@
       <guid>https://lexcao.io/zh/posts/kotlin-java-tdd-example/</guid>
       <description>通过使用 Kotlin / Java 中 Junit5 和 Mockito 测试框架，在预约功能中演示 TDD 开发流程。
 TDD 介绍 TDD（Test-Driven Development） 是一种开发流程，中文是「测试驱动开发」。用一句白话形容，就是「先写测试再开发」。先写测试除了能确保测试程式的撰写，还有一个好处：有助于在开发初期厘清程式介面如何设计。详细理论知识可以前往 Wiki 了解，这里不再过多介绍。
- 测试驱动开发 Test Driven Development  TDD 开发流程（5步） 术语说明：
- 红灯 - Failure - 测试用例失败 绿灯 - Success - 测试用例成功 重构 - Refactor - 重构功能代码  具体步骤：
- 选定一个功能，编写测试用例 执行测试，得到【红灯】 编写满足测试用例的功能代码 再次执行，得到【绿灯】 【重构】代码  小结：
+测试驱动开发 Test Driven Development TDD 开发流程（5步） 术语说明：
+红灯 - Failure - 测试用例失败 绿灯 - Success - 测试用例成功 重构 - Refactor - 重构功能代码 具体步骤：
+选定一个功能，编写测试用例 执行测试，得到【红灯】 编写满足测试用例的功能代码 再次执行，得到【绿灯】 【重构】代码 小结：
 对于每一个功能，在【红灯】-【绿灯】-【重构】间来回循环往复，不断得到完善。
-前置工作 代码说明  使用 Kotlin 语言（会有相对应的 Java 代码） 使用到的测试框架  Running: JUnit5 Mock: MockK / Mockito Assertion: Kotest / AssertJ   只涉及 TDD 的具体流程，不涉及单元测试如何编写（可以看 SpringBoot 单元测试各层）  功能介绍 假设一个用户预约的场景。</description>
+前置工作 代码说明 使用 Kotlin 语言（会有相对应的 Java 代码） 使用到的测试框架 Running: JUnit5 Mock: MockK / Mockito Assertion: Kotest / AssertJ 只涉及 TDD 的具体流程，不涉及单元测试如何编写（可以看 SpringBoot 单元测试各层） 功能介绍 假设一个用户预约的场景。</description>
     </item>
     
   </channel>

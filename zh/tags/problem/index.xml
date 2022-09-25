@@ -17,12 +17,12 @@
       
       <guid>https://lexcao.io/zh/posts/async-within-async/</guid>
       <description>背景 某次发版之后，线上服务低概率出现某台实例接口响应超时，具体表现为：
- /health 接口超时报警； 线程死锁，Tomcat 线程池吃满； 服务完全无响应。  保留下当前 heap dump 和 thread stack 后，临时重启服务器恢复正常。
+/health 接口超时报警； 线程死锁，Tomcat 线程池吃满； 服务完全无响应。 保留下当前 heap dump 和 thread stack 后，临时重启服务器恢复正常。
 # heap dump $ jmap -dump:format=b,file=dump.hprof [pid] # thread stack jstack [pid] &amp;gt; stack.txt 接下来简单记录一下排查结果。 （此文为回忆所写，当时排查的思考细节和过程已省略）
 排查 heap dump 使用工具 Eclipse + MAT
-安装 # 安装 eclipse $ brew cask install eclipse-java # 安装 eclipse MAT $ brew cask install mat # 是的，这个就是 eclipse-mat 相关连接   Eclipse
-  Eclipse MAT
-  使用   把 heap dump 文件 dump.</description>
+安装 # 安装 eclipse $ brew cask install eclipse-java # 安装 eclipse MAT $ brew cask install mat # 是的，这个就是 eclipse-mat 相关连接 Eclipse
+Eclipse MAT
+使用 把 heap dump 文件 dump.hprof 导入到 MAT。</description>
     </item>
     
   </channel>

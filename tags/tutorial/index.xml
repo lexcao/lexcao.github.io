@@ -37,7 +37,7 @@ Here is some brief information I found from Google and hope it should be useful 
       <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://lexcao.io/posts/jekyll-multi-language-without-plugin/</guid>
-      <description>Goal  Support multi-language, mainly in English and supplemented by Chinese; When visiting pages begin with /, e.g. /about.html, /posts/hello-world, English pages would be shown; When visiting pages began with /zh/, e.g. /zh/about.html, /zh/posts/hello-world, Chinese pages would be shown; When visiting ../hello-world posts, corresponding langugage posts would be jumped via the link; Posts which are specified language would only be shown in archive and index pages.  Defect  As 404.</description>
+      <description>Goal Support multi-language, mainly in English and supplemented by Chinese; When visiting pages begin with /, e.g. /about.html, /posts/hello-world, English pages would be shown; When visiting pages began with /zh/, e.g. /zh/about.html, /zh/posts/hello-world, Chinese pages would be shown; When visiting ../hello-world posts, corresponding langugage posts would be jumped via the link; Posts which are specified language would only be shown in archive and index pages. Defect As 404.html page was not supported for separate language file, two langugage content would be shown on it at the same time.</description>
     </item>
     
     <item>
@@ -47,9 +47,9 @@ Here is some brief information I found from Google and hope it should be useful 
       
       <guid>https://lexcao.io/posts/hello-world/</guid>
       <description>Hello World Blog configuration:
- Static Website Generation  Jekyll 3.8.5 Ruby 2.6.0 Lagrange theme   Website Aynalysis  Google Analysis Baidu Analysis   Deployment  GitHub Pages    This is my first post, which I would like to note the beginning of the blog as the simplest &amp;ldquo;hello world&amp;rdquo; and how to build such blog by yourself.
+Static Website Generation Jekyll 3.8.5 Ruby 2.6.0 Lagrange theme Website Aynalysis Google Analysis Baidu Analysis Deployment GitHub Pages This is my first post, which I would like to note the beginning of the blog as the simplest &amp;ldquo;hello world&amp;rdquo; and how to build such blog by yourself.
 The article will contain three steps:
- Choose type of blog Prepare something needed Compose them  Step 01 Choose Type of Blog There are static websites and dynamic websites depending on whether the frontend web page interacts with the backend server or database.</description>
+Choose type of blog Prepare something needed Compose them Step 01 Choose Type of Blog There are static websites and dynamic websites depending on whether the frontend web page interacts with the backend server or database.</description>
     </item>
     
   </channel>

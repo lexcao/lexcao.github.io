@@ -9,7 +9,38 @@
       <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 03 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/zh/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/zh/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring Data JPA 多条件连表查询 (2022 更新)</title>
+      <link>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</link>
+      <pubDate>Sat, 24 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</guid>
+      <description>痛点 项目中使用 Spring Data JPA 作为 ORM 框架的时候，实体映射非常方便。Spring Data Repository 的顶层抽象完全解决单实体的查询，面对单实体的复杂查询，也能使用 JpaSpecificationExecutor&amp;lt;T&amp;gt; 构造 Specification&amp;lt;T&amp;gt; 轻松应对。
+而对于后台管理报表查询需求来说，需要进行连表多条件动态查询的时候，就显得无从下手。因为它并不像 MyBatis 一样能够在 XML 文件中写出动态 SQL 语句。
+尽管可以使用 EntityManager 动态拼接原生 SQL 语句，但是该方法返回值为 ResultSet ，也就是说查出来的实体映射关系需要手动映射（😢这样不太优雅，已经定义出实体，还需要自己去映射）。
+所以，本文的目的是，在现有实体关系的基础上，结合 Specification&amp;lt;T&amp;gt; 记录下 Spring Data JPA 多条件动态连表查询操作，以及其中的踩坑和优化。
+想要直接看结论的，请看这篇 Spring Data JPA 动态多条件连表查询最佳实践。
+基础操作 那么，让我们开始进入代码操作。【本文所有代码在此】
+前置说明 相关依赖 Java 11 SpringBoot 2.4.2 build.gradle
+plugins { id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&amp;#39; id &amp;#39;io.spring.dependency-management&amp;#39; version &amp;#39;1.0.11.RELEASE&amp;#39; id &amp;#39;java&amp;#39; } dependencies { implementation &amp;#39;org.springframework.boot:spring-boot-starter-data-jpa&amp;#39; compileOnly &amp;#39;org.projectlombok:lombok&amp;#39; runtimeOnly &amp;#39;mysql:mysql-connector-java&amp;#39; annotationProcessor &amp;#39;org.</description>
+    </item>
+    
+    <item>
+      <title>Spring Data JPA 多条件连表查询最佳实践</title>
+      <link>https://lexcao.io/zh/posts/spring-data-jpa-join-table-best-practice/</link>
+      <pubDate>Sat, 24 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/zh/posts/spring-data-jpa-join-table-best-practice/</guid>
+      <description>背景 本文是 Spring Data JPA 多条件连表查询 文章的最佳实践总结。
+解决什么问题？ 使用 Spring Data JPA 需要针对多条件进行连表查询的场景不使用原生 SQL 或者 HQL 的时候，仅仅通过 JpaSpecificationExecutor 构造 Specification 动态条件语句来实现类型安全的多条件查询。
+说明 相关上下文背景请前往 前文 了解。 这里再提一下接下来示例会用到的场景：
+三个实体：作者、书、书评。其中，作者与书是一对多的关系，书与书评是一对一的关系（当然书评与读者的评价是一对多的关系，这里省去，仅用一对一来进行演示即可）。
+假设有这样的后台查询条件：作者名称、书的发布时间、书评的评分。（这里每个实体取一个字段进行连表查询演示，其他字段同理）。返回书籍列表以及相关表字段。
+【本文所有代码在此】
+最佳实践 需要 SELECT 查询的字段，通过单独的 Java Bean 进行映射 利用 JPA 的自动实体映射结果集 @EntityGraph 注解标注返回实体需要 Fetch 的字段 无需再手动针对连表进行 fetch，解决 N+1 问题 JOIN ON 查询条件使用 join().on() 拼接 Join&amp;lt;Object, Object&amp;gt; author = root.join(&amp;#34;author&amp;#34;); author.on(cb.equal(author.get(&amp;#34;name&amp;#34;), param.getAuthorName())); WHERE 查询条件使用 query.where() 拼接 query.where(cb.equal(root.get(&amp;#34;publishTime&amp;#34;), param.getBookPublishTime())); 代码示例 针对 Repository 需要 override 已有 findAll 方法，使用 @EntityGraph 注解 使用 @EntityGraph 注解，标注额外属性需要 fetch // BookJoinRepository.</description>
+    </item>
+    
     <item>
       <title>Kotlin/Java TDD 开发流程记录</title>
       <link>https://lexcao.io/zh/posts/kotlin-java-tdd-example/</link>
@@ -18,26 +49,11 @@
       <guid>https://lexcao.io/zh/posts/kotlin-java-tdd-example/</guid>
       <description>通过使用 Kotlin / Java 中 Junit5 和 Mockito 测试框架，在预约功能中演示 TDD 开发流程。
 TDD 介绍 TDD（Test-Driven Development） 是一种开发流程，中文是「测试驱动开发」。用一句白话形容，就是「先写测试再开发」。先写测试除了能确保测试程式的撰写，还有一个好处：有助于在开发初期厘清程式介面如何设计。详细理论知识可以前往 Wiki 了解，这里不再过多介绍。
- 测试驱动开发 Test Driven Development  TDD 开发流程（5步） 术语说明：
- 红灯 - Failure - 测试用例失败 绿灯 - Success - 测试用例成功 重构 - Refactor - 重构功能代码  具体步骤：
- 选定一个功能，编写测试用例 执行测试，得到【红灯】 编写满足测试用例的功能代码 再次执行，得到【绿灯】 【重构】代码  小结：
+测试驱动开发 Test Driven Development TDD 开发流程（5步） 术语说明：
+红灯 - Failure - 测试用例失败 绿灯 - Success - 测试用例成功 重构 - Refactor - 重构功能代码 具体步骤：
+选定一个功能，编写测试用例 执行测试，得到【红灯】 编写满足测试用例的功能代码 再次执行，得到【绿灯】 【重构】代码 小结：
 对于每一个功能，在【红灯】-【绿灯】-【重构】间来回循环往复，不断得到完善。
-前置工作 代码说明  使用 Kotlin 语言（会有相对应的 Java 代码） 使用到的测试框架  Running: JUnit5 Mock: MockK / Mockito Assertion: Kotest / AssertJ   只涉及 TDD 的具体流程，不涉及单元测试如何编写（可以看 SpringBoot 单元测试各层）  功能介绍 假设一个用户预约的场景。</description>
-    </item>
-    
-    <item>
-      <title>Spring Data JPA 多条件动态连表查询</title>
-      <link>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</link>
-      <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</guid>
-      <description>痛点 项目中使用 Spring Data JPA 作为 ORM 框架的时候，实体映射非常方便。Spring Data Repository 的顶层抽象完全解决单实体的查询，面对单实体的复杂查询，也能使用 JpaSpecificationExecutor&amp;lt;T&amp;gt; 构造 Specification&amp;lt;T&amp;gt; 轻松应对。
-而对于后台管理报表查询需求来说，需要进行连表多条件动态查询的时候，就显得无从下手。因为它并不像 MyBatis 一样能够在 XML 文件中写出动态 SQL 语句。
-尽管可以使用 EntityManager 动态拼接原生 SQL 语句，但是该方法返回值为 ResultSet ，也就是说查出来的实体映射关系需要手动映射（😢这样不太优雅，已经定义出实体，还需要自己去映射）。
-所以，本文的目的是，在现有实体关系的基础上，结合 Specification&amp;lt;T&amp;gt; 记录下 Spring Data JPA 多条件动态连表查询操作，以及其中的踩坑和优化。
-基础操作 那么，让我们开始进入代码操作。【本文所有代码在此】
-前置说明 相关依赖  Java 11 SpringBoot 2.4.2  build.gradle
-plugins {  id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&amp;#39;  id &amp;#39;io.spring.dependency-management&amp;#39; version &amp;#39;1.0.11.RELEASE&amp;#39;  id &amp;#39;java&amp;#39; }  dependencies {  implementation &amp;#39;org.springframework.boot:spring-boot-starter-data-jpa&amp;#39;  compileOnly &amp;#39;org.</description>
+前置工作 代码说明 使用 Kotlin 语言（会有相对应的 Java 代码） 使用到的测试框架 Running: JUnit5 Mock: MockK / Mockito Assertion: Kotest / AssertJ 只涉及 TDD 的具体流程，不涉及单元测试如何编写（可以看 SpringBoot 单元测试各层） 功能介绍 假设一个用户预约的场景。</description>
     </item>
     
     <item>
@@ -47,12 +63,12 @@ plugins {  id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&
       
       <guid>https://lexcao.io/zh/posts/async-within-async/</guid>
       <description>背景 某次发版之后，线上服务低概率出现某台实例接口响应超时，具体表现为：
- /health 接口超时报警； 线程死锁，Tomcat 线程池吃满； 服务完全无响应。  保留下当前 heap dump 和 thread stack 后，临时重启服务器恢复正常。
+/health 接口超时报警； 线程死锁，Tomcat 线程池吃满； 服务完全无响应。 保留下当前 heap dump 和 thread stack 后，临时重启服务器恢复正常。
 # heap dump $ jmap -dump:format=b,file=dump.hprof [pid] # thread stack jstack [pid] &amp;gt; stack.txt 接下来简单记录一下排查结果。 （此文为回忆所写，当时排查的思考细节和过程已省略）
 排查 heap dump 使用工具 Eclipse + MAT
-安装 # 安装 eclipse $ brew cask install eclipse-java # 安装 eclipse MAT $ brew cask install mat # 是的，这个就是 eclipse-mat 相关连接   Eclipse
-  Eclipse MAT
-  使用   把 heap dump 文件 dump.</description>
+安装 # 安装 eclipse $ brew cask install eclipse-java # 安装 eclipse MAT $ brew cask install mat # 是的，这个就是 eclipse-mat 相关连接 Eclipse
+Eclipse MAT
+使用 把 heap dump 文件 dump.hprof 导入到 MAT。</description>
     </item>
     
   </channel>

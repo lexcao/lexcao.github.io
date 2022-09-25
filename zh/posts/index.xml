@@ -9,7 +9,38 @@
       <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 02 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/zh/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/zh/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring Data JPA 多条件连表查询 (2022 更新)</title>
+      <link>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</link>
+      <pubDate>Sat, 24 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</guid>
+      <description>痛点 项目中使用 Spring Data JPA 作为 ORM 框架的时候，实体映射非常方便。Spring Data Repository 的顶层抽象完全解决单实体的查询，面对单实体的复杂查询，也能使用 JpaSpecificationExecutor&amp;lt;T&amp;gt; 构造 Specification&amp;lt;T&amp;gt; 轻松应对。
+而对于后台管理报表查询需求来说，需要进行连表多条件动态查询的时候，就显得无从下手。因为它并不像 MyBatis 一样能够在 XML 文件中写出动态 SQL 语句。
+尽管可以使用 EntityManager 动态拼接原生 SQL 语句，但是该方法返回值为 ResultSet ，也就是说查出来的实体映射关系需要手动映射（😢这样不太优雅，已经定义出实体，还需要自己去映射）。
+所以，本文的目的是，在现有实体关系的基础上，结合 Specification&amp;lt;T&amp;gt; 记录下 Spring Data JPA 多条件动态连表查询操作，以及其中的踩坑和优化。
+想要直接看结论的，请看这篇 Spring Data JPA 动态多条件连表查询最佳实践。
+基础操作 那么，让我们开始进入代码操作。【本文所有代码在此】
+前置说明 相关依赖 Java 11 SpringBoot 2.4.2 build.gradle
+plugins { id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&amp;#39; id &amp;#39;io.spring.dependency-management&amp;#39; version &amp;#39;1.0.11.RELEASE&amp;#39; id &amp;#39;java&amp;#39; } dependencies { implementation &amp;#39;org.springframework.boot:spring-boot-starter-data-jpa&amp;#39; compileOnly &amp;#39;org.projectlombok:lombok&amp;#39; runtimeOnly &amp;#39;mysql:mysql-connector-java&amp;#39; annotationProcessor &amp;#39;org.</description>
+    </item>
+    
+    <item>
+      <title>Spring Data JPA 多条件连表查询最佳实践</title>
+      <link>https://lexcao.io/zh/posts/spring-data-jpa-join-table-best-practice/</link>
+      <pubDate>Sat, 24 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/zh/posts/spring-data-jpa-join-table-best-practice/</guid>
+      <description>背景 本文是 Spring Data JPA 多条件连表查询 文章的最佳实践总结。
+解决什么问题？ 使用 Spring Data JPA 需要针对多条件进行连表查询的场景不使用原生 SQL 或者 HQL 的时候，仅仅通过 JpaSpecificationExecutor 构造 Specification 动态条件语句来实现类型安全的多条件查询。
+说明 相关上下文背景请前往 前文 了解。 这里再提一下接下来示例会用到的场景：
+三个实体：作者、书、书评。其中，作者与书是一对多的关系，书与书评是一对一的关系（当然书评与读者的评价是一对多的关系，这里省去，仅用一对一来进行演示即可）。
+假设有这样的后台查询条件：作者名称、书的发布时间、书评的评分。（这里每个实体取一个字段进行连表查询演示，其他字段同理）。返回书籍列表以及相关表字段。
+【本文所有代码在此】
+最佳实践 需要 SELECT 查询的字段，通过单独的 Java Bean 进行映射 利用 JPA 的自动实体映射结果集 @EntityGraph 注解标注返回实体需要 Fetch 的字段 无需再手动针对连表进行 fetch，解决 N+1 问题 JOIN ON 查询条件使用 join().on() 拼接 Join&amp;lt;Object, Object&amp;gt; author = root.join(&amp;#34;author&amp;#34;); author.on(cb.equal(author.get(&amp;#34;name&amp;#34;), param.getAuthorName())); WHERE 查询条件使用 query.where() 拼接 query.where(cb.equal(root.get(&amp;#34;publishTime&amp;#34;), param.getBookPublishTime())); 代码示例 针对 Repository 需要 override 已有 findAll 方法，使用 @EntityGraph 注解 使用 @EntityGraph 注解，标注额外属性需要 fetch // BookJoinRepository.</description>
+    </item>
+    
     <item>
       <title>通过构建全栈待办应用学习 Rust</title>
       <link>https://lexcao.io/zh/posts/learn-rust-fullstack/</link>
@@ -25,9 +56,10 @@
 在学习了一些基本的语法之后，我尝试从零开始使用 Rust 构建一个全栈应用，这是一个使用 Rust tokio 的后端服务和一个使用 Rust WASM（Web Assembly）的前端页面。
 我将分别对这两部分做一个简单的介绍。
 后端 后台服务是一个的简单的 REST API。使用 actix-web 作为网络框架。
- 我将写另一篇博客，介绍我如何使用 TDD 开发 Rust 后台服务。 被 Rust 编译器和 Borrow Checker 教育是一次特别的体验。  对于部署，我使用 Supabase 作为 Postgres 服务，使用 Railway 来运行后台服务 docker 镜像。
+我将写另一篇博客，介绍我如何使用 TDD 开发 Rust 后台服务。 被 Rust 编译器和 Borrow Checker 教育是一次特别的体验。 对于部署，我使用 Supabase 作为 Postgres 服务，使用 Railway 来运行后台服务 docker 镜像。
 前端 前端页面有在线和离线数据源，在线是从后台服务器获取数据，而离线是在本地存储。并且有一个按钮来切换它们。
-前台由 Rust WASM 和 yew 框架驱动，这是一个类似 React 基于组件构建 Web 应用框架。</description>
+前台由 Rust WASM 和 yew 框架驱动，这是一个类似 React 基于组件构建 Web 应用框架。
+如果你熟悉 JSX，你可以在使用 Yew 时感到很自在。 在 Rust 中编写类似 React 的代码体验良好，而且真的很有趣。 但有一些不同之处我想与大家分享，晚点会写一篇博客来谈这个问题，所以敬请关注。 部署的话，是放在 Vercel 上进行托管，用 GitHub Action 来实现自动部署。</description>
     </item>
     
     <item>
@@ -38,26 +70,11 @@
       <guid>https://lexcao.io/zh/posts/kotlin-java-tdd-example/</guid>
       <description>通过使用 Kotlin / Java 中 Junit5 和 Mockito 测试框架，在预约功能中演示 TDD 开发流程。
 TDD 介绍 TDD（Test-Driven Development） 是一种开发流程，中文是「测试驱动开发」。用一句白话形容，就是「先写测试再开发」。先写测试除了能确保测试程式的撰写，还有一个好处：有助于在开发初期厘清程式介面如何设计。详细理论知识可以前往 Wiki 了解，这里不再过多介绍。
- 测试驱动开发 Test Driven Development  TDD 开发流程（5步） 术语说明：
- 红灯 - Failure - 测试用例失败 绿灯 - Success - 测试用例成功 重构 - Refactor - 重构功能代码  具体步骤：
- 选定一个功能，编写测试用例 执行测试，得到【红灯】 编写满足测试用例的功能代码 再次执行，得到【绿灯】 【重构】代码  小结：
+测试驱动开发 Test Driven Development TDD 开发流程（5步） 术语说明：
+红灯 - Failure - 测试用例失败 绿灯 - Success - 测试用例成功 重构 - Refactor - 重构功能代码 具体步骤：
+选定一个功能，编写测试用例 执行测试，得到【红灯】 编写满足测试用例的功能代码 再次执行，得到【绿灯】 【重构】代码 小结：
 对于每一个功能，在【红灯】-【绿灯】-【重构】间来回循环往复，不断得到完善。
-前置工作 代码说明  使用 Kotlin 语言（会有相对应的 Java 代码） 使用到的测试框架  Running: JUnit5 Mock: MockK / Mockito Assertion: Kotest / AssertJ   只涉及 TDD 的具体流程，不涉及单元测试如何编写（可以看 SpringBoot 单元测试各层）  功能介绍 假设一个用户预约的场景。</description>
-    </item>
-    
-    <item>
-      <title>Spring Data JPA 多条件动态连表查询</title>
-      <link>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</link>
-      <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</guid>
-      <description>痛点 项目中使用 Spring Data JPA 作为 ORM 框架的时候，实体映射非常方便。Spring Data Repository 的顶层抽象完全解决单实体的查询，面对单实体的复杂查询，也能使用 JpaSpecificationExecutor&amp;lt;T&amp;gt; 构造 Specification&amp;lt;T&amp;gt; 轻松应对。
-而对于后台管理报表查询需求来说，需要进行连表多条件动态查询的时候，就显得无从下手。因为它并不像 MyBatis 一样能够在 XML 文件中写出动态 SQL 语句。
-尽管可以使用 EntityManager 动态拼接原生 SQL 语句，但是该方法返回值为 ResultSet ，也就是说查出来的实体映射关系需要手动映射（😢这样不太优雅，已经定义出实体，还需要自己去映射）。
-所以，本文的目的是，在现有实体关系的基础上，结合 Specification&amp;lt;T&amp;gt; 记录下 Spring Data JPA 多条件动态连表查询操作，以及其中的踩坑和优化。
-基础操作 那么，让我们开始进入代码操作。【本文所有代码在此】
-前置说明 相关依赖  Java 11 SpringBoot 2.4.2  build.gradle
-plugins {  id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&amp;#39;  id &amp;#39;io.spring.dependency-management&amp;#39; version &amp;#39;1.0.11.RELEASE&amp;#39;  id &amp;#39;java&amp;#39; }  dependencies {  implementation &amp;#39;org.springframework.boot:spring-boot-starter-data-jpa&amp;#39;  compileOnly &amp;#39;org.</description>
+前置工作 代码说明 使用 Kotlin 语言（会有相对应的 Java 代码） 使用到的测试框架 Running: JUnit5 Mock: MockK / Mockito Assertion: Kotest / AssertJ 只涉及 TDD 的具体流程，不涉及单元测试如何编写（可以看 SpringBoot 单元测试各层） 功能介绍 假设一个用户预约的场景。</description>
     </item>
     
     <item>
@@ -69,7 +86,8 @@ plugins {  id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&
       <description>最近遇到一个平时没怎么关注的 Kotlin 相等问题，决定记录一下探究过程。
 事由 以下代码片段 Kotlin 版本 1.3.72。
 还原问题代码，已去除业务逻辑部分，仅保留关键代码，片段如下：
-// 有一个状态枚举 enum class MyState {  OK, CANCELED }  // 某个处理函数会返回 nullable MyState fun processing(): MyState? { 	// 假设当前某种情况下返回 取消 这个状态  return MyState.CANCELED }  // 在处理状态时 fun handleState() { 	// 此时编译器推断出类型为 State?  val state = processing()  if (state == CANCELED) {  // 当处理 CANCELED 以下代码没有执行  println(&amp;#34;Handle &amp;lt;CANCELED&amp;gt; state&amp;#34;)  } } 当处理 CANCELED 代码没有执行，原因在于***「import」***。</description>
+// 有一个状态枚举 enum class MyState { OK, CANCELED } // 某个处理函数会返回 nullable MyState fun processing(): MyState? { // 假设当前某种情况下返回 取消 这个状态 return MyState.CANCELED } // 在处理状态时 fun handleState() { // 此时编译器推断出类型为 State? val state = processing() if (state == CANCELED) { // 当处理 CANCELED 以下代码没有执行 println(&amp;#34;Handle &amp;lt;CANCELED&amp;gt; state&amp;#34;) } } 当处理 CANCELED 代码没有执行，原因在于***「import」***。
+import javax.print.attribute.standard.JobState.CANCELED // 此处使用静态导入引入了一个其他包中同名的一个静态变量，该变量声明如下 // public static final JobState CANCELED = new JobState (7); 解决方法：</description>
     </item>
     
     <item>
@@ -79,11 +97,12 @@ plugins {  id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&
       
       <guid>https://lexcao.io/zh/posts/konverter/</guid>
       <description>背景 Web 后台开发中，对于一个实体的操作会衍生出多个类似的对象进行操作（避免直接使用实体），由此出现相关名词
- 持久化对象，即实体 PO(Persistent Object) 传输对象 DTO(Data Transfer Object) 业务对象 BO(Business Object) 展示对象 VO(View Object) 等等…… 这些对象大多数直接从实体里面裁剪几个字段，比如，在一次创建订单请求中以订单实体（OrderEntity）为例，经历如下流程：  1. 接收请求体 CreateOrderRequest 2. 根据 OrderQuery 构造查询对象查询订单 3. 构造 OrderEntity 进行持久化操作 4. 构造 OrderBO 进行下游消费 5. 返回响应体 CreateOrderResponse 可见，从 OrderEntity 衍生出 4 个对象，仅仅是对订单的实体的部分裁剪，但是要编写很多重复的代码（复制也行）。当然，如果是新增字段的话可以使用继承解决。
+持久化对象，即实体 PO(Persistent Object) 传输对象 DTO(Data Transfer Object) 业务对象 BO(Business Object) 展示对象 VO(View Object) 等等…… 这些对象大多数直接从实体里面裁剪几个字段，比如，在一次创建订单请求中以订单实体（OrderEntity）为例，经历如下流程： 1. 接收请求体 CreateOrderRequest 2. 根据 OrderQuery 构造查询对象查询订单 3. 构造 OrderEntity 进行持久化操作 4. 构造 OrderBO 进行下游消费 5. 返回响应体 CreateOrderResponse 可见，从 OrderEntity 衍生出 4 个对象，仅仅是对订单的实体的部分裁剪，但是要编写很多重复的代码（复制也行）。当然，如果是新增字段的话可以使用继承解决。
 在 Kotlin Web 后台开发中，data class 的语法特性带来很多优势，但还是避免不了创建类似的重复对象。 所以 Konverter 诞生于此，解决实体对象裁剪问题。还有另一个功能那就是自动生成两个实体间的转换方法。
- 注意：目前只支持 Kotlin，并且生成的转换方法是通过扩展函数实现
- 是什么 通过 KAPT(Kotlin Annotation Processing Tool 注解处理以及 Kotlin Poet 代码生成，实现自动生成对实体的相关裁剪的对象。 主要有两个注解：
- @Konvertable 生成裁剪的实体以及对应的转换方法 @Konvert 单独针对某个类生成转换方法  废话不多说来看怎么使用。</description>
+注意：目前只支持 Kotlin，并且生成的转换方法是通过扩展函数实现
+是什么 通过 KAPT(Kotlin Annotation Processing Tool 注解处理以及 Kotlin Poet 代码生成，实现自动生成对实体的相关裁剪的对象。 主要有两个注解：
+@Konvertable 生成裁剪的实体以及对应的转换方法 @Konvert 单独针对某个类生成转换方法 废话不多说来看怎么使用。
+怎么用 1. 引入依赖 // for build.</description>
     </item>
     
     <item>
@@ -93,12 +112,12 @@ plugins {  id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&
       
       <guid>https://lexcao.io/zh/posts/async-within-async/</guid>
       <description>背景 某次发版之后，线上服务低概率出现某台实例接口响应超时，具体表现为：
- /health 接口超时报警； 线程死锁，Tomcat 线程池吃满； 服务完全无响应。  保留下当前 heap dump 和 thread stack 后，临时重启服务器恢复正常。
+/health 接口超时报警； 线程死锁，Tomcat 线程池吃满； 服务完全无响应。 保留下当前 heap dump 和 thread stack 后，临时重启服务器恢复正常。
 # heap dump $ jmap -dump:format=b,file=dump.hprof [pid] # thread stack jstack [pid] &amp;gt; stack.txt 接下来简单记录一下排查结果。 （此文为回忆所写，当时排查的思考细节和过程已省略）
 排查 heap dump 使用工具 Eclipse + MAT
-安装 # 安装 eclipse $ brew cask install eclipse-java # 安装 eclipse MAT $ brew cask install mat # 是的，这个就是 eclipse-mat 相关连接   Eclipse
-  Eclipse MAT
-  使用   把 heap dump 文件 dump.</description>
+安装 # 安装 eclipse $ brew cask install eclipse-java # 安装 eclipse MAT $ brew cask install mat # 是的，这个就是 eclipse-mat 相关连接 Eclipse
+Eclipse MAT
+使用 把 heap dump 文件 dump.hprof 导入到 MAT。</description>
     </item>
     
     <item>
@@ -108,12 +127,12 @@ plugins {  id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&
       
       <guid>https://lexcao.io/zh/posts/reactive-overview/</guid>
       <description>Reactive Streams Reactive Streams 在 Netflix 、Pivotal 和 Lightbend 工程师于 2013 年底发起这项计划。
- Reactive Streams 是一项提议，为无阻塞背压的异步流提供一个标准。这包括针对运行时环境（JVM 和 JavaScript）以及网络协议上的工作。
- 你可以在 Reactive Streams 官网网站阅读这个原始规范。
+Reactive Streams 是一项提议，为无阻塞背压的异步流提供一个标准。这包括针对运行时环境（JVM 和 JavaScript）以及网络协议上的工作。
+你可以在 Reactive Streams 官网网站阅读这个原始规范。
 你也可以在 这里 阅读它的中文翻译。
 无阻塞背压的异步流处理 Reactive Streams 由以下组成：
- 异步； 流式； 无阻塞； 背压（回压）。  以下是 Java 接口，你可以在 GitHub 阅读更详细内容。
-public interface Publisher&amp;lt;T&amp;gt; {  public void subscribe(Subscriber&amp;lt;? super T&amp;gt; s); }  public interface Subscriber&amp;lt;T&amp;gt; {  public void onSubscribe(Subscription s);  public void onNext(T t);  public void onError(Throwable t);  public void onComplete(); }  public interface Subscription {  public void request(long n);  public void cancel(); }  public interface Processor&amp;lt;T, R&amp;gt; extends Subscriber&amp;lt;T&amp;gt;, Publisher&amp;lt;R&amp;gt; { } Reactive Extensions  用于可观察流的异步编程 API。</description>
+异步； 流式； 无阻塞； 背压（回压）。 以下是 Java 接口，你可以在 GitHub 阅读更详细内容。
+public interface Publisher&amp;lt;T&amp;gt; { public void subscribe(Subscriber&amp;lt;? super T&amp;gt; s); } public interface Subscriber&amp;lt;T&amp;gt; { public void onSubscribe(Subscription s); public void onNext(T t); public void onError(Throwable t); public void onComplete(); } public interface Subscription { public void request(long n); public void cancel(); } public interface Processor&amp;lt;T, R&amp;gt; extends Subscriber&amp;lt;T&amp;gt;, Publisher&amp;lt;R&amp;gt; { } Reactive Extensions 用于可观察流的异步编程 API。</description>
     </item>
     
     <item>
@@ -123,8 +142,8 @@ public interface Publisher&amp;lt;T&amp;gt; {  public void subscribe(Subscriber&
       
       <guid>https://lexcao.io/zh/posts/reactive-streams/</guid>
       <description>翻译自 Reactive Streams
-Reactive Streams  注：Reactive Streams 直译为响应式流，这里保留英文原词。
- Reactive Streams 是一项提议，旨在为具有无阻塞背压的异步处理流提供标准。这包括针对运行环境（JVM 和 JavaScript）以及网络协议的努力。
+Reactive Streams 注：Reactive Streams 直译为响应式流，这里保留英文原词。
+Reactive Streams 是一项提议，旨在为具有无阻塞背压的异步处理流提供标准。这包括针对运行环境（JVM 和 JavaScript）以及网络协议的努力。
 Reactive Streams 是为了提供一个无阻塞背压异步流式处理的标准的一个提议。
 JDK9 java.util.concurrent.Flow 在 JDK 9 的 java.util.concurrent.Flow 中可用的接口，分别为 1 ：1 语义上各自对应于 Reactive Streams。这意味着将会有一个迁移期，库（Libraries）将采用 JDK 中的新类型，但是由于库的完全语义等效以及 Reactive Streams &amp;lt;-&amp;gt; Flow 适配器库和直接与 JDK Flow 类型兼容的 TCK，因此这个迁移期预计会很短。
 如果你有兴趣了解有关 JVM Reactive Streams，请阅读此 文章
@@ -148,7 +167,7 @@ Reactive Streams 的主要目标是管理跨异步边界的流数据交换（考
 文章所说 以下是文章原文。
 Do not try to be creative in picking an English name.
 Avoid:
-  Do not try to pick a fun or cute-sounding name from a movie, television, or video game character Do not pick a name that you think sounds cool or trendy, because Americans will think it sounds stupid Do not pick a name because your friends think it sounds cute, because your friends are not the Americans you have to interact with in the future Do not translate some positive-sounding word in your language into English and make that into your name   Do:</description>
+Do not try to pick a fun or cute-sounding name from a movie, television, or video game character Do not pick a name that you think sounds cool or trendy, because Americans will think it sounds stupid Do not pick a name because your friends think it sounds cute, because your friends are not the Americans you have to interact with in the future Do not translate some positive-sounding word in your language into English and make that into your name Do:</description>
     </item>
     
     <item>
@@ -160,8 +179,8 @@ Avoid:
       <description>选择一个合适的静态网站生成器比较难，尤其是当你第一次想要搭建一个博客网站的时候。这是我第一次搭建一个博客并且没有足够的时间去尝试所有常见的生成器，我选择了 Jekyll 作为第一次搭建使用的生成器，尽管它可能不是最好的一个。我准备以后再尝试其他生成器。
 这是我从 Google 找到的一些简要的描述，希望它能对你选择什么生成器开始搭建网站有帮助。
 我从 GitHub 选择了以下三个静态博客生成器进行比较
- Jekyll Hugo Hexo  什么是静态网站生成器  HTML 文件； 没有服务端处理或者数据库交互； 比动态网站更安全； 利于使用 CDN 进行扩展； 缓存会带来比动态网页更高的效率； 请求超快速。  Jekyll  使用语言 Ruby； GitHub 支持； 使用 GitHub Pages 免费部署。  优势  免费且开源； RubyGems 支持构建主题为 gems 方便分发； 简单便捷使用； 强大的 GitHub Pages 支持； 开箱即用的合适的默认极简主题。  劣势 当网站内容不断增加后，构建速度会明显变慢。
-功能  Liquid 模版引擎； 基于 Gem 主题； Markdown 和 YAML 类型支持； Sass 预处理 CSS 支持； 官方插件支持 CoffeeScript。  Hugo  使用语言 Go.</description>
+Jekyll Hugo Hexo 什么是静态网站生成器 HTML 文件； 没有服务端处理或者数据库交互； 比动态网站更安全； 利于使用 CDN 进行扩展； 缓存会带来比动态网页更高的效率； 请求超快速。 Jekyll 使用语言 Ruby； GitHub 支持； 使用 GitHub Pages 免费部署。 优势 免费且开源； RubyGems 支持构建主题为 gems 方便分发； 简单便捷使用； 强大的 GitHub Pages 支持； 开箱即用的合适的默认极简主题。 劣势 当网站内容不断增加后，构建速度会明显变慢。
+功能 Liquid 模版引擎； 基于 Gem 主题； Markdown 和 YAML 类型支持； Sass 预处理 CSS 支持； 官方插件支持 CoffeeScript。 Hugo 使用语言 Go. 优势 免费开源； 速度非常快，对构建速度做了优化； 内置支持很多功能： 动态 API 请求的内容； 无限制内容类型； shortcakes， 一个灵活的 Markdown 替代； 国际化； 别名重定向； 分页。 预制的 Go 模版和模式； 无需依赖（不用安装 Go，因为它是编译好的二进制）； 功能强大的内容模型。 劣势 主题使用 Go 模版，所以需要熟悉 Go； 没有内置默认主题； 缺少扩展性和插件（因为 Go 是编译型语言）。 功能 Go 模版； 国际化; 支持动态 API。 Hexo 使用 Node.</description>
     </item>
     
     <item>
@@ -170,12 +189,12 @@ Avoid:
       <pubDate>Sat, 26 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://lexcao.io/zh/posts/jekyll-multi-language-without-plugin/</guid>
-      <description>实现目标  支持多语言，英文为主，中文为辅； 当访问 / 根目录下页面，比如 /about.html /posts/hello-world 显示英文页面； 当访问 /zh/ 目录下页面，比如 /zh/about.html /zh/posts/hello-world 显示中文页面； 当访问 ../hello-world 文章时，可以通过链接跳转到对应语言页面； archive 和 index 页面中仅显示出当前语言页面。  相关缺陷  404 页面无法配置，只能在 404.html 页面写上两种语言； 支持多语言文章的分页插件 jekyll-paginate-v2 没在 GitHub Pages 支持的插件白名单内，目前本博客首页不支持分页。多语言分页详见下文； 多语言时间表示有点麻烦，需要做一些字符串处理工作，能实现但是不太优雅，具体可以参考 Jekyll-Date-Formatting。  开始配置 最初，我搜索到 i18n 插件 Jekyll-Multiple-Languages-Plugin。
+      <description>实现目标 支持多语言，英文为主，中文为辅； 当访问 / 根目录下页面，比如 /about.html /posts/hello-world 显示英文页面； 当访问 /zh/ 目录下页面，比如 /zh/about.html /zh/posts/hello-world 显示中文页面； 当访问 ../hello-world 文章时，可以通过链接跳转到对应语言页面； archive 和 index 页面中仅显示出当前语言页面。 相关缺陷 404 页面无法配置，只能在 404.html 页面写上两种语言； 支持多语言文章的分页插件 jekyll-paginate-v2 没在 GitHub Pages 支持的插件白名单内，目前本博客首页不支持分页。多语言分页详见下文； 多语言时间表示有点麻烦，需要做一些字符串处理工作，能实现但是不太优雅，具体可以参考 Jekyll-Date-Formatting。 开始配置 最初，我搜索到 i18n 插件 Jekyll-Multiple-Languages-Plugin。
 该仓库的 Star 数是多语言插件中最多的，同时里面也列出了相关其他多语言插件，已经比较完善，不想折腾的可以直接使用。
 目前我为了简单和可定制化，同时省略掉插件中不必要的功能，选择使用自定义规则来实现多语言功能。
 1. 单个博文配置 每一篇文章和页面需要定义两个属性：
- uid 标示文章唯一，一篇文章的中文版本和英文版本 uid 相同；  注意：uid 可以设置为任意命名，比如 document_id 。   locale 标示文章语言，一篇文章被渲染后作为哪种语言展示。  所以每篇文章的 Front Matter 新增如下设置
---- uid: hello-world locale: zh --- 2.</description>
+uid 标示文章唯一，一篇文章的中文版本和英文版本 uid 相同； 注意：uid 可以设置为任意命名，比如 document_id 。 locale 标示文章语言，一篇文章被渲染后作为哪种语言展示。 所以每篇文章的 Front Matter 新增如下设置
+--- uid: hello-world locale: zh --- 2. 对于文章 posts 每篇文章都需要在 Front Matter 中写上 locale 重复多余。不要重复自己。我准备使用不同文件夹来区分不同语言的文章，然后在配置文件设置 locale 的默认值。</description>
     </item>
     
     <item>
@@ -185,14 +204,16 @@ Avoid:
       
       <guid>https://lexcao.io/zh/posts/hello-world/</guid>
       <description>博客配置：
- 静态网页生成器  Jekyll 3.8.5 Ruby 2.6.0 主题 lagrange   网页分析  Google Aynalysis Baidu Aynalysis   部署  GitHub Pages    这是我的第一篇文章，作为最简单的 “你好 世界”，我想记录一下该博客的诞生过程，以及如果你也想搭建一个自己的博客应该怎么做。
+静态网页生成器 Jekyll 3.8.5 Ruby 2.6.0 主题 lagrange 网页分析 Google Aynalysis Baidu Aynalysis 部署 GitHub Pages 这是我的第一篇文章，作为最简单的 “你好 世界”，我想记录一下该博客的诞生过程，以及如果你也想搭建一个自己的博客应该怎么做。
 本文章将会涉及三个部分：
- 选择博客类型 准备好所需内容 将他们编排起来  第一步 选择博客类型 根据前端网页是否与后台服务器或者数据库交互分为：静态网站 / 动态网站
+选择博客类型 准备好所需内容 将他们编排起来 第一步 选择博客类型 根据前端网页是否与后台服务器或者数据库交互分为：静态网站 / 动态网站
 静态网站：
- 仅依靠 HTML / CSS / JS 没有后台服务器存储数据 数据是预先生成的  动态网站：
- 依赖前端 HTML / CSS / JS 数据从后台服务器获取 能够动态响应用户请求  所以，静态博客：
- 文章预先生成 不依赖后台服务器  动态博客：
- 文章从后台服务器获取 前端页面动态获取  考虑到刚接触到博客搭建，先从简单的静态博客入手。目前 GitHub 上有很多开源的静态网站生成器，这里我选择使用 Jekyll。</description>
+仅依靠 HTML / CSS / JS 没有后台服务器存储数据 数据是预先生成的 动态网站：
+依赖前端 HTML / CSS / JS 数据从后台服务器获取 能够动态响应用户请求 所以，静态博客：
+文章预先生成 不依赖后台服务器 动态博客：
+文章从后台服务器获取 前端页面动态获取 考虑到刚接触到博客搭建，先从简单的静态博客入手。目前 GitHub 上有很多开源的静态网站生成器，这里我选择使用 Jekyll。
+选择合适的静态博客生成器请看 [Jekyll / Hugo / Hexo 比较]({{ &amp;ldquo;/zh/posts/jekyll-hugo-hexo&amp;rdquo; | relative_url }})。
+第二步 准备好所需内容 准备内容涉及以下方面：</description>
     </item>
     
   </channel>

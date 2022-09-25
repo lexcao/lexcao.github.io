@@ -17,8 +17,8 @@
       
       <guid>https://lexcao.io/posts/reactive-overview/</guid>
       <description>Reactive Streams Reactive Streams started as an initiative in late 2013 between engineers at Netflix, Pivotal and Lightbend.
- Reactive Streams is an initiative to provide a standard for asynchronous stream processing with non-blocking back pressure. This encompasses efforts aimed at runtime environments (JVM and JavaScript) as well as network protocols.
- You can read the origin specification on official website of Reactive Streams.
+Reactive Streams is an initiative to provide a standard for asynchronous stream processing with non-blocking back pressure. This encompasses efforts aimed at runtime environments (JVM and JavaScript) as well as network protocols.
+You can read the origin specification on official website of Reactive Streams.
 Also, you can read the Chinese translation from here.</description>
     </item>
     

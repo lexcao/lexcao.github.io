@@ -25,9 +25,10 @@
 在学习了一些基本的语法之后，我尝试从零开始使用 Rust 构建一个全栈应用，这是一个使用 Rust tokio 的后端服务和一个使用 Rust WASM（Web Assembly）的前端页面。
 我将分别对这两部分做一个简单的介绍。
 后端 后台服务是一个的简单的 REST API。使用 actix-web 作为网络框架。
- 我将写另一篇博客，介绍我如何使用 TDD 开发 Rust 后台服务。 被 Rust 编译器和 Borrow Checker 教育是一次特别的体验。  对于部署，我使用 Supabase 作为 Postgres 服务，使用 Railway 来运行后台服务 docker 镜像。
+我将写另一篇博客，介绍我如何使用 TDD 开发 Rust 后台服务。 被 Rust 编译器和 Borrow Checker 教育是一次特别的体验。 对于部署，我使用 Supabase 作为 Postgres 服务，使用 Railway 来运行后台服务 docker 镜像。
 前端 前端页面有在线和离线数据源，在线是从后台服务器获取数据，而离线是在本地存储。并且有一个按钮来切换它们。
-前台由 Rust WASM 和 yew 框架驱动，这是一个类似 React 基于组件构建 Web 应用框架。</description>
+前台由 Rust WASM 和 yew 框架驱动，这是一个类似 React 基于组件构建 Web 应用框架。
+如果你熟悉 JSX，你可以在使用 Yew 时感到很自在。 在 Rust 中编写类似 React 的代码体验良好，而且真的很有趣。 但有一些不同之处我想与大家分享，晚点会写一篇博客来谈这个问题，所以敬请关注。 部署的话，是放在 Vercel 上进行托管，用 GitHub Action 来实现自动部署。</description>
     </item>
     
   </channel>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Spring on The Coding Notes</title>
-    <link>https://lexcao.io/zh/tags/spring/</link>
-    <description>Recent content in Spring on The Coding Notes</description>
+    <title>JPA on The Coding Notes</title>
+    <link>https://lexcao.io/zh/tags/jpa/</link>
+    <description>Recent content in JPA on The Coding Notes</description>
     <image>
       <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</url>
       <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 24 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/zh/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/zh/tags/jpa/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Spring Data JPA 多条件连表查询 (2022 更新)</title>
       <link>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</link>
