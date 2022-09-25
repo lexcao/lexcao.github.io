@@ -9,7 +9,22 @@
       <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 24 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/zh/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 25 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/zh/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring Data JPA 多条件连表查询最佳实践</title>
+      <link>https://lexcao.io/zh/posts/spring-data-jpa-join-table-best-practice/</link>
+      <pubDate>Sun, 25 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lexcao.io/zh/posts/spring-data-jpa-join-table-best-practice/</guid>
+      <description>背景 本文是 Spring Data JPA 多条件连表查询 文章的最佳实践总结。
+解决什么问题？ 使用 Spring Data JPA 需要针对多条件进行连表查询的场景不使用原生 SQL 或者 HQL 的时候，仅仅通过 JpaSpecificationExecutor 构造 Specification 动态条件语句来实现类型安全的多条件查询。
+说明 相关上下文背景请前往 前文 了解。 这里再提一下接下来示例会用到的场景：
+三个实体：作者、书、书评。其中，作者与书是一对多的关系，书与书评是一对一的关系（当然书评与读者的评价是一对多的关系，这里省去，仅用一对一来进行演示即可）。
+假设有这样的后台查询条件：作者名称、书的发布时间、书评的评分。（这里每个实体取一个字段进行连表查询演示，其他字段同理）。返回书籍列表以及相关表字段。
+【本文所有代码在此】
+最佳实践 需要 SELECT 查询的字段，通过单独的 Java Bean 进行映射 利用 JPA 的自动实体映射结果集 @EntityGraph 注解标注返回实体需要 Fetch 的字段 无需再手动针对连表进行 fetch，解决 N+1 问题 JOIN ON 查询条件使用 join().on() 拼接 Join&amp;lt;Object, Object&amp;gt; author = root.join(&amp;#34;author&amp;#34;); author.on(cb.equal(author.get(&amp;#34;name&amp;#34;), param.getAuthorName())); WHERE 查询条件使用 query.where() 拼接 query.where(cb.equal(root.get(&amp;#34;publishTime&amp;#34;), param.getBookPublishTime())); 代码示例 针对 Repository 需要 override 已有 findAll 方法，使用 @EntityGraph 注解 使用 @EntityGraph 注解，标注额外属性需要 fetch // BookJoinRepository.</description>
+    </item>
+    
     <item>
       <title>Spring Data JPA 多条件连表查询 (2022 更新)</title>
       <link>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</link>
@@ -24,21 +39,6 @@
 基础操作 那么，让我们开始进入代码操作。【本文所有代码在此】
 前置说明 相关依赖 Java 11 SpringBoot 2.4.2 build.gradle
 plugins { id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&amp;#39; id &amp;#39;io.spring.dependency-management&amp;#39; version &amp;#39;1.0.11.RELEASE&amp;#39; id &amp;#39;java&amp;#39; } dependencies { implementation &amp;#39;org.springframework.boot:spring-boot-starter-data-jpa&amp;#39; compileOnly &amp;#39;org.projectlombok:lombok&amp;#39; runtimeOnly &amp;#39;mysql:mysql-connector-java&amp;#39; annotationProcessor &amp;#39;org.</description>
-    </item>
-    
-    <item>
-      <title>Spring Data JPA 多条件连表查询最佳实践</title>
-      <link>https://lexcao.io/zh/posts/spring-data-jpa-join-table-best-practice/</link>
-      <pubDate>Sat, 24 Sep 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://lexcao.io/zh/posts/spring-data-jpa-join-table-best-practice/</guid>
-      <description>背景 本文是 Spring Data JPA 多条件连表查询 文章的最佳实践总结。
-解决什么问题？ 使用 Spring Data JPA 需要针对多条件进行连表查询的场景不使用原生 SQL 或者 HQL 的时候，仅仅通过 JpaSpecificationExecutor 构造 Specification 动态条件语句来实现类型安全的多条件查询。
-说明 相关上下文背景请前往 前文 了解。 这里再提一下接下来示例会用到的场景：
-三个实体：作者、书、书评。其中，作者与书是一对多的关系，书与书评是一对一的关系（当然书评与读者的评价是一对多的关系，这里省去，仅用一对一来进行演示即可）。
-假设有这样的后台查询条件：作者名称、书的发布时间、书评的评分。（这里每个实体取一个字段进行连表查询演示，其他字段同理）。返回书籍列表以及相关表字段。
-【本文所有代码在此】
-最佳实践 需要 SELECT 查询的字段，通过单独的 Java Bean 进行映射 利用 JPA 的自动实体映射结果集 @EntityGraph 注解标注返回实体需要 Fetch 的字段 无需再手动针对连表进行 fetch，解决 N+1 问题 JOIN ON 查询条件使用 join().on() 拼接 Join&amp;lt;Object, Object&amp;gt; author = root.join(&amp;#34;author&amp;#34;); author.on(cb.equal(author.get(&amp;#34;name&amp;#34;), param.getAuthorName())); WHERE 查询条件使用 query.where() 拼接 query.where(cb.equal(root.get(&amp;#34;publishTime&amp;#34;), param.getBookPublishTime())); 代码示例 针对 Repository 需要 override 已有 findAll 方法，使用 @EntityGraph 注解 使用 @EntityGraph 注解，标注额外属性需要 fetch // BookJoinRepository.</description>
     </item>
     
     <item>

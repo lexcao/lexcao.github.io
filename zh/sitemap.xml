@@ -3,13 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://lexcao.io/zh/tags/java/</loc>
-    <lastmod>2022-09-24T00:00:00+00:00</lastmod>
+    <lastmod>2022-09-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://lexcao.io/zh/tags/jpa/</loc>
-    <lastmod>2022-09-24T00:00:00+00:00</lastmod>
+    <lastmod>2022-09-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://lexcao.io/zh/tags/kotlin/</loc>
-    <lastmod>2022-09-24T00:00:00+00:00</lastmod>
+    <lastmod>2022-09-25T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -22,16 +22,13 @@
                 />
   </url><url>
     <loc>https://lexcao.io/zh/tags/spring/</loc>
-    <lastmod>2022-09-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</loc>
-    <lastmod>2022-09-24T00:00:00+00:00</lastmod>
+    <lastmod>2022-09-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://lexcao.io/zh/posts/spring-data-jpa-join-table-best-practice/</loc>
-    <lastmod>2022-09-24T00:00:00+00:00</lastmod>
+    <lastmod>2022-09-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://lexcao.io/zh/</loc>
-    <lastmod>2022-09-24T00:00:00+00:00</lastmod>
+    <lastmod>2022-09-25T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -44,7 +41,7 @@
                 />
   </url><url>
     <loc>https://lexcao.io/zh/tags/</loc>
-    <lastmod>2022-09-24T00:00:00+00:00</lastmod>
+    <lastmod>2022-09-25T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -57,7 +54,7 @@
                 />
   </url><url>
     <loc>https://lexcao.io/zh/posts/</loc>
-    <lastmod>2022-09-24T00:00:00+00:00</lastmod>
+    <lastmod>2022-09-25T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -68,6 +65,9 @@
                 hreflang="zh"
                 href="https://lexcao.io/zh/posts/"
                 />
+  </url><url>
+    <loc>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</loc>
+    <lastmod>2022-09-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://lexcao.io/zh/tags/practice/</loc>
     <lastmod>2022-05-02T00:00:00+00:00</lastmod>
