@@ -1,7 +1,7 @@
 ---
-title: Spring Data JPA 多条件动态连表查询
-date: 2021-04-04
-tags: [Java, Spring, MySQL]
+title: Spring Data JPA 多条件连表查询 (2022 更新)
+date: 2022-09-24
+tags: [Java, Kotlin, Spring, JPA]
 ---
 
 # 痛点
@@ -13,6 +13,8 @@ tags: [Java, Spring, MySQL]
 尽管可以使用 `EntityManager` 动态拼接原生 SQL 语句，但是该方法返回值为 `ResultSet` ，也就是说查出来的实体映射关系需要手动映射（😢这样不太优雅，已经定义出实体，还需要自己去映射）。
 
 所以，本文的目的是，在现有实体关系的基础上，结合 `Specification<T>` 记录下 Spring Data JPA 多条件动态连表查询操作，以及其中的踩坑和优化。
+
+想要直接看结论的，请看这篇 [Spring Data JPA 动态多条件连表查询最佳实践](/zh/posts/spring-data-jpa-join-table-best-practice)。
 
 # 基础操作
 
@@ -462,7 +464,7 @@ if ( !fromElementsForLoad.contains( origin ) && !fromElementsForLoad.contains( f
 }
 ```
 
-## 03 版本 - 加上条件筛选
+## 03 版本 - 加上 WHERE 条件筛选
 
 创建一个新的单元测试，筛选一下 Join 条件
 
@@ -515,11 +517,110 @@ static Specification<BookJoin> multiQuery_03(BookJoinQuery param) {
 }
 ```
 
-## 总结连表操作
+生成的查询语句如下，可以看到查询条件是拼接在 `WHERE` 部分
+```sql
+select bookjoin0_.id           as id1_1_0_,
+       bookjoin_a1_.id         as id1_0_1_,
+       bookjoin_r2_.id         as id1_2_2_,
+       bookjoin0_.author_id    as author_i3_1_0_,
+       bookjoin0_.publish_time as publish_2_1_0_,
+       bookjoin0_.review_id    as review_i4_1_0_,
+       bookjoin_a1_.name       as name2_0_1_,
+       bookjoin_r2_.score      as score2_2_2_
+from book bookjoin0_
+         inner join author bookjoin_a1_ on bookjoin0_.author_id = bookjoin_a1_.id
+         inner join review bookjoin_r2_ on bookjoin0_.review_id = bookjoin_r2_.id
+where bookjoin_a1_.name = ? limit ?
+```
+如果我想要针对 `join` 的表进行 `on` 条件查询，应该怎么做呢？
+下面来看下 04 版本。
 
-1. 需要 `SELECT` 查询出来的字段，通过单独的类 `BookJoin` 映射出来
-2. 使用 `fetch` 直接加载连表中的其他字段，此处注意分页还需要使用 `join`
-3. 对于连表字段筛选，使用 `root.get("author").get("name")` 即可
+## 04 版本 - 加上 JOIN ON 条件筛选
+
+创建一个新的单元测试
+```java
+@Test
+void multiQuery_04() {
+    var query = BookJoinQuery.builder()
+        .authorName("Author_2")
+        .reviewScore(70)
+        .build();
+
+    var spec = BookJoinSpec.multiQuery_04(query);
+    var page = PageRequest.of(0, 5);
+
+    var bookJoin = queryBySpecMethod(spec, page).getContent().get(0);
+    assertThat(bookJoin.getAuthor().getName()).isEqualTo("Author_2");
+    assertThat(bookJoin.getReview().getScore()).isEqualTo(70);
+}
+```
+
+首先直接对 `join` 条件进行 `on` 查询
+```java
+static Specification<BookJoin> multiQuery_04(BookJoinQuery param) {
+    return (root, query, cb) -> {
+        if (null != param.getBookPublishTime()) {
+            query.where(cb.equal(root.get("publishTime"), param.getBookPublishTime()));
+        }
+
+        if (null != param.getAuthorName()) {
+            Join<Object, Object> author = root.join("author");
+            author.on(cb.equal(author.get("name"), param.getAuthorName()));
+        }
+
+        if (null != param.getReviewScore()) {
+            Join<Object, Object> review = root.join("review");
+            review.on(cb.equal(review.get("score"), param.getReviewScore()));
+        }
+        return query.getRestriction();
+    };
+}
+```
+
+此时生成的 SQL 语句如下，能够成功拼接 JOIN ON 条件但是出现 N + 1 问题，
+```sql
+select bookjoin0_.id           as id1_1_,
+       bookjoin0_.author_id    as author_i3_1_,
+       bookjoin0_.publish_time as publish_2_1_,
+       bookjoin0_.review_id    as review_i4_1_
+from book bookjoin0_
+         inner join author bookjoin_a1_ on bookjoin0_.author_id = bookjoin_a1_.id and (bookjoin_a1_.name = ?)
+         inner join review bookjoin_r2_ on bookjoin0_.review_id = bookjoin_r2_.id and (bookjoin_r2_.score = ?) limit ?
+
+select bookjoin_a0_.id as id1_0_0_, bookjoin_a0_.name as name2_0_0_
+from author bookjoin_a0_
+where bookjoin_a0_.id = ?
+
+select bookjoin_r0_.id as id1_2_0_, bookjoin_r0_.score as score2_2_0_
+from review bookjoin_r0_
+where bookjoin_r0_.id = ?
+```
+
+此时如果我们改用 `fetch` 的话，又不能进行 `on` 条件筛选，该怎么处理呢？
+
+这里的解决方案是引入一个新的注解 `@EntityGraph`，修改我们的查询方法
+* 主动声明查询方法返回的 Entity 明确需要进行 Fetch 的属性有哪些
+
+```java
+@Override
+@EntityGraph(attributePaths = { "author", "review" })
+Page<BookJoin> findAll(Specification<BookJoin> spec, Pageable pageable);
+```
+
+再看一下生成的语句，很好，自动帮忙 fetch 出来了，并且也解决了 02 版本的分页查询问题
+```sql
+select bookjoin0_.id           as id1_1_0_,
+       bookjoin_a1_.id         as id1_0_1_,
+       bookjoin_r2_.id         as id1_2_2_,
+       bookjoin0_.author_id    as author_i3_1_0_,
+       bookjoin0_.publish_time as publish_2_1_0_,
+       bookjoin0_.review_id    as review_i4_1_0_,
+       bookjoin_a1_.name       as name2_0_1_,
+       bookjoin_r2_.score      as score2_2_2_
+from book bookjoin0_
+         inner join author bookjoin_a1_ on bookjoin0_.author_id = bookjoin_a1_.id and (bookjoin_a1_.name = ?)
+         inner join review bookjoin_r2_ on bookjoin0_.review_id = bookjoin_r2_.id and (bookjoin_r2_.score = ?) limit ?
+```
 
 ## 注意
 
