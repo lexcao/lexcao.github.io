@@ -67,7 +67,7 @@ languages:
     contentDir: content/zh
     languageName: 中文
     weight: 2
-    DateFormat: "2006 January 2"
+    DateFormat: "2006 01/02"
     profileMode:
       enabled: true
       imageUrl: "/profile_avatar.webp"
