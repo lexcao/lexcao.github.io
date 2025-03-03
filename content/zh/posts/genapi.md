@@ -94,9 +94,11 @@ func (c *Client) GetWeather(city string) (*Weather, error) {
 
 ## genapi：注解驱动的代码生成
 
-为了进一步提高开发效率，我们开发了 genapi。通过简单的注解，我们可以自动生成所有的 API 调用代码：
+为了进一步提高开发效率，引入 genapi。通过简单的注解，我们可以自动生成所有的 API 调用代码：
 
 ```go
+package api
+
 import "github.com/lexcao/genapi"
 
 //go:generate go run github.com/lexcao/genapi/cmd/genapi -file $GOFILE

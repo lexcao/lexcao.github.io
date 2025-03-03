@@ -94,9 +94,11 @@ However, we still need to manually write each API method.
 
 ## genapi: Annotation-Driven Code Generation
 
-To further improve development efficiency, we developed genapi. Through simple annotations, we can automatically generate all API call code:
+To further improve development efficiency, introducing genapi. Through simple annotations, we can automatically generate all API call code:
 
 ```go
+package api
+
 import "github.com/lexcao/genapi"
 
 //go:generate go run github.com/lexcao/genapi/cmd/genapi -file $GOFILE
