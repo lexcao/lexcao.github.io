@@ -5,24 +5,27 @@
     <link>https://lexcao.io/tags/rust/</link>
     <description>Recent content in Rust on The Coding Notes</description>
     <image>
-      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</url>
-      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</link>
+      <title>The Coding Notes</title>
+      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
+      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 01 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- 0.145.0</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 01 May 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://lexcao.io/tags/rust/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Learn Rust by Building a Full-stack Todo Application</title>
       <link>https://lexcao.io/posts/learn-rust-fullstack/</link>
       <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/posts/learn-rust-fullstack/</guid>
-      <description>What I want to write a blog about how I learned Rust.
-Please forgive me that I just started learning such a great programming language in 2022.
-To learn Rust by doing, I have built a full-stack todo application.
-You can try it here. The source code is available at GitHub.
-Here I am going to write about how to build it.
-How Firstly, as everyone beginning, I learn Rust from the book as well.</description>
+      <description>&lt;h1 id=&#34;what&#34;&gt;What&lt;/h1&gt;
+&lt;p&gt;I want to write a blog about how I learned Rust.&lt;/p&gt;
+&lt;p&gt;Please forgive me that I just started learning such a great programming language in 2022.&lt;/p&gt;
+&lt;p&gt;To learn Rust by doing, I have built a full-stack todo application.&lt;/p&gt;
+&lt;p&gt;You can try it &lt;a href=&#34;https://todos.lexcao.io&#34;&gt;here&lt;/a&gt;. The source code is available at &lt;a href=&#34;https://github.com/lexcao/rust_fullstack_todo&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here I am going to write about how to build it.&lt;/p&gt;
+&lt;h1 id=&#34;how&#34;&gt;How&lt;/h1&gt;
+&lt;p&gt;Firstly, as everyone beginning, I learn Rust from &lt;a href=&#34;https://doc.rust-lang.org/book/&#34;&gt;the book&lt;/a&gt; as well. It is an awesome book to start learning Rust, and you should not skip it.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

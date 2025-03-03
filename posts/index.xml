@@ -5,100 +5,198 @@
     <link>https://lexcao.io/posts/</link>
     <description>Recent content in Posts on The Coding Notes</description>
     <image>
-      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</url>
-      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</link>
+      <title>The Coding Notes</title>
+      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
+      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 01 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- 0.145.0</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 03 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://lexcao.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introducing genapi: A Golang HTTP Client Code Generator</title>
+      <link>https://lexcao.io/posts/genapi/</link>
+      <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/posts/genapi/</guid>
+      <description>&lt;h1 id=&#34;from-manual-to-automatic-evolution-of-golang-http-client&#34;&gt;From Manual to Automatic: Evolution of Golang HTTP Client&lt;/h1&gt;
+&lt;p&gt;In Golang development, making HTTP API calls is a very common requirement. Through a weather API example, this article will demonstrate how HTTP client code evolves from manual writing to automatic generation. Let&amp;rsquo;s look at this simple weather API:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;api&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;weather&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;?&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;city&lt;/span&gt;=&lt;span style=&#34;color:#a6e22e&#34;&gt;shanghai&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Response&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;temperature&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;humidity&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;condition&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sunny&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;initial-manual-approach&#34;&gt;Initial Manual Approach&lt;/h2&gt;
+&lt;p&gt;Initially, we might write code directly like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getWeather&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;city&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;) (&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Weather&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;error&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;resp&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://api.weather.com/api/weather?city=&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;city&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;defer&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;resp&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Body&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Close&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;weather&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Weather&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;json&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;NewDecoder&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;resp&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Body&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;Decode&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;weather&lt;/span&gt;); &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;weather&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This approach is straightforward but has several issues:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Learn Rust by Building a Full-stack Todo Application</title>
       <link>https://lexcao.io/posts/learn-rust-fullstack/</link>
       <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/posts/learn-rust-fullstack/</guid>
-      <description>What I want to write a blog about how I learned Rust.
-Please forgive me that I just started learning such a great programming language in 2022.
-To learn Rust by doing, I have built a full-stack todo application.
-You can try it here. The source code is available at GitHub.
-Here I am going to write about how to build it.
-How Firstly, as everyone beginning, I learn Rust from the book as well.</description>
+      <description>&lt;h1 id=&#34;what&#34;&gt;What&lt;/h1&gt;
+&lt;p&gt;I want to write a blog about how I learned Rust.&lt;/p&gt;
+&lt;p&gt;Please forgive me that I just started learning such a great programming language in 2022.&lt;/p&gt;
+&lt;p&gt;To learn Rust by doing, I have built a full-stack todo application.&lt;/p&gt;
+&lt;p&gt;You can try it &lt;a href=&#34;https://todos.lexcao.io&#34;&gt;here&lt;/a&gt;. The source code is available at &lt;a href=&#34;https://github.com/lexcao/rust_fullstack_todo&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here I am going to write about how to build it.&lt;/p&gt;
+&lt;h1 id=&#34;how&#34;&gt;How&lt;/h1&gt;
+&lt;p&gt;Firstly, as everyone beginning, I learn Rust from &lt;a href=&#34;https://doc.rust-lang.org/book/&#34;&gt;the book&lt;/a&gt; as well. It is an awesome book to start learning Rust, and you should not skip it.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Kotlin Weird Equality</title>
       <link>https://lexcao.io/posts/kotlin-equality-diving/</link>
       <pubDate>Tue, 21 Apr 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/posts/kotlin-equality-diving/</guid>
-      <description>Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.
-Background The following code snippet is using Kotlin 1.3.72.
-The business logic of it has been removed and only remained the code structure for reproducing the question.
-// a enum for state enum class MyState { OK, CANCELED } // it might return nullable MyState fun processing(): MyState?</description>
+      <description>&lt;p&gt;Recently, I encountered a weird equality question about Kotlin which does not usually get much attention while coding. So here is the thought process.&lt;/p&gt;
+&lt;h1 id=&#34;background&#34;&gt;Background&lt;/h1&gt;
+&lt;p&gt;The following code snippet is using Kotlin &lt;code&gt;1.3.72&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The business logic of it has been removed and only remained the code structure for reproducing the question.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// a enum for state
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;enum&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyState&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    OK, CANCELED
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// it might return nullable MyState
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;processing&lt;/span&gt;(): MyState? {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// asuming that it returns the CANCELED state
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyState&lt;/span&gt;.CANCELED
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// when processing the state
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;handleState&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// the type of state is MyState?
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; state = processing()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (state &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; CANCELED) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// if condition counld not reach here
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        println(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Handle &amp;lt;CANCELED&amp;gt; state&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The reason why it could not reach the CANCELED condition is the &lt;em&gt;&lt;strong&gt;import&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Generate Converter for Kotlin Class by KAPT</title>
       <link>https://lexcao.io/posts/konverter/</link>
       <pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/posts/konverter/</guid>
-      <description>Background In web backend development, the operation of an entity need to code a number of similar classes to handle request (avoiding the direct use of entities), which resulting in related terminology:
-PO (Persistent Object) DTO (Data Transfer Object) BO (Business Object) VO (View Object) Most of these classes trim a few fields directly from the entity. For example, by using OrderEntity in a request to create an order, it would process like following:</description>
+      <description>&lt;h1 id=&#34;background&#34;&gt;Background&lt;/h1&gt;
+&lt;p&gt;In web backend development, the operation of an entity need to code a number of similar classes to handle request (avoiding the direct use of entities), which resulting in related terminology:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PO (&lt;em&gt;Persistent Object&lt;/em&gt;)&lt;/li&gt;
+&lt;li&gt;DTO (&lt;em&gt;Data Transfer Object&lt;/em&gt;)&lt;/li&gt;
+&lt;li&gt;BO (&lt;em&gt;Business Object&lt;/em&gt;)&lt;/li&gt;
+&lt;li&gt;VO (&lt;em&gt;View Object&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Most of these classes trim a few fields directly from the entity. For example, by using &lt;code&gt;OrderEntity&lt;/code&gt; in a request to create an order, it would process like following:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reactive Overview</title>
       <link>https://lexcao.io/posts/reactive-overview/</link>
       <pubDate>Thu, 28 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/posts/reactive-overview/</guid>
-      <description>Reactive Streams Reactive Streams started as an initiative in late 2013 between engineers at Netflix, Pivotal and Lightbend.
-Reactive Streams is an initiative to provide a standard for asynchronous stream processing with non-blocking back pressure. This encompasses efforts aimed at runtime environments (JVM and JavaScript) as well as network protocols.
-You can read the origin specification on official website of Reactive Streams.
-Also, you can read the Chinese translation from here.</description>
+      <description>&lt;h1 id=&#34;reactive-streams&#34;&gt;Reactive Streams&lt;/h1&gt;
+&lt;p&gt;Reactive Streams started as an initiative in late 2013 between engineers at &lt;a href=&#34;https://en.wikipedia.org/wiki/Netflix&#34;&gt;&lt;em&gt;Netflix&lt;/em&gt;&lt;/a&gt;, &lt;a href=&#34;https://en.wikipedia.org/wiki/Pivotal_Software&#34;&gt;&lt;em&gt;Pivotal&lt;/em&gt;&lt;/a&gt; and &lt;a href=&#34;https://en.wikipedia.org/wiki/Lightbend&#34;&gt;&lt;em&gt;Lightbend&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Reactive Streams is an initiative to provide &lt;strong&gt;a standard for asynchronous stream processing with non-blocking back pressure&lt;/strong&gt;. This encompasses efforts aimed at runtime environments (JVM and JavaScript) as well as network protocols.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;You can read the origin specification on official website of &lt;a href=&#34;https://www.reactive-streams.org/&#34;&gt;&lt;em&gt;Reactive Streams&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Also, you can read the Chinese translation from &lt;a href=&#34;https://lexcao.github.io/zh/posts/reactive-streams&#34;&gt;&lt;em&gt;here&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h5 id=&#34;asynchronous-stream-processing-with-non-blocking-back-pressure&#34;&gt;&lt;strong&gt;Asynchronous stream processing with non-blocking back pressure.&lt;/strong&gt;&lt;/h5&gt;
+&lt;p&gt;The Reactive Streams is composed of following:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Choose An English Name</title>
       <link>https://lexcao.io/posts/choose-english-name/</link>
       <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/posts/choose-english-name/</guid>
-      <description>Introduction I am Lixin Cao in Chinese Pinyin. I was finding a way to give myself an English name, then I found a post, How to choose an English name, which gives an useful method for choosing an English name, by which I made a program to help choose an English name.
-You can try it here.
-I will cover some detail of the post and the program in the below.</description>
+      <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;I am Lixin Cao in Chinese Pinyin. I was finding a way to give myself an English name, then I found a post, &lt;a href=&#34;http://www.pgbovine.net/choosing-english-name.htm&#34;&gt;&lt;em&gt;How to choose an English name&lt;/em&gt;&lt;/a&gt;, which gives an useful method for choosing an English name, by which I made a program to help choose an English name.&lt;/p&gt;
+&lt;p&gt;You can try it &lt;a href=&#34;https://lexcao.github.io/English-name-picker&#34;&gt;&lt;em&gt;here&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I will cover some detail of the post and the program in the below.&lt;/p&gt;
+&lt;h1 id=&#34;the-post-says&#34;&gt;The post says&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Do not try to be creative in picking an English name.&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Jekyll / Hugo / Hexo Comparison</title>
       <link>https://lexcao.io/posts/jekyll-hugo-hexo/</link>
       <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/posts/jekyll-hugo-hexo/</guid>
-      <description>It is hard to choose a suitable static website generator, especially when you want to build website like blog for the first time. This is my first time to build a blog and have not enough time to go through some popular generators, which I have chosen Jekyll at the beginning but it is not a best one. In the future I am going to try another generators.
-Here is some brief information I found from Google and hope it should be useful for you to decide starting up on what generator.</description>
+      <description>&lt;p&gt;It is hard to choose a suitable static website generator, especially when you want to build website like blog for the first time. This is my first time to build a blog and have not enough time to go through some popular generators, which I have chosen &lt;code&gt;Jekyll&lt;/code&gt; at the beginning but it is not a best one. In the future I am going to try another generators.&lt;/p&gt;
+&lt;p&gt;Here is some brief information I found from Google and hope it should be useful for you to decide starting up on what generator.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Jekyll Multi-Language without Plugin</title>
       <link>https://lexcao.io/posts/jekyll-multi-language-without-plugin/</link>
       <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/posts/jekyll-multi-language-without-plugin/</guid>
-      <description>Goal Support multi-language, mainly in English and supplemented by Chinese; When visiting pages begin with /, e.g. /about.html, /posts/hello-world, English pages would be shown; When visiting pages began with /zh/, e.g. /zh/about.html, /zh/posts/hello-world, Chinese pages would be shown; When visiting ../hello-world posts, corresponding langugage posts would be jumped via the link; Posts which are specified language would only be shown in archive and index pages. Defect As 404.html page was not supported for separate language file, two langugage content would be shown on it at the same time.</description>
+      <description>&lt;h1 id=&#34;goal&#34;&gt;Goal&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Support multi-language, mainly in English and supplemented by Chinese;&lt;/li&gt;
+&lt;li&gt;When visiting pages begin with &lt;code&gt;/&lt;/code&gt;, e.g. &lt;code&gt;/about.html&lt;/code&gt;, &lt;code&gt;/posts/hello-world&lt;/code&gt;, English pages would be  shown;&lt;/li&gt;
+&lt;li&gt;When visiting pages began with &lt;code&gt;/zh/&lt;/code&gt;, e.g. &lt;code&gt;/zh/about.html&lt;/code&gt;, &lt;code&gt;/zh/posts/hello-world&lt;/code&gt;, Chinese pages would be shown;&lt;/li&gt;
+&lt;li&gt;When visiting &lt;code&gt;../hello-world&lt;/code&gt; posts, corresponding langugage posts would be jumped via the link;&lt;/li&gt;
+&lt;li&gt;Posts which are specified language would only be shown in &lt;code&gt;archive&lt;/code&gt; and &lt;code&gt;index&lt;/code&gt; pages.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;defect&#34;&gt;Defect&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;As &lt;code&gt;404.html&lt;/code&gt; page was not supported for separate language file, two langugage content would be shown on it at the same time.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;jekyll-paginate-v2&lt;/code&gt;, a plugin supports pagination for multi-language, is not supported by GitHub Pages. So the blog has not been supported pagination so far. See details &lt;a href=&#34;https://lexcao.io/posts/jekyll-multi-language-without-plugin/#pagination&#34;&gt;&lt;em&gt;below&lt;/em&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;It is a little bit tricky to show date in multi-language way. Some string formatting work should be taken as it is able to have done that but is not a better way. Please see &lt;a href=&#34;http://alanwsmith.com/jekyll-liquid-date-formatting-examples&#34;&gt;&lt;em&gt;Jekyll Date Formatting&lt;/em&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;setup&#34;&gt;Setup&lt;/h1&gt;
+&lt;p&gt;Firstly, I found a &lt;code&gt;i18n&lt;/code&gt; plugin &lt;a href=&#34;https://github.com/kurtsson/jekyll-multiple-languages-plugin&#34;&gt;&lt;em&gt;Jekyll Multiple Languages Plugin&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Hello World</title>
       <link>https://lexcao.io/posts/hello-world/</link>
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/posts/hello-world/</guid>
-      <description>Hello World Blog configuration:
-Static Website Generation Jekyll 3.8.5 Ruby 2.6.0 Lagrange theme Website Aynalysis Google Analysis Baidu Analysis Deployment GitHub Pages This is my first post, which I would like to note the beginning of the blog as the simplest &amp;ldquo;hello world&amp;rdquo; and how to build such blog by yourself.
-The article will contain three steps:
-Choose type of blog Prepare something needed Compose them Step 01 Choose Type of Blog There are static websites and dynamic websites depending on whether the frontend web page interacts with the backend server or database.</description>
+      <description>&lt;h1 id=&#34;hello-world&#34;&gt;Hello World&lt;/h1&gt;
+&lt;p&gt;Blog configuration:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Static Website Generation
+&lt;ul&gt;
+&lt;li&gt;Jekyll 3.8.5&lt;/li&gt;
+&lt;li&gt;Ruby 2.6.0&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://jekyllthemes.org/themes/lagrange/&#34;&gt;Lagrange&lt;/a&gt; theme&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Website Aynalysis
+&lt;ul&gt;
+&lt;li&gt;Google Analysis&lt;/li&gt;
+&lt;li&gt;Baidu Analysis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Deployment
+&lt;ul&gt;
+&lt;li&gt;GitHub Pages&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is my first post, which I would like to note the beginning of the blog as the simplest &amp;ldquo;hello world&amp;rdquo; and how to build such blog by yourself.&lt;/p&gt;
+&lt;p&gt;The article will contain three steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Choose type of blog&lt;/li&gt;
+&lt;li&gt;Prepare something needed&lt;/li&gt;
+&lt;li&gt;Compose them&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;step-01-choose-type-of-blog&#34;&gt;Step 01 Choose Type of Blog&lt;/h1&gt;
+&lt;p&gt;There are static websites and dynamic websites depending on whether the frontend web page interacts with the backend server or database.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

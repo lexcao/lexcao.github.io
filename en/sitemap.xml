@@ -2,6 +2,84 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://lexcao.io/tags/code-generation/</loc>
+    <lastmod>2025-03-03T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/code-generation/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/tags/code-generation/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/tags/golang/</loc>
+    <lastmod>2025-03-03T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/golang/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/tags/golang/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/posts/genapi/</loc>
+    <lastmod>2025-03-03T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/genapi/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/posts/genapi/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/posts/</loc>
+    <lastmod>2025-03-03T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/posts/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/tags/</loc>
+    <lastmod>2025-03-03T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/tags/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/</loc>
+    <lastmod>2025-03-03T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/"
+                />
+  </url><url>
     <loc>https://lexcao.io/posts/learn-rust-fullstack/</loc>
     <lastmod>2022-05-01T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -13,19 +91,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://lexcao.io/posts/learn-rust-fullstack/"
-                />
-  </url><url>
-    <loc>https://lexcao.io/posts/</loc>
-    <lastmod>2022-05-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/posts/"
                 />
   </url><url>
     <loc>https://lexcao.io/tags/practice/</loc>
@@ -52,32 +117,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://lexcao.io/tags/rust/"
-                />
-  </url><url>
-    <loc>https://lexcao.io/tags/</loc>
-    <lastmod>2022-05-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/tags/"
-                />
-  </url><url>
-    <loc>https://lexcao.io/</loc>
-    <lastmod>2022-05-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/"
                 />
   </url><url>
     <loc>https://lexcao.io/posts/kotlin-equality-diving/</loc>

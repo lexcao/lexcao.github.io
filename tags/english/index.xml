@@ -5,30 +5,47 @@
     <link>https://lexcao.io/tags/english/</link>
     <description>Recent content in English on The Coding Notes</description>
     <image>
-      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</url>
-      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</link>
+      <title>The Coding Notes</title>
+      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
+      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 07 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/tags/english/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- 0.145.0</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 07 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://lexcao.io/tags/english/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Choose An English Name</title>
       <link>https://lexcao.io/posts/choose-english-name/</link>
       <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/posts/choose-english-name/</guid>
-      <description>Introduction I am Lixin Cao in Chinese Pinyin. I was finding a way to give myself an English name, then I found a post, How to choose an English name, which gives an useful method for choosing an English name, by which I made a program to help choose an English name.
-You can try it here.
-I will cover some detail of the post and the program in the below.</description>
+      <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;I am Lixin Cao in Chinese Pinyin. I was finding a way to give myself an English name, then I found a post, &lt;a href=&#34;http://www.pgbovine.net/choosing-english-name.htm&#34;&gt;&lt;em&gt;How to choose an English name&lt;/em&gt;&lt;/a&gt;, which gives an useful method for choosing an English name, by which I made a program to help choose an English name.&lt;/p&gt;
+&lt;p&gt;You can try it &lt;a href=&#34;https://lexcao.github.io/English-name-picker&#34;&gt;&lt;em&gt;here&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I will cover some detail of the post and the program in the below.&lt;/p&gt;
+&lt;h1 id=&#34;the-post-says&#34;&gt;The post says&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Do not try to be creative in picking an English name.&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Jekyll Multi-Language without Plugin</title>
       <link>https://lexcao.io/posts/jekyll-multi-language-without-plugin/</link>
       <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/posts/jekyll-multi-language-without-plugin/</guid>
-      <description>Goal Support multi-language, mainly in English and supplemented by Chinese; When visiting pages begin with /, e.g. /about.html, /posts/hello-world, English pages would be shown; When visiting pages began with /zh/, e.g. /zh/about.html, /zh/posts/hello-world, Chinese pages would be shown; When visiting ../hello-world posts, corresponding langugage posts would be jumped via the link; Posts which are specified language would only be shown in archive and index pages. Defect As 404.html page was not supported for separate language file, two langugage content would be shown on it at the same time.</description>
+      <description>&lt;h1 id=&#34;goal&#34;&gt;Goal&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Support multi-language, mainly in English and supplemented by Chinese;&lt;/li&gt;
+&lt;li&gt;When visiting pages begin with &lt;code&gt;/&lt;/code&gt;, e.g. &lt;code&gt;/about.html&lt;/code&gt;, &lt;code&gt;/posts/hello-world&lt;/code&gt;, English pages would be  shown;&lt;/li&gt;
+&lt;li&gt;When visiting pages began with &lt;code&gt;/zh/&lt;/code&gt;, e.g. &lt;code&gt;/zh/about.html&lt;/code&gt;, &lt;code&gt;/zh/posts/hello-world&lt;/code&gt;, Chinese pages would be shown;&lt;/li&gt;
+&lt;li&gt;When visiting &lt;code&gt;../hello-world&lt;/code&gt; posts, corresponding langugage posts would be jumped via the link;&lt;/li&gt;
+&lt;li&gt;Posts which are specified language would only be shown in &lt;code&gt;archive&lt;/code&gt; and &lt;code&gt;index&lt;/code&gt; pages.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;defect&#34;&gt;Defect&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;As &lt;code&gt;404.html&lt;/code&gt; page was not supported for separate language file, two langugage content would be shown on it at the same time.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;jekyll-paginate-v2&lt;/code&gt;, a plugin supports pagination for multi-language, is not supported by GitHub Pages. So the blog has not been supported pagination so far. See details &lt;a href=&#34;https://lexcao.io/posts/jekyll-multi-language-without-plugin/#pagination&#34;&gt;&lt;em&gt;below&lt;/em&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;It is a little bit tricky to show date in multi-language way. Some string formatting work should be taken as it is able to have done that but is not a better way. Please see &lt;a href=&#34;http://alanwsmith.com/jekyll-liquid-date-formatting-examples&#34;&gt;&lt;em&gt;Jekyll Date Formatting&lt;/em&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;setup&#34;&gt;Setup&lt;/h1&gt;
+&lt;p&gt;Firstly, I found a &lt;code&gt;i18n&lt;/code&gt; plugin &lt;a href=&#34;https://github.com/kurtsson/jekyll-multiple-languages-plugin&#34;&gt;&lt;em&gt;Jekyll Multiple Languages Plugin&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

@@ -5,216 +5,931 @@
     <link>https://lexcao.io/zh/posts/</link>
     <description>Recent content in 博文 on The Coding Notes</description>
     <image>
-      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</url>
-      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</link>
+      <title>The Coding Notes</title>
+      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
+      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 25 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/zh/posts/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- 0.145.0</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 03 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://lexcao.io/zh/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>介绍 genapi：一个 Golang HTTP Client 生成代码库</title>
+      <link>https://lexcao.io/zh/posts/genapi/</link>
+      <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/zh/posts/genapi/</guid>
+      <description>&lt;h1 id=&#34;从手工到自动golang-http-client-的演进之路&#34;&gt;从手工到自动：Golang HTTP Client 的演进之路&lt;/h1&gt;
+&lt;p&gt;在 Golang 开发中，调用 HTTP API 是一个非常常见的需求。本文将通过一个天气 API 的示例，介绍 HTTP Client 代码是如何从手工编写演进到自动生成的。让我们看看这个简单的天气 API：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;api&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;weather&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;?&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;city&lt;/span&gt;=&lt;span style=&#34;color:#a6e22e&#34;&gt;shanghai&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Response&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;temperature&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;humidity&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;condition&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sunny&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;原始手工编写&#34;&gt;原始手工编写&lt;/h2&gt;
+&lt;p&gt;最初，我们可能会直接编写如下代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getWeather&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;city&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;) (&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Weather&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;error&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;resp&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://api.weather.com/api/weather?city=&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;city&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;defer&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;resp&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Body&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Close&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;weather&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Weather&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;json&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;NewDecoder&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;resp&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Body&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;Decode&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;weather&lt;/span&gt;); &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;weather&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这种方式简单直接，但存在以下问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;URL 硬编码在代码中&lt;/li&gt;
+&lt;li&gt;参数拼接容易产生错误&lt;/li&gt;
+&lt;li&gt;错误处理逻辑重复&lt;/li&gt;
+&lt;li&gt;响应解析代码重复&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;模板化请求&#34;&gt;模板化请求&lt;/h2&gt;
+&lt;p&gt;为了解决上述问题，我们开始对代码进行抽象和模板化改造：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Client&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;baseURL&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;client&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Client&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Client&lt;/span&gt;) &lt;span style=&#34;color:#a6e22e&#34;&gt;doRequest&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;method&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;path&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;query&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Values&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;result&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt;{}) &lt;span style=&#34;color:#66d9ef&#34;&gt;error&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;u&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;_&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Parse&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;baseURL&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;path&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;u&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;RawQuery&lt;/span&gt; = &lt;span style=&#34;color:#a6e22e&#34;&gt;query&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Encode&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;req&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;NewRequest&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;method&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;u&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;String&lt;/span&gt;(), &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;resp&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;client&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Do&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;req&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;defer&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;resp&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Body&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Close&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;json&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;NewDecoder&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;resp&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Body&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;Decode&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;result&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Client&lt;/span&gt;) &lt;span style=&#34;color:#a6e22e&#34;&gt;GetWeather&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;city&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;) (&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Weather&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;error&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;query&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Values&lt;/span&gt;{}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;query&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Set&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;city&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;city&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;weather&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Weather&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;doRequest&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;GET&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/api/weather&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;query&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;weather&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;weather&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样的改进带来了以下好处：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>「翻译」复式记账法 (The Double-Entry Counting Method)</title>
+      <link>https://lexcao.io/zh/posts/double-entry-counting-method/</link>
+      <pubDate>Tue, 04 Jul 2023 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/zh/posts/double-entry-counting-method/</guid>
+      <description>&lt;p&gt;翻译自 &lt;a href=&#34;https://beancount.github.io/docs/the_double_entry_counting_method.html&#34;&gt;&lt;em&gt;The Double-Entry Counting Method&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;介绍&#34;&gt;介绍&lt;/h1&gt;
+&lt;p&gt;本文是一份关于复式记账的简要介绍，从计算机科学家的角度撰写。它试图以尽可能简单的方法解释基础记账，简化会计中通常涉及到的某些特殊性。它也代表了 &lt;a href=&#34;http://furius.ca/beancount/&#34;&gt;Beancount&lt;/a&gt; 的工作方式，并且对所有使用纯文本记账的用户都应该适用。&lt;/p&gt;
+&lt;p&gt;请注意，我不是会计师，在编写此文档过程中，我可能使用与传统会计培训教授略有不同或不常见的术语。我给自己授权创造一些新的、甚至是不寻常的东西，以便将这些想法尽可能简单明了地解释给那些对它们不熟悉的人。&lt;/p&gt;
+&lt;p&gt;我认为每个高中生都应该在高中阶段学习复式记账法，因为这是一项极其有用的组织技能，并且我希望这篇文章可以帮助将其知识传播到专业圈以外的领域。&lt;/p&gt;
+&lt;h1 id=&#34;复式记账的基础&#34;&gt;复式记账的基础&lt;/h1&gt;
+&lt;p&gt;复式记账法只是一种简单的计数方法，只有一些简单的规则。&lt;/p&gt;
+&lt;p&gt;让我们从定义账户的概念开始。账户是一种可以容纳物品的东西，就像一个袋子。它用于计算和累积物品。让我们画一条水平箭头来直观地表示随着时间推移账户中不断变化的内容：&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://beancount.github.io/docs/the_double_entry_counting_method/media/2f37aa3938d599d4783ca9b74965026fba0a3b50.png#center&#34; alt=&#34;Untitled&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;左侧，是描述过去，而右侧则是不断增长的时间：现在、未来等。&lt;/p&gt;
+&lt;p&gt;现在，让我们假设账户只能包含一种东西，例如美元。所有的账户都以零美元的空内容开始。我们将称账户中单位数量为账户的 &lt;strong&gt;余额 （Balance）&lt;/strong&gt;。请注意，它代表了特定时间点上其内容的情况。我会使用一个数字在帐户时间轴上方绘制余额：&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://beancount.github.io/docs/the_double_entry_counting_method/media/54633827be99c315dc937778221752b848411ca9.png#center&#34; alt=&#34;Untitled&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;账户的内容会随着时间而变化。为了改变账户的内容，我们必须向其添加一些东西。我们将这个添加称为对账户的记账，我会在该账户的时间轴上画一个带圈数字来表示这种变化，例如：向该账户中添加 100 美元：&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://beancount.github.io/docs/the_double_entry_counting_method/media/004bc3354eb84bf554a8e5080a21f8d16fc29d82.png#center&#34; alt=&#34;Untitled&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;现在，我们可以在记账后绘制更新后的账户余额，并在其后面加上另一个小数字：&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://beancount.github.io/docs/the_double_entry_counting_method/media/6281f96c3465982c6bf48fccb302b40f90890311.png#center&#34; alt=&#34;Untitled&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;账户加上 100 美元后，余额现在为 100 美元。&lt;/p&gt;
+&lt;p&gt;我们也可以从账户中减去一定金额。例如，我们可以减去 25 美元，这样账户余额就变成了 75 美元：&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://beancount.github.io/docs/the_double_entry_counting_method/media/1672e121ec80f8fcdb158bb497e05e6dc809dee5.png#center&#34; alt=&#34;Untitled&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;如果我们减去的金额超过账户余额，账户余额也可能变为负数。例如，如果我们从该账户中取出 200 美元，则余额现在变为 -125 美元：&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://beancount.github.io/docs/the_double_entry_counting_method/media/862c0b57a35631a52eead2cf8cdd7b5f2a1aa106.png#center&#34; alt=&#34;Untitled&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;账户中包含负数是完全正常的。请记住，我们所做的只是计数。很快我们会看到，有些账户在它们的时间轴上将保持负余额。&lt;/p&gt;
+&lt;h2 id=&#34;报表-statement&#34;&gt;报表 （Statement）&lt;/h2&gt;
+&lt;p&gt;值得注意的是，我在前一节中写下的时间线记账与机构为每个客户维护并通常通过邮件发送的纸质账户报表类似：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;时间&lt;/th&gt;
+          &lt;th&gt;描述&lt;/th&gt;
+          &lt;th&gt;金额&lt;/th&gt;
+          &lt;th&gt;余额&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2016-10-02&lt;/td&gt;
+          &lt;td&gt;…&lt;/td&gt;
+          &lt;td&gt;100.00&lt;/td&gt;
+          &lt;td&gt;1100.00&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2016-10-05&lt;/td&gt;
+          &lt;td&gt;..&lt;/td&gt;
+          &lt;td&gt;-25.00&lt;/td&gt;
+          &lt;td&gt;1075.00&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2016-10-06&lt;/td&gt;
+          &lt;td&gt;..&lt;/td&gt;
+          &lt;td&gt;-200.00&lt;/td&gt;
+          &lt;td&gt;875.00&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;最终结余&lt;/td&gt;
+          &lt;td&gt;875.00&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;有时候金额栏会被分成两个，一个显示正数，另一个显示负数：&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Spring Data JPA 多条件连表查询最佳实践</title>
       <link>https://lexcao.io/zh/posts/spring-data-jpa-join-table-best-practice/</link>
       <pubDate>Sun, 25 Sep 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/zh/posts/spring-data-jpa-join-table-best-practice/</guid>
-      <description>背景 本文是 Spring Data JPA 多条件连表查询 文章的最佳实践总结。
-解决什么问题？ 使用 Spring Data JPA 需要针对多条件进行连表查询的场景不使用原生 SQL 或者 HQL 的时候，仅仅通过 JpaSpecificationExecutor 构造 Specification 动态条件语句来实现类型安全的多条件查询。
-说明 相关上下文背景请前往 前文 了解。 这里再提一下接下来示例会用到的场景：
-三个实体：作者、书、书评。其中，作者与书是一对多的关系，书与书评是一对一的关系（当然书评与读者的评价是一对多的关系，这里省去，仅用一对一来进行演示即可）。
-假设有这样的后台查询条件：作者名称、书的发布时间、书评的评分。（这里每个实体取一个字段进行连表查询演示，其他字段同理）。返回书籍列表以及相关表字段。
-【本文所有代码在此】
-最佳实践 需要 SELECT 查询的字段，通过单独的 Java Bean 进行映射 利用 JPA 的自动实体映射结果集 @EntityGraph 注解标注返回实体需要 Fetch 的字段 无需再手动针对连表进行 fetch，解决 N+1 问题 JOIN ON 查询条件使用 join().on() 拼接 Join&amp;lt;Object, Object&amp;gt; author = root.join(&amp;#34;author&amp;#34;); author.on(cb.equal(author.get(&amp;#34;name&amp;#34;), param.getAuthorName())); WHERE 查询条件使用 query.where() 拼接 query.where(cb.equal(root.get(&amp;#34;publishTime&amp;#34;), param.getBookPublishTime())); 代码示例 针对 Repository 需要 override 已有 findAll 方法，使用 @EntityGraph 注解 使用 @EntityGraph 注解，标注额外属性需要 fetch // BookJoinRepository.</description>
+      <description>&lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
+&lt;p&gt;本文是 &lt;a href=&#34;https://lexcao.io/zh/posts/spring-data-jpa-join-table&#34;&gt;Spring Data JPA 多条件连表查询&lt;/a&gt; 文章的最佳实践总结。&lt;/p&gt;
+&lt;h3 id=&#34;解决什么问题&#34;&gt;解决什么问题？&lt;/h3&gt;
+&lt;p&gt;使用 Spring Data JPA 需要针对多条件进行连表查询的场景不使用原生 SQL 或者 HQL 的时候，仅仅通过 JpaSpecificationExecutor&lt;T&gt; 构造 Specification&lt;T&gt; 动态条件语句来实现类型安全的多条件查询。&lt;/p&gt;
+&lt;h3 id=&#34;说明&#34;&gt;说明&lt;/h3&gt;
+&lt;p&gt;相关上下文背景请前往 &lt;a href=&#34;https://lexcao.io/zh/posts/spring-data-jpa-join-table&#34;&gt;前文&lt;/a&gt; 了解。
+这里再提一下接下来示例会用到的场景：&lt;/p&gt;
+&lt;p&gt;三个实体：作者、书、书评。其中，作者与书是一对多的关系，书与书评是一对一的关系（当然书评与读者的评价是一对多的关系，这里省去，仅用一对一来进行演示即可）。&lt;/p&gt;
+&lt;p&gt;假设有这样的后台查询条件：作者名称、书的发布时间、书评的评分。（这里每个实体取一个字段进行连表查询演示，其他字段同理）。返回书籍列表以及相关表字段。&lt;/p&gt;
+&lt;p&gt;【&lt;a href=&#34;https://github.com/lexcao/spring-data-jpa-join-table&#34;&gt;本文所有代码在此&lt;/a&gt;】&lt;/p&gt;
+&lt;h1 id=&#34;最佳实践&#34;&gt;最佳实践&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;需要 &lt;code&gt;SELECT&lt;/code&gt; 查询的字段，通过单独的 Java Bean 进行映射
+&lt;ul&gt;
+&lt;li&gt;利用 JPA 的自动实体映射结果集&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@EntityGraph&lt;/code&gt; 注解标注返回实体需要 Fetch 的字段
+&lt;ul&gt;
+&lt;li&gt;无需再手动针对连表进行 &lt;code&gt;fetch&lt;/code&gt;，解决 N+1 问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;JOIN ON 查询条件使用 &lt;code&gt;join().on()&lt;/code&gt; 拼接
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Join&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Object, Object&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; author &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root.&lt;span style=&#34;color:#a6e22e&#34;&gt;join&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;author&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;author.&lt;span style=&#34;color:#a6e22e&#34;&gt;on&lt;/span&gt;(cb.&lt;span style=&#34;color:#a6e22e&#34;&gt;equal&lt;/span&gt;(author.&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;), param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getAuthorName&lt;/span&gt;()));
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;WHERE 查询条件使用 &lt;code&gt;query.where()&lt;/code&gt; 拼接
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;query.&lt;span style=&#34;color:#a6e22e&#34;&gt;where&lt;/span&gt;(cb.&lt;span style=&#34;color:#a6e22e&#34;&gt;equal&lt;/span&gt;(root.&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;publishTime&amp;#34;&lt;/span&gt;), param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getBookPublishTime&lt;/span&gt;()));
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;代码示例&#34;&gt;代码示例&lt;/h1&gt;
+&lt;h2 id=&#34;针对-repository&#34;&gt;针对 Repository&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;需要 &lt;code&gt;override&lt;/code&gt; 已有 &lt;code&gt;findAll&lt;/code&gt; 方法，使用 &lt;code&gt;@EntityGraph&lt;/code&gt; 注解&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;@EntityGraph&lt;/code&gt; 注解，标注额外属性需要 fetch&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// BookJoinRepository.java&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@Repository&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;BookJoinRepository&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    JpaRepository&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;BookJoin, String&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;, JpaSpecificationExecutor&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;BookJoin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@Override&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@EntityGraph&lt;/span&gt;(attributePaths &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; { &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;author&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;review&amp;#34;&lt;/span&gt; })
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Page&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;BookJoin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;findAll&lt;/span&gt;(Specification&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;BookJoin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; spec, Pageable pageable);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;针对-specification&#34;&gt;针对 Specification&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;WHERE 查询条件使用 &lt;code&gt;query.where()&lt;/code&gt; 拼接&lt;/li&gt;
+&lt;li&gt;JOIN ON 查询条件使用 &lt;code&gt;join().on()&lt;/code&gt; 拼接&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; Specification&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;BookJoin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;multiQuery_04&lt;/span&gt;(BookJoinQuery param) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (root, query, cb) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getBookPublishTime&lt;/span&gt;()) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            query.&lt;span style=&#34;color:#a6e22e&#34;&gt;where&lt;/span&gt;(cb.&lt;span style=&#34;color:#a6e22e&#34;&gt;equal&lt;/span&gt;(root.&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;publishTime&amp;#34;&lt;/span&gt;), param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getBookPublishTime&lt;/span&gt;()));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getAuthorName&lt;/span&gt;()) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            Join&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Object, Object&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; author &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root.&lt;span style=&#34;color:#a6e22e&#34;&gt;join&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;author&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            author.&lt;span style=&#34;color:#a6e22e&#34;&gt;on&lt;/span&gt;(cb.&lt;span style=&#34;color:#a6e22e&#34;&gt;equal&lt;/span&gt;(author.&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;), param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getAuthorName&lt;/span&gt;()));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getReviewScore&lt;/span&gt;()) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            Join&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Object, Object&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; review &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root.&lt;span style=&#34;color:#a6e22e&#34;&gt;join&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;review&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            review.&lt;span style=&#34;color:#a6e22e&#34;&gt;on&lt;/span&gt;(cb.&lt;span style=&#34;color:#a6e22e&#34;&gt;equal&lt;/span&gt;(review.&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;score&amp;#34;&lt;/span&gt;), param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getReviewScore&lt;/span&gt;()));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; query.&lt;span style=&#34;color:#a6e22e&#34;&gt;getRestriction&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    };
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;结果-sql-语句&#34;&gt;结果 SQL 语句&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;select&lt;/span&gt; bookjoin0_.id           &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; id1_1_0_,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       bookjoin_a1_.id         &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; id1_0_1_,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       bookjoin_r2_.id         &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; id1_2_2_,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       bookjoin0_.author_id    &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; author_i3_1_0_,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       bookjoin0_.publish_time &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; publish_2_1_0_,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       bookjoin0_.review_id    &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; review_i4_1_0_,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       bookjoin_a1_.name       &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; name2_0_1_,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       bookjoin_r2_.score      &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; score2_2_2_
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;from&lt;/span&gt; book bookjoin0_
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#66d9ef&#34;&gt;inner&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;join&lt;/span&gt; author bookjoin_a1_ &lt;span style=&#34;color:#66d9ef&#34;&gt;on&lt;/span&gt; bookjoin0_.author_id &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; bookjoin_a1_.id 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                      &lt;span style=&#34;color:#66d9ef&#34;&gt;and&lt;/span&gt; (bookjoin_a1_.name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;?&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#66d9ef&#34;&gt;inner&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;join&lt;/span&gt; review bookjoin_r2_ &lt;span style=&#34;color:#66d9ef&#34;&gt;on&lt;/span&gt; bookjoin0_.review_id &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; bookjoin_r2_.id 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                      &lt;span style=&#34;color:#66d9ef&#34;&gt;and&lt;/span&gt; (bookjoin_r2_.score &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;?&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt; bookjoin0_.publish_time &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;?&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;limit&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;?&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当然，这里案例使用的是 &lt;code&gt;INNER JOIN&lt;/code&gt;，对于 &lt;code&gt;LEFT JOIN&lt;/code&gt; 也是生效的。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Spring Data JPA 多条件连表查询 (2022 更新)</title>
       <link>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</link>
       <pubDate>Sat, 24 Sep 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/zh/posts/spring-data-jpa-join-table/</guid>
-      <description>痛点 项目中使用 Spring Data JPA 作为 ORM 框架的时候，实体映射非常方便。Spring Data Repository 的顶层抽象完全解决单实体的查询，面对单实体的复杂查询，也能使用 JpaSpecificationExecutor&amp;lt;T&amp;gt; 构造 Specification&amp;lt;T&amp;gt; 轻松应对。
-而对于后台管理报表查询需求来说，需要进行连表多条件动态查询的时候，就显得无从下手。因为它并不像 MyBatis 一样能够在 XML 文件中写出动态 SQL 语句。
-尽管可以使用 EntityManager 动态拼接原生 SQL 语句，但是该方法返回值为 ResultSet ，也就是说查出来的实体映射关系需要手动映射（😢这样不太优雅，已经定义出实体，还需要自己去映射）。
-所以，本文的目的是，在现有实体关系的基础上，结合 Specification&amp;lt;T&amp;gt; 记录下 Spring Data JPA 多条件动态连表查询操作，以及其中的踩坑和优化。
-想要直接看结论的，请看这篇 Spring Data JPA 动态多条件连表查询最佳实践。
-基础操作 那么，让我们开始进入代码操作。【本文所有代码在此】
-前置说明 相关依赖 Java 11 SpringBoot 2.4.2 build.gradle
-plugins { id &amp;#39;org.springframework.boot&amp;#39; version &amp;#39;2.4.2&amp;#39; id &amp;#39;io.spring.dependency-management&amp;#39; version &amp;#39;1.0.11.RELEASE&amp;#39; id &amp;#39;java&amp;#39; } dependencies { implementation &amp;#39;org.springframework.boot:spring-boot-starter-data-jpa&amp;#39; compileOnly &amp;#39;org.projectlombok:lombok&amp;#39; runtimeOnly &amp;#39;mysql:mysql-connector-java&amp;#39; annotationProcessor &amp;#39;org.</description>
+      <description>&lt;h1 id=&#34;痛点&#34;&gt;痛点&lt;/h1&gt;
+&lt;p&gt;项目中使用 Spring Data JPA 作为 ORM 框架的时候，实体映射非常方便。Spring Data Repository 的顶层抽象完全解决单实体的查询，面对单实体的复杂查询，也能使用 &lt;code&gt;JpaSpecificationExecutor&amp;lt;T&amp;gt;&lt;/code&gt; 构造 &lt;code&gt;Specification&amp;lt;T&amp;gt;&lt;/code&gt; 轻松应对。&lt;/p&gt;
+&lt;p&gt;而对于后台管理报表查询需求来说，需要进行连表多条件动态查询的时候，就显得无从下手。因为它并不像 MyBatis 一样能够在 XML 文件中写出动态 SQL 语句。&lt;/p&gt;
+&lt;p&gt;尽管可以使用 &lt;code&gt;EntityManager&lt;/code&gt; 动态拼接原生 SQL 语句，但是该方法返回值为 &lt;code&gt;ResultSet&lt;/code&gt; ，也就是说查出来的实体映射关系需要手动映射（😢这样不太优雅，已经定义出实体，还需要自己去映射）。&lt;/p&gt;
+&lt;p&gt;所以，本文的目的是，在现有实体关系的基础上，结合 &lt;code&gt;Specification&amp;lt;T&amp;gt;&lt;/code&gt; 记录下 Spring Data JPA 多条件动态连表查询操作，以及其中的踩坑和优化。&lt;/p&gt;
+&lt;p&gt;想要直接看结论的，请看这篇 &lt;a href=&#34;https://lexcao.io/zh/posts/spring-data-jpa-join-table-best-practice&#34;&gt;Spring Data JPA 动态多条件连表查询最佳实践&lt;/a&gt;。&lt;/p&gt;
+&lt;h1 id=&#34;基础操作&#34;&gt;基础操作&lt;/h1&gt;
+&lt;p&gt;那么，让我们开始进入代码操作。【&lt;a href=&#34;https://github.com/lexcao/spring-data-jpa-join-table&#34;&gt;本文所有代码在此&lt;/a&gt;】&lt;/p&gt;
+&lt;h2 id=&#34;前置说明&#34;&gt;前置说明&lt;/h2&gt;
+&lt;h3 id=&#34;相关依赖&#34;&gt;相关依赖&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Java 11&lt;/li&gt;
+&lt;li&gt;SpringBoot 2.4.2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;build.gradle&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;plugins &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    id &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;org.springframework.boot&amp;#39;&lt;/span&gt; version &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;2.4.2&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    id &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;io.spring.dependency-management&amp;#39;&lt;/span&gt; version &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;1.0.11.RELEASE&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    id &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;java&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dependencies &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    implementation &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;org.springframework.boot:spring-boot-starter-data-jpa&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    compileOnly &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;org.projectlombok:lombok&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    runtimeOnly &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;mysql:mysql-connector-java&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    annotationProcessor &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;org.projectlombok:lombok&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    testImplementation &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;org.springframework.boot:spring-boot-starter-test&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    testRuntimeOnly &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;com.h2database:h2&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;maven.xml&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>通过构建全栈待办应用学习 Rust</title>
       <link>https://lexcao.io/zh/posts/learn-rust-fullstack/</link>
       <pubDate>Mon, 02 May 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/zh/posts/learn-rust-fullstack/</guid>
-      <description>什么 我想写一篇关于我如何学习Rust的博客。
-请原谅我在 2022 年才开始学习这个伟大的编程语言。
-为了在实践中学习Rust，我构建了一个全栈待办应用。
-你可以在 这里 尝试。相关源码可以在 GitHub 上找到。
-现在，我准备写一下它是如何构建的。
-如何 首先，和大家一样，我也是从 The Book 中学习 Rust。这是一本不应该跳过入门学习 Rust 的好书。
-在学习了一些基本的语法之后，我尝试从零开始使用 Rust 构建一个全栈应用，这是一个使用 Rust tokio 的后端服务和一个使用 Rust WASM（Web Assembly）的前端页面。
-我将分别对这两部分做一个简单的介绍。
-后端 后台服务是一个的简单的 REST API。使用 actix-web 作为网络框架。
-我将写另一篇博客，介绍我如何使用 TDD 开发 Rust 后台服务。 被 Rust 编译器和 Borrow Checker 教育是一次特别的体验。 对于部署，我使用 Supabase 作为 Postgres 服务，使用 Railway 来运行后台服务 docker 镜像。
-前端 前端页面有在线和离线数据源，在线是从后台服务器获取数据，而离线是在本地存储。并且有一个按钮来切换它们。
-前台由 Rust WASM 和 yew 框架驱动，这是一个类似 React 基于组件构建 Web 应用框架。
-如果你熟悉 JSX，你可以在使用 Yew 时感到很自在。 在 Rust 中编写类似 React 的代码体验良好，而且真的很有趣。 但有一些不同之处我想与大家分享，晚点会写一篇博客来谈这个问题，所以敬请关注。 部署的话，是放在 Vercel 上进行托管，用 GitHub Action 来实现自动部署。</description>
+      <description>&lt;h1 id=&#34;什么&#34;&gt;什么&lt;/h1&gt;
+&lt;p&gt;我想写一篇关于我如何学习Rust的博客。&lt;/p&gt;
+&lt;p&gt;请原谅我在 2022 年才开始学习这个伟大的编程语言。&lt;/p&gt;
+&lt;p&gt;为了在实践中学习Rust，我构建了一个全栈待办应用。&lt;/p&gt;
+&lt;p&gt;你可以在 &lt;a href=&#34;https://todos.lexcao.io/&#34;&gt;这里&lt;/a&gt; 尝试。相关源码可以在 &lt;a href=&#34;https://github.com/lexcao/rust_fullstack_todo&#34;&gt;GitHub&lt;/a&gt; 上找到。&lt;/p&gt;
+&lt;p&gt;现在，我准备写一下它是如何构建的。&lt;/p&gt;
+&lt;h1 id=&#34;如何&#34;&gt;如何&lt;/h1&gt;
+&lt;p&gt;首先，和大家一样，我也是从 &lt;a href=&#34;https://doc.rust-lang.org/book/&#34;&gt;The Book&lt;/a&gt; 中学习 Rust。这是一本不应该跳过入门学习 Rust 的好书。&lt;/p&gt;
+&lt;p&gt;在学习了一些基本的语法之后，我尝试从零开始使用 Rust 构建一个全栈应用，这是一个使用 Rust tokio 的后端服务和一个使用 &lt;a href=&#34;https://rustwasm.github.io/docs/book/&#34;&gt;Rust WASM（Web Assembly）&lt;/a&gt;的前端页面。&lt;/p&gt;
+&lt;p&gt;我将分别对这两部分做一个简单的介绍。&lt;/p&gt;
+&lt;h3 id=&#34;后端&#34;&gt;后端&lt;/h3&gt;
+&lt;p&gt;后台服务是一个的简单的 REST API。使用 &lt;a href=&#34;https://github.com/actix/actix-web&#34;&gt;&lt;code&gt;actix-web&lt;/code&gt;&lt;/a&gt; 作为网络框架。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;我将写另一篇博客，介绍我如何使用 TDD 开发 Rust 后台服务。&lt;/li&gt;
+&lt;li&gt;被 Rust 编译器和 Borrow Checker 教育是一次特别的体验。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于部署，我使用 &lt;a href=&#34;https://supabase.com/&#34;&gt;Supabase&lt;/a&gt; 作为 Postgres 服务，使用 &lt;a href=&#34;https://railway.app/&#34;&gt;Railway&lt;/a&gt; 来运行后台服务 docker 镜像。&lt;/p&gt;
+&lt;h3 id=&#34;前端&#34;&gt;前端&lt;/h3&gt;
+&lt;p&gt;前端页面有在线和离线数据源，在线是从后台服务器获取数据，而离线是在本地存储。并且有一个按钮来切换它们。&lt;/p&gt;
+&lt;p&gt;前台由 Rust WASM 和 &lt;a href=&#34;https://github.com/yewstack/yew&#34;&gt;&lt;code&gt;yew&lt;/code&gt;&lt;/a&gt; 框架驱动，这是一个类似 React 基于组件构建 Web 应用框架。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果你熟悉 JSX，你可以在使用 Yew 时感到很自在。&lt;/li&gt;
+&lt;li&gt;在 Rust 中编写类似 React 的代码体验良好，而且真的很有趣。&lt;/li&gt;
+&lt;li&gt;但有一些不同之处我想与大家分享，晚点会写一篇博客来谈这个问题，所以敬请关注。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;部署的话，是放在 &lt;a href=&#34;https://vercel.com/&#34;&gt;Vercel&lt;/a&gt; 上进行托管，用 GitHub Action 来实现自动部署。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Kotlin/Java TDD 开发流程记录</title>
       <link>https://lexcao.io/zh/posts/kotlin-java-tdd-example/</link>
       <pubDate>Mon, 03 May 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/zh/posts/kotlin-java-tdd-example/</guid>
-      <description>通过使用 Kotlin / Java 中 Junit5 和 Mockito 测试框架，在预约功能中演示 TDD 开发流程。
-TDD 介绍 TDD（Test-Driven Development） 是一种开发流程，中文是「测试驱动开发」。用一句白话形容，就是「先写测试再开发」。先写测试除了能确保测试程式的撰写，还有一个好处：有助于在开发初期厘清程式介面如何设计。详细理论知识可以前往 Wiki 了解，这里不再过多介绍。
-测试驱动开发 Test Driven Development TDD 开发流程（5步） 术语说明：
-红灯 - Failure - 测试用例失败 绿灯 - Success - 测试用例成功 重构 - Refactor - 重构功能代码 具体步骤：
-选定一个功能，编写测试用例 执行测试，得到【红灯】 编写满足测试用例的功能代码 再次执行，得到【绿灯】 【重构】代码 小结：
-对于每一个功能，在【红灯】-【绿灯】-【重构】间来回循环往复，不断得到完善。
-前置工作 代码说明 使用 Kotlin 语言（会有相对应的 Java 代码） 使用到的测试框架 Running: JUnit5 Mock: MockK / Mockito Assertion: Kotest / AssertJ 只涉及 TDD 的具体流程，不涉及单元测试如何编写（可以看 SpringBoot 单元测试各层） 功能介绍 假设一个用户预约的场景。</description>
+      <description>&lt;p&gt;通过使用 Kotlin / Java 中 Junit5 和 Mockito 测试框架，在预约功能中演示 TDD 开发流程。&lt;/p&gt;
+&lt;h1 id=&#34;tdd-介绍&#34;&gt;TDD 介绍&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;TDD（Test-Driven Development）&lt;/strong&gt;
+是一种开发流程，中文是「测试驱动开发」。用一句白话形容，就是「先写测试再开发」。先写测试除了能确保测试程式的撰写，还有一个好处：有助于在开发初期厘清程式介面如何设计。详细理论知识可以前往 Wiki 了解，这里不再过多介绍。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91&#34;&gt;测试驱动开发&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;Test Driven Development&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;tdd-开发流程5步&#34;&gt;TDD 开发流程（5步）&lt;/h2&gt;
+&lt;p&gt;术语说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;红灯 - Failure - 测试用例失败&lt;/li&gt;
+&lt;li&gt;绿灯 - Success - 测试用例成功&lt;/li&gt;
+&lt;li&gt;重构 - Refactor - 重构功能代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;具体步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;选定一个功能，编写测试用例&lt;/li&gt;
+&lt;li&gt;执行测试，得到【红灯】&lt;/li&gt;
+&lt;li&gt;编写满足测试用例的功能代码&lt;/li&gt;
+&lt;li&gt;再次执行，得到【绿灯】&lt;/li&gt;
+&lt;li&gt;【重构】代码&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;小结：&lt;/p&gt;
+&lt;p&gt;对于每一个功能，在【红灯】-【绿灯】-【重构】间来回循环往复，不断得到完善。&lt;/p&gt;
+&lt;h1 id=&#34;前置工作&#34;&gt;前置工作&lt;/h1&gt;
+&lt;h2 id=&#34;代码说明&#34;&gt;代码说明&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 Kotlin 语言（会有相对应的 Java 代码）&lt;/li&gt;
+&lt;li&gt;使用到的测试框架
+&lt;ul&gt;
+&lt;li&gt;Running: &lt;code&gt;JUnit5&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Mock:  &lt;code&gt;MockK&lt;/code&gt; / &lt;code&gt;Mockito&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Assertion: &lt;code&gt;Kotest&lt;/code&gt; / &lt;code&gt;AssertJ&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;只涉及 TDD 的具体流程，不涉及单元测试如何编写（可以看 SpringBoot 单元测试各层）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;功能介绍&#34;&gt;功能介绍&lt;/h2&gt;
+&lt;p&gt;假设一个用户预约的场景。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Kotlin 奇怪的相等现象探究</title>
       <link>https://lexcao.io/zh/posts/kotlin-equality-diving/</link>
       <pubDate>Tue, 21 Apr 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/zh/posts/kotlin-equality-diving/</guid>
-      <description>最近遇到一个平时没怎么关注的 Kotlin 相等问题，决定记录一下探究过程。
-事由 以下代码片段 Kotlin 版本 1.3.72。
-还原问题代码，已去除业务逻辑部分，仅保留关键代码，片段如下：
-// 有一个状态枚举 enum class MyState { OK, CANCELED } // 某个处理函数会返回 nullable MyState fun processing(): MyState? { // 假设当前某种情况下返回 取消 这个状态 return MyState.CANCELED } // 在处理状态时 fun handleState() { // 此时编译器推断出类型为 State? val state = processing() if (state == CANCELED) { // 当处理 CANCELED 以下代码没有执行 println(&amp;#34;Handle &amp;lt;CANCELED&amp;gt; state&amp;#34;) } } 当处理 CANCELED 代码没有执行，原因在于***「import」***。
-import javax.print.attribute.standard.JobState.CANCELED // 此处使用静态导入引入了一个其他包中同名的一个静态变量，该变量声明如下 // public static final JobState CANCELED = new JobState (7); 解决方法：</description>
+      <description>&lt;p&gt;最近遇到一个平时没怎么关注的 Kotlin 相等问题，决定记录一下探究过程。&lt;/p&gt;
+&lt;h1 id=&#34;事由&#34;&gt;事由&lt;/h1&gt;
+&lt;p&gt;以下代码片段 Kotlin 版本 &lt;code&gt;1.3.72&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;还原问题代码，已去除业务逻辑部分，仅保留关键代码，片段如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 有一个状态枚举
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;enum&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyState&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    OK, CANCELED
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 某个处理函数会返回 nullable MyState
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;processing&lt;/span&gt;(): MyState? {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#75715e&#34;&gt;// 假设当前某种情况下返回 取消 这个状态
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyState&lt;/span&gt;.CANCELED
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 在处理状态时
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;handleState&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#75715e&#34;&gt;// 此时编译器推断出类型为 State?
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; state = processing()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (state &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; CANCELED) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// 当处理 CANCELED 以下代码没有执行
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        println(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Handle &amp;lt;CANCELED&amp;gt; state&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当处理 CANCELED 代码没有执行，原因在于***「import」***。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; javax.print.attribute.standard.JobState.CANCELED
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 此处使用静态导入引入了一个其他包中同名的一个静态变量，该变量声明如下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// public static final JobState CANCELED = new JobState (7);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;解决方法：&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>使用 KAPT 生成 Kotlin Data Class 转换器</title>
       <link>https://lexcao.io/zh/posts/konverter/</link>
       <pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/zh/posts/konverter/</guid>
-      <description>背景 Web 后台开发中，对于一个实体的操作会衍生出多个类似的对象进行操作（避免直接使用实体），由此出现相关名词
-持久化对象，即实体 PO(Persistent Object) 传输对象 DTO(Data Transfer Object) 业务对象 BO(Business Object) 展示对象 VO(View Object) 等等…… 这些对象大多数直接从实体里面裁剪几个字段，比如，在一次创建订单请求中以订单实体（OrderEntity）为例，经历如下流程： 1. 接收请求体 CreateOrderRequest 2. 根据 OrderQuery 构造查询对象查询订单 3. 构造 OrderEntity 进行持久化操作 4. 构造 OrderBO 进行下游消费 5. 返回响应体 CreateOrderResponse 可见，从 OrderEntity 衍生出 4 个对象，仅仅是对订单的实体的部分裁剪，但是要编写很多重复的代码（复制也行）。当然，如果是新增字段的话可以使用继承解决。
-在 Kotlin Web 后台开发中，data class 的语法特性带来很多优势，但还是避免不了创建类似的重复对象。 所以 Konverter 诞生于此，解决实体对象裁剪问题。还有另一个功能那就是自动生成两个实体间的转换方法。
-注意：目前只支持 Kotlin，并且生成的转换方法是通过扩展函数实现
-是什么 通过 KAPT(Kotlin Annotation Processing Tool 注解处理以及 Kotlin Poet 代码生成，实现自动生成对实体的相关裁剪的对象。 主要有两个注解：
-@Konvertable 生成裁剪的实体以及对应的转换方法 @Konvert 单独针对某个类生成转换方法 废话不多说来看怎么使用。
-怎么用 1. 引入依赖 // for build.</description>
+      <description>&lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
+&lt;p&gt;Web 后台开发中，对于一个实体的操作会衍生出多个类似的对象进行操作（避免直接使用实体），由此出现相关名词&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;持久化对象，即实体 PO(&lt;em&gt;Persistent Object&lt;/em&gt;)&lt;/li&gt;
+&lt;li&gt;传输对象 DTO(&lt;em&gt;Data Transfer Object&lt;/em&gt;)&lt;/li&gt;
+&lt;li&gt;业务对象 BO(&lt;em&gt;Business Object&lt;/em&gt;)&lt;/li&gt;
+&lt;li&gt;展示对象 VO(&lt;em&gt;View Object&lt;/em&gt;)&lt;/li&gt;
+&lt;li&gt;等等……
+这些对象大多数直接从实体里面裁剪几个字段，比如，在一次创建订单请求中以订单实体（OrderEntity）为例，经历如下流程：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 接收请求体 CreateOrderRequest
+2. 根据 OrderQuery 构造查询对象查询订单
+3. 构造 OrderEntity 进行持久化操作
+4. 构造 OrderBO 进行下游消费
+5. 返回响应体 CreateOrderResponse
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可见，从 OrderEntity 衍生出 4 个对象，仅仅是对订单的实体的部分裁剪，但是要编写很多重复的代码（复制也行）。当然，如果是新增字段的话可以使用继承解决。&lt;/p&gt;
+&lt;p&gt;在 Kotlin Web 后台开发中，data class 的语法特性带来很多优势，但还是避免不了创建类似的重复对象。
+所以 &lt;code&gt;Konverter&lt;/code&gt; 诞生于此，解决实体对象裁剪问题。还有另一个功能那就是自动生成两个实体间的转换方法。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：目前只支持 Kotlin，并且生成的转换方法是通过扩展函数实现&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h1 id=&#34;是什么&#34;&gt;是什么&lt;/h1&gt;
+&lt;p&gt;通过 &lt;a href=&#34;https://kotlinlang.org/docs/reference/kapt.html]&#34;&gt;&lt;em&gt;KAPT(Kotlin Annotation Processing Tool&lt;/em&gt;&lt;/a&gt; 注解处理以及 &lt;a href=&#34;https://github.com/square/kotlinpoet&#34;&gt;&lt;em&gt;Kotlin Poet&lt;/em&gt;&lt;/a&gt; 代码生成，实现自动生成对实体的相关裁剪的对象。
+主要有两个注解：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;@Konvertable&lt;/code&gt; 生成裁剪的实体以及对应的转换方法&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@Konvert&lt;/code&gt; 单独针对某个类生成转换方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;废话不多说来看怎么使用。&lt;/p&gt;
+&lt;h1 id=&#34;怎么用&#34;&gt;怎么用&lt;/h1&gt;
+&lt;h2 id=&#34;1-引入依赖&#34;&gt;1. 引入依赖&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;// for build.gradle.kts
+repositories {
+    maven(&amp;#34;https://jitpack.io&amp;#34;)
+}
+
+dependencies {
+    kapt(&amp;#34;com.github.lexcao:konverter:master-SNAPSHOT&amp;#34;)
+    implementation(&amp;#34;com.github.lexcao:konverter-annotation:master-SNAPSHOT&amp;#34;)
+}
+
+// for build.gradle
+repositories {
+    maven { url &amp;#39;https://jitpack.io&amp;#39; }
+}
+
+dependencies {
+    kapt &amp;#39;com.github.lexcao:konverter:master-SNAPSHOT&amp;#39;
+    implementation &amp;#39;com.github.lexcao:konverter-annotation:master-SNAPSHOT&amp;#39;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;2-在需要转换的类上加上注解&#34;&gt;2. 在需要转换的类上加上注解&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@Konvertable(
+    To(name = &amp;#34;LoginDTO&amp;#34;, pick = [&amp;#34;username&amp;#34;, &amp;#34;password&amp;#34;]),
+    To(name = &amp;#34;UserListDTO&amp;#34;, omit = [&amp;#34;password&amp;#34;])
+)
+@Konvert(to = UserVO::class)
+data class UserEntity(
+    val id: Long,
+    @Konvert.Field(&amp;#34;name&amp;#34;)
+    val username: String,
+    val password: String,
+    @Konvert.By(GenderEnumConverter::class)
+    val gender: Int
+)
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;3-生成的代码如下&#34;&gt;3. 生成的代码如下：&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;// @Konvertable
+/**
+ *  Auto generated code by @Konvertable
+ */
+data class LoginDTO(
+  val username: String,
+  val password: String
+)
+
+/**
+ *  Auto generated code by @Konvertable
+ */
+data class UserListDTO(
+  val id: Long,
+  val username: String,
+  val gender: Int
+)
+
+/**
+ *  Auto generated code by @Konvert
+ */
+fun UserEntity.toLoginDTO(username: String = this@toLoginDTO.username, password: String =
+    this@toLoginDTO.password): LoginDTO = LoginDTO(username=username,password=password)
+
+/**
+ *  Auto generated code by @Konvert
+ */
+fun LoginDTO.toUserEntity(
+  id: Long = 0L,
+  username: String = this@toUserEntity.username,
+  password: String = this@toUserEntity.password,
+  gender: Int = 0
+): UserEntity = UserEntity(id=id,username=username,password=password,gender=gender)
+
+/**
+ *  Auto generated code by @Konvert
+ */
+fun UserEntity.toUserListDTO(
+  id: Long = this@toUserListDTO.id,
+  username: String = this@toUserListDTO.username,
+  gender: Int = this@toUserListDTO.gender
+): UserListDTO = UserListDTO(id=id,username=username,gender=gender)
+
+/**
+ *  Auto generated code by @Konvert
+ */
+fun UserListDTO.toUserEntity(
+  id: Long = this@toUserEntity.id,
+  username: String = this@toUserEntity.username,
+  password: String = &amp;#34;&amp;#34;,
+  gender: Int = this@toUserEntity.gender
+): UserEntity = UserEntity(id=id,username=username,password=password,gender=gender)
+
+/**
+ *  Auto generated code by @Konvert
+ */
+fun UserEntity.toRegisterDTO(
+  username: String = this@toRegisterDTO.username,
+  password: String = this@toRegisterDTO.password,
+  gender: Int = this@toRegisterDTO.gender
+): RegisterDTO = RegisterDTO(username=username,password=password,gender=gender)
+
+/**
+ *  Auto generated code by @Konvert
+ */
+fun RegisterDTO.toUserEntity(
+  id: Long = 0L,
+  username: String = this@toUserEntity.username,
+  password: String = this@toUserEntity.password,
+  gender: Int = this@toUserEntity.gender
+): UserEntity = UserEntity(id=id,username=username,password=password,gender=gender)
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;// @Konvert
+// 转换为如下对象
+data class UserVO(
+    val id: String,
+    val name: String,
+    val gender: GenderEnum
+)
+
+enum class GenderEnum {
+    MALE, FEMALE;
+}
+
+object GenderEnumConverter : Konvert.KonvertBy&amp;lt;Int, GenderEnum&amp;gt; {
+    override fun Int.forward(): GenderEnum {
+        return GenderEnum.values()[this]
+    }
+
+    override fun GenderEnum.backward(): Int {
+        return this.ordinal
+    }
+}
+
+// 生成的代码
+**
+ *  Auto generated code by @Konvert
+ */
+fun UserEntity.toUserVO(
+  id: String = this@toUserVO.id.toString(),
+  name: String = this@toUserVO.username,
+  gender: GenderEnum = with(GenderEnumConverter) { this@toUserVO.gender.forward() }
+): UserVO = UserVO(id=id,name=name,gender=gender)
+
+/**
+ *  Auto generated code by @Konvert
+ */
+fun UserVO.toUserEntity(
+  id: Long = this@toUserEntity.id.toLong(),
+  username: String = this@toUserEntity.name,
+  password: String = &amp;#34;&amp;#34;,
+  gender: Int = with(GenderEnumConverter) { this@toUserEntity.gender.backward() }
+): UserEntity = UserEntity(id=id,username=username,password=password,gender=gender)
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;相关-api-说明&#34;&gt;相关 API 说明&lt;/h2&gt;
+&lt;p&gt;转换规则&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>一次线程死锁排查记录</title>
       <link>https://lexcao.io/zh/posts/async-within-async/</link>
       <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/zh/posts/async-within-async/</guid>
-      <description>背景 某次发版之后，线上服务低概率出现某台实例接口响应超时，具体表现为：
-/health 接口超时报警； 线程死锁，Tomcat 线程池吃满； 服务完全无响应。 保留下当前 heap dump 和 thread stack 后，临时重启服务器恢复正常。
-# heap dump $ jmap -dump:format=b,file=dump.hprof [pid] # thread stack jstack [pid] &amp;gt; stack.txt 接下来简单记录一下排查结果。 （此文为回忆所写，当时排查的思考细节和过程已省略）
-排查 heap dump 使用工具 Eclipse + MAT
-安装 # 安装 eclipse $ brew cask install eclipse-java # 安装 eclipse MAT $ brew cask install mat # 是的，这个就是 eclipse-mat 相关连接 Eclipse
-Eclipse MAT
-使用 把 heap dump 文件 dump.hprof 导入到 MAT。</description>
+      <description>&lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
+&lt;p&gt;某次发版之后，线上服务低概率出现某台实例接口响应超时，具体表现为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/health&lt;/code&gt; 接口超时报警；&lt;/li&gt;
+&lt;li&gt;线程死锁，Tomcat 线程池吃满；&lt;/li&gt;
+&lt;li&gt;服务完全无响应。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;保留下当前 heap dump 和 thread stack 后，临时重启服务器恢复正常。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# heap dump&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ jmap -dump:format&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;b,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;dump.hprof &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;pid&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# thread stack&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;jstack &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;pid&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &amp;gt; stack.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来简单记录一下排查结果。
+&lt;br/&gt;（此文为回忆所写，当时排查的思考细节和过程已省略）&lt;/p&gt;
+&lt;h1 id=&#34;排查&#34;&gt;排查&lt;/h1&gt;
+&lt;h2 id=&#34;heap-dump&#34;&gt;heap dump&lt;/h2&gt;
+&lt;h3 id=&#34;使用工具&#34;&gt;使用工具&lt;/h3&gt;
+&lt;p&gt;Eclipse + MAT&lt;/p&gt;
+&lt;h3 id=&#34;安装&#34;&gt;安装&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 安装 eclipse&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ brew cask install eclipse-java
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 安装 eclipse MAT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ brew cask install mat &lt;span style=&#34;color:#75715e&#34;&gt;# 是的，这个就是 eclipse-mat&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;相关连接&#34;&gt;相关连接&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://projects.eclipse.org/projects/eclipse&#34;&gt;&lt;em&gt;&lt;strong&gt;Eclipse&lt;/strong&gt;&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.eclipse.org/mat/&#34;&gt;&lt;em&gt;&lt;strong&gt;Eclipse MAT&lt;/strong&gt;&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;使用&#34;&gt;使用&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;把 &lt;code&gt;heap dump&lt;/code&gt; 文件 &lt;code&gt;dump.hprof&lt;/code&gt; 导入到 MAT。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;发现有一个名称为 &lt;code&gt;Spring-Async-Scheduler&lt;/code&gt; 异步队列占用特别大。【TODO 图片】&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reactive 概览</title>
       <link>https://lexcao.io/zh/posts/reactive-overview/</link>
       <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/zh/posts/reactive-overview/</guid>
-      <description>Reactive Streams Reactive Streams 在 Netflix 、Pivotal 和 Lightbend 工程师于 2013 年底发起这项计划。
-Reactive Streams 是一项提议，为无阻塞背压的异步流提供一个标准。这包括针对运行时环境（JVM 和 JavaScript）以及网络协议上的工作。
-你可以在 Reactive Streams 官网网站阅读这个原始规范。
-你也可以在 这里 阅读它的中文翻译。
-无阻塞背压的异步流处理 Reactive Streams 由以下组成：
-异步； 流式； 无阻塞； 背压（回压）。 以下是 Java 接口，你可以在 GitHub 阅读更详细内容。
-public interface Publisher&amp;lt;T&amp;gt; { public void subscribe(Subscriber&amp;lt;? super T&amp;gt; s); } public interface Subscriber&amp;lt;T&amp;gt; { public void onSubscribe(Subscription s); public void onNext(T t); public void onError(Throwable t); public void onComplete(); } public interface Subscription { public void request(long n); public void cancel(); } public interface Processor&amp;lt;T, R&amp;gt; extends Subscriber&amp;lt;T&amp;gt;, Publisher&amp;lt;R&amp;gt; { } Reactive Extensions 用于可观察流的异步编程 API。</description>
+      <description>&lt;h1 id=&#34;reactive-streams&#34;&gt;Reactive Streams&lt;/h1&gt;
+&lt;p&gt;Reactive Streams 在 &lt;a href=&#34;https://en.wikipedia.org/wiki/Netflix&#34;&gt;&lt;em&gt;Netflix&lt;/em&gt;&lt;/a&gt; 、&lt;a href=&#34;https://en.wikipedia.org/wiki/Pivotal_Software&#34;&gt;&lt;em&gt;Pivotal&lt;/em&gt;&lt;/a&gt; 和 &lt;a href=&#34;https://en.wikipedia.org/wiki/Lightbend&#34;&gt;&lt;em&gt;Lightbend&lt;/em&gt;&lt;/a&gt; 工程师于 2013 年底发起这项计划。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Reactive Streams 是一项提议，为无阻塞背压的异步流提供一个标准。这包括针对运行时环境（JVM 和 JavaScript）以及网络协议上的工作。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;你可以在 &lt;a href=&#34;https://www.reactive-streams.org/&#34;&gt;&lt;em&gt;Reactive Streams&lt;/em&gt;&lt;/a&gt; 官网网站阅读这个原始规范。&lt;/p&gt;
+&lt;p&gt;你也可以在 &lt;a href=&#34;https://lexcao.github.io/zh/posts/reactive-streams&#34;&gt;&lt;em&gt;这里&lt;/em&gt;&lt;/a&gt; 阅读它的中文翻译。&lt;/p&gt;
+&lt;h5 id=&#34;无阻塞背压的异步流处理&#34;&gt;&lt;strong&gt;无阻塞背压的异步流处理&lt;/strong&gt;&lt;/h5&gt;
+&lt;p&gt;Reactive Streams 由以下组成：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;异步；&lt;/li&gt;
+&lt;li&gt;流式；&lt;/li&gt;
+&lt;li&gt;无阻塞；&lt;/li&gt;
+&lt;li&gt;背压（回压）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;以下是 Java 接口，你可以在 &lt;a href=&#34;https://github.com/reactive-streams/reactive-streams-jvm&#34;&gt;&lt;em&gt;GitHub&lt;/em&gt;&lt;/a&gt; 阅读更详细内容。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Publisher&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;subscribe&lt;/span&gt;(Subscriber&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;?&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;super&lt;/span&gt; T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; s);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Subscriber&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;onSubscribe&lt;/span&gt;(Subscription s);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;onNext&lt;/span&gt;(T t);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;onError&lt;/span&gt;(Throwable t);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;onComplete&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Subscription&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;request&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;long&lt;/span&gt; n);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;cancel&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Processor&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T, R&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; Subscriber&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;, Publisher&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;R&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;reactive-extensions&#34;&gt;Reactive Extensions&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;用于可观察流的异步编程 API。&lt;/p&gt;
+&lt;p&gt;ReactiveX 是来自观察者模式、迭代器模式以及函数式编程的最佳创意组合。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reactive Streams 规范翻译</title>
       <link>https://lexcao.io/zh/posts/reactive-streams/</link>
       <pubDate>Sun, 17 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/zh/posts/reactive-streams/</guid>
-      <description>翻译自 Reactive Streams
-Reactive Streams 注：Reactive Streams 直译为响应式流，这里保留英文原词。
-Reactive Streams 是一项提议，旨在为具有无阻塞背压的异步处理流提供标准。这包括针对运行环境（JVM 和 JavaScript）以及网络协议的努力。
-Reactive Streams 是为了提供一个无阻塞背压异步流式处理的标准的一个提议。
-JDK9 java.util.concurrent.Flow 在 JDK 9 的 java.util.concurrent.Flow 中可用的接口，分别为 1 ：1 语义上各自对应于 Reactive Streams。这意味着将会有一个迁移期，库（Libraries）将采用 JDK 中的新类型，但是由于库的完全语义等效以及 Reactive Streams &amp;lt;-&amp;gt; Flow 适配器库和直接与 JDK Flow 类型兼容的 TCK，因此这个迁移期预计会很短。
-如果你有兴趣了解有关 JVM Reactive Streams，请阅读此 文章
-问题 在异步系统中，处理流数据（尤其是数量未先确定的的“实时”数据）需要特别注意。最突出的问题是，需要控制资源消耗，这样快速数据源不会压垮流目的地。为了在并行网络主机或一台多核机器上并行地使用计算资源，需要异步。
-Reactive Streams 的主要目标是管理跨异步边界的流数据交换（考虑将元素传递到另一个线程或线程池），同时确保接收方不强制缓存任意数量的数据。换句话说，背压是此模型中不可或缺的一部分，以使在线程之间进行调节的队列收到限制。如果背压的通信是同步的，则异步处理的好处将被抵消（另请看 Reactive Manifesto），因此必须注意对 Reactive Streams 实现的所有方面进行完全无阻塞和异步行为授权。
-本说明书旨在允许创建许多符合要求的实现，这些实现通过遵守规则将能够平滑地互相操作，并在流应用程序的整个处理图中保留上述好处和特性。
-范围 Reactive Streams 的范围是找接口、方法和协议的最小集，这些接口、方法和协议将描述实现目标——无阻塞背压的异步处理流，所需要的操作和实体。
-端用户 DSLs（领域特定语言）或者协议绑定 API（应用编程接口）有目的地被排除在范围之外，以鼓励和支持可能使用不同编程语言的不同实现，以尽可能地遵循其平台的习惯用法。
-我们预计，接受这个 Reactive Streams 规范以及它的实现经验将共同导向广泛的集成，例如，包括将来 JDK 版本中的 Java 平台支持或者在将来的网页浏览器中网络协议的支持。</description>
+      <description>&lt;p&gt;翻译自 &lt;a href=&#34;https://www.reactive-streams.org/&#34;&gt;&lt;em&gt;Reactive Streams&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;reactive-streams&#34;&gt;Reactive Streams&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注：Reactive Streams 直译为响应式流，这里保留英文原词。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;Reactive Streams&lt;/em&gt; 是一项提议，旨在为具有&lt;strong&gt;无阻塞背压的异步处理流&lt;/strong&gt;提供标准。这包括针对运行环境（JVM 和 JavaScript）以及网络协议的努力。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Reactive Streams&lt;/em&gt; 是为了提供一个&lt;strong&gt;无阻塞背压异步流式处理的标准的一个提议&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;jdk9-javautilconcurrentflow&#34;&gt;JDK9 java.util.concurrent.Flow&lt;/h2&gt;
+&lt;p&gt;在 JDK 9 的 &lt;a href=&#34;https://docs.oracle.com/javase/9/docs/api/java/util/concurrent/Flow.html&#34;&gt;&lt;em&gt;java.util.concurrent.Flow&lt;/em&gt;&lt;/a&gt; 中可用的接口，分别为 1 ：1 语义上各自对应于 Reactive Streams。这意味着将会有一个迁移期，库（Libraries）将采用 JDK 中的新类型，但是由于库的完全语义等效以及 &lt;code&gt;Reactive Streams &amp;lt;-&amp;gt; Flow&lt;/code&gt; 适配器库和直接与 JDK Flow 类型兼容的 TCK，因此这个迁移期预计会很短。&lt;/p&gt;
+&lt;p&gt;如果你有兴趣了解有关 &lt;em&gt;JVM Reactive Streams&lt;/em&gt;，请阅读此 &lt;a href=&#34;https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.3/README.md&#34;&gt;&lt;em&gt;文章&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
+&lt;p&gt;在异步系统中，处理流数据（尤其是数量未先确定的的“实时”数据）需要特别注意。最突出的问题是，需要控制资源消耗，这样快速数据源不会压垮流目的地。为了在并行网络主机或一台多核机器上并行地使用计算资源，需要异步。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Reactive Streams&lt;/em&gt; 的主要目标是管理跨异步边界的流数据交换（考虑将元素传递到另一个线程或线程池），同时确保接收方不强制缓存任意数量的数据。换句话说，&lt;strong&gt;背压&lt;/strong&gt;是此模型中不可或缺的一部分，以使在线程之间进行调节的队列收到限制。如果背压的通信是同步的，则异步处理的好处将被抵消（另请看  &lt;a href=&#34;http://reactivemanifesto.org/&#34;&gt;&lt;em&gt;Reactive Manifesto&lt;/em&gt;&lt;/a&gt;），因此必须注意对 Reactive Streams 实现的所有方面进行完全无阻塞和异步行为授权。&lt;/p&gt;
+&lt;p&gt;本说明书旨在允许创建许多符合要求的实现，这些实现通过遵守规则将能够平滑地互相操作，并在流应用程序的整个处理图中保留上述好处和特性。&lt;/p&gt;
+&lt;h2 id=&#34;范围&#34;&gt;范围&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Reactive Streams&lt;/em&gt; 的范围是找接口、方法和协议的最小集，这些接口、方法和协议将描述实现目标——无阻塞背压的异步处理流，所需要的操作和实体。&lt;/p&gt;
+&lt;p&gt;端用户 DSLs（领域特定语言）或者协议绑定 API（应用编程接口）有目的地被排除在范围之外，以鼓励和支持可能使用不同编程语言的不同实现，以尽可能地遵循其平台的习惯用法。&lt;/p&gt;
+&lt;p&gt;我们预计，接受这个 &lt;em&gt;Reactive Streams&lt;/em&gt; 规范以及它的实现经验将共同导向广泛的集成，例如，包括将来 JDK 版本中的 Java 平台支持或者在将来的网页浏览器中网络协议的支持。&lt;/p&gt;
+&lt;h3 id=&#34;工作组&#34;&gt;工作组&lt;/h3&gt;
+&lt;h4 id=&#34;基本含义&#34;&gt;基本含义&lt;/h4&gt;
+&lt;p&gt;基本含义定义了如何通过背压来调节流中元素的传输。元素的传输方式，传输过程中的表现形式或者背压的信号发送方式均不属于本规范的一部分。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>选择一个英文名字</title>
       <link>https://lexcao.io/zh/posts/choose-english-name/</link>
       <pubDate>Sun, 10 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/zh/posts/choose-english-name/</guid>
-      <description>简介 最近我在寻找一个方法给自己取一个英文名字，然后我发现这篇文章，如何选择一个英文名字。该文章在选择一个英文名字提出了一个行之有效的方法，我用该方法制作了一个应用来帮助选择一个英文名字。
-你可以在 这里 尝试一下。
-我会在下面展开讲一下那篇文章和这个应用。
-文章所说 以下是文章原文。
-Do not try to be creative in picking an English name.
-Avoid:
-Do not try to pick a fun or cute-sounding name from a movie, television, or video game character Do not pick a name that you think sounds cool or trendy, because Americans will think it sounds stupid Do not pick a name because your friends think it sounds cute, because your friends are not the Americans you have to interact with in the future Do not translate some positive-sounding word in your language into English and make that into your name Do:</description>
+      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
+&lt;p&gt;最近我在寻找一个方法给自己取一个英文名字，然后我发现这篇文章，&lt;a href=&#34;http://www.pgbovine.net/choosing-english-name.htm&#34;&gt;&lt;em&gt;如何选择一个英文名字&lt;/em&gt;&lt;/a&gt;。该文章在选择一个英文名字提出了一个行之有效的方法，我用该方法制作了一个应用来帮助选择一个英文名字。&lt;/p&gt;
+&lt;p&gt;你可以在 &lt;a href=&#34;https://lexcao.github.io/English-name-picker&#34;&gt;&lt;em&gt;这里&lt;/em&gt;&lt;/a&gt; 尝试一下。&lt;/p&gt;
+&lt;p&gt;我会在下面展开讲一下那篇文章和这个应用。&lt;/p&gt;
+&lt;h1 id=&#34;文章所说&#34;&gt;文章所说&lt;/h1&gt;
+&lt;p&gt;以下是文章原文。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Do not try to be creative in picking an English name.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Avoid:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Do not try to pick a fun or cute-sounding name from a movie, television, or video game character&lt;/li&gt;
+&lt;li&gt;Do not pick a name that you think sounds cool or trendy, because Americans will think it sounds stupid&lt;/li&gt;
+&lt;li&gt;Do not pick a name because your friends think it sounds cute, because your friends are not the Americans you have to interact with in the future&lt;/li&gt;
+&lt;li&gt;Do not translate some positive-sounding word in your language into English and make that into your name&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;p&gt;Do:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Jekyll / Hugo / Hexo 比较</title>
       <link>https://lexcao.io/zh/posts/jekyll-hugo-hexo/</link>
       <pubDate>Wed, 30 Oct 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/zh/posts/jekyll-hugo-hexo/</guid>
-      <description>选择一个合适的静态网站生成器比较难，尤其是当你第一次想要搭建一个博客网站的时候。这是我第一次搭建一个博客并且没有足够的时间去尝试所有常见的生成器，我选择了 Jekyll 作为第一次搭建使用的生成器，尽管它可能不是最好的一个。我准备以后再尝试其他生成器。
-这是我从 Google 找到的一些简要的描述，希望它能对你选择什么生成器开始搭建网站有帮助。
-我从 GitHub 选择了以下三个静态博客生成器进行比较
-Jekyll Hugo Hexo 什么是静态网站生成器 HTML 文件； 没有服务端处理或者数据库交互； 比动态网站更安全； 利于使用 CDN 进行扩展； 缓存会带来比动态网页更高的效率； 请求超快速。 Jekyll 使用语言 Ruby； GitHub 支持； 使用 GitHub Pages 免费部署。 优势 免费且开源； RubyGems 支持构建主题为 gems 方便分发； 简单便捷使用； 强大的 GitHub Pages 支持； 开箱即用的合适的默认极简主题。 劣势 当网站内容不断增加后，构建速度会明显变慢。
-功能 Liquid 模版引擎； 基于 Gem 主题； Markdown 和 YAML 类型支持； Sass 预处理 CSS 支持； 官方插件支持 CoffeeScript。 Hugo 使用语言 Go. 优势 免费开源； 速度非常快，对构建速度做了优化； 内置支持很多功能： 动态 API 请求的内容； 无限制内容类型； shortcakes， 一个灵活的 Markdown 替代； 国际化； 别名重定向； 分页。 预制的 Go 模版和模式； 无需依赖（不用安装 Go，因为它是编译好的二进制）； 功能强大的内容模型。 劣势 主题使用 Go 模版，所以需要熟悉 Go； 没有内置默认主题； 缺少扩展性和插件（因为 Go 是编译型语言）。 功能 Go 模版； 国际化; 支持动态 API。 Hexo 使用 Node.</description>
+      <description>&lt;p&gt;选择一个合适的静态网站生成器比较难，尤其是当你第一次想要搭建一个博客网站的时候。这是我第一次搭建一个博客并且没有足够的时间去尝试所有常见的生成器，我选择了 &lt;code&gt;Jekyll&lt;/code&gt; 作为第一次搭建使用的生成器，尽管它可能不是最好的一个。我准备以后再尝试其他生成器。&lt;/p&gt;
+&lt;p&gt;这是我从 Google 找到的一些简要的描述，希望它能对你选择什么生成器开始搭建网站有帮助。&lt;/p&gt;
+&lt;p&gt;我从 GitHub 选择了以下三个静态博客生成器进行比较&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://jekyllrb.com/&#34;&gt;&lt;em&gt;Jekyll&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gohugo.io/&#34;&gt;&lt;em&gt;Hugo&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://hexo.io/&#34;&gt;&lt;em&gt;Hexo&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;什么是静态网站生成器&#34;&gt;什么是静态网站生成器&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;HTML 文件；&lt;/li&gt;
+&lt;li&gt;没有服务端处理或者数据库交互；&lt;/li&gt;
+&lt;li&gt;比动态网站更安全；&lt;/li&gt;
+&lt;li&gt;利于使用 CDN 进行扩展；&lt;/li&gt;
+&lt;li&gt;缓存会带来比动态网页更高的效率；&lt;/li&gt;
+&lt;li&gt;请求超快速。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;jekyll&#34;&gt;&lt;a href=&#34;https://jekyllrb.com/&#34;&gt;&lt;em&gt;Jekyll&lt;/em&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;使用语言 &lt;strong&gt;Ruby&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub&lt;/strong&gt; 支持；&lt;/li&gt;
+&lt;li&gt;使用 GitHub Pages 免费部署。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;优势&#34;&gt;优势&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;免费且开源；&lt;/li&gt;
+&lt;li&gt;RubyGems 支持构建主题为 gems 方便分发；&lt;/li&gt;
+&lt;li&gt;简单便捷使用；&lt;/li&gt;
+&lt;li&gt;强大的 GitHub Pages 支持；&lt;/li&gt;
+&lt;li&gt;开箱即用的合适的默认极简主题。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;劣势&#34;&gt;劣势&lt;/h2&gt;
+&lt;p&gt;当网站内容不断增加后，构建速度会明显变慢。&lt;/p&gt;
+&lt;h2 id=&#34;功能&#34;&gt;功能&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Liquid&lt;/code&gt; 模版引擎；&lt;/li&gt;
+&lt;li&gt;基于 &lt;code&gt;Gem&lt;/code&gt; 主题；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Markdown&lt;/code&gt; 和 &lt;code&gt;YAML&lt;/code&gt; 类型支持；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Sass&lt;/code&gt; 预处理 CSS 支持；&lt;/li&gt;
+&lt;li&gt;官方插件支持 &lt;code&gt;CoffeeScript&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;hugo&#34;&gt;&lt;a href=&#34;https://gohugo.io&#34;&gt;&lt;em&gt;Hugo&lt;/em&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;使用语言 &lt;strong&gt;Go&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;优势-1&#34;&gt;优势&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;免费开源；&lt;/li&gt;
+&lt;li&gt;速度非常快，对构建速度做了优化；&lt;/li&gt;
+&lt;li&gt;内置支持很多功能：
+&lt;ol&gt;
+&lt;li&gt;动态 API 请求的内容；&lt;/li&gt;
+&lt;li&gt;无限制内容类型；&lt;/li&gt;
+&lt;li&gt;shortcakes， 一个灵活的 Markdown 替代；&lt;/li&gt;
+&lt;li&gt;国际化；&lt;/li&gt;
+&lt;li&gt;别名重定向；&lt;/li&gt;
+&lt;li&gt;分页。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;预制的 Go 模版和模式；&lt;/li&gt;
+&lt;li&gt;无需依赖（不用安装 Go，因为它是编译好的二进制）；&lt;/li&gt;
+&lt;li&gt;功能强大的内容模型。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;劣势-1&#34;&gt;劣势&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;主题使用 Go 模版，所以需要熟悉 Go；&lt;/li&gt;
+&lt;li&gt;没有内置默认主题；&lt;/li&gt;
+&lt;li&gt;缺少扩展性和插件（因为 Go 是编译型语言）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;功能-1&#34;&gt;功能&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Go 模版；&lt;/li&gt;
+&lt;li&gt;国际化;&lt;/li&gt;
+&lt;li&gt;支持动态 API。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;hexo&#34;&gt;&lt;a href=&#34;https://hexo.io&#34;&gt;&lt;em&gt;Hexo&lt;/em&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;strong&gt;Node.js&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;优势-2&#34;&gt;优势&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;相当快速；&lt;/li&gt;
+&lt;li&gt;在 GitHub Pages 部署简单；&lt;/li&gt;
+&lt;li&gt;中文支持（可能是劣势对于非中文用户）；&lt;/li&gt;
+&lt;li&gt;中文社区。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;劣势-2&#34;&gt;劣势&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;没有英文。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;功能-2&#34;&gt;功能&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;EJS&lt;/code&gt; 模版引擎;&lt;/li&gt;
+&lt;li&gt;支持 &lt;code&gt;中文&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;对于 &lt;code&gt;HTML + CSS + Javascript&lt;/code&gt; 非常友好。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;我正在使用&#34;&gt;我正在使用&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Jekyll&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Jekyll 不使用插件支持多语言</title>
       <link>https://lexcao.io/zh/posts/jekyll-multi-language-without-plugin/</link>
       <pubDate>Sat, 26 Oct 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/zh/posts/jekyll-multi-language-without-plugin/</guid>
-      <description>实现目标 支持多语言，英文为主，中文为辅； 当访问 / 根目录下页面，比如 /about.html /posts/hello-world 显示英文页面； 当访问 /zh/ 目录下页面，比如 /zh/about.html /zh/posts/hello-world 显示中文页面； 当访问 ../hello-world 文章时，可以通过链接跳转到对应语言页面； archive 和 index 页面中仅显示出当前语言页面。 相关缺陷 404 页面无法配置，只能在 404.html 页面写上两种语言； 支持多语言文章的分页插件 jekyll-paginate-v2 没在 GitHub Pages 支持的插件白名单内，目前本博客首页不支持分页。多语言分页详见下文； 多语言时间表示有点麻烦，需要做一些字符串处理工作，能实现但是不太优雅，具体可以参考 Jekyll-Date-Formatting。 开始配置 最初，我搜索到 i18n 插件 Jekyll-Multiple-Languages-Plugin。
-该仓库的 Star 数是多语言插件中最多的，同时里面也列出了相关其他多语言插件，已经比较完善，不想折腾的可以直接使用。
-目前我为了简单和可定制化，同时省略掉插件中不必要的功能，选择使用自定义规则来实现多语言功能。
-1. 单个博文配置 每一篇文章和页面需要定义两个属性：
-uid 标示文章唯一，一篇文章的中文版本和英文版本 uid 相同； 注意：uid 可以设置为任意命名，比如 document_id 。 locale 标示文章语言，一篇文章被渲染后作为哪种语言展示。 所以每篇文章的 Front Matter 新增如下设置
---- uid: hello-world locale: zh --- 2. 对于文章 posts 每篇文章都需要在 Front Matter 中写上 locale 重复多余。不要重复自己。我准备使用不同文件夹来区分不同语言的文章，然后在配置文件设置 locale 的默认值。</description>
+      <description>&lt;h1 id=&#34;实现目标&#34;&gt;实现目标&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;支持多语言，英文为主，中文为辅；&lt;/li&gt;
+&lt;li&gt;当访问 &lt;code&gt;/&lt;/code&gt; 根目录下页面，比如 &lt;code&gt;/about.html&lt;/code&gt; &lt;code&gt;/posts/hello-world&lt;/code&gt; 显示英文页面；&lt;/li&gt;
+&lt;li&gt;当访问 &lt;code&gt;/zh/&lt;/code&gt; 目录下页面，比如 &lt;code&gt;/zh/about.html&lt;/code&gt; &lt;code&gt;/zh/posts/hello-world&lt;/code&gt; 显示中文页面；&lt;/li&gt;
+&lt;li&gt;当访问 &lt;code&gt;../hello-world&lt;/code&gt; 文章时，可以通过链接跳转到对应语言页面；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;archive&lt;/code&gt; 和 &lt;code&gt;index&lt;/code&gt; 页面中仅显示出当前语言页面。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;相关缺陷&#34;&gt;相关缺陷&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;404 页面无法配置，只能在 &lt;code&gt;404.html&lt;/code&gt; 页面写上两种语言；&lt;/li&gt;
+&lt;li&gt;支持多语言文章的分页插件 &lt;code&gt;jekyll-paginate-v2&lt;/code&gt; 没在 GitHub Pages 支持的插件白名单内，目前本博客首页不支持分页。多语言分页详见&lt;a href=&#34;https://lexcao.io/zh/posts/jekyll-multi-language-without-plugin/#paginate&#34;&gt;下文&lt;/a&gt;；&lt;/li&gt;
+&lt;li&gt;多语言时间表示有点麻烦，需要做一些字符串处理工作，能实现但是不太优雅，具体可以参考 &lt;a href=&#34;http://alanwsmith.com/jekyll-liquid-date-formatting-examples&#34;&gt;&lt;em&gt;Jekyll-Date-Formatting&lt;/em&gt;&lt;/a&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;开始配置&#34;&gt;开始配置&lt;/h1&gt;
+&lt;p&gt;最初，我搜索到 &lt;code&gt;i18n&lt;/code&gt; 插件 &lt;a href=&#34;https://github.com/kurtsson/jekyll-multiple-languages-plugin&#34;&gt;&lt;em&gt;Jekyll-Multiple-Languages-Plugin&lt;/em&gt;&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;该仓库的 Star 数是多语言插件中最多的，同时里面也列出了相关其他多语言插件，已经比较完善，不想折腾的可以直接使用。&lt;/p&gt;
+&lt;p&gt;目前我为了简单和可定制化，同时省略掉插件中不必要的功能，选择使用自定义规则来实现多语言功能。&lt;/p&gt;
+&lt;h2 id=&#34;1-单个博文配置&#34;&gt;1. 单个博文配置&lt;/h2&gt;
+&lt;p&gt;每一篇文章和页面需要定义两个属性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;uid&lt;/code&gt; 标示文章唯一，一篇文章的中文版本和英文版本 &lt;code&gt;uid&lt;/code&gt; 相同；
+&lt;ul&gt;
+&lt;li&gt;注意：&lt;code&gt;uid&lt;/code&gt; 可以设置为任意命名，比如 &lt;code&gt;document_id&lt;/code&gt; 。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;locale&lt;/code&gt; 标示文章语言，一篇文章被渲染后作为哪种语言展示。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以每篇文章的 &lt;code&gt;Front Matter&lt;/code&gt; 新增如下设置&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;---
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;uid&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;hello-world&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;locale&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;zh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;---
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-对于文章-posts&#34;&gt;2. 对于文章 posts&lt;/h2&gt;
+&lt;p&gt;每篇文章都需要在 &lt;code&gt;Front Matter&lt;/code&gt; 中写上 &lt;code&gt;locale&lt;/code&gt; 重复多余。&lt;strong&gt;不要重复自己&lt;/strong&gt;。我准备使用不同文件夹来区分不同语言的文章，然后在配置文件设置 &lt;code&gt;locale&lt;/code&gt; 的默认值。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>你好 世界</title>
       <link>https://lexcao.io/zh/posts/hello-world/</link>
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/zh/posts/hello-world/</guid>
-      <description>博客配置：
-静态网页生成器 Jekyll 3.8.5 Ruby 2.6.0 主题 lagrange 网页分析 Google Aynalysis Baidu Aynalysis 部署 GitHub Pages 这是我的第一篇文章，作为最简单的 “你好 世界”，我想记录一下该博客的诞生过程，以及如果你也想搭建一个自己的博客应该怎么做。
-本文章将会涉及三个部分：
-选择博客类型 准备好所需内容 将他们编排起来 第一步 选择博客类型 根据前端网页是否与后台服务器或者数据库交互分为：静态网站 / 动态网站
-静态网站：
-仅依靠 HTML / CSS / JS 没有后台服务器存储数据 数据是预先生成的 动态网站：
-依赖前端 HTML / CSS / JS 数据从后台服务器获取 能够动态响应用户请求 所以，静态博客：
-文章预先生成 不依赖后台服务器 动态博客：
-文章从后台服务器获取 前端页面动态获取 考虑到刚接触到博客搭建，先从简单的静态博客入手。目前 GitHub 上有很多开源的静态网站生成器，这里我选择使用 Jekyll。
-选择合适的静态博客生成器请看 [Jekyll / Hugo / Hexo 比较]({{ &amp;ldquo;/zh/posts/jekyll-hugo-hexo&amp;rdquo; | relative_url }})。
-第二步 准备好所需内容 准备内容涉及以下方面：</description>
+      <description>&lt;p&gt;博客配置：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;静态网页生成器
+&lt;ul&gt;
+&lt;li&gt;Jekyll 3.8.5&lt;/li&gt;
+&lt;li&gt;Ruby 2.6.0&lt;/li&gt;
+&lt;li&gt;主题 &lt;a href=&#34;http://jekyllthemes.org/themes/lagrange/&#34;&gt;lagrange&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;网页分析
+&lt;ul&gt;
+&lt;li&gt;Google Aynalysis&lt;/li&gt;
+&lt;li&gt;Baidu Aynalysis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;部署
+&lt;ul&gt;
+&lt;li&gt;GitHub Pages&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这是我的第一篇文章，作为最简单的 “你好 世界”，我想记录一下该博客的诞生过程，以及如果你也想搭建一个自己的博客应该怎么做。&lt;/p&gt;
+&lt;p&gt;本文章将会涉及三个部分：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;选择博客类型&lt;/li&gt;
+&lt;li&gt;准备好所需内容&lt;/li&gt;
+&lt;li&gt;将他们编排起来&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;第一步-选择博客类型&#34;&gt;第一步 选择博客类型&lt;/h1&gt;
+&lt;p&gt;根据前端网页是否与后台服务器或者数据库交互分为：静态网站 / 动态网站&lt;/p&gt;
+&lt;p&gt;静态网站：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;仅依靠 HTML / CSS / JS&lt;/li&gt;
+&lt;li&gt;没有后台服务器存储数据&lt;/li&gt;
+&lt;li&gt;数据是预先生成的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;动态网站：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;依赖前端 HTML / CSS / JS&lt;/li&gt;
+&lt;li&gt;数据从后台服务器获取&lt;/li&gt;
+&lt;li&gt;能够动态响应用户请求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以，静态博客：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;文章预先生成&lt;/li&gt;
+&lt;li&gt;不依赖后台服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;动态博客：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;文章从后台服务器获取&lt;/li&gt;
+&lt;li&gt;前端页面动态获取&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;考虑到刚接触到博客搭建，先从简单的静态博客入手。目前 GitHub 上有很多开源的静态网站生成器，这里我选择使用 &lt;code&gt;Jekyll&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;选择合适的静态博客生成器请看 [&lt;em&gt;Jekyll / Hugo / Hexo 比较&lt;/em&gt;]({{ &amp;ldquo;/zh/posts/jekyll-hugo-hexo&amp;rdquo; | relative_url }})。&lt;/p&gt;
+&lt;h1 id=&#34;第二步-准备好所需内容&#34;&gt;第二步 准备好所需内容&lt;/h1&gt;
+&lt;p&gt;准备内容涉及以下方面：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;博客文章&lt;/li&gt;
+&lt;li&gt;博客介绍&lt;/li&gt;
+&lt;li&gt;作者信息&lt;/li&gt;
+&lt;li&gt;博客域名&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;博客文章&#34;&gt;博客文章&lt;/h2&gt;
+&lt;p&gt;提前写好文章准备发布&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

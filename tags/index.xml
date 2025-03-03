@@ -5,100 +5,97 @@
     <link>https://lexcao.io/tags/</link>
     <description>Recent content in Tags on The Coding Notes</description>
     <image>
-      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</url>
-      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80</link>
+      <title>The Coding Notes</title>
+      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
+      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 01 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lexcao.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- 0.145.0</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 03 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://lexcao.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Code Generation</title>
+      <link>https://lexcao.io/tags/code-generation/</link>
+      <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/tags/code-generation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Golang</title>
+      <link>https://lexcao.io/tags/golang/</link>
+      <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/tags/golang/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Practice</title>
       <link>https://lexcao.io/tags/practice/</link>
       <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/tags/practice/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Rust</title>
       <link>https://lexcao.io/tags/rust/</link>
       <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/tags/rust/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Backend</title>
       <link>https://lexcao.io/tags/backend/</link>
       <pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/tags/backend/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Kotlin</title>
       <link>https://lexcao.io/tags/kotlin/</link>
       <pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/tags/kotlin/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Library</title>
       <link>https://lexcao.io/tags/library/</link>
       <pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/tags/library/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Document</title>
       <link>https://lexcao.io/tags/document/</link>
       <pubDate>Thu, 28 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/tags/document/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Reactive</title>
       <link>https://lexcao.io/tags/reactive/</link>
       <pubDate>Thu, 28 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/tags/reactive/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>English</title>
       <link>https://lexcao.io/tags/english/</link>
       <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/tags/english/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Tutorial</title>
       <link>https://lexcao.io/tags/tutorial/</link>
       <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/tags/tutorial/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Blog</title>
       <link>https://lexcao.io/tags/blog/</link>
       <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://lexcao.io/tags/blog/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>
