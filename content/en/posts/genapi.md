@@ -4,6 +4,8 @@ date: 2025-03-03
 tags: [Golang, Code Generation]
 ---
 
+In this article, I'm excited to introduce genapi, a code generator for Golang HTTP clients. For comprehensive documentation and implementation details, you can explore the [genapi website](https://lexcao.io/genapi/) or check out our [GitHub repository](https://github.com/lexcao/genapi).
+
 # From Manual to Automatic: Evolution of Golang HTTP Client
 
 In Golang development, making HTTP API calls is a very common requirement. Through a weather API example, this article will demonstrate how HTTP client code evolves from manual writing to automatic generation. Let's look at this simple weather API:
@@ -171,4 +173,3 @@ Through annotation-driven approach, genapi enables developers to:
 - Improve development efficiency and reduce maintenance costs
 - Make code clearer and more reliable
 
-For more details, visit the [GitHub repository](https://github.com/lexcao/genapi).
