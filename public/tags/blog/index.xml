@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Blog on The Coding Notes</title>
+    <link>http://localhost:1313/tags/blog/</link>
+    <description>Recent content in Blog on The Coding Notes</description>
+    <image>
+      <title>The Coding Notes</title>
+      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
+      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
+    </image>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 29 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jekyll / Hugo / Hexo Comparison</title>
+      <link>http://localhost:1313/posts/jekyll-hugo-hexo/</link>
+      <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/jekyll-hugo-hexo/</guid>
+      <description>&lt;p&gt;It is hard to choose a suitable static website generator, especially when you want to build website like blog for the first time. This is my first time to build a blog and have not enough time to go through some popular generators, which I have chosen &lt;code&gt;Jekyll&lt;/code&gt; at the beginning but it is not a best one. In the future I am going to try another generators.&lt;/p&gt;
+&lt;p&gt;Here is some brief information I found from Google and hope it should be useful for you to decide starting up on what generator.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Jekyll Multi-Language without Plugin</title>
+      <link>http://localhost:1313/posts/jekyll-multi-language-without-plugin/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/jekyll-multi-language-without-plugin/</guid>
+      <description>&lt;h1 id=&#34;goal&#34;&gt;Goal&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Support multi-language, mainly in English and supplemented by Chinese;&lt;/li&gt;
+&lt;li&gt;When visiting pages begin with &lt;code&gt;/&lt;/code&gt;, e.g. &lt;code&gt;/about.html&lt;/code&gt;, &lt;code&gt;/posts/hello-world&lt;/code&gt;, English pages would be  shown;&lt;/li&gt;
+&lt;li&gt;When visiting pages began with &lt;code&gt;/zh/&lt;/code&gt;, e.g. &lt;code&gt;/zh/about.html&lt;/code&gt;, &lt;code&gt;/zh/posts/hello-world&lt;/code&gt;, Chinese pages would be shown;&lt;/li&gt;
+&lt;li&gt;When visiting &lt;code&gt;../hello-world&lt;/code&gt; posts, corresponding langugage posts would be jumped via the link;&lt;/li&gt;
+&lt;li&gt;Posts which are specified language would only be shown in &lt;code&gt;archive&lt;/code&gt; and &lt;code&gt;index&lt;/code&gt; pages.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;defect&#34;&gt;Defect&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;As &lt;code&gt;404.html&lt;/code&gt; page was not supported for separate language file, two langugage content would be shown on it at the same time.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;jekyll-paginate-v2&lt;/code&gt;, a plugin supports pagination for multi-language, is not supported by GitHub Pages. So the blog has not been supported pagination so far. See details &lt;a href=&#34;http://localhost:1313/posts/jekyll-multi-language-without-plugin/#pagination&#34;&gt;&lt;em&gt;below&lt;/em&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;It is a little bit tricky to show date in multi-language way. Some string formatting work should be taken as it is able to have done that but is not a better way. Please see &lt;a href=&#34;http://alanwsmith.com/jekyll-liquid-date-formatting-examples&#34;&gt;&lt;em&gt;Jekyll Date Formatting&lt;/em&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;setup&#34;&gt;Setup&lt;/h1&gt;
+&lt;p&gt;Firstly, I found a &lt;code&gt;i18n&lt;/code&gt; plugin &lt;a href=&#34;https://github.com/kurtsson/jekyll-multiple-languages-plugin&#34;&gt;&lt;em&gt;Jekyll Multiple Languages Plugin&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hello World</title>
+      <link>http://localhost:1313/posts/hello-world/</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/hello-world/</guid>
+      <description>&lt;h1 id=&#34;hello-world&#34;&gt;Hello World&lt;/h1&gt;
+&lt;p&gt;Blog configuration:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Static Website Generation
+&lt;ul&gt;
+&lt;li&gt;Jekyll 3.8.5&lt;/li&gt;
+&lt;li&gt;Ruby 2.6.0&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://jekyllthemes.org/themes/lagrange/&#34;&gt;Lagrange&lt;/a&gt; theme&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Website Aynalysis
+&lt;ul&gt;
+&lt;li&gt;Google Analysis&lt;/li&gt;
+&lt;li&gt;Baidu Analysis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Deployment
+&lt;ul&gt;
+&lt;li&gt;GitHub Pages&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is my first post, which I would like to note the beginning of the blog as the simplest &amp;ldquo;hello world&amp;rdquo; and how to build such blog by yourself.&lt;/p&gt;
+&lt;p&gt;The article will contain three steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Choose type of blog&lt;/li&gt;
+&lt;li&gt;Prepare something needed&lt;/li&gt;
+&lt;li&gt;Compose them&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;step-01-choose-type-of-blog&#34;&gt;Step 01 Choose Type of Blog&lt;/h1&gt;
+&lt;p&gt;There are static websites and dynamic websites depending on whether the frontend web page interacts with the backend server or database.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

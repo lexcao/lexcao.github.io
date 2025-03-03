@@ -1,7 +1,8 @@
 baseURL: https://lexcao.io
 title: The Coding Notes
 theme: PaperMod
-paginate: 5
+pagination:
+  pagerSize: 5
 
 defaultContentLanguage: en
 
@@ -29,18 +30,19 @@ languages:
     languageName: English
     weight: 1
     DateFormat: "January 2, 2006"
-    profileMode:
-      enabled: true
-      imageUrl: "profile_avatar.webp"
-      imageWidth: 150
-      imageHeight: 150
-      title: Lex Cao
-      subtitle: Stay hungry, stay foolish.
-      buttons:
-        - name: Posts
-          url: posts
-        - name: Projects
-          url: projects
+    params:
+      profileMode:
+        enabled: true
+        imageUrl: "/profile_avatar.webp"
+        imageWidth: 150
+        imageHeight: 150
+        title: Lex Cao
+        subtitle: Stay hungry, stay foolish.
+        buttons:
+          - name: Posts
+            url: posts
+          - name: Projects
+            url: projects
     menu:
       main:
         - identifier: search
@@ -68,20 +70,21 @@ languages:
     languageName: 中文
     weight: 2
     DateFormat: "2006 01/02"
-    profileMode:
-      enabled: true
-      imageUrl: "/profile_avatar.webp"
-      imageWidth: 150
-      imageHeight: 150
-      title: 曹 历鑫
-      subtitle: 在城市的肋骨间，感受一成不变的节拍
-      buttons:
-        - name: 博文
-          url: posts
-        - name: 项目
-          url: projects
-    label:
-      text: 代码笔记
+    params:
+      profileMode:
+        enabled: true
+        imageUrl: "/profile_avatar.webp"
+        imageWidth: 150
+        imageHeight: 150
+        title: 曹 历鑫
+        subtitle: 在城市的肋骨间，感受一成不变的节拍
+        buttons:
+          - name: 博文
+            url: posts
+          - name: 项目
+            url: projects
+      label:
+        text: 代码笔记
     menu:
       main:
         - identifier: search
@@ -113,6 +116,8 @@ params:
   keywords: [ Blog ]
   author: Lex Cao
   images: [ "https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&fit=crop&w=720&q=80" ]
+  profileMode:
+    enabled: true
 
   defaultTheme: auto # dark, light
   disableThemeToggle: false

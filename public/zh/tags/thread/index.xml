@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Thread on The Coding Notes</title>
+    <link>http://localhost:1313/zh/tags/thread/</link>
+    <description>Recent content in Thread on The Coding Notes</description>
+    <image>
+      <title>The Coding Notes</title>
+      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
+      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
+    </image>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>zh</language>
+    <lastBuildDate>Sat, 21 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/zh/tags/thread/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>一次线程死锁排查记录</title>
+      <link>http://localhost:1313/zh/posts/async-within-async/</link>
+      <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/async-within-async/</guid>
+      <description>&lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
+&lt;p&gt;某次发版之后，线上服务低概率出现某台实例接口响应超时，具体表现为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/health&lt;/code&gt; 接口超时报警；&lt;/li&gt;
+&lt;li&gt;线程死锁，Tomcat 线程池吃满；&lt;/li&gt;
+&lt;li&gt;服务完全无响应。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;保留下当前 heap dump 和 thread stack 后，临时重启服务器恢复正常。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# heap dump&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ jmap -dump:format&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;b,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;dump.hprof &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;pid&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# thread stack&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;jstack &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;pid&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &amp;gt; stack.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来简单记录一下排查结果。
+&lt;br/&gt;（此文为回忆所写，当时排查的思考细节和过程已省略）&lt;/p&gt;
+&lt;h1 id=&#34;排查&#34;&gt;排查&lt;/h1&gt;
+&lt;h2 id=&#34;heap-dump&#34;&gt;heap dump&lt;/h2&gt;
+&lt;h3 id=&#34;使用工具&#34;&gt;使用工具&lt;/h3&gt;
+&lt;p&gt;Eclipse + MAT&lt;/p&gt;
+&lt;h3 id=&#34;安装&#34;&gt;安装&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 安装 eclipse&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ brew cask install eclipse-java
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 安装 eclipse MAT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ brew cask install mat &lt;span style=&#34;color:#75715e&#34;&gt;# 是的，这个就是 eclipse-mat&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;相关连接&#34;&gt;相关连接&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://projects.eclipse.org/projects/eclipse&#34;&gt;&lt;em&gt;&lt;strong&gt;Eclipse&lt;/strong&gt;&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.eclipse.org/mat/&#34;&gt;&lt;em&gt;&lt;strong&gt;Eclipse MAT&lt;/strong&gt;&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;使用&#34;&gt;使用&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;把 &lt;code&gt;heap dump&lt;/code&gt; 文件 &lt;code&gt;dump.hprof&lt;/code&gt; 导入到 MAT。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;发现有一个名称为 &lt;code&gt;Spring-Async-Scheduler&lt;/code&gt; 异步队列占用特别大。【TODO 图片】&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

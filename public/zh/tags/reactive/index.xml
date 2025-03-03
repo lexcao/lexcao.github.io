@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Reactive on The Coding Notes</title>
+    <link>http://localhost:1313/zh/tags/reactive/</link>
+    <description>Recent content in Reactive on The Coding Notes</description>
+    <image>
+      <title>The Coding Notes</title>
+      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
+      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
+    </image>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>zh</language>
+    <lastBuildDate>Sun, 17 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/zh/tags/reactive/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reactive Streams 规范翻译</title>
+      <link>http://localhost:1313/zh/posts/reactive-streams/</link>
+      <pubDate>Sun, 17 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/reactive-streams/</guid>
+      <description>&lt;p&gt;翻译自 &lt;a href=&#34;https://www.reactive-streams.org/&#34;&gt;&lt;em&gt;Reactive Streams&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;reactive-streams&#34;&gt;Reactive Streams&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注：Reactive Streams 直译为响应式流，这里保留英文原词。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;Reactive Streams&lt;/em&gt; 是一项提议，旨在为具有&lt;strong&gt;无阻塞背压的异步处理流&lt;/strong&gt;提供标准。这包括针对运行环境（JVM 和 JavaScript）以及网络协议的努力。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Reactive Streams&lt;/em&gt; 是为了提供一个&lt;strong&gt;无阻塞背压异步流式处理的标准的一个提议&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;jdk9-javautilconcurrentflow&#34;&gt;JDK9 java.util.concurrent.Flow&lt;/h2&gt;
+&lt;p&gt;在 JDK 9 的 &lt;a href=&#34;https://docs.oracle.com/javase/9/docs/api/java/util/concurrent/Flow.html&#34;&gt;&lt;em&gt;java.util.concurrent.Flow&lt;/em&gt;&lt;/a&gt; 中可用的接口，分别为 1 ：1 语义上各自对应于 Reactive Streams。这意味着将会有一个迁移期，库（Libraries）将采用 JDK 中的新类型，但是由于库的完全语义等效以及 &lt;code&gt;Reactive Streams &amp;lt;-&amp;gt; Flow&lt;/code&gt; 适配器库和直接与 JDK Flow 类型兼容的 TCK，因此这个迁移期预计会很短。&lt;/p&gt;
+&lt;p&gt;如果你有兴趣了解有关 &lt;em&gt;JVM Reactive Streams&lt;/em&gt;，请阅读此 &lt;a href=&#34;https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.3/README.md&#34;&gt;&lt;em&gt;文章&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
+&lt;p&gt;在异步系统中，处理流数据（尤其是数量未先确定的的“实时”数据）需要特别注意。最突出的问题是，需要控制资源消耗，这样快速数据源不会压垮流目的地。为了在并行网络主机或一台多核机器上并行地使用计算资源，需要异步。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Reactive Streams&lt;/em&gt; 的主要目标是管理跨异步边界的流数据交换（考虑将元素传递到另一个线程或线程池），同时确保接收方不强制缓存任意数量的数据。换句话说，&lt;strong&gt;背压&lt;/strong&gt;是此模型中不可或缺的一部分，以使在线程之间进行调节的队列收到限制。如果背压的通信是同步的，则异步处理的好处将被抵消（另请看  &lt;a href=&#34;http://reactivemanifesto.org/&#34;&gt;&lt;em&gt;Reactive Manifesto&lt;/em&gt;&lt;/a&gt;），因此必须注意对 Reactive Streams 实现的所有方面进行完全无阻塞和异步行为授权。&lt;/p&gt;
+&lt;p&gt;本说明书旨在允许创建许多符合要求的实现，这些实现通过遵守规则将能够平滑地互相操作，并在流应用程序的整个处理图中保留上述好处和特性。&lt;/p&gt;
+&lt;h2 id=&#34;范围&#34;&gt;范围&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Reactive Streams&lt;/em&gt; 的范围是找接口、方法和协议的最小集，这些接口、方法和协议将描述实现目标——无阻塞背压的异步处理流，所需要的操作和实体。&lt;/p&gt;
+&lt;p&gt;端用户 DSLs（领域特定语言）或者协议绑定 API（应用编程接口）有目的地被排除在范围之外，以鼓励和支持可能使用不同编程语言的不同实现，以尽可能地遵循其平台的习惯用法。&lt;/p&gt;
+&lt;p&gt;我们预计，接受这个 &lt;em&gt;Reactive Streams&lt;/em&gt; 规范以及它的实现经验将共同导向广泛的集成，例如，包括将来 JDK 版本中的 Java 平台支持或者在将来的网页浏览器中网络协议的支持。&lt;/p&gt;
+&lt;h3 id=&#34;工作组&#34;&gt;工作组&lt;/h3&gt;
+&lt;h4 id=&#34;基本含义&#34;&gt;基本含义&lt;/h4&gt;
+&lt;p&gt;基本含义定义了如何通过背压来调节流中元素的传输。元素的传输方式，传输过程中的表现形式或者背压的信号发送方式均不属于本规范的一部分。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
