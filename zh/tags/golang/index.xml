@@ -18,7 +18,8 @@
       <link>https://lexcao.io/zh/posts/genapi/</link>
       <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
       <guid>https://lexcao.io/zh/posts/genapi/</guid>
-      <description>&lt;h1 id=&#34;从手工到自动golang-http-client-的演进之路&#34;&gt;从手工到自动：Golang HTTP Client 的演进之路&lt;/h1&gt;
+      <description>&lt;p&gt;本文将为大家介绍 genapi，一个用于自动生成 Golang HTTP Client 的代码库。如果你对这个项目感兴趣，可以访问 &lt;a href=&#34;https://lexcao.io/genapi/&#34;&gt;genapi 官网&lt;/a&gt; 或 &lt;a href=&#34;https://github.com/lexcao/genapi&#34;&gt;GitHub 仓库&lt;/a&gt; 获取更多技术细节。&lt;/p&gt;
+&lt;h1 id=&#34;从手工到自动golang-http-client-的演进之路&#34;&gt;从手工到自动：Golang HTTP Client 的演进之路&lt;/h1&gt;
 &lt;p&gt;在 Golang 开发中，调用 HTTP API 是一个非常常见的需求。本文将通过一个天气 API 的示例，介绍 HTTP Client 代码是如何从手工编写演进到自动生成的。让我们看看这个简单的天气 API：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;api&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;weather&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;?&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;city&lt;/span&gt;=&lt;span style=&#34;color:#a6e22e&#34;&gt;shanghai&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Response&lt;/span&gt;:
