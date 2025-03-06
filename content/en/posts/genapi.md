@@ -168,10 +168,75 @@ func main() {
 }
 ```
 
+### Replacing Different HttpClients
+
+One of the core features of genapi is its support for dynamically replacing HttpClient at runtime. This gives us great flexibility to switch between different HTTP client implementations as needed.
+
+#### Replacing the Default HttpClient
+
+```go
+import (
+    http_client "net/http"
+    "github.com/lexcao/genapi"
+    "github.com/lexcao/genapi/pkg/clients/http"
+)
+
+func main() {
+    httpClient := &http_client.Client{}
+    
+    // Specify when creating
+    client := genapi.New[api.WeatherAPI](
+        genapi.WithHttpClient(http.New(httpClient))
+    )
+
+    // Or set at runtime
+    client.SetHttpClient(httpClient)
+}
+```
+
+#### Using Resty
+
+genapi has built-in support for Resty client. First, you need to install:
+
+```bash
+go get github.com/lexcao/genapi/pkg/clients/resty
+```
+
+Then you can use it like this:
+
+```go
+import (
+    "github.com/lexcao/genapi"
+    "github.com/lexcao/genapi/pkg/clients/resty"
+    resty_client "github.com/go-resty/resty/v2"
+)
+
+func main() {
+    client := genapi.New[api.WeatherAPI](
+        genapi.WithHttpClient(resty.DefaultClient),           // Use default configuration
+        genapi.WithHttpClient(resty.New(resty_client.New())), // Custom configuration
+    )
+}
+```
+
+#### Implementing Your Own HttpClient
+
+You can also implement your own HttpClient by implementing the `genapi.HttpClient` interface:
+
+```go
+type HttpClient interface {
+    SetConfig(Config)
+    Do(req *Request) (*Response, error)
+}
+```
+
+You can also use the test suite `genapi.TestHttpClient` to verify if your implementation covers the basic use cases:
+
 # Summary
 
 Through annotation-driven approach, genapi enables developers to:
 - Focus on interface definition, avoiding repetitive code
 - Improve development efficiency and reduce maintenance costs
 - Make code clearer and more reliable
+- Dynamically replace HttpClient implementations
 
