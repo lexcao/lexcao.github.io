@@ -18,7 +18,7 @@ tags: [蓝牙, HomeKit, Home Assistant, ESPHome, 教程]
 
 那么恭喜你，你可以跟随本篇教程，一步一步将它接入 HomeKit 智能家居。
 来实现通过 iPhone 家庭应用控制以及 Siri 语音控制。
-对于实现后的效果，可以看我另一篇博文【TODO 此处链接】。
+对于实现后的效果，可以看我另一篇博文：[折腾：HomeKit 接入蓝牙吸顶灯](./integrate-bluetooth-lamp-into-homekit)
 
 非常感谢 https://github.com/NicoIIT/ha-ble-adv/，本篇教程实际是从零接入该项目。
 
@@ -40,7 +40,7 @@ tags: [蓝牙, HomeKit, Home Assistant, ESPHome, 教程]
 
 # 如何实现
 
-对于实现不感兴趣的，可以跳转到下一部分【TODO 此处链接】
+对于实现不感兴趣的，可以跳转到[下一部分](#Step1)
 
 ## 组件列表
 
@@ -61,8 +61,9 @@ tags: [蓝牙, HomeKit, Home Assistant, ESPHome, 教程]
    1. 通过 `HACS` 安装组件 `ha-ble-adv`
    2. 通过 ESP Home 在 ESP32 上面安装 `esphome-ble-adv-proxy` 以供 `ha-ble-adv` 发送和接收蓝牙信息
 
-以下是整体流程图
-【TODO 替换流程图 ha-ble-adv-arch02.png】
+以下是整体架构图
+
+{{<image name="ha-ble-adv-arch02">}}
 
 
 话不多说，让我们开始吧。基于上面的实现，为了教程的连贯性，让我们从 ESP32 开始。
@@ -73,7 +74,7 @@ $ mkdir Home-Assistant
 $ cd Home-Assistant
 ```
 
-# 第一部分： ESP Home
+# 第一部分： ESP Home <a name="Step1" />
 
 ## 安装 ESP Home
 
@@ -202,7 +203,7 @@ ble_adv_proxy:
 ### 要做什么
 
 通过 python 直接在 MacOS 主机上面安装 Home Assistant Core。
-**注意：本教程对于在 Docker 内运行的 Home Assistant 无法成功**，详见下面 Q&A 【TODO 链接】
+**注意：本教程对于在 Docker 内运行的 Home Assistant 无法成功**，详见下面 [Q&A](#QA)
 
 当然，可以访问 [官方文档](https://www.home-assistant.io/installation/macos#install-home-assistant-core) 获取更多安装说明。
 
@@ -450,7 +451,7 @@ logger:
 本教程详细介绍了如何将特定的蓝牙灯（如 LampSmart Pro 控制的灯）通过一系列开源工具接入 Apple HomeKit 智能家居系统。我们从准备 ESP32 开发板开始，利用 ESPHome 安装了 `esphome-ble-adv-proxy` 以实现蓝牙通信代理。接着，我们在 MacOS 上安装了 Home Assistant Core，并集成了 ESP32 设备。通过 HACS，我们安装了关键的 `ha-ble-adv` 自定义组件，用于发现和控制蓝牙灯。最后，利用 Home Assistant 内置的 HomeKit Bridge 功能，成功将蓝牙灯设备桥接至 iPhone 的家庭应用，实现了通过家庭 App 和 Siri 进行控制。教程中也涵盖了各个步骤可能遇到的问题及其排查方法，特别是 HomeKit 连接时常见的 mDNS 网络问题。遵循本教程，你可以将原本“不智能”的蓝牙设备融入现代智能家居生态。
 
 
-# 答疑
+# 答疑 <a name="QA">
 
 ### Q1 是否可以使用 Docker 运行 Home Assistant
 

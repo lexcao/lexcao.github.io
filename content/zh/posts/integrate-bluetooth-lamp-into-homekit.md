@@ -1,5 +1,5 @@
 ---
-title: HomeKit 接入蓝牙吸顶灯
+title: 折腾：HomeKit 接入蓝牙吸顶灯
 date: 2025-04-26
 tags: [蓝牙, HomeKit, Home Assistant, ESPHome]
 ---
@@ -10,6 +10,8 @@ tags: [蓝牙, HomeKit, Home Assistant, ESPHome]
 搜索后才发现，原来同品牌更贵版本是支持米家控制的，而我买的这个乞丐版不支持，大概价差 100 元左右。
 
 作为一个爱折腾的程序员，我立马开启了第一性原理思考模式：既然它能通过手机 App 控制，通过打开 App 时申请蓝牙权限可以推断是通过蓝牙进行通信。既然是蓝牙控制，那理论上就能通过别的蓝牙程序来控制它，进而接入智能家居生态。对，没错，肯定行！
+
+【注意】想要着手操作一番的朋友，可以参考我的另一篇博文：[教程：让你的不智能蓝牙灯接入 HomeKit 智能家居](./integrate-bluetooth-lamp-into-homekit-step-by-step)
 
 {{<video name="remoter_control_lamp">}}
 {{<video name="app_control_lamp">}}
