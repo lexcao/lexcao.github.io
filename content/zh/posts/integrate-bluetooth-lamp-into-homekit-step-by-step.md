@@ -1,6 +1,6 @@
 ---
 title: 教程：让你的不智能蓝牙灯接入 HomeKit 智能家居
-date: 2025-04-26
+date: 2025-04-27
 tags: [蓝牙, HomeKit, Home Assistant, ESPHome, 教程]
 ---
 
