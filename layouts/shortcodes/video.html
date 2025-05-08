@@ -1,0 +1,4 @@
+{{ $name := .Get "name" }}
+
+<video width="100%" controls disablepictureinpicture controlslist="nodownload" src="/videos/{{ .Page.File.BaseFileName }}/{{ $name }}.webm" type="video/webm">
+</video>

@@ -1,4 +1,4 @@
 {{ $name := .Get "name" }}
 {{ $alt := .Get "alt" | default $name }}
 
-<img src="/images/{{ .Page.File.BaseFileName }}/{{$name}}.webp" alt="{{ $alt }}" />
+<img src="/images/{{ .Page.File.BaseFileName }}/{{ $name }}.webp" alt="{{ $alt }}" />

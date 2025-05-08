@@ -7,3 +7,5 @@ vendor
 .idea
 
 public/
+static/videos/**/*.mov
+!static/videos/**/*.webm

@@ -11,7 +11,8 @@ tags: [蓝牙, HomeKit, Home Assistant, ESPHome]
 
 作为一个爱折腾的程序员，我立马开启了第一性原理思考模式：既然它能通过手机 App 控制，通过打开 App 时申请蓝牙权限可以推断是通过蓝牙进行通信。既然是蓝牙控制，那理论上就能通过别的蓝牙程序来控制它，进而接入智能家居生态。对，没错，肯定行！
 
-- TODO：补 2 个视频，1 个遥控控制，1 个手机 App 控制
+{{<video name="remoter_control_lamp">}}
+{{<video name="app_control_lamp">}}
 
 ## 二、探索：Home Assistant 与蓝牙控制方案
 
@@ -143,7 +144,9 @@ ESP32 成功接入 `ble_adv_proxy` 的过程还算顺利。当打开 ESP32 的 D
 终于，到了最后一步——添加 HomeKit Bridge 到 HomeKit。这一次，一切都如丝般顺滑，成功了！🎉
 
 现在，我终于可以通过 iPhone 上的"家庭" App，甚至直接用 Siri 来控制我的吸顶灯了！开关灯、调节亮度，一切都随心所欲。
-- TODO：补充 2 个视频，通过家庭 App 控制，通过 Siri 控制
+
+{{<video name="home_control_lamp">}}
+{{<video name="hey_siri_关灯">}}
 
 ## 六、总结与感悟
 
