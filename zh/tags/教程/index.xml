@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>教程 on The Coding Notes</title>
+    <link>https://lexcao.io/zh/tags/%E6%95%99%E7%A8%8B/</link>
+    <description>Recent content in 教程 on The Coding Notes</description>
+    <image>
+      <title>The Coding Notes</title>
+      <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
+      <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
+    </image>
+    <generator>Hugo -- 0.147.2</generator>
+    <language>zh</language>
+    <lastBuildDate>Sat, 26 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://lexcao.io/zh/tags/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>教程：让你的不智能蓝牙灯接入 HomeKit 智能家居</title>
+      <link>https://lexcao.io/zh/posts/integrate-bluetooth-lamp-into-homekit-step-by-step/</link>
+      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/zh/posts/integrate-bluetooth-lamp-into-homekit-step-by-step/</guid>
+      <description>&lt;h1 id=&#34;引言&#34;&gt;引言&lt;/h1&gt;
+&lt;p&gt;如果你有一个蓝牙灯，并且它能够被以下几个手机应用控制：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;LampSmart Pro&lt;/li&gt;
+&lt;li&gt;Lamp Smart Pro - Soft Lighting / Smart Lighting&lt;/li&gt;
+&lt;li&gt;FanLamp Pro&lt;/li&gt;
+&lt;li&gt;Zhi Jia&lt;/li&gt;
+&lt;li&gt;Zhi Guang&lt;/li&gt;
+&lt;li&gt;ApplianceSmart&lt;/li&gt;
+&lt;li&gt;Vmax smart&lt;/li&gt;
+&lt;li&gt;Zhi Mei Deng Kong&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;那么恭喜你，你可以跟随本篇教程，一步一步将它接入 HomeKit 智能家居。
+来实现通过 iPhone 家庭应用控制以及 Siri 语音控制。
+对于实现后的效果，可以看我另一篇博文【TODO 此处链接】。&lt;/p&gt;
+&lt;p&gt;非常感谢 &lt;a href=&#34;https://github.com/NicoIIT/ha-ble-adv/&#34;&gt;https://github.com/NicoIIT/ha-ble-adv/&lt;/a&gt;，本篇教程实际是从零接入该项目。&lt;/p&gt;
+&lt;h2 id=&#34;开始之前&#34;&gt;开始之前&lt;/h2&gt;
+&lt;p&gt;在开始之前，需要一点点基础的计算机知识，确保满足以下条件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;熟悉 Home Assistant 概念和一些基本操作，可以阅读官方文档快速熟悉；&lt;/li&gt;
+&lt;li&gt;能够使用 Terminal 命令行工具；&lt;/li&gt;
+&lt;li&gt;已安装 Docker 并且可用；&lt;/li&gt;
+&lt;li&gt;有一个 GitHub 帐号；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键：一块 ESP32 开发板&lt;/strong&gt;；
+&lt;ul&gt;
+&lt;li&gt;主要用于蓝牙通信，如果没有的话，可以网购一块，25 元左右的价格；&lt;/li&gt;
+&lt;li&gt;（未来会研究如何直接使用系统自带的蓝牙）；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;教程方式&#34;&gt;教程方式&lt;/h2&gt;
+&lt;p&gt;本教程以 MacOS 为例。如果你使用 Linux 或 Windows，部分操作可能需要稍作调整。
+教程的每个步骤会说明：&lt;strong&gt;要做什么&lt;/strong&gt;、&lt;strong&gt;怎么做&lt;/strong&gt;、以及&lt;strong&gt;验证结果&lt;/strong&gt;。请确保完成验证后再进行下一步。遇到问题时，可以参考自查攻略（部分步骤有）或联系我。&lt;/p&gt;
+&lt;h1 id=&#34;如何实现&#34;&gt;如何实现&lt;/h1&gt;
+&lt;p&gt;对于实现不感兴趣的，可以跳转到下一部分【TODO 此处链接】&lt;/p&gt;
+&lt;h2 id=&#34;组件列表&#34;&gt;组件列表&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.home-assistant.io/&#34;&gt;Home Assistant (HA)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://hacs.xyz/&#34;&gt;Home Assistant Community Store (HACS)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/NicoIIT/ha-ble-adv/&#34;&gt;ha-ble-adv&lt;/a&gt;&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;缩写是 Home Assistant Bluetooth Low Energy Advertise&lt;/li&gt;
+&lt;li&gt;翻译为 Home Assistant 蓝牙低功耗广播&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://esphome.io/&#34;&gt;ESP Home&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/NicoIIT/esphome-ble_adv_proxy&#34;&gt;esphome-ble-adv-proxy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;ESP32&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;组件交互&#34;&gt;组件交互&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;核心是使用 &lt;code&gt;ha-ble-adv&lt;/code&gt; 通过蓝牙与设备交互，控制开关和亮度&lt;/li&gt;
+&lt;li&gt;通过 Home Assistant 提供的 HomeKit Bridge 连接到 iPhone 家庭应用，来实现控制&lt;/li&gt;
+&lt;li&gt;要让 Home Assistant 成功使用上 &lt;code&gt;ha-ble-adv&lt;/code&gt; 需要具备以下条件：
+&lt;ol&gt;
+&lt;li&gt;通过 &lt;code&gt;HACS&lt;/code&gt; 安装组件 &lt;code&gt;ha-ble-adv&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;通过 ESP Home 在 ESP32 上面安装 &lt;code&gt;esphome-ble-adv-proxy&lt;/code&gt; 以供 &lt;code&gt;ha-ble-adv&lt;/code&gt; 发送和接收蓝牙信息&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;以下是整体流程图
+【TODO 替换流程图 ha-ble-adv-arch02.png】&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -9,10 +9,45 @@
       <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
       <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
     </image>
-    <generator>Hugo -- 0.145.0</generator>
+    <generator>Hugo -- 0.147.2</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 03 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 26 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://lexcao.io/zh/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ESPHome</title>
+      <link>https://lexcao.io/zh/tags/esphome/</link>
+      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/zh/tags/esphome/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Home Assistant</title>
+      <link>https://lexcao.io/zh/tags/home-assistant/</link>
+      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/zh/tags/home-assistant/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>HomeKit</title>
+      <link>https://lexcao.io/zh/tags/homekit/</link>
+      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/zh/tags/homekit/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>教程</title>
+      <link>https://lexcao.io/zh/tags/%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/zh/tags/%E6%95%99%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>蓝牙</title>
+      <link>https://lexcao.io/zh/tags/%E8%93%9D%E7%89%99/</link>
+      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/zh/tags/%E8%93%9D%E7%89%99/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Code Generation</title>
       <link>https://lexcao.io/zh/tags/code-generation/</link>
