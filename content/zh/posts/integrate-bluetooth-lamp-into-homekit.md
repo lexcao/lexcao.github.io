@@ -38,7 +38,7 @@ tags: [蓝牙, HomeKit, Home Assistant, ESPHome]
 2. 通过 Home Assistant 控制 `ha-ble-adv`。
 3. 通过 Home Assistant 的 Home Bridge 接入 HomeKit。
 
-- TODO: 替换架构图（ha-ble-adv-arch01.png）
+{{<image name="ha-ble-adv-arch01" >}}
 
 ## 三、实践：Docker 环境下的重重阻碍
 
@@ -62,14 +62,14 @@ tags: [蓝牙, HomeKit, Home Assistant, ESPHome]
 
 一天后，ESP32 板子到手。
 
-- TODO：替换截图 esp32.jpg
+{{<image name="esp32" >}}
 
 ### 3.1 ESP32 初体验：Wi-Fi 连接难题
 
 接下来开始进入折腾之旅第二章：配置 ESP32。
 查阅 `ha-ble-adv` 文档，发现其更推荐使用 `esphome-ble_adv_proxy` 作为蓝牙代理。
 
-- TODO：替换架构图（ha-ble-adv-arch02.png）
+{{<image name="ha-ble-adv-arch02" >}}
 
 由于是第一次接触 ESP32 板子，我并没有多想，严格按照文档指引，一步步攻克：
 1. 安装 ESPHome：用于 ESP32 的快速配置和与 Home Assistant 的无缝集成。
@@ -82,7 +82,7 @@ tags: [蓝牙, HomeKit, Home Assistant, ESPHome]
 
 ESP32 成功接入 `ble_adv_proxy` 的过程还算顺利。当打开 ESP32 的 Debug 网页，看到它开始接收到周围的蓝牙信号时，心中还是涌起了一阵小小的成就感。
 
-- TODO：替换 esp32-debug-page.png
+{{<image name="esp32-debug-page" >}}
 
 ### 3.2 Home Assistant 集成 ESP32：mDNS 的"坑"
 
