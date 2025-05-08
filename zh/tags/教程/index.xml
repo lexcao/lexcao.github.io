@@ -32,7 +32,7 @@
 &lt;/ul&gt;
 &lt;p&gt;那么恭喜你，你可以跟随本篇教程，一步一步将它接入 HomeKit 智能家居。
 来实现通过 iPhone 家庭应用控制以及 Siri 语音控制。
-对于实现后的效果，可以看我另一篇博文【TODO 此处链接】。&lt;/p&gt;
+对于实现后的效果，可以看我另一篇博文：&lt;a href=&#34;https://lexcao.io/zh/posts/integrate-bluetooth-lamp-into-homekit/&#34;&gt;折腾：HomeKit 接入蓝牙吸顶灯&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;非常感谢 &lt;a href=&#34;https://github.com/NicoIIT/ha-ble-adv/&#34;&gt;https://github.com/NicoIIT/ha-ble-adv/&lt;/a&gt;，本篇教程实际是从零接入该项目。&lt;/p&gt;
 &lt;h2 id=&#34;开始之前&#34;&gt;开始之前&lt;/h2&gt;
 &lt;p&gt;在开始之前，需要一点点基础的计算机知识，确保满足以下条件：&lt;/p&gt;
@@ -52,7 +52,7 @@
 &lt;p&gt;本教程以 MacOS 为例。如果你使用 Linux 或 Windows，部分操作可能需要稍作调整。
 教程的每个步骤会说明：&lt;strong&gt;要做什么&lt;/strong&gt;、&lt;strong&gt;怎么做&lt;/strong&gt;、以及&lt;strong&gt;验证结果&lt;/strong&gt;。请确保完成验证后再进行下一步。遇到问题时，可以参考自查攻略（部分步骤有）或联系我。&lt;/p&gt;
 &lt;h1 id=&#34;如何实现&#34;&gt;如何实现&lt;/h1&gt;
-&lt;p&gt;对于实现不感兴趣的，可以跳转到下一部分【TODO 此处链接】&lt;/p&gt;
+&lt;p&gt;对于实现不感兴趣的，可以跳转到&lt;a href=&#34;https://lexcao.io/zh/posts/integrate-bluetooth-lamp-into-homekit-step-by-step/#Step1&#34;&gt;下一部分&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;组件列表&#34;&gt;组件列表&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.home-assistant.io/&#34;&gt;Home Assistant (HA)&lt;/a&gt;&lt;/li&gt;
@@ -78,8 +78,7 @@
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;以下是整体流程图
-【TODO 替换流程图 ha-ble-adv-arch02.png】&lt;/p&gt;</description>
+&lt;p&gt;以下是整体架构图&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
