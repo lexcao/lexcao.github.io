@@ -11,8 +11,43 @@
     </image>
     <generator>Hugo -- 0.147.2</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 03 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://lexcao.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bluetooth</title>
+      <link>https://lexcao.io/tags/bluetooth/</link>
+      <pubDate>Sun, 27 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/tags/bluetooth/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ESPHome</title>
+      <link>https://lexcao.io/tags/esphome/</link>
+      <pubDate>Sun, 27 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/tags/esphome/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Home Assistant</title>
+      <link>https://lexcao.io/tags/home-assistant/</link>
+      <pubDate>Sun, 27 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/tags/home-assistant/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>HomeKit</title>
+      <link>https://lexcao.io/tags/homekit/</link>
+      <pubDate>Sun, 27 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/tags/homekit/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tutorial</title>
+      <link>https://lexcao.io/tags/tutorial/</link>
+      <pubDate>Sun, 27 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/tags/tutorial/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Code Generation</title>
       <link>https://lexcao.io/tags/code-generation/</link>
@@ -81,13 +116,6 @@
       <link>https://lexcao.io/tags/english/</link>
       <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
       <guid>https://lexcao.io/tags/english/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Tutorial</title>
-      <link>https://lexcao.io/tags/tutorial/</link>
-      <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>https://lexcao.io/tags/tutorial/</guid>
       <description></description>
     </item>
     <item>

@@ -2,6 +2,116 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://lexcao.io/tags/bluetooth/</loc>
+    <lastmod>2025-04-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lexcao.io/tags/esphome/</loc>
+    <lastmod>2025-04-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/esphome/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/tags/esphome/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/tags/home-assistant/</loc>
+    <lastmod>2025-04-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/home-assistant/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/tags/home-assistant/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/tags/homekit/</loc>
+    <lastmod>2025-04-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/homekit/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/tags/homekit/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/posts/</loc>
+    <lastmod>2025-04-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/posts/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/tags/</loc>
+    <lastmod>2025-04-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/tags/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/</loc>
+    <lastmod>2025-04-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/tags/tutorial/</loc>
+    <lastmod>2025-04-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit-step-by-step/</loc>
+    <lastmod>2025-04-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/integrate-bluetooth-lamp-into-homekit-step-by-step/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit-step-by-step/"
+                />
+  </url><url>
+    <loc>https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit/</loc>
+    <lastmod>2025-04-26T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/integrate-bluetooth-lamp-into-homekit/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit/"
+                />
+  </url><url>
     <loc>https://lexcao.io/tags/code-generation/</loc>
     <lastmod>2025-03-03T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -39,45 +149,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://lexcao.io/posts/genapi/"
-                />
-  </url><url>
-    <loc>https://lexcao.io/posts/</loc>
-    <lastmod>2025-03-03T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/posts/"
-                />
-  </url><url>
-    <loc>https://lexcao.io/tags/</loc>
-    <lastmod>2025-03-03T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/tags/"
-                />
-  </url><url>
-    <loc>https://lexcao.io/</loc>
-    <lastmod>2025-03-03T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/"
                 />
   </url><url>
     <loc>https://lexcao.io/posts/learn-rust-fullstack/</loc>
@@ -207,9 +278,6 @@
                 />
   </url><url>
     <loc>https://lexcao.io/tags/english/</loc>
-    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://lexcao.io/tags/tutorial/</loc>
     <lastmod>2019-11-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://lexcao.io/tags/blog/</loc>

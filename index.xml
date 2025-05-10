@@ -11,8 +11,36 @@
     </image>
     <generator>Hugo -- 0.147.2</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 03 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://lexcao.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tutorial: Make Your Non-Smart Bluetooth Light Work with HomeKit</title>
+      <link>https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit-step-by-step/</link>
+      <pubDate>Sun, 27 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit-step-by-step/</guid>
+      <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;This tutorial demonstrates how to integrate Bluetooth-enabled lights into Apple&amp;rsquo;s HomeKit ecosystem. The following mobile apps are supported:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;LampSmart Pro&lt;/li&gt;
+&lt;li&gt;Lamp Smart Pro - Soft Lighting / Smart Lighting&lt;/li&gt;
+&lt;li&gt;FanLamp Pro&lt;/li&gt;
+&lt;li&gt;Zhi Jia&lt;/li&gt;
+&lt;li&gt;Zhi Guang&lt;/li&gt;
+&lt;li&gt;ApplianceSmart&lt;/li&gt;
+&lt;li&gt;Vmax smart&lt;/li&gt;
+&lt;li&gt;Zhi Mei Deng Kong&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;By following this guide, you&amp;rsquo;ll be able to control your Bluetooth light through the iPhone Home app and Siri voice commands. For a demonstration of the final implementation, refer to my companion post: &lt;a href=&#34;https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit/&#34;&gt;Journal: Integrate Bluetooth Lamp into HomeKit&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Journal: Integrate Bluetooth Lamp into HomeKit</title>
+      <link>https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit/</link>
+      <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit/</guid>
+      <description>&lt;h2 id=&#34;i-the-challenge-making-a-basic-ceiling-light-smart&#34;&gt;I. The Challenge: Making a &amp;ldquo;Basic&amp;rdquo; Ceiling Light Smart&lt;/h2&gt;
+&lt;p&gt;Recently, I replaced my living room ceiling light with a new model. This light supports both remote and mobile app control, making it appear smart. However, it lacks integration with Mi Home or HomeKit.
+After research, I discovered that the premium version of the same brand supports Mi Home control, while my basic version doesn&amp;rsquo;t - a price difference of approximately 100 RMB.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Introducing genapi: A Golang HTTP Client Code Generator</title>
       <link>https://lexcao.io/posts/genapi/</link>
