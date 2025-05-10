@@ -81,15 +81,16 @@
 &lt;p&gt;以下是整体架构图&lt;/p&gt;</description>
     </item>
     <item>
-      <title>折腾：HomeKit 接入蓝牙吸顶灯</title>
+      <title>折腾：蓝牙吸顶灯接入 HomeKit</title>
       <link>https://lexcao.io/zh/posts/integrate-bluetooth-lamp-into-homekit/</link>
       <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
       <guid>https://lexcao.io/zh/posts/integrate-bluetooth-lamp-into-homekit/</guid>
-      <description>&lt;h2 id=&#34;一缘起一个丐版吸顶灯的智能化挑战&#34;&gt;一、缘起：一个“丐版”吸顶灯的智能化挑战&lt;/h2&gt;
-&lt;p&gt;最近给家里客厅换了个新吸顶灯。这灯不仅能用遥控器，还能用手机 App 控制，感觉挺智能的。然而，美中不足的是，它竟然不支持接入米家或者 HomeKit。
-搜索后才发现，原来同品牌更贵版本是支持米家控制的，而我买的这个乞丐版不支持，大概价差 100 元左右。&lt;/p&gt;
-&lt;p&gt;作为一个爱折腾的程序员，我立马开启了第一性原理思考模式：既然它能通过手机 App 控制，通过打开 App 时申请蓝牙权限可以推断是通过蓝牙进行通信。既然是蓝牙控制，那理论上就能通过别的蓝牙程序来控制它，进而接入智能家居生态。对，没错，肯定行！&lt;/p&gt;
+      <description>&lt;h2 id=&#34;一缘起一个基础版吸顶灯的智能化挑战&#34;&gt;一、缘起：一个&amp;quot;基础版&amp;quot;吸顶灯的智能化挑战&lt;/h2&gt;
+&lt;p&gt;最近给家里客厅换了个新吸顶灯。这灯不仅能用遥控器，还能用手机 App 控制，看起来挺智能的。然而，美中不足的是，它竟然不支持接入米家或 HomeKit。
+搜索后才发现，原来同品牌更贵版本是支持米家控制的，而我买的这个基础版不支持，大概价差 100 元左右。&lt;/p&gt;
+&lt;p&gt;作为一个喜欢折腾的程序员，我开始从第一性原理思考：既然它能通过手机 App 控制，通过打开 App 时申请蓝牙权限可以推断是通过蓝牙进行通信。既然是蓝牙控制，那理论上就能通过别的蓝牙程序来控制它，进而接入智能家居生态。对，没错，肯定行！&lt;/p&gt;
 &lt;p&gt;【注意】想要着手操作一番的朋友，可以参考我的另一篇博文：&lt;a href=&#34;https://lexcao.io/zh/posts/integrate-bluetooth-lamp-into-homekit-step-by-step/&#34;&gt;教程：让你的不智能蓝牙灯接入 HomeKit 智能家居&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;问题现状演示&#34;&gt;问题现状演示&lt;/h3&gt;
 &lt;p&gt;
 
 &lt;video width=&#34;100%&#34; controls disablepictureinpicture controlslist=&#34;nodownload&#34; src=&#34;https://lexcao.io/videos/integrate-bluetooth-lamp-into-homekit/remoter_control_lamp.webm&#34; type=&#34;video/webm&#34;&gt;
@@ -100,17 +101,18 @@
 &lt;video width=&#34;100%&#34; controls disablepictureinpicture controlslist=&#34;nodownload&#34; src=&#34;https://lexcao.io/videos/integrate-bluetooth-lamp-into-homekit/app_control_lamp.webm&#34; type=&#34;video/webm&#34;&gt;
 &lt;/video&gt;
 &lt;/p&gt;
+&lt;p&gt;想要直接看到接入后的效果，可以 &lt;a href=&#34;https://lexcao.io/zh/posts/integrate-bluetooth-lamp-into-homekit/#final&#34;&gt;点击这里跳转&lt;/a&gt;。&lt;/p&gt;
 &lt;h2 id=&#34;二探索home-assistant-与蓝牙控制方案&#34;&gt;二、探索：Home Assistant 与蓝牙控制方案&lt;/h2&gt;
-&lt;p&gt;于是乎，我兴冲冲地开始了我的折腾之旅，进行了大量的搜索尝试。既然直接接入米家此路不通，那曲线救国呢？我灵机一动，开始搜索如何将米家设备接入 HomeKit。
-这一搜让我打开了一个新世界的大门 —— Home Assistant (HA)！&lt;/p&gt;
+&lt;p&gt;于是乎，我兴冲冲地开始了我的折腾之旅，进行了大量的搜索尝试。既然直接接入米家此路不通，那曲线救国呢？（注：这里指通过其他方式间接实现目标）我灵机一动，开始搜索如何将米家设备接入 HomeKit。
+这次搜索让我打开了一个新世界的大门 —— &lt;code&gt;Home Assistant&lt;/code&gt; (HA)！&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.home-assistant.io/&#34;&gt;Home Assistant&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.home-assistant.io/&#34;&gt;&lt;code&gt;Home Assistant&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Open source home automation that puts local control and privacy first. Powered by a worldwide community of tinkerers and DIY enthusiasts.
 以本地控制和隐私为先的开源家庭自动化。由全球工匠和 DIY 爱好者社区提供支持。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;顺藤摸瓜，我又发现 Home Assistant 竟然有个叫 HomeKit Bridge 的组件，能把各种非 HomeKit 设备桥接到 HomeKit。看到这里，我仿佛看到了曙光！&lt;/p&gt;
-&lt;p&gt;继续在 Home Assistant 的社区里搜索，感谢万能的网友，挖到了一个宝藏项目：&lt;code&gt;ha-ble-adv&lt;/code&gt;！看名字就知道，这玩意儿跟蓝牙有关，简直是为我量身定做的！&lt;/p&gt;</description>
+&lt;p&gt;顺藤摸瓜，我又发现 &lt;code&gt;Home Assistant&lt;/code&gt; 竟然有个叫 &lt;code&gt;HomeKit Bridge&lt;/code&gt; 的组件，能把各种非 HomeKit 设备桥接到 HomeKit。看到这里，我仿佛看到了曙光！&lt;/p&gt;
+&lt;p&gt;继续在 &lt;code&gt;Home Assistant&lt;/code&gt; 的社区里搜索，感谢万能的网友，挖到了一个宝藏项目：&lt;code&gt;ha-ble-adv&lt;/code&gt;！看名字就知道，这玩意儿跟蓝牙有关，简直是为我量身定做的！&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
