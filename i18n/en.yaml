@@ -12,3 +12,6 @@ kox:
 
 konverter:
   other: Code generation for converter between data class by KAPT.
+
+last_mod:
+  other: "Updated"
