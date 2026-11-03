@@ -19,7 +19,7 @@ description: "怎么起英文名？从中文名拼音找灵感，用 5 个步骤
 
 我的中文名拼音是 Lixin Cao。给自己起英文名时，我发现了这篇文章：[*如何选择一个英文名字*](http://www.pgbovine.net/choosing-english-name.htm)。它提供了一种挑选思路，我据此做了一个帮助选择英文名的应用。
 
-你可以在 [*这里*](https://lexcao.github.io/English-name-picker) 试用。
+你可以在 [*这里*](https://lexcao.io/English-name-picker/) 试用。
 
 下面介绍原文的建议、应用的做法，以及我最后选择 Lex 的过程。
 
@@ -115,7 +115,7 @@ description: "怎么起英文名？从中文名拼音找灵感，用 5 个步骤
 
 ## 参考链接
 
-* [*英文名选择器*](https://lexcao.github.io/English-name-picker)
+* [*英文名选择器*](https://lexcao.io/English-name-picker/)
 * [*英文名选择器 源码*](https://github.com/lexcao/English-name-picker)
 * [*美国社保局英文名数据 GitHub*](https://github.com/lexcao/English-name-dataset)
 * [*如何选择一个英文名*](http://www.pgbovine.net/choosing-english-name.htm)
