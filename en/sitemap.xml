@@ -9,198 +9,198 @@
     <lastmod>2025-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/tags/esphome/"
+                hreflang="en"
+                href="https://lexcao.io/tags/esphome/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/tags/esphome/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/esphome/"
                 />
   </url><url>
     <loc>https://lexcao.io/tags/home-assistant/</loc>
     <lastmod>2025-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/tags/home-assistant/"
+                hreflang="en"
+                href="https://lexcao.io/tags/home-assistant/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/tags/home-assistant/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/home-assistant/"
                 />
   </url><url>
     <loc>https://lexcao.io/tags/homekit/</loc>
     <lastmod>2025-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/tags/homekit/"
-                />
-    <xhtml:link
-                rel="alternate"
                 hreflang="en"
                 href="https://lexcao.io/tags/homekit/"
                 />
-  </url><url>
-    <loc>https://lexcao.io/posts/</loc>
-    <lastmod>2025-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://lexcao.io/zh/posts/"
+                href="https://lexcao.io/zh/tags/homekit/"
                 />
+  </url><url>
+    <loc>https://lexcao.io/posts/</loc>
+    <lastmod>2026-11-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
                 href="https://lexcao.io/posts/"
                 />
-  </url><url>
-    <loc>https://lexcao.io/tags/</loc>
-    <lastmod>2025-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://lexcao.io/zh/tags/"
+                href="https://lexcao.io/zh/posts/"
                 />
+  </url><url>
+    <loc>https://lexcao.io/tags/</loc>
+    <lastmod>2026-11-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
                 href="https://lexcao.io/tags/"
                 />
-  </url><url>
-    <loc>https://lexcao.io/</loc>
-    <lastmod>2025-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://lexcao.io/zh/"
+                href="https://lexcao.io/zh/tags/"
                 />
+  </url><url>
+    <loc>https://lexcao.io/</loc>
+    <lastmod>2026-11-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
                 href="https://lexcao.io/"
                 />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/"
+                />
   </url><url>
     <loc>https://lexcao.io/tags/tutorial/</loc>
-    <lastmod>2025-04-27T00:00:00+00:00</lastmod>
+    <lastmod>2026-11-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit-step-by-step/</loc>
     <lastmod>2025-04-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/posts/integrate-bluetooth-lamp-into-homekit-step-by-step/"
+                hreflang="en"
+                href="https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit-step-by-step/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit-step-by-step/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/integrate-bluetooth-lamp-into-homekit-step-by-step/"
                 />
   </url><url>
     <loc>https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit/</loc>
     <lastmod>2025-04-26T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/posts/integrate-bluetooth-lamp-into-homekit/"
+                hreflang="en"
+                href="https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/integrate-bluetooth-lamp-into-homekit/"
                 />
   </url><url>
     <loc>https://lexcao.io/tags/code-generation/</loc>
     <lastmod>2025-03-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/tags/code-generation/"
+                hreflang="en"
+                href="https://lexcao.io/tags/code-generation/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/tags/code-generation/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/code-generation/"
                 />
   </url><url>
     <loc>https://lexcao.io/tags/golang/</loc>
     <lastmod>2025-03-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/tags/golang/"
+                hreflang="en"
+                href="https://lexcao.io/tags/golang/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/tags/golang/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/golang/"
                 />
   </url><url>
     <loc>https://lexcao.io/posts/genapi/</loc>
     <lastmod>2025-03-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/posts/genapi/"
+                hreflang="en"
+                href="https://lexcao.io/posts/genapi/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/posts/genapi/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/genapi/"
                 />
   </url><url>
     <loc>https://lexcao.io/posts/learn-rust-fullstack/</loc>
     <lastmod>2022-05-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/posts/learn-rust-fullstack/"
+                hreflang="en"
+                href="https://lexcao.io/posts/learn-rust-fullstack/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/posts/learn-rust-fullstack/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/learn-rust-fullstack/"
                 />
   </url><url>
     <loc>https://lexcao.io/tags/practice/</loc>
     <lastmod>2022-05-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/tags/practice/"
+                hreflang="en"
+                href="https://lexcao.io/tags/practice/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/tags/practice/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/practice/"
                 />
   </url><url>
     <loc>https://lexcao.io/tags/rust/</loc>
     <lastmod>2022-05-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/tags/rust/"
+                hreflang="en"
+                href="https://lexcao.io/tags/rust/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/tags/rust/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/rust/"
                 />
   </url><url>
     <loc>https://lexcao.io/posts/kotlin-equality-diving/</loc>
     <lastmod>2020-04-21T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/posts/kotlin-equality-diving/"
+                hreflang="en"
+                href="https://lexcao.io/posts/kotlin-equality-diving/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/posts/kotlin-equality-diving/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/kotlin-equality-diving/"
                 />
   </url><url>
     <loc>https://lexcao.io/tags/backend/</loc>
@@ -210,26 +210,26 @@
     <lastmod>2020-04-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/posts/konverter/"
+                hreflang="en"
+                href="https://lexcao.io/posts/konverter/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/posts/konverter/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/konverter/"
                 />
   </url><url>
     <loc>https://lexcao.io/tags/kotlin/</loc>
     <lastmod>2020-04-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/tags/kotlin/"
+                hreflang="en"
+                href="https://lexcao.io/tags/kotlin/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/tags/kotlin/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/kotlin/"
                 />
   </url><url>
     <loc>https://lexcao.io/tags/library/</loc>
@@ -242,43 +242,43 @@
     <lastmod>2019-11-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/tags/reactive/"
+                hreflang="en"
+                href="https://lexcao.io/tags/reactive/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/tags/reactive/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/tags/reactive/"
                 />
   </url><url>
     <loc>https://lexcao.io/posts/reactive-overview/</loc>
     <lastmod>2019-11-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/posts/reactive-overview/"
-                />
-    <xhtml:link
-                rel="alternate"
                 hreflang="en"
                 href="https://lexcao.io/posts/reactive-overview/"
                 />
-  </url><url>
-    <loc>https://lexcao.io/posts/choose-english-name/</loc>
-    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://lexcao.io/zh/posts/choose-english-name/"
+                href="https://lexcao.io/zh/posts/reactive-overview/"
                 />
+  </url><url>
+    <loc>https://lexcao.io/tags/english/</loc>
+    <lastmod>2026-11-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://lexcao.io/posts/choose-english-name/</loc>
+    <lastmod>2026-11-03T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
                 href="https://lexcao.io/posts/choose-english-name/"
                 />
-  </url><url>
-    <loc>https://lexcao.io/tags/english/</loc>
-    <lastmod>2019-11-07T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/choose-english-name/"
+                />
   </url><url>
     <loc>https://lexcao.io/tags/blog/</loc>
     <lastmod>2019-10-29T00:00:00+00:00</lastmod>
@@ -287,88 +287,88 @@
     <lastmod>2019-10-29T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/posts/jekyll-hugo-hexo/"
+                hreflang="en"
+                href="https://lexcao.io/posts/jekyll-hugo-hexo/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/posts/jekyll-hugo-hexo/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/jekyll-hugo-hexo/"
                 />
   </url><url>
     <loc>https://lexcao.io/posts/jekyll-multi-language-without-plugin/</loc>
     <lastmod>2019-10-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/posts/jekyll-multi-language-without-plugin/"
+                hreflang="en"
+                href="https://lexcao.io/posts/jekyll-multi-language-without-plugin/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/posts/jekyll-multi-language-without-plugin/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/jekyll-multi-language-without-plugin/"
                 />
   </url><url>
     <loc>https://lexcao.io/about/</loc>
     <lastmod>2019-10-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/about/"
+                hreflang="en"
+                href="https://lexcao.io/about/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/about/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/about/"
                 />
   </url><url>
     <loc>https://lexcao.io/posts/hello-world/</loc>
     <lastmod>2019-10-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/posts/hello-world/"
+                hreflang="en"
+                href="https://lexcao.io/posts/hello-world/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/posts/hello-world/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/posts/hello-world/"
                 />
   </url><url>
     <loc>https://lexcao.io/archives/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/archives/"
+                hreflang="en"
+                href="https://lexcao.io/archives/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/archives/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/archives/"
                 />
   </url><url>
     <loc>https://lexcao.io/projects/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/projects/"
+                hreflang="en"
+                href="https://lexcao.io/projects/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/projects/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/projects/"
                 />
   </url><url>
     <loc>https://lexcao.io/search/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh"
-                href="https://lexcao.io/zh/search/"
+                hreflang="en"
+                href="https://lexcao.io/search/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://lexcao.io/search/"
+                hreflang="zh"
+                href="https://lexcao.io/zh/search/"
                 />
   </url>
 </urlset>

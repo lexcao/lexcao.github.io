@@ -9,7 +9,7 @@
       <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
       <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
     </image>
-    <generator>Hugo -- 0.147.2</generator>
+    <generator>Hugo -- 0.169.0</generator>
     <language>zh</language>
     <lastBuildDate>Tue, 04 Jul 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://lexcao.io/zh/tags/accounting/index.xml" rel="self" type="application/rss+xml" />
@@ -49,40 +49,40 @@
 &lt;h2 id=&#34;报表-statement&#34;&gt;报表 （Statement）&lt;/h2&gt;
 &lt;p&gt;值得注意的是，我在前一节中写下的时间线记账与机构为每个客户维护并通常通过邮件发送的纸质账户报表类似：&lt;/p&gt;
 &lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th&gt;时间&lt;/th&gt;
-          &lt;th&gt;描述&lt;/th&gt;
-          &lt;th&gt;金额&lt;/th&gt;
-          &lt;th&gt;余额&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td&gt;2016-10-02&lt;/td&gt;
-          &lt;td&gt;…&lt;/td&gt;
-          &lt;td&gt;100.00&lt;/td&gt;
-          &lt;td&gt;1100.00&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;2016-10-05&lt;/td&gt;
-          &lt;td&gt;..&lt;/td&gt;
-          &lt;td&gt;-25.00&lt;/td&gt;
-          &lt;td&gt;1075.00&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;2016-10-06&lt;/td&gt;
-          &lt;td&gt;..&lt;/td&gt;
-          &lt;td&gt;-200.00&lt;/td&gt;
-          &lt;td&gt;875.00&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;最终结余&lt;/td&gt;
-          &lt;td&gt;875.00&lt;/td&gt;
-          &lt;td&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;时间&lt;/th&gt;
+					&lt;th&gt;描述&lt;/th&gt;
+					&lt;th&gt;金额&lt;/th&gt;
+					&lt;th&gt;余额&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;2016-10-02&lt;/td&gt;
+					&lt;td&gt;…&lt;/td&gt;
+					&lt;td&gt;100.00&lt;/td&gt;
+					&lt;td&gt;1100.00&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;2016-10-05&lt;/td&gt;
+					&lt;td&gt;..&lt;/td&gt;
+					&lt;td&gt;-25.00&lt;/td&gt;
+					&lt;td&gt;1075.00&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;2016-10-06&lt;/td&gt;
+					&lt;td&gt;..&lt;/td&gt;
+					&lt;td&gt;-200.00&lt;/td&gt;
+					&lt;td&gt;875.00&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;最终结余&lt;/td&gt;
+					&lt;td&gt;875.00&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;有时候金额栏会被分成两个，一个显示正数，另一个显示负数：&lt;/p&gt;</description>
     </item>

@@ -9,9 +9,9 @@
       <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
       <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
     </image>
-    <generator>Hugo -- 0.147.2</generator>
+    <generator>Hugo -- 0.169.0</generator>
     <language>zh</language>
-    <lastBuildDate>Sun, 27 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://lexcao.io/zh/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>教程：让你的不智能蓝牙灯接入 HomeKit 智能家居</title>
@@ -110,7 +110,8 @@
 &lt;/ul&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Open source home automation that puts local control and privacy first. Powered by a worldwide community of tinkerers and DIY enthusiasts.
-以本地控制和隐私为先的开源家庭自动化。由全球工匠和 DIY 爱好者社区提供支持。&lt;/p&gt;&lt;/blockquote&gt;
+以本地控制和隐私为先的开源家庭自动化。由全球工匠和 DIY 爱好者社区提供支持。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;顺藤摸瓜，我又发现 &lt;code&gt;Home Assistant&lt;/code&gt; 竟然有个叫 &lt;code&gt;HomeKit Bridge&lt;/code&gt; 的组件，能把各种非 HomeKit 设备桥接到 HomeKit。看到这里，我仿佛看到了曙光！&lt;/p&gt;
 &lt;p&gt;继续在 &lt;code&gt;Home Assistant&lt;/code&gt; 的社区里搜索，感谢万能的网友，挖到了一个宝藏项目：&lt;code&gt;ha-ble-adv&lt;/code&gt;！看名字就知道，这玩意儿跟蓝牙有关，简直是为我量身定做的！&lt;/p&gt;</description>
     </item>
@@ -122,7 +123,7 @@
       <description>&lt;p&gt;本文将为大家介绍 genapi，一个用于自动生成 Golang HTTP Client 的代码库。如果你对这个项目感兴趣，可以访问 &lt;a href=&#34;https://lexcao.io/genapi/&#34;&gt;genapi 官网&lt;/a&gt; 或 &lt;a href=&#34;https://github.com/lexcao/genapi&#34;&gt;GitHub 仓库&lt;/a&gt; 获取更多技术细节。&lt;/p&gt;
 &lt;h1 id=&#34;从手工到自动golang-http-client-的演进之路&#34;&gt;从手工到自动：Golang HTTP Client 的演进之路&lt;/h1&gt;
 &lt;p&gt;在 Golang 开发中，调用 HTTP API 是一个非常常见的需求。本文将通过一个天气 API 的示例，介绍 HTTP Client 代码是如何从手工编写演进到自动生成的。让我们看看这个简单的天气 API：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;api&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;weather&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;?&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;city&lt;/span&gt;=&lt;span style=&#34;color:#a6e22e&#34;&gt;shanghai&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;api&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;weather&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;?&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;city&lt;/span&gt;=&lt;span style=&#34;color:#a6e22e&#34;&gt;shanghai&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Response&lt;/span&gt;:
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;temperature&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;,
@@ -131,7 +132,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;原始手工编写&#34;&gt;原始手工编写&lt;/h2&gt;
 &lt;p&gt;最初，我们可能会直接编写如下代码：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getWeather&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;city&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;) (&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Weather&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;error&lt;/span&gt;) {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getWeather&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;city&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;) (&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Weather&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;error&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;resp&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://api.weather.com/api/weather?city=&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;city&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt;
@@ -154,7 +155,7 @@
 &lt;/ol&gt;
 &lt;h2 id=&#34;模板化请求&#34;&gt;模板化请求&lt;/h2&gt;
 &lt;p&gt;为了解决上述问题，我们开始对代码进行抽象和模板化改造：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Client&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Client&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;baseURL&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;client&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Client&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
@@ -223,40 +224,40 @@
 &lt;h2 id=&#34;报表-statement&#34;&gt;报表 （Statement）&lt;/h2&gt;
 &lt;p&gt;值得注意的是，我在前一节中写下的时间线记账与机构为每个客户维护并通常通过邮件发送的纸质账户报表类似：&lt;/p&gt;
 &lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th&gt;时间&lt;/th&gt;
-          &lt;th&gt;描述&lt;/th&gt;
-          &lt;th&gt;金额&lt;/th&gt;
-          &lt;th&gt;余额&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td&gt;2016-10-02&lt;/td&gt;
-          &lt;td&gt;…&lt;/td&gt;
-          &lt;td&gt;100.00&lt;/td&gt;
-          &lt;td&gt;1100.00&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;2016-10-05&lt;/td&gt;
-          &lt;td&gt;..&lt;/td&gt;
-          &lt;td&gt;-25.00&lt;/td&gt;
-          &lt;td&gt;1075.00&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;2016-10-06&lt;/td&gt;
-          &lt;td&gt;..&lt;/td&gt;
-          &lt;td&gt;-200.00&lt;/td&gt;
-          &lt;td&gt;875.00&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;最终结余&lt;/td&gt;
-          &lt;td&gt;875.00&lt;/td&gt;
-          &lt;td&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;时间&lt;/th&gt;
+					&lt;th&gt;描述&lt;/th&gt;
+					&lt;th&gt;金额&lt;/th&gt;
+					&lt;th&gt;余额&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;2016-10-02&lt;/td&gt;
+					&lt;td&gt;…&lt;/td&gt;
+					&lt;td&gt;100.00&lt;/td&gt;
+					&lt;td&gt;1100.00&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;2016-10-05&lt;/td&gt;
+					&lt;td&gt;..&lt;/td&gt;
+					&lt;td&gt;-25.00&lt;/td&gt;
+					&lt;td&gt;1075.00&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;2016-10-06&lt;/td&gt;
+					&lt;td&gt;..&lt;/td&gt;
+					&lt;td&gt;-200.00&lt;/td&gt;
+					&lt;td&gt;875.00&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;最终结余&lt;/td&gt;
+					&lt;td&gt;875.00&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;有时候金额栏会被分成两个，一个显示正数，另一个显示负数：&lt;/p&gt;</description>
     </item>
@@ -288,11 +289,11 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;JOIN ON 查询条件使用 &lt;code&gt;join().on()&lt;/code&gt; 拼接
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Join&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Object, Object&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; author &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root.&lt;span style=&#34;color:#a6e22e&#34;&gt;join&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;author&amp;#34;&lt;/span&gt;);
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Join&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Object, Object&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; author &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root.&lt;span style=&#34;color:#a6e22e&#34;&gt;join&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;author&amp;#34;&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;author.&lt;span style=&#34;color:#a6e22e&#34;&gt;on&lt;/span&gt;(cb.&lt;span style=&#34;color:#a6e22e&#34;&gt;equal&lt;/span&gt;(author.&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;), param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getAuthorName&lt;/span&gt;()));
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;WHERE 查询条件使用 &lt;code&gt;query.where()&lt;/code&gt; 拼接
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;query.&lt;span style=&#34;color:#a6e22e&#34;&gt;where&lt;/span&gt;(cb.&lt;span style=&#34;color:#a6e22e&#34;&gt;equal&lt;/span&gt;(root.&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;publishTime&amp;#34;&lt;/span&gt;), param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getBookPublishTime&lt;/span&gt;()));
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;query.&lt;span style=&#34;color:#a6e22e&#34;&gt;where&lt;/span&gt;(cb.&lt;span style=&#34;color:#a6e22e&#34;&gt;equal&lt;/span&gt;(root.&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;publishTime&amp;#34;&lt;/span&gt;), param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getBookPublishTime&lt;/span&gt;()));
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1 id=&#34;代码示例&#34;&gt;代码示例&lt;/h1&gt;
@@ -301,7 +302,7 @@
 &lt;li&gt;需要 &lt;code&gt;override&lt;/code&gt; 已有 &lt;code&gt;findAll&lt;/code&gt; 方法，使用 &lt;code&gt;@EntityGraph&lt;/code&gt; 注解&lt;/li&gt;
 &lt;li&gt;使用 &lt;code&gt;@EntityGraph&lt;/code&gt; 注解，标注额外属性需要 fetch&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// BookJoinRepository.java&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// BookJoinRepository.java&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@Repository&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;BookJoinRepository&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    JpaRepository&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;BookJoin, String&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;, JpaSpecificationExecutor&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;BookJoin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; {
@@ -314,7 +315,7 @@
 &lt;li&gt;WHERE 查询条件使用 &lt;code&gt;query.where()&lt;/code&gt; 拼接&lt;/li&gt;
 &lt;li&gt;JOIN ON 查询条件使用 &lt;code&gt;join().on()&lt;/code&gt; 拼接&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; Specification&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;BookJoin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;multiQuery_04&lt;/span&gt;(BookJoinQuery param) {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; Specification&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;BookJoin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;multiQuery_04&lt;/span&gt;(BookJoinQuery param) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (root, query, cb) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getBookPublishTime&lt;/span&gt;()) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            query.&lt;span style=&#34;color:#a6e22e&#34;&gt;where&lt;/span&gt;(cb.&lt;span style=&#34;color:#a6e22e&#34;&gt;equal&lt;/span&gt;(root.&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;publishTime&amp;#34;&lt;/span&gt;), param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getBookPublishTime&lt;/span&gt;()));
@@ -333,7 +334,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    };
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;结果-sql-语句&#34;&gt;结果 SQL 语句&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;select&lt;/span&gt; bookjoin0_.id           &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; id1_1_0_,
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;select&lt;/span&gt; bookjoin0_.id           &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; id1_1_0_,
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       bookjoin_a1_.id         &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; id1_0_1_,
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       bookjoin_r2_.id         &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; id1_2_2_,
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       bookjoin0_.author_id    &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; author_i3_1_0_,
@@ -369,7 +370,7 @@
 &lt;li&gt;SpringBoot 2.4.2&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;build.gradle&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;plugins &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;plugins &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    id &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;org.springframework.boot&amp;#39;&lt;/span&gt; version &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;2.4.2&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    id &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;io.spring.dependency-management&amp;#39;&lt;/span&gt; version &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;1.0.11.RELEASE&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    id &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;java&amp;#39;&lt;/span&gt;
@@ -472,28 +473,28 @@
 &lt;h1 id=&#34;事由&#34;&gt;事由&lt;/h1&gt;
 &lt;p&gt;以下代码片段 Kotlin 版本 &lt;code&gt;1.3.72&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;还原问题代码，已去除业务逻辑部分，仅保留关键代码，片段如下：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 有一个状态枚举
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;enum&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyState&lt;/span&gt; {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 有一个状态枚举
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;enum&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyState&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    OK, CANCELED
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 某个处理函数会返回 nullable MyState
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;processing&lt;/span&gt;(): MyState? {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;processing&lt;/span&gt;(): MyState? {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#75715e&#34;&gt;// 假设当前某种情况下返回 取消 这个状态
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyState&lt;/span&gt;.CANCELED
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyState&lt;/span&gt;.CANCELED
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 在处理状态时
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;handleState&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;handleState&lt;/span&gt;() {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#75715e&#34;&gt;// 此时编译器推断出类型为 State?
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; state = processing()
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; state = processing()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (state &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; CANCELED) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// 当处理 CANCELED 以下代码没有执行
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        println(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Handle &amp;lt;CANCELED&amp;gt; state&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        println(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Handle &amp;lt;CANCELED&amp;gt; state&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当处理 CANCELED 代码没有执行，原因在于***「import」***。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; javax.print.attribute.standard.JobState.CANCELED
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; javax.print.attribute.standard.JobState.CANCELED
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 此处使用静态导入引入了一个其他包中同名的一个静态变量，该变量声明如下&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// public static final JobState CANCELED = new JobState (7);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;解决方法：&lt;/p&gt;</description>
@@ -522,7 +523,8 @@
 &lt;p&gt;在 Kotlin Web 后台开发中，data class 的语法特性带来很多优势，但还是避免不了创建类似的重复对象。
 所以 &lt;code&gt;Konverter&lt;/code&gt; 诞生于此，解决实体对象裁剪问题。还有另一个功能那就是自动生成两个实体间的转换方法。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;注意：目前只支持 Kotlin，并且生成的转换方法是通过扩展函数实现&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;注意：目前只支持 Kotlin，并且生成的转换方法是通过扩展函数实现&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h1 id=&#34;是什么&#34;&gt;是什么&lt;/h1&gt;
 &lt;p&gt;通过 &lt;a href=&#34;https://kotlinlang.org/docs/reference/kapt.html]&#34;&gt;&lt;em&gt;KAPT(Kotlin Annotation Processing Tool&lt;/em&gt;&lt;/a&gt; 注解处理以及 &lt;a href=&#34;https://github.com/square/kotlinpoet&#34;&gt;&lt;em&gt;Kotlin Poet&lt;/em&gt;&lt;/a&gt; 代码生成，实现自动生成对实体的相关裁剪的对象。
 主要有两个注解：&lt;/p&gt;
@@ -695,7 +697,7 @@ fun UserVO.toUserEntity(
 &lt;li&gt;服务完全无响应。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;保留下当前 heap dump 和 thread stack 后，临时重启服务器恢复正常。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# heap dump&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# heap dump&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ jmap -dump:format&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;b,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;dump.hprof &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;pid&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# thread stack&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;jstack &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;pid&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &amp;gt; stack.txt
@@ -706,7 +708,7 @@ fun UserVO.toUserEntity(
 &lt;h3 id=&#34;使用工具&#34;&gt;使用工具&lt;/h3&gt;
 &lt;p&gt;Eclipse + MAT&lt;/p&gt;
 &lt;h3 id=&#34;安装&#34;&gt;安装&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 安装 eclipse&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 安装 eclipse&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ brew cask install eclipse-java
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 安装 eclipse MAT&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ brew cask install mat &lt;span style=&#34;color:#75715e&#34;&gt;# 是的，这个就是 eclipse-mat&lt;/span&gt;
@@ -725,7 +727,9 @@ fun UserVO.toUserEntity(
 &lt;p&gt;把 &lt;code&gt;heap dump&lt;/code&gt; 文件 &lt;code&gt;dump.hprof&lt;/code&gt; 导入到 MAT。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;发现有一个名称为 &lt;code&gt;Spring-Async-Scheduler&lt;/code&gt; 异步队列占用特别大。【TODO 图片】&lt;/p&gt;</description>
+&lt;p&gt;发现有一个名称为 &lt;code&gt;Spring-Async-Scheduler&lt;/code&gt; 异步队列占用特别大。【TODO 图片】&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     <item>
       <title>Reactive 概览</title>
@@ -735,7 +739,8 @@ fun UserVO.toUserEntity(
       <description>&lt;h1 id=&#34;reactive-streams&#34;&gt;Reactive Streams&lt;/h1&gt;
 &lt;p&gt;Reactive Streams 在 &lt;a href=&#34;https://en.wikipedia.org/wiki/Netflix&#34;&gt;&lt;em&gt;Netflix&lt;/em&gt;&lt;/a&gt; 、&lt;a href=&#34;https://en.wikipedia.org/wiki/Pivotal_Software&#34;&gt;&lt;em&gt;Pivotal&lt;/em&gt;&lt;/a&gt; 和 &lt;a href=&#34;https://en.wikipedia.org/wiki/Lightbend&#34;&gt;&lt;em&gt;Lightbend&lt;/em&gt;&lt;/a&gt; 工程师于 2013 年底发起这项计划。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Reactive Streams 是一项提议，为无阻塞背压的异步流提供一个标准。这包括针对运行时环境（JVM 和 JavaScript）以及网络协议上的工作。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Reactive Streams 是一项提议，为无阻塞背压的异步流提供一个标准。这包括针对运行时环境（JVM 和 JavaScript）以及网络协议上的工作。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;你可以在 &lt;a href=&#34;https://www.reactive-streams.org/&#34;&gt;&lt;em&gt;Reactive Streams&lt;/em&gt;&lt;/a&gt; 官网网站阅读这个原始规范。&lt;/p&gt;
 &lt;p&gt;你也可以在 &lt;a href=&#34;https://lexcao.github.io/zh/posts/reactive-streams&#34;&gt;&lt;em&gt;这里&lt;/em&gt;&lt;/a&gt; 阅读它的中文翻译。&lt;/p&gt;
 &lt;h5 id=&#34;无阻塞背压的异步流处理&#34;&gt;&lt;strong&gt;无阻塞背压的异步流处理&lt;/strong&gt;&lt;/h5&gt;
@@ -747,7 +752,7 @@ fun UserVO.toUserEntity(
 &lt;li&gt;背压（回压）。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;以下是 Java 接口，你可以在 &lt;a href=&#34;https://github.com/reactive-streams/reactive-streams-jvm&#34;&gt;&lt;em&gt;GitHub&lt;/em&gt;&lt;/a&gt; 阅读更详细内容。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Publisher&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Publisher&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;subscribe&lt;/span&gt;(Subscriber&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;?&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;super&lt;/span&gt; T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; s);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
@@ -768,7 +773,9 @@ fun UserVO.toUserEntity(
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;reactive-extensions&#34;&gt;Reactive Extensions&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;用于可观察流的异步编程 API。&lt;/p&gt;
-&lt;p&gt;ReactiveX 是来自观察者模式、迭代器模式以及函数式编程的最佳创意组合。&lt;/p&gt;</description>
+&lt;p&gt;ReactiveX 是来自观察者模式、迭代器模式以及函数式编程的最佳创意组合。&lt;/p&gt;
+&lt;p&gt;&amp;ndash; &lt;a href=&#34;http://reactivex.io/&#34;&gt;&lt;em&gt;Reactive Extensions&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     <item>
       <title>Reactive Streams 规范翻译</title>
@@ -778,7 +785,8 @@ fun UserVO.toUserEntity(
       <description>&lt;p&gt;翻译自 &lt;a href=&#34;https://www.reactive-streams.org/&#34;&gt;&lt;em&gt;Reactive Streams&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;reactive-streams&#34;&gt;Reactive Streams&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;注：Reactive Streams 直译为响应式流，这里保留英文原词。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;注：Reactive Streams 直译为响应式流，这里保留英文原词。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;em&gt;Reactive Streams&lt;/em&gt; 是一项提议，旨在为具有&lt;strong&gt;无阻塞背压的异步处理流&lt;/strong&gt;提供标准。这包括针对运行环境（JVM 和 JavaScript）以及网络协议的努力。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Reactive Streams&lt;/em&gt; 是为了提供一个&lt;strong&gt;无阻塞背压异步流式处理的标准的一个提议&lt;/strong&gt;。&lt;/p&gt;
 &lt;h2 id=&#34;jdk9-javautilconcurrentflow&#34;&gt;JDK9 java.util.concurrent.Flow&lt;/h2&gt;
@@ -797,26 +805,11 @@ fun UserVO.toUserEntity(
 &lt;p&gt;基本含义定义了如何通过背压来调节流中元素的传输。元素的传输方式，传输过程中的表现形式或者背压的信号发送方式均不属于本规范的一部分。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>选择一个英文名字</title>
+      <title>怎么起英文名：给自己选英文名的 5 个步骤</title>
       <link>https://lexcao.io/zh/posts/choose-english-name/</link>
       <pubDate>Sun, 10 Nov 2019 00:00:00 +0000</pubDate>
       <guid>https://lexcao.io/zh/posts/choose-english-name/</guid>
-      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
-&lt;p&gt;最近我在寻找一个方法给自己取一个英文名字，然后我发现这篇文章，&lt;a href=&#34;http://www.pgbovine.net/choosing-english-name.htm&#34;&gt;&lt;em&gt;如何选择一个英文名字&lt;/em&gt;&lt;/a&gt;。该文章在选择一个英文名字提出了一个行之有效的方法，我用该方法制作了一个应用来帮助选择一个英文名字。&lt;/p&gt;
-&lt;p&gt;你可以在 &lt;a href=&#34;https://lexcao.github.io/English-name-picker&#34;&gt;&lt;em&gt;这里&lt;/em&gt;&lt;/a&gt; 尝试一下。&lt;/p&gt;
-&lt;p&gt;我会在下面展开讲一下那篇文章和这个应用。&lt;/p&gt;
-&lt;h1 id=&#34;文章所说&#34;&gt;文章所说&lt;/h1&gt;
-&lt;p&gt;以下是文章原文。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Do not try to be creative in picking an English name.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Avoid:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;Do not try to pick a fun or cute-sounding name from a movie, television, or video game character&lt;/li&gt;
-&lt;li&gt;Do not pick a name that you think sounds cool or trendy, because Americans will think it sounds stupid&lt;/li&gt;
-&lt;li&gt;Do not pick a name because your friends think it sounds cute, because your friends are not the Americans you have to interact with in the future&lt;/li&gt;
-&lt;li&gt;Do not translate some positive-sounding word in your language into English and make that into your name&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
-&lt;p&gt;Do:&lt;/p&gt;</description>
+      <description>怎么起英文名？从中文名拼音找灵感，用 5 个步骤筛选适合自己的英文名，了解发音、拼写和常见误区，并参考按拼音首字母整理的名字示例。</description>
     </item>
     <item>
       <title>Jekyll / Hugo / Hexo 比较</title>
@@ -956,7 +949,7 @@ fun UserVO.toUserEntity(
 &lt;li&gt;&lt;code&gt;locale&lt;/code&gt; 标示文章语言，一篇文章被渲染后作为哪种语言展示。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;所以每篇文章的 &lt;code&gt;Front Matter&lt;/code&gt; 新增如下设置&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;---
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;---
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;uid&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;hello-world&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;locale&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;zh&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;---

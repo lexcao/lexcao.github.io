@@ -9,7 +9,7 @@
       <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
       <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
     </image>
-    <generator>Hugo -- 0.147.2</generator>
+    <generator>Hugo -- 0.169.0</generator>
     <language>zh</language>
     <lastBuildDate>Sun, 17 Nov 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://lexcao.io/zh/tags/reactive/index.xml" rel="self" type="application/rss+xml" />
@@ -21,7 +21,8 @@
       <description>&lt;p&gt;翻译自 &lt;a href=&#34;https://www.reactive-streams.org/&#34;&gt;&lt;em&gt;Reactive Streams&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;reactive-streams&#34;&gt;Reactive Streams&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;注：Reactive Streams 直译为响应式流，这里保留英文原词。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;注：Reactive Streams 直译为响应式流，这里保留英文原词。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;em&gt;Reactive Streams&lt;/em&gt; 是一项提议，旨在为具有&lt;strong&gt;无阻塞背压的异步处理流&lt;/strong&gt;提供标准。这包括针对运行环境（JVM 和 JavaScript）以及网络协议的努力。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Reactive Streams&lt;/em&gt; 是为了提供一个&lt;strong&gt;无阻塞背压异步流式处理的标准的一个提议&lt;/strong&gt;。&lt;/p&gt;
 &lt;h2 id=&#34;jdk9-javautilconcurrentflow&#34;&gt;JDK9 java.util.concurrent.Flow&lt;/h2&gt;

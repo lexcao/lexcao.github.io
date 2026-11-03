@@ -9,7 +9,7 @@
       <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
       <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
     </image>
-    <generator>Hugo -- 0.147.2</generator>
+    <generator>Hugo -- 0.169.0</generator>
     <language>zh</language>
     <lastBuildDate>Sun, 25 Sep 2022 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://lexcao.io/zh/tags/java/index.xml" rel="self" type="application/rss+xml" />
@@ -41,11 +41,11 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;JOIN ON 查询条件使用 &lt;code&gt;join().on()&lt;/code&gt; 拼接
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Join&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Object, Object&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; author &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root.&lt;span style=&#34;color:#a6e22e&#34;&gt;join&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;author&amp;#34;&lt;/span&gt;);
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Join&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Object, Object&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; author &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root.&lt;span style=&#34;color:#a6e22e&#34;&gt;join&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;author&amp;#34;&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;author.&lt;span style=&#34;color:#a6e22e&#34;&gt;on&lt;/span&gt;(cb.&lt;span style=&#34;color:#a6e22e&#34;&gt;equal&lt;/span&gt;(author.&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;), param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getAuthorName&lt;/span&gt;()));
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;WHERE 查询条件使用 &lt;code&gt;query.where()&lt;/code&gt; 拼接
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;query.&lt;span style=&#34;color:#a6e22e&#34;&gt;where&lt;/span&gt;(cb.&lt;span style=&#34;color:#a6e22e&#34;&gt;equal&lt;/span&gt;(root.&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;publishTime&amp;#34;&lt;/span&gt;), param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getBookPublishTime&lt;/span&gt;()));
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;query.&lt;span style=&#34;color:#a6e22e&#34;&gt;where&lt;/span&gt;(cb.&lt;span style=&#34;color:#a6e22e&#34;&gt;equal&lt;/span&gt;(root.&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;publishTime&amp;#34;&lt;/span&gt;), param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getBookPublishTime&lt;/span&gt;()));
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1 id=&#34;代码示例&#34;&gt;代码示例&lt;/h1&gt;
@@ -54,7 +54,7 @@
 &lt;li&gt;需要 &lt;code&gt;override&lt;/code&gt; 已有 &lt;code&gt;findAll&lt;/code&gt; 方法，使用 &lt;code&gt;@EntityGraph&lt;/code&gt; 注解&lt;/li&gt;
 &lt;li&gt;使用 &lt;code&gt;@EntityGraph&lt;/code&gt; 注解，标注额外属性需要 fetch&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// BookJoinRepository.java&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// BookJoinRepository.java&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@Repository&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;BookJoinRepository&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    JpaRepository&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;BookJoin, String&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;, JpaSpecificationExecutor&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;BookJoin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; {
@@ -67,7 +67,7 @@
 &lt;li&gt;WHERE 查询条件使用 &lt;code&gt;query.where()&lt;/code&gt; 拼接&lt;/li&gt;
 &lt;li&gt;JOIN ON 查询条件使用 &lt;code&gt;join().on()&lt;/code&gt; 拼接&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; Specification&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;BookJoin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;multiQuery_04&lt;/span&gt;(BookJoinQuery param) {
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; Specification&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;BookJoin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;multiQuery_04&lt;/span&gt;(BookJoinQuery param) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (root, query, cb) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getBookPublishTime&lt;/span&gt;()) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            query.&lt;span style=&#34;color:#a6e22e&#34;&gt;where&lt;/span&gt;(cb.&lt;span style=&#34;color:#a6e22e&#34;&gt;equal&lt;/span&gt;(root.&lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;publishTime&amp;#34;&lt;/span&gt;), param.&lt;span style=&#34;color:#a6e22e&#34;&gt;getBookPublishTime&lt;/span&gt;()));
@@ -86,7 +86,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    };
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;结果-sql-语句&#34;&gt;结果 SQL 语句&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;select&lt;/span&gt; bookjoin0_.id           &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; id1_1_0_,
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;select&lt;/span&gt; bookjoin0_.id           &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; id1_1_0_,
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       bookjoin_a1_.id         &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; id1_0_1_,
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       bookjoin_r2_.id         &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; id1_2_2_,
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       bookjoin0_.author_id    &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; author_i3_1_0_,
@@ -122,7 +122,7 @@
 &lt;li&gt;SpringBoot 2.4.2&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;build.gradle&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;plugins &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;plugins &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    id &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;org.springframework.boot&amp;#39;&lt;/span&gt; version &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;2.4.2&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    id &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;io.spring.dependency-management&amp;#39;&lt;/span&gt; version &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;1.0.11.RELEASE&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    id &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;java&amp;#39;&lt;/span&gt;
@@ -197,7 +197,7 @@
 &lt;li&gt;服务完全无响应。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;保留下当前 heap dump 和 thread stack 后，临时重启服务器恢复正常。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# heap dump&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# heap dump&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ jmap -dump:format&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;b,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;dump.hprof &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;pid&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# thread stack&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;jstack &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;pid&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &amp;gt; stack.txt
@@ -208,7 +208,7 @@
 &lt;h3 id=&#34;使用工具&#34;&gt;使用工具&lt;/h3&gt;
 &lt;p&gt;Eclipse + MAT&lt;/p&gt;
 &lt;h3 id=&#34;安装&#34;&gt;安装&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 安装 eclipse&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 安装 eclipse&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ brew cask install eclipse-java
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 安装 eclipse MAT&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ brew cask install mat &lt;span style=&#34;color:#75715e&#34;&gt;# 是的，这个就是 eclipse-mat&lt;/span&gt;
@@ -227,7 +227,9 @@
 &lt;p&gt;把 &lt;code&gt;heap dump&lt;/code&gt; 文件 &lt;code&gt;dump.hprof&lt;/code&gt; 导入到 MAT。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;发现有一个名称为 &lt;code&gt;Spring-Async-Scheduler&lt;/code&gt; 异步队列占用特别大。【TODO 图片】&lt;/p&gt;</description>
+&lt;p&gt;发现有一个名称为 &lt;code&gt;Spring-Async-Scheduler&lt;/code&gt; 异步队列占用特别大。【TODO 图片】&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
   </channel>
 </rss>

@@ -9,7 +9,7 @@
       <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
       <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
     </image>
-    <generator>Hugo -- 0.147.2</generator>
+    <generator>Hugo -- 0.169.0</generator>
     <language>zh</language>
     <lastBuildDate>Sat, 21 Mar 2020 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://lexcao.io/zh/tags/thread/index.xml" rel="self" type="application/rss+xml" />
@@ -26,7 +26,7 @@
 &lt;li&gt;服务完全无响应。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;保留下当前 heap dump 和 thread stack 后，临时重启服务器恢复正常。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# heap dump&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# heap dump&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ jmap -dump:format&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;b,file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;dump.hprof &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;pid&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# thread stack&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;jstack &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;pid&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &amp;gt; stack.txt
@@ -37,7 +37,7 @@
 &lt;h3 id=&#34;使用工具&#34;&gt;使用工具&lt;/h3&gt;
 &lt;p&gt;Eclipse + MAT&lt;/p&gt;
 &lt;h3 id=&#34;安装&#34;&gt;安装&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 安装 eclipse&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 安装 eclipse&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ brew cask install eclipse-java
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 安装 eclipse MAT&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ brew cask install mat &lt;span style=&#34;color:#75715e&#34;&gt;# 是的，这个就是 eclipse-mat&lt;/span&gt;
@@ -56,7 +56,9 @@
 &lt;p&gt;把 &lt;code&gt;heap dump&lt;/code&gt; 文件 &lt;code&gt;dump.hprof&lt;/code&gt; 导入到 MAT。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;发现有一个名称为 &lt;code&gt;Spring-Async-Scheduler&lt;/code&gt; 异步队列占用特别大。【TODO 图片】&lt;/p&gt;</description>
+&lt;p&gt;发现有一个名称为 &lt;code&gt;Spring-Async-Scheduler&lt;/code&gt; 异步队列占用特别大。【TODO 图片】&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
   </channel>
 </rss>

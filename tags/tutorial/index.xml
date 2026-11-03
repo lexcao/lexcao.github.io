@@ -9,9 +9,9 @@
       <url>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</url>
       <link>https://images.unsplash.com/photo-1510843572979-e4b9e790fdd7?auto=format&amp;fit=crop&amp;w=720&amp;q=80</link>
     </image>
-    <generator>Hugo -- 0.147.2</generator>
+    <generator>Hugo -- 0.169.0</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 27 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://lexcao.io/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tutorial: Make Your Non-Smart Bluetooth Light Work with HomeKit</title>
@@ -33,16 +33,11 @@
 &lt;p&gt;By following this guide, you&amp;rsquo;ll be able to control your Bluetooth light through the iPhone Home app and Siri voice commands. For a demonstration of the final implementation, refer to my companion post: &lt;a href=&#34;https://lexcao.io/posts/integrate-bluetooth-lamp-into-homekit/&#34;&gt;Journal: Integrate Bluetooth Lamp into HomeKit&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Choose An English Name</title>
+      <title>How to Choose an English Name for Yourself (Step-by-Step)</title>
       <link>https://lexcao.io/posts/choose-english-name/</link>
       <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
       <guid>https://lexcao.io/posts/choose-english-name/</guid>
-      <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
-&lt;p&gt;I am Lixin Cao in Chinese Pinyin. I was finding a way to give myself an English name, then I found a post, &lt;a href=&#34;http://www.pgbovine.net/choosing-english-name.htm&#34;&gt;&lt;em&gt;How to choose an English name&lt;/em&gt;&lt;/a&gt;, which gives an useful method for choosing an English name, by which I made a program to help choose an English name.&lt;/p&gt;
-&lt;p&gt;You can try it &lt;a href=&#34;https://lexcao.github.io/English-name-picker&#34;&gt;&lt;em&gt;here&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I will cover some detail of the post and the program in the below.&lt;/p&gt;
-&lt;h1 id=&#34;the-post-says&#34;&gt;The post says&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;Do not try to be creative in picking an English name.&lt;/strong&gt;&lt;/p&gt;</description>
+      <description>Wondering how to choose an English name for myself? Follow five steps, compare common names, avoid mistakes, and decide whether to keep your pinyin name.</description>
     </item>
     <item>
       <title>Jekyll / Hugo / Hexo Comparison</title>
