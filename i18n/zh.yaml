@@ -12,3 +12,6 @@ kox:
 
 konverter:
   other: 通过 KAPT 生成 data class 自动转换代码。
+
+last_mod:
+  other: "更新于"

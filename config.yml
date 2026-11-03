@@ -124,6 +124,7 @@ params:
   displayFullLangName: true
 
   ShowReadingTime: true
+  ShowLastMod: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
