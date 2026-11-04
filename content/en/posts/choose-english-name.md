@@ -20,7 +20,7 @@ If you are asking, “How do I choose an English name for myself?”, start with
 
 My Chinese name in pinyin is Lixin Cao. When I was looking for a way to choose an English name for myself, I found [*How to choose an English name*](http://www.pgbovine.net/choosing-english-name.htm). Its method inspired me to make a program to help with the choice.
 
-You can try it [*here*](https://lexcao.io/English-name-picker/).
+You can try it here: [*Name Vintage — names born the year you were*](https://lexcao.io/English-name-picker/).
 
 Below I explain the original advice, how the program works, and how I eventually chose Lex.
 
@@ -118,7 +118,7 @@ Choose what fits you. Some names are commonly associated with men or women, whil
 
 ## References
 
-* [*English-name-picker*](https://lexcao.io/English-name-picker/)
+* [*Name Vintage (formerly English Name Picker)*](https://lexcao.io/English-name-picker/)
 * [*Source code*](https://github.com/lexcao/English-name-picker)
 * [*English-name-dataset*](https://github.com/lexcao/English-name-dataset)
 * [*How to choose an English name*](http://www.pgbovine.net/choosing-english-name.htm)
