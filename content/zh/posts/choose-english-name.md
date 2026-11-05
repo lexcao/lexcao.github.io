@@ -1,11 +1,11 @@
 ---
 title: "怎么起英文名：给自己选英文名的 5 个步骤"
 date: 2019-11-10
-lastmod: 2026-11-03
-description: "怎么起英文名？从中文名拼音找灵感，用 5 个步骤筛选适合自己的英文名，了解发音、拼写和常见误区，并参考按拼音首字母整理的名字示例。"
+lastmod: 2026-11-05
+description: "怎么起英文名？用 5 个步骤筛选适合自己的英文名，看看出生那年常见名字，并试用同年名（Name Vintage）。"
 ---
 
-> 想直接看看你出生那年最常见的英文名？试试 [**同年名：按出生年份取英文名**](https://lexcao.io/English-name-picker/)（美国社保局 SSA 数据，可听发音、做候选名单）。
+> 想直接看看你出生那年最常见的英文名？打开 [**同年名 / Name Vintage**](https://lexcao.io/English-name-picker/)：美国社保局 SSA 1880–2025 数据，可听发音、做候选名单；也可先浏览 [女生英文名](https://lexcao.io/English-name-picker/names/girls/)、[男生英文名](https://lexcao.io/English-name-picker/names/boys/) 或 [按年份](https://lexcao.io/English-name-picker/names/year/2000/)、[按字母](https://lexcao.io/English-name-picker/names/letter/a/) 的榜单页。
 
 ## 快速了解：给自己起英文名的 5 个步骤
 
@@ -17,13 +17,19 @@ description: "怎么起英文名？从中文名拼音找灵感，用 5 个步骤
 4. **确认拼写和使用场景。** 听听名字的发音，想想是否适合日常学习、工作和交流。
 5. **先试用，再确定。** 在几次自我介绍中试用，选择自己喜欢、听到时也愿意回应的名字。
 
-## 我为什么做了一个英文名选择器
+## 我为什么做了「同年名」
 
-我的中文名拼音是 Lixin Cao。给自己起英文名时，我发现了这篇文章：[*如何选择一个英文名字*](http://www.pgbovine.net/choosing-english-name.htm)。它提供了一种挑选思路，我据此做了一个帮助选择英文名的应用。
+我的中文名拼音是 Lixin Cao。给自己起英文名时，我发现了这篇文章：[*如何选择一个英文名字*](http://www.pgbovine.net/choosing-english-name.htm)。它提供了一种挑选思路：从**出生那年最流行的名字**里选，尽量找读音相近的。我据此做了一个小工具，后来改名为 **同年名 / Name Vintage**——按你出生那年，看看当时最常见的英文名。
 
-你可以在 [*同年名（原“英文名选择器”）*](https://lexcao.io/English-name-picker/) 试用。
+你可以在 [*同年名*](https://lexcao.io/English-name-picker/) 试用：
 
-下面介绍原文的建议、应用的做法，以及我最后选择 Lex 的过程。
+![同年名首页：从出生那年找一个英文名](/images/choose-english-name/home-desk.webp)
+
+手机上同样可以直接挑：
+
+![同年名手机首页](/images/choose-english-name/home-mob.webp)
+
+下面介绍原文的建议、工具怎么用，以及我最后选择 Lex 的过程。
 
 ## 原文给出的建议
 
@@ -45,17 +51,24 @@ description: "怎么起英文名？从中文名拼音找灵感，用 5 个步骤
 3. 不要把名字的变体用作正式名字
 4. 不必担心名字的含义
 
-## 英文名选择器是怎么做的
+## 同年名是怎么做的
 
 > 从**你出生那年最流行的 100 个名字**中选择一个
 
-我根据文章的建议从 [*美国社保局出生婴儿名字数据*](https://www.ssa.gov/oact/babynames/limits.html) 下载了原始数据。
+我根据文章的建议从 [*美国社保局出生婴儿名字数据*](https://www.ssa.gov/oact/babynames/limits.html) 下载了原始数据（SSA，覆盖 1880–2025），整理成 JSON 放在 [*GitHub*](https://github.com/lexcao/English-name-dataset) 上。使用前请先阅读数据的 [*说明*](https://github.com/lexcao/English-name-dataset/blob/master/raw/NationalReadMe.pdf)。欢迎免费使用这些数据，也欢迎用它们制作自己的英文名应用。
 
-我把数据放到了 [*GitHub*](https://github.com/lexcao/English-name-dataset) 上，并整理成了 JSON 格式。
+同年名本身可以按年份刷卡挑选、听发音、留下候选；另外还生成了一批基于同一套 SSA 数据的静态榜单页，方便搜索和浏览，例如：
 
-使用前请先阅读数据的 [*说明*](https://github.com/lexcao/English-name-dataset/blob/master/raw/NationalReadMe.pdf)。欢迎免费使用这些数据，也欢迎用它们制作自己的英文名应用。
+* [女生英文名](https://lexcao.io/English-name-picker/names/girls/)（2025 年美国出生人数前 200，并对照 2005 排名）
+* [男生英文名](https://lexcao.io/English-name-picker/names/boys/)
+* 按年份：[1990](https://lexcao.io/English-name-picker/names/year/1990/)、[1994](https://lexcao.io/English-name-picker/names/year/1994/)、[2000](https://lexcao.io/English-name-picker/names/year/2000/)、[2010](https://lexcao.io/English-name-picker/names/year/2010/)（每年男女各前 100）
+* 按字母：[A](https://lexcao.io/English-name-picker/names/letter/a/)、[L](https://lexcao.io/English-name-picker/names/letter/l/)、[完整目录](https://lexcao.io/English-name-picker/names/)
 
+![女生英文名落地页示例](/images/choose-english-name/names-girls.webp)
 
+![1994 年出生的英文名榜单](/images/choose-english-name/names-year-1994.webp)
+
+榜单页只展示 SSA 的出生人数与排名，不编造名字含义。
 
 ## 我是怎么选出 Lex 的
 
@@ -73,7 +86,7 @@ description: "怎么起英文名？从中文名拼音找灵感，用 5 个步骤
 4. 在 [*nameberry*](https://nameberry.com) 和 [*behindthename*](https://behindthename.com) 搜索名字的含义和一些变体。
 5. 我最喜欢 ***Alex***，然后我最后选择了 ***Lex*** 作为我的英文名字。
 
-
+想按同样思路试一下的话，可以直接打开 [1994 年出生的英文名](https://lexcao.io/English-name-picker/names/year/1994/)，或在 [同年名](https://lexcao.io/English-name-picker/) 里选自己的出生年。
 
 ## 起英文名时常见的误区
 
@@ -84,7 +97,7 @@ description: "怎么起英文名？从中文名拼音找灵感，用 5 个步骤
 
 ## 按中文名拼音首字母找灵感
 
-首字母相同并不代表发音相同，下面只是常见英文名示例，不涉及名字含义，也不要求你一定按首字母选择。
+首字母相同并不代表发音相同，下面只是常见英文名示例，不涉及名字含义，也不要求你一定按首字母选择。更多按字母浏览可看 [同年名字母页](https://lexcao.io/English-name-picker/names/letter/a/)。
 
 | 拼音首字母 | 英文名示例 |
 | --- | --- |
@@ -105,7 +118,7 @@ description: "怎么起英文名？从中文名拼音找灵感，用 5 个步骤
 
 ### 英文名的含义重要吗？
 
-如果你在意，可以把含义作为参考，但不必让它决定一切。发音、拼写和使用时的感受也很重要。查询含义时，应核对可靠资料，不要仅凭一句好听的中文解释就下结论。
+如果你在意，可以把含义作为参考，但不必让它决定一切。发音、拼写和使用时的感受也很重要。查询含义时，应核对可靠资料，不要仅凭一句好听的中文解释就下结论。同年名的榜单页只提供 SSA 使用频率，不标注含义。
 
 ### 选好英文名以后还能改吗？
 
@@ -113,11 +126,12 @@ description: "怎么起英文名？从中文名拼音找灵感，用 5 个步骤
 
 ### 应该选男性、女性还是中性英文名？
 
-按自己的偏好和身份选择即可。有些名字通常用于男性或女性，Alex、Sam 等名字则可用于不同性别。具体用法也可能因国家和社群而异。
+按自己的偏好和身份选择即可。有些名字通常用于男性或女性，Alex、Sam 等名字则可用于不同性别。具体用法也可能因国家和社群而异。也可以分别浏览 [女生英文名](https://lexcao.io/English-name-picker/names/girls/) 和 [男生英文名](https://lexcao.io/English-name-picker/names/boys/)。
 
 ## 参考链接
 
-* [*同年名：按出生年份取英文名*](https://lexcao.io/English-name-picker/)
+* [*同年名 / Name Vintage*](https://lexcao.io/English-name-picker/)
+* [*女生英文名*](https://lexcao.io/English-name-picker/names/girls/) · [*男生英文名*](https://lexcao.io/English-name-picker/names/boys/) · [*名字目录*](https://lexcao.io/English-name-picker/names/)
 * [*同年名 源码*](https://github.com/lexcao/English-name-picker)
 * [*美国社保局英文名数据 GitHub*](https://github.com/lexcao/English-name-dataset)
 * [*如何选择一个英文名*](http://www.pgbovine.net/choosing-english-name.htm)

@@ -1,10 +1,12 @@
 ---
 title: "How to Choose an English Name for Yourself (Step-by-Step)"
 date: 2019-11-07
-lastmod: 2026-11-03
-description: "Wondering how to choose an English name for myself? Follow five steps, compare common names, avoid mistakes, and decide whether to keep your pinyin name."
+lastmod: 2026-11-05
+description: "Wondering how to choose an English name for myself? Follow five steps, browse birth-year SSA lists, and try Name Vintage (同年名)."
 tags: [Tutorial, English]
 ---
+
+> Looking for names popular the year you were born? Try [**Name Vintage / 同年名**](https://lexcao.io/English-name-picker/) — U.S. SSA data for 1880–2025, with pronunciation and a shortlist. Or browse [girls' names](https://lexcao.io/English-name-picker/names/girls/), [boys' names](https://lexcao.io/English-name-picker/names/boys/), a [year page](https://lexcao.io/English-name-picker/names/year/2000/), or an [A–Z letter page](https://lexcao.io/English-name-picker/names/letter/a/).
 
 ## Quick steps: how to choose an English name for yourself
 
@@ -16,13 +18,19 @@ If you are asking, “How do I choose an English name for myself?”, start with
 4. **Check the spelling and context.** Listen to the pronunciation and consider whether the name suits your everyday setting.
 5. **Try it before settling.** Use it in a few introductions, then choose the one you like answering to.
 
-## Why I made an English name picker
+## Why I made Name Vintage
 
-My Chinese name in pinyin is Lixin Cao. When I was looking for a way to choose an English name for myself, I found [*How to choose an English name*](http://www.pgbovine.net/choosing-english-name.htm). Its method inspired me to make a program to help with the choice.
+My Chinese name in pinyin is Lixin Cao. When I was looking for a way to choose an English name for myself, I found [*How to choose an English name*](http://www.pgbovine.net/choosing-english-name.htm). Its method — pick from the **most popular names for your birth year**, preferably ones that sound a little like your own — inspired a small tool. I later renamed it **Name Vintage / 同年名**: look at the English names that were common the year you were born.
 
-You can try it here: [*Name Vintage — names born the year you were*](https://lexcao.io/English-name-picker/).
+You can try it here: [*Name Vintage*](https://lexcao.io/English-name-picker/).
 
-Below I explain the original advice, how the program works, and how I eventually chose Lex.
+![Name Vintage home: find an English name from your birth year](/images/choose-english-name/home-desk.webp)
+
+On a phone it looks like this:
+
+![Name Vintage home on mobile](/images/choose-english-name/home-mob.webp)
+
+Below I explain the original advice, how the tool works, and how I eventually chose Lex.
 
 ## Advice from the original post
 
@@ -44,19 +52,24 @@ Do:
 > 3. Do not choose a variation as your official name
 > 4. Do not worry about what a name means
 
-
-
-## How the English name picker works
+## How Name Vintage works
 
 > Choose a name from the 100 most popular names for your birth year
 
-I downloaded the [*SSA baby names data*](https://www.ssa.gov/oact/babynames/limits.html) which the post suggested.
+I downloaded the [*SSA baby names data*](https://www.ssa.gov/oact/babynames/limits.html) which the post suggested (1880–2025), formatted it as JSON, and put it on [*GitHub*](https://github.com/lexcao/English-name-dataset). You can use it for free or make another English name application.
 
-I formatted the dataset as JSON and put it on [*GitHub*](https://github.com/lexcao/English-name-dataset).
+Name Vintage lets you swipe through a birth year, listen to pronunciations, and keep a shortlist. The same SSA data also powers static list pages that are easy to browse and search, for example:
 
-You can use it for free or make another English name application. Enjoy!
+* [Girls' English names](https://lexcao.io/English-name-picker/names/girls/) (top 200 U.S. births in 2025, with 2005 rank)
+* [Boys' English names](https://lexcao.io/English-name-picker/names/boys/)
+* By year: [1990](https://lexcao.io/English-name-picker/names/year/1990/), [1994](https://lexcao.io/English-name-picker/names/year/1994/), [2000](https://lexcao.io/English-name-picker/names/year/2000/), [2010](https://lexcao.io/English-name-picker/names/year/2010/) (top 100 per sex)
+* By letter: [A](https://lexcao.io/English-name-picker/names/letter/a/), [L](https://lexcao.io/English-name-picker/names/letter/l/), [full index](https://lexcao.io/English-name-picker/names/)
 
+![Girls' names landing page](/images/choose-english-name/names-girls.webp)
 
+![Names born in 1994](/images/choose-english-name/names-year-1994.webp)
+
+Those pages show SSA birth counts and ranks only — no invented name meanings.
 
 ## How I chose my English name
 
@@ -74,7 +87,7 @@ You can use it for free or make another English name application. Enjoy!
 4. I looked up name meanings on [*NameBerry*](https://nameberry.com/) and [*BehindTheName*](https://behindthename.com) to find variants of the name.
 5. I liked ***Alex*** most and finally picked ***Lex*** as my English name.
 
-
+To try the same approach, open [names born in 1994](https://lexcao.io/English-name-picker/names/year/1994/) or pick your own year in [Name Vintage](https://lexcao.io/English-name-picker/).
 
 ## Common mistakes for Chinese speakers
 
@@ -85,7 +98,7 @@ You can use it for free or make another English name application. Enjoy!
 
 ## Common names by pinyin initial
 
-Matching the first letter is optional: English and pinyin letters do not always represent the same sound. These are starting points, without claims about name meanings.
+Matching the first letter is optional: English and pinyin letters do not always represent the same sound. These are starting points, without claims about name meanings. For more letter browsing, see the [Name Vintage letter pages](https://lexcao.io/English-name-picker/names/letter/a/).
 
 | Pinyin initial | Names to try |
 | --- | --- |
@@ -106,7 +119,7 @@ Yes, if you prefer it. You can introduce yourself with your pinyin name and expl
 
 ### Does the meaning of an English name matter?
 
-It can matter to you, but it does not have to drive your choice. Pronunciation, spelling, and how you feel using the name are useful considerations. If you research a meaning, check reliable references rather than assuming a flattering description is accurate.
+It can matter to you, but it does not have to drive your choice. Pronunciation, spelling, and how you feel using the name are useful considerations. If you research a meaning, check reliable references rather than assuming a flattering description is accurate. Name Vintage list pages show SSA usage frequency only, not meanings.
 
 ### Can I change my English name later?
 
@@ -114,11 +127,12 @@ You can try a different name for everyday introductions and let people know what
 
 ### Should I choose a male, female, or gender-neutral name?
 
-Choose what fits you. Some names are commonly associated with men or women, while names such as Alex and Sam are used across genders. Usage can vary by country and community.
+Choose what fits you. Some names are commonly associated with men or women, while names such as Alex and Sam are used across genders. Usage can vary by country and community. You can also browse [girls' names](https://lexcao.io/English-name-picker/names/girls/) and [boys' names](https://lexcao.io/English-name-picker/names/boys/) separately.
 
 ## References
 
-* [*Name Vintage (formerly English Name Picker)*](https://lexcao.io/English-name-picker/)
+* [*Name Vintage / 同年名*](https://lexcao.io/English-name-picker/)
+* [*Girls' names*](https://lexcao.io/English-name-picker/names/girls/) · [*Boys' names*](https://lexcao.io/English-name-picker/names/boys/) · [*Name index*](https://lexcao.io/English-name-picker/names/)
 * [*Source code*](https://github.com/lexcao/English-name-picker)
 * [*English-name-dataset*](https://github.com/lexcao/English-name-dataset)
 * [*How to choose an English name*](http://www.pgbovine.net/choosing-english-name.htm)
