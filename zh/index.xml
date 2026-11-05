@@ -11,7 +11,7 @@
     </image>
     <generator>Hugo -- 0.169.0</generator>
     <language>zh</language>
-    <lastBuildDate>Tue, 03 Nov 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://lexcao.io/zh/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>教程：让你的不智能蓝牙灯接入 HomeKit 智能家居</title>
@@ -809,7 +809,7 @@ fun UserVO.toUserEntity(
       <link>https://lexcao.io/zh/posts/choose-english-name/</link>
       <pubDate>Sun, 10 Nov 2019 00:00:00 +0000</pubDate>
       <guid>https://lexcao.io/zh/posts/choose-english-name/</guid>
-      <description>怎么起英文名？从中文名拼音找灵感，用 5 个步骤筛选适合自己的英文名，了解发音、拼写和常见误区，并参考按拼音首字母整理的名字示例。</description>
+      <description>怎么起英文名？用 5 个步骤筛选适合自己的英文名，看看出生那年常见名字，并试用同年名（Name Vintage）。</description>
     </item>
     <item>
       <title>Jekyll / Hugo / Hexo 比较</title>
