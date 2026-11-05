@@ -11,7 +11,7 @@
     </image>
     <generator>Hugo -- 0.169.0</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 03 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://lexcao.io/zh/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>介绍 genapi：一个 Golang HTTP Client 生成代码库</title>
