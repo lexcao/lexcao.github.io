@@ -5,6 +5,8 @@ lastmod: 2026-11-03
 description: "怎么起英文名？从中文名拼音找灵感，用 5 个步骤筛选适合自己的英文名，了解发音、拼写和常见误区，并参考按拼音首字母整理的名字示例。"
 ---
 
+> 想直接看看你出生那年最常见的英文名？试试 [**同年名：按出生年份取英文名**](https://lexcao.io/English-name-picker/)（美国社保局 SSA 数据，可听发音、做候选名单）。
+
 ## 快速了解：给自己起英文名的 5 个步骤
 
 怎么起英文名，才能让自己用得自然、介绍起来方便？可以先从下面 5 个步骤开始。英文名并非必需，如果你喜欢，也可以一直使用中文名的拼音。
@@ -19,7 +21,7 @@ description: "怎么起英文名？从中文名拼音找灵感，用 5 个步骤
 
 我的中文名拼音是 Lixin Cao。给自己起英文名时，我发现了这篇文章：[*如何选择一个英文名字*](http://www.pgbovine.net/choosing-english-name.htm)。它提供了一种挑选思路，我据此做了一个帮助选择英文名的应用。
 
-你可以在 [*这里*](https://lexcao.io/English-name-picker/) 试用。
+你可以在 [*同年名（原“英文名选择器”）*](https://lexcao.io/English-name-picker/) 试用。
 
 下面介绍原文的建议、应用的做法，以及我最后选择 Lex 的过程。
 
@@ -115,8 +117,8 @@ description: "怎么起英文名？从中文名拼音找灵感，用 5 个步骤
 
 ## 参考链接
 
-* [*英文名选择器*](https://lexcao.io/English-name-picker/)
-* [*英文名选择器 源码*](https://github.com/lexcao/English-name-picker)
+* [*同年名：按出生年份取英文名*](https://lexcao.io/English-name-picker/)
+* [*同年名 源码*](https://github.com/lexcao/English-name-picker)
 * [*美国社保局英文名数据 GitHub*](https://github.com/lexcao/English-name-dataset)
 * [*如何选择一个英文名*](http://www.pgbovine.net/choosing-english-name.htm)
 * [*美国社保局出生婴儿名字*](https://www.ssa.gov/oact/babynames/)
