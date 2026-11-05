@@ -6,3 +6,4 @@ Disallow: /
 {{- end }}
 Sitemap: {{ "sitemap.xml" | absURL }}
 Sitemap: https://lexcao.io/English-name-picker/sitemap.xml
+Sitemap: https://lexcao.io/genapi/sitemap.xml

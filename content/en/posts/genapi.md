@@ -1,6 +1,7 @@
 ---
 title: "Introducing genapi: A Golang HTTP Client Code Generator"
 date: 2025-03-03
+lastmod: 2026-11-05
 tags: [Golang, Code Generation]
 ---
 
@@ -239,4 +240,6 @@ Through annotation-driven approach, genapi enables developers to:
 - Improve development efficiency and reduce maintenance costs
 - Make code clearer and more reliable
 - Dynamically replace HttpClient implementations
+
+> **Docs:** Install steps, examples, and release notes are on the docs site: [home](https://lexcao.io/genapi/), [install](https://lexcao.io/genapi/install/), [examples](https://lexcao.io/genapi/examples/), and the [changelog](https://lexcao.io/genapi/changelog/).
 
