@@ -1,6 +1,7 @@
 ---
 title: 介绍 genapi：一个 Golang HTTP Client 生成代码库
 date: 2025-03-03
+lastmod: 2026-11-05
 tags: [Golang, Code Generation]
 ---
 
@@ -241,3 +242,5 @@ genapi 通过注解驱动的方式，让开发者可以：
 - 提高开发效率，降低维护成本
 - 使代码更加清晰可靠
 - 动态替换 HttpClient
+
+> **文档：** 安装、示例和版本记录都在文档站上：[首页](https://lexcao.io/genapi/zh/)、[安装](https://lexcao.io/genapi/zh/install/)、[示例](https://lexcao.io/genapi/zh/examples/)、[更新日志](https://lexcao.io/genapi/zh/changelog/)。
