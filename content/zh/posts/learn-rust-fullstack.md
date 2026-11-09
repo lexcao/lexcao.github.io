@@ -1,16 +1,17 @@
 ---
-title: 通过构建全栈待办应用学习 Rust
+title: 通过构建「蟹记 Crabnote」学习 Rust
 date: 2022-05-02
+lastmod: 2026-11-09
 tags: [Rust, Practice]
 ---
 
 # 什么
 
-我想写一篇关于我如何学习Rust的博客。
+我想写一篇关于我如何学习 Rust 的博客。
 
 请原谅我在 2022 年才开始学习这个伟大的编程语言。
 
-为了在实践中学习Rust，我构建了一个全栈待办应用。
+为了在实践中学习 Rust，我构建了一个全栈待办应用——**蟹记 Crabnote**（原 *Rust Fullstack Todo*）。
 
 你可以在 [这里](https://todos.lexcao.io/) 尝试。相关源码可以在 [GitHub](https://github.com/lexcao/rust_fullstack_todo) 上找到。
 
@@ -20,13 +21,13 @@ tags: [Rust, Practice]
 
 首先，和大家一样，我也是从 [The Book](https://doc.rust-lang.org/book/) 中学习 Rust。这是一本不应该跳过入门学习 Rust 的好书。
 
-在学习了一些基本的语法之后，我尝试从零开始使用 Rust 构建一个全栈应用，这是一个使用 Rust tokio 的后端服务和一个使用 [Rust WASM（Web Assembly）](https://rustwasm.github.io/docs/book/)的前端页面。
+在学习了一些基本的语法之后，我尝试从零开始使用 Rust 构建一个全栈应用，这是一个使用 Rust tokio 的后端服务和一个使用 [Rust WASM（Web Assembly）](https://rustwasm.github.io/docs/book/) 的前端页面。
 
 我将分别对这两部分做一个简单的介绍。
 
 ### 后端
 
-后台服务是一个的简单的 REST API。使用 [`actix-web`](https://github.com/actix/actix-web) 作为网络框架。
+后台服务是一个简单的 REST API。使用 [`actix-web`](https://github.com/actix/actix-web) 作为网络框架。
 
 - 我将写另一篇博客，介绍我如何使用 TDD 开发 Rust 后台服务。
 - 被 Rust 编译器和 Borrow Checker 教育是一次特别的体验。
@@ -55,7 +56,8 @@ tags: [Rust, Practice]
 
 # 相关引用
 
-- [源码](https://github.com/lexcao/rust_fullstack_todo)
+- [源码](https://github.com/lexcao/rust_fullstack_todo) — 蟹记 Crabnote
+- [在线演示](https://todos.lexcao.io/)
 - [Rust](https://www.rust-lang.org/)
 - [The Book](https://doc.rust-lang.org/book/)
 - [WASM](https://rustwasm.github.io/docs/book/)

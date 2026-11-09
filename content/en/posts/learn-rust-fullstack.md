@@ -1,6 +1,7 @@
 ---
-title: Learn Rust by Building a Full-stack Todo Application
+title: Learn Rust by Building 蟹记 Crabnote
 date: 2022-05-01
+lastmod: 2026-11-09
 tags: [Rust, Practice]
 ---
 
@@ -10,9 +11,9 @@ I want to write a blog about how I learned Rust.
 
 Please forgive me that I just started learning such a great programming language in 2022.
 
-To learn Rust by doing, I have built a full-stack todo application.
+To learn Rust by doing, I have built a full-stack todo application — **蟹记 Crabnote** (formerly *Rust Fullstack Todo*).
 
-You can try it [here](https://todos.lexcao.io). The source code is available at [GitHub](https://github.com/lexcao/rust_fullstack_todo).
+You can try it [here](https://todos.lexcao.io/). The source code is available at [GitHub](https://github.com/lexcao/rust_fullstack_todo).
 
 Here I am going to write about how to build it.
 
@@ -20,7 +21,7 @@ Here I am going to write about how to build it.
 
 Firstly, as everyone beginning, I learn Rust from [the book](https://doc.rust-lang.org/book/) as well. It is an awesome book to start learning Rust, and you should not skip it.
 
-After learning some basic grammar,  I try to start building a todo application all in Rust from the beginning, which is a backend server from Rust tokio and a frontend page from [Rust WASM (Web Assembly)](https://rustwasm.github.io/docs/book/).
+After learning some basic grammar, I try to start building a todo application all in Rust from the beginning, which is a backend server from Rust tokio and a frontend page from [Rust WASM (Web Assembly)](https://rustwasm.github.io/docs/book/).
 
 I am going to give a brief introduction to each of these two parts.
 
@@ -55,7 +56,8 @@ Thanks to the Rust compiler, it is a great teacher to teach learning Rust.
 
 # References
 
-- [Source code](https://github.com/lexcao/rust_fullstack_todo)
+- [Source code](https://github.com/lexcao/rust_fullstack_todo) — 蟹记 Crabnote
+- [Live demo](https://todos.lexcao.io/)
 - [Rust](https://www.rust-lang.org/)
 - [The Book](https://doc.rust-lang.org/book/)
 - [WASM](https://rustwasm.github.io/docs/book/)
